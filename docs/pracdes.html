@@ -12,7 +12,7 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Lab journal</title>
+<title>Practive descriptive</title>
 
 <script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -38,10 +38,6 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
-<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
-<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
-<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -428,50 +424,104 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Lab journal</h1>
+<h1 class="title toc-ignore">Practive descriptive</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<script>
-  addClassKlippyTo("pre.r, pre.markdown");
-  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
-</script>
-<hr />
-<div class="columns">
-<div class="column" style="width:50%;">
-<div id="my-lab-journal" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> My Lab Journal</h1>
-<p>Last compiled on september, 2023</p>
-<p><em>Describe lab journal here.</em></p>
-<p><br></p>
-<hr />
-<p>Everyone can fork this repository.</p>
-<p>Use this example to journal your lab work and assignments.</p>
-</div>
-</div><div class="column" style="width:50%;">
-<p><img src="images/sciencedog.jpg" /></p>
-</div>
-</div>
-<div id="how-to-use" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> How to use</h2>
-<ol style="list-style-type: decimal">
-<li><p>Fork the repository for this website and follow instructions on
-<code>README</code> to get started <a
-href="https://github.com/robfranken/LabJournal">here</a>.</p></li>
-<li><p>Journal your work, by editing the .Rmd-files</p></li>
-<li><p>…</p></li>
-<li><p>Change everything to make it your own!</p></li>
-</ol>
-<p><br></p>
-<p>Use the top menu to navigate through the journal.</p>
-<pre class="r test"><code>2+2</code></pre>
-<pre class="test2"><code>#&gt; [1] 4</code></pre>
-<hr />
+<div id="a-first-look" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> A first look</h1>
+<pre class="r"><code>require(igraph)</code></pre>
+<pre><code>## Loading required package: igraph</code></pre>
+<pre><code>## Warning: package &#39;igraph&#39; was built under R version 4.2.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code>g &lt;- make_graph(&quot;Zachary&quot;)
+plot(g)</code></pre>
+<p><img src="pracdes_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>gm &lt;- as_adjacency_matrix(
+  graph = g,
+  type = c(&quot;both&quot;),
+  attr = NULL,
+  edges = FALSE,
+  names = TRUE,
+  sparse = FALSE
+)</code></pre>
+<pre><code>## Warning in as_adjacency_matrix(graph = g, type = c(&quot;both&quot;), attr = NULL, : The `edges` argument of
+## `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0</code></pre>
+<pre class="r"><code>isSymmetric(gm)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># number of nodes
+vcount(g)</code></pre>
+<pre><code>## [1] 34</code></pre>
+<pre class="r"><code>dim(gm)[1]</code></pre>
+<pre><code>## [1] 34</code></pre>
+<pre class="r"><code># number of edges (ties)
+ecount(g)</code></pre>
+<pre><code>## [1] 78</code></pre>
+<pre class="r"><code>sum(gm)/2</code></pre>
+<pre><code>## [1] 78</code></pre>
+<pre class="r"><code>dens &lt;- ecount(g)/((vcount(g) * vcount(g) - vcount(g)) /2)
+dens</code></pre>
+<pre><code>## [1] 0.1390374</code></pre>
+<pre class="r"><code>#ipath density
+edge_density(g, loops = FALSE)</code></pre>
+<pre><code>## [1] 0.1390374</code></pre>
+<pre class="r"><code>degree(
+  graph = g,
+  v = V(g),
+  mode = c(&quot;all&quot;, &quot;out&quot;, &quot;in&quot;, &quot;total&quot;),
+  loops = TRUE,
+  normalized = FALSE
+)</code></pre>
+<pre><code>##  [1] 16  9 10  6  3  4  4  4  5  2  3  1  2  5  2  2  2  2  2  3  2  2  2  5  3  3  2  4  3  4  4  6
+## [33] 12 17</code></pre>
+<pre class="r"><code># Degree is the amount of (undirected) relations a node has. Indegree is the amount of &#39;incoming&#39; ties, whereas outdegree constitutes the amount of &#39;outgoing&#39; ties.
+
+degree(g)</code></pre>
+<pre><code>##  [1] 16  9 10  6  3  4  4  4  5  2  3  1  2  5  2  2  2  2  2  3  2  2  2  5  3  3  2  4  3  4  4  6
+## [33] 12 17</code></pre>
+<pre class="r"><code>hist (degree_distribution(g, cumulative = FALSE))</code></pre>
+<p><img src="pracdes_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code># Closeness centrality measures how many steps is required to access every other vertex from a given vertex.
+closeness(
+  g,
+  vids = V(g),
+  mode = c(&quot;out&quot;, &quot;in&quot;, &quot;all&quot;, &quot;total&quot;),
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+)</code></pre>
+<pre><code>##  [1] 0.01724138 0.01470588 0.01694915 0.01408451 0.01149425 0.01162791 0.01162791 0.01333333
+##  [9] 0.01562500 0.01315789 0.01149425 0.01111111 0.01123596 0.01562500 0.01123596 0.01123596
+## [17] 0.00862069 0.01136364 0.01123596 0.01515152 0.01123596 0.01136364 0.01123596 0.01190476
+## [25] 0.01136364 0.01136364 0.01098901 0.01388889 0.01369863 0.01162791 0.01388889 0.01639344
+## [33] 0.01562500 0.01666667</code></pre>
+<pre class="r"><code># Transitivity is the number of transitive triads divided by all possible transitive triads.
+transitivity(g, type = c(&quot;localundirected&quot;), isolates = c(&quot;NaN&quot;, &quot;zero&quot;))</code></pre>
+<pre><code>##  [1] 0.1500000 0.3333333 0.2444444 0.6666667 0.6666667 0.5000000 0.5000000 1.0000000 0.5000000
+## [10] 0.0000000 0.6666667       NaN 1.0000000 0.6000000 1.0000000 1.0000000 1.0000000 1.0000000
+## [19] 1.0000000 0.3333333 1.0000000 1.0000000 1.0000000 0.4000000 0.3333333 0.3333333 1.0000000
+## [28] 0.1666667 0.3333333 0.6666667 0.5000000 0.2000000 0.1969697 0.1102941</code></pre>
+<pre class="r"><code># Betweenness centrality is the amount of times a node is on the route of the shortest path from a node to another node
+igraph::betweenness(g, directed = FALSE)</code></pre>
+<pre><code>##  [1] 231.0714286  28.4785714  75.8507937   6.2880952   0.3333333  15.8333333  15.8333333   0.0000000
+##  [9]  29.5293651   0.4476190   0.3333333   0.0000000   0.0000000  24.2158730   0.0000000   0.0000000
+## [17]   0.0000000   0.0000000   0.0000000  17.1468254   0.0000000   0.0000000   0.0000000   9.3000000
+## [25]   1.1666667   2.0277778   0.0000000  11.7920635   0.9476190   1.5428571   7.6095238  73.0095238
+## [33]  76.6904762 160.5515873</code></pre>
+<pre class="r"><code># Standardization of betweenness centrality value
+# ((value of betweenness node) - minimum value betweenness centrality) / maximum value betweenness centrality - minimum value betweenness centrality</code></pre>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIkxhYiBqb3VybmFsIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogdHJ1ZQ0KICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQ0KYXV0aG9yOiAiYnk6IFN0aWpuIHZhbiBIZWxtb25kdCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCg0KLS0tDQoNCg0KYGBge3IsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQ0KIyBpbnN0YWxsLnBhY2thZ2VzKCJyZW1vdGVzIikNCiMgcmVtb3Rlczo6aW5zdGFsbF9naXRodWIoInJsZXN1ci9rbGlwcHkiKQ0KYGBgIA0KDQpgYGB7ciwgZWNobz1GQUxTRSwgd2FybmluZz1GQUxTRSwgcmVzdWx0cz0naGlkZSd9DQpsaWJyYXJ5KGtuaXRyKQ0KDQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpDQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygidGVzdCIpLCBjbGFzcy5vdXRwdXQ9YygidGVzdDIiKSkNCm9wdGlvbnMod2lkdGggPSAxMDApDQpyZ2w6OnNldHVwS25pdHIoKQ0KDQoNCg0KY29sb3JpemUgPC0gZnVuY3Rpb24oeCwgY29sb3IpIHtzcHJpbnRmKCI8c3BhbiBzdHlsZT0nY29sb3I6ICVzOyc+JXM8L3NwYW4+IiwgY29sb3IsIHgpIH0NCg0KYGBgDQoNCmBgYHtyICwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQ0Ka2xpcHB5OjprbGlwcHkocG9zaXRpb24gPSBjKCd0b3AnLCAncmlnaHQnKSkNCiNrbGlwcHk6OmtsaXBweShjb2xvciA9ICdkYXJrcmVkJykNCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykNCmBgYA0KDQoNCg0KDQotLS0tDQoNCjo6Ojo6Ojo6Ojo6Ojo6IHsuY29sdW1uc30NCjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0NCg0KIyBNeSBMYWIgSm91cm5hbA0KTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYCAgDQoNCipEZXNjcmliZSBsYWIgam91cm5hbCBoZXJlLioNCg0KPGJyPg0KDQotLS0tDQoNCg0KRXZlcnlvbmUgY2FuIGZvcmsgdGhpcyByZXBvc2l0b3J5LiANCg0KVXNlIHRoaXMgZXhhbXBsZSB0byBqb3VybmFsIHlvdXIgbGFiIHdvcmsgYW5kIGFzc2lnbm1lbnRzLiANCg0KDQo6OjoNCjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0NCg0KDQoNCg0KDQohW10oaW1hZ2VzL3NjaWVuY2Vkb2cuanBnKQ0KDQoNCjo6Og0KOjo6Ojo6Ojo6Ojo6OjoNCg0KDQoNCiMjIEhvdyB0byB1c2UNCg0KMS4gRm9yayB0aGUgcmVwb3NpdG9yeSBmb3IgdGhpcyB3ZWJzaXRlIGFuZCBmb2xsb3cgaW5zdHJ1Y3Rpb25zIG9uIGBSRUFETUVgIHRvIGdldCBzdGFydGVkIFtoZXJlXShodHRwczovL2dpdGh1Yi5jb20vcm9iZnJhbmtlbi9MYWJKb3VybmFsKS4gIA0KDQoyLiBKb3VybmFsIHlvdXIgd29yaywgYnkgZWRpdGluZyB0aGUgLlJtZC1maWxlcw0KDQozLiAuLi4NCg0KNC4gQ2hhbmdlIGV2ZXJ5dGhpbmcgdG8gbWFrZSBpdCB5b3VyIG93biENCg0KDQo8YnI+DQoNClVzZSB0aGUgdG9wIG1lbnUgdG8gbmF2aWdhdGUgdGhyb3VnaCB0aGUgam91cm5hbC4NCg0KDQpgYGB7cn0NCjIrMg0KDQpgYGANCg0KDQotLS0tDQoNCg0KDQoNCg0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByYWN0aXZlIGRlc2NyaXB0aXZlIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogdHJ1ZQ0KICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQ0KYXV0aG9yOiAiYnk6IFN0aWpuIHZhbiBIZWxtb25kdCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCg0KLS0tDQojIEEgZmlyc3QgbG9vaw0KDQpgYGB7cn0NCg0KcmVxdWlyZShpZ3JhcGgpDQpnIDwtIG1ha2VfZ3JhcGgoIlphY2hhcnkiKQ0KcGxvdChnKQ0KDQpnbSA8LSBhc19hZGphY2VuY3lfbWF0cml4KA0KICBncmFwaCA9IGcsDQogIHR5cGUgPSBjKCJib3RoIiksDQogIGF0dHIgPSBOVUxMLA0KICBlZGdlcyA9IEZBTFNFLA0KICBuYW1lcyA9IFRSVUUsDQogIHNwYXJzZSA9IEZBTFNFDQopDQoNCmlzU3ltbWV0cmljKGdtKQ0KDQojIG51bWJlciBvZiBub2Rlcw0KdmNvdW50KGcpDQoNCmRpbShnbSlbMV0NCg0KIyBudW1iZXIgb2YgZWRnZXMgKHRpZXMpDQplY291bnQoZykNCnN1bShnbSkvMg0KDQpkZW5zIDwtIGVjb3VudChnKS8oKHZjb3VudChnKSAqIHZjb3VudChnKSAtIHZjb3VudChnKSkgLzIpDQpkZW5zDQoNCiNpcGF0aCBkZW5zaXR5DQplZGdlX2RlbnNpdHkoZywgbG9vcHMgPSBGQUxTRSkNCg0KDQoNCmRlZ3JlZSgNCiAgZ3JhcGggPSBnLA0KICB2ID0gVihnKSwNCiAgbW9kZSA9IGMoImFsbCIsICJvdXQiLCAiaW4iLCAidG90YWwiKSwNCiAgbG9vcHMgPSBUUlVFLA0KICBub3JtYWxpemVkID0gRkFMU0UNCikNCg0KDQoNCg0KIyBEZWdyZWUgaXMgdGhlIGFtb3VudCBvZiAodW5kaXJlY3RlZCkgcmVsYXRpb25zIGEgbm9kZSBoYXMuIEluZGVncmVlIGlzIHRoZSBhbW91bnQgb2YgJ2luY29taW5nJyB0aWVzLCB3aGVyZWFzIG91dGRlZ3JlZSBjb25zdGl0dXRlcyB0aGUgYW1vdW50IG9mICdvdXRnb2luZycgdGllcy4NCg0KZGVncmVlKGcpDQpoaXN0IChkZWdyZWVfZGlzdHJpYnV0aW9uKGcsIGN1bXVsYXRpdmUgPSBGQUxTRSkpDQoNCiMgQ2xvc2VuZXNzIGNlbnRyYWxpdHkgbWVhc3VyZXMgaG93IG1hbnkgc3RlcHMgaXMgcmVxdWlyZWQgdG8gYWNjZXNzIGV2ZXJ5IG90aGVyIHZlcnRleCBmcm9tIGEgZ2l2ZW4gdmVydGV4Lg0KY2xvc2VuZXNzKA0KICBnLA0KICB2aWRzID0gVihnKSwNCiAgbW9kZSA9IGMoIm91dCIsICJpbiIsICJhbGwiLCAidG90YWwiKSwNCiAgd2VpZ2h0cyA9IE5VTEwsDQogIG5vcm1hbGl6ZWQgPSBGQUxTRSwNCiAgY3V0b2ZmID0gLTENCikNCg0KDQojIFRyYW5zaXRpdml0eSBpcyB0aGUgbnVtYmVyIG9mIHRyYW5zaXRpdmUgdHJpYWRzIGRpdmlkZWQgYnkgYWxsIHBvc3NpYmxlIHRyYW5zaXRpdmUgdHJpYWRzLg0KdHJhbnNpdGl2aXR5KGcsIHR5cGUgPSBjKCJsb2NhbHVuZGlyZWN0ZWQiKSwgaXNvbGF0ZXMgPSBjKCJOYU4iLCAiemVybyIpKQ0KDQojIEJldHdlZW5uZXNzIGNlbnRyYWxpdHkgaXMgdGhlIGFtb3VudCBvZiB0aW1lcyBhIG5vZGUgaXMgb24gdGhlIHJvdXRlIG9mIHRoZSBzaG9ydGVzdCBwYXRoIGZyb20gYSBub2RlIHRvIGFub3RoZXIgbm9kZQ0KaWdyYXBoOjpiZXR3ZWVubmVzcyhnLCBkaXJlY3RlZCA9IEZBTFNFKQ0KDQojIFN0YW5kYXJkaXphdGlvbiBvZiBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IHZhbHVlDQojICgodmFsdWUgb2YgYmV0d2Vlbm5lc3Mgbm9kZSkgLSBtaW5pbXVtIHZhbHVlIGJldHdlZW5uZXNzIGNlbnRyYWxpdHkpIC8gbWF4aW11bSB2YWx1ZSBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IC0gbWluaW11bSB2YWx1ZSBiZXR3ZWVubmVzcyBjZW50cmFsaXR5DQoNCg0KDQpgYGANCg0KDQo=</div>
 
 
 </div>
@@ -509,7 +559,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("index.Rmd");
+  window.initializeSourceEmbed("pracdes.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

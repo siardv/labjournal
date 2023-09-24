@@ -1,0 +1,20 @@
+---
+title: "Conclusion and discussion"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+
+
+---
+
+# Conclusion
+
+Start entering text here 
+
+
+# Discussion
+
+type to start

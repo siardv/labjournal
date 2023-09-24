@@ -1,0 +1,87 @@
+---
+title: "Practive descriptive"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+
+---
+# A first look
+
+```{r}
+
+require(igraph)
+g <- make_graph("Zachary")
+plot(g)
+
+gm <- as_adjacency_matrix(
+  graph = g,
+  type = c("both"),
+  attr = NULL,
+  edges = FALSE,
+  names = TRUE,
+  sparse = FALSE
+)
+
+isSymmetric(gm)
+
+# number of nodes
+vcount(g)
+
+dim(gm)[1]
+
+# number of edges (ties)
+ecount(g)
+sum(gm)/2
+
+dens <- ecount(g)/((vcount(g) * vcount(g) - vcount(g)) /2)
+dens
+
+#ipath density
+edge_density(g, loops = FALSE)
+
+
+
+degree(
+  graph = g,
+  v = V(g),
+  mode = c("all", "out", "in", "total"),
+  loops = TRUE,
+  normalized = FALSE
+)
+
+
+
+
+# Degree is the amount of (undirected) relations a node has. Indegree is the amount of 'incoming' ties, whereas outdegree constitutes the amount of 'outgoing' ties.
+
+degree(g)
+hist (degree_distribution(g, cumulative = FALSE))
+
+# Closeness centrality measures how many steps is required to access every other vertex from a given vertex.
+closeness(
+  g,
+  vids = V(g),
+  mode = c("out", "in", "all", "total"),
+  weights = NULL,
+  normalized = FALSE,
+  cutoff = -1
+)
+
+
+# Transitivity is the number of transitive triads divided by all possible transitive triads.
+transitivity(g, type = c("localundirected"), isolates = c("NaN", "zero"))
+
+# Betweenness centrality is the amount of times a node is on the route of the shortest path from a node to another node
+igraph::betweenness(g, directed = FALSE)
+
+# Standardization of betweenness centrality value
+# ((value of betweenness node) - minimum value betweenness centrality) / maximum value betweenness centrality - minimum value betweenness centrality
+
+
+
+```
+
+

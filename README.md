@@ -1,1 +1,1 @@
-# LabJournal
+# Lab Journal

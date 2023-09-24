@@ -1,0 +1,47 @@
+---
+title: "Summary SNASS Chapter 11"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+
+---
+
+**Summary SNASS Chapter 11**
+
+# Definitions:
+
+ -	Webscraping --> The process by which you collect data from the internet. This can entail different routes: manual data collection, automated data collection via code, use of application programming interfaces, and so forth.
+ -	Digital footprints --> Automatically logged behavioural signals that actors – broadly construed: individuals, companies, organizations, groups, etc. – leave on the internet. This may imply many things, including the messages one leaves on Instagram posts, back-and-forth conversations on Whatsapp, companies’ job advertisements, university course texts, and so forth. All of these signals can capture some social process: networking on social media, signalling specific job requirements, or university course prerequisites. This also means that digital footprints can contain a lot of different and sometimes unstructured data types. Social network data is obvious: who is friends with whom on Facebook, who Tweets to whom, and so forth. Network data (not social) is also obvious. For instance, which website links to what other websites. (Sidenote: Google’s page-rank algorithm made them successful, and this page-rank algorithm is based on network centrality that essentially filters out “influential” websites quickly. In other words, Google became such an influential company because of network analyses.) It can also contain (unstructured) text data, which in itself signals a lot of interesting social processes that one may consider.
+ -	Computational sociology --> Problem-driven, empirical sociology, but with the empirical part specifically containing some form of digital footprint data and/or some new methodological technique. Sociologists are usually (necessarily?) interested in digital footprints concerning some social process. Because digital footprints are often related to social network processes (e.g., befriending on Facebook, messaging on Twitter, etc.), a lot of computational sociology includes some form of social network analysis. Because this is often, though not always, the case, discussing webscraping in the context of this book on social network analyses makes perfect sense. Some claim Agent-Based Modelling to be part of computational sociology too, others not. Again others claim performing RSiena analyses is part of computational sociology, others not. Note that this definition-issue is somewhat of a useless moving target. Computational sociology’s definition will be different next week depending on who you ask. In this book, we use a pragmatic definition. This means that you are a computational sociologists if you use digital footprint data and/or use relatively new methodological techniques in your research. Also note that there is a certain cause-effect sequence in the three definions above: using webscraping techniques to gather digital footprint data to study social problems makes you a computational sociologist.
+
+# Advantages and disadvantages of webscraped data
+
+Advantages:
+ +	Relatively easy and cheap to collect interesting data
+ +	Data are often time-stamped (and sometimes geo-stamped). This means that the the researcher knows exactly when (and where) the digital trace occurred.
+ +	Social network data collected in, for instance, school classes often puts the same time-stamp on a given network (e.g., the time that class was surveyed), whereas networks online may contain more-detailed time-stamps. These time-stamped (network) data can in some cases be considered relational events.
+ +	Webscraped data can potentially capture behavioral and/or attitudinal signals that are otherwise hard to come by. Furthermore, survey respondents may be a bit hesitant to write about their own attitudes that are perceived to be socially undesirable (like severe ethnic prejudice). In that case, one may collect digital trace data on Twitter, where you can observe and then operationalize ethnic prejudice happening in real time.
+ +	The sheer size of webscraped data – under appropriate sampling! – may make it easier to observe relationships between the variables of interest when they are small in magnitude.
+
+Disadvantages :
+ +	Despite potentially large datasets, a larger dataset doesn’t automatically mean more generalizability. Disproportional use by certain types of people can lead to ‘biased’ data. Ideally, you would have some anchor data set from which you know that it generalizes to a given target population and link that to some source of digital trace data. On the other end, one could attempt to study an entire population such that you are pretty certain that you can generalize your results to that population.
+ +	Huge numbers of observations (again, into the many if not hundreds of millions) may be pretty difficult to manipulate and analyze. In some cases, the data become so large that it is necessary to move to computing clusters because your laptop’s memory cannot handle it anymore. Dependent on what type of data you analyze you thus might need to adjust your data workflow. Solution: draw a random sample from the data and run that sample. Disadvantage of the solution: The interdependent nature of networks; some of the inherently clustered structure of networks is lost when you only draw a subset of agents from the network.
+ +	Webscraped digital trace data is usually structured very differently compared to the “flat” data files social scientists are used to working with. Usually, we open a dataset with columns (variables) and rows (observations). Webscraped data is usually stored in nested structured such as XML or JSON or contains text data. Therefore, additional manipulation is needed before we arrive at the data formats that standard statistical packages can read/analyze. Sometimes the networks-of-interest are stored in text data, for instance if you’re interested in letter-writing relationships. Hence, if you want to manipulate and analyze these data at scale, some form of programming becomes nearly unavoidable.
+ +	Unobserved variables --> most often no demographic information.
+ 
+# Three most prevalent advantages: 
+
+1.	New tests of old social science hypotheses made possible by the availability of digital footprint data.
+2.	Tests of newly derived social science hypotheses made possible by the availability of digital footprint data.
+3.	Tests of new theories about “the internet” as social phenomenon by itself.
+
+# Ways of webscraping
+1.	Do it yourself/research assistants and save the data manually
+2.	Application Programming Interface: Utilizing existing structures in place, usually a connection between a computer/program to another computer/program that makes use of an interface to provide some service.
+3.	You can also design your own webscraping crawlers.
+4.	You can also collaborate with companies like Facebook or Twitter such that they provide data for researchers
+
+---

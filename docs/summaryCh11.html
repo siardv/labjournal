@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="by: Siard van den Bosch" />
+
+
+<title>Summary SNASS Chapter 11</title>
+
+<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 1</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="test.html">test1</a>
+        </li>
+        <li>
+          <a href="test.html">test2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 2</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="pracdes.html">descriptive statistics</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 3</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="summaryCh11.html">Summary SNASS chapter 11</a>
+        </li>
+        <li>
+          <a href="webscraping_workshop.html">Workshop on webscraping</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Report</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="Introduction.html">Introduction</a>
+        </li>
+        <li>
+          <a href="Theory.html">Theory</a>
+        </li>
+        <li>
+          <a href="Methods.html">Methods</a>
+        </li>
+        <li>
+          <a href="Results.html">Results</a>
+        </li>
+        <li>
+          <a href="Conc_Disc.html">Conclusion and discussion</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/siardv/LabJournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Summary SNASS Chapter 11</h1>
+<h4 class="author">by: Siard van den Bosch</h4>
+
+</div>
+
+
+<p><strong>Summary SNASS Chapter 11</strong></p>
+<div id="definitions" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Definitions:</h1>
+<ul>
+<li>Webscraping –&gt; The process by which you collect data from the
+internet. This can entail different routes: manual data collection,
+automated data collection via code, use of application programming
+interfaces, and so forth.</li>
+<li>Digital footprints –&gt; Automatically logged behavioural signals
+that actors – broadly construed: individuals, companies, organizations,
+groups, etc. – leave on the internet. This may imply many things,
+including the messages one leaves on Instagram posts, back-and-forth
+conversations on Whatsapp, companies’ job advertisements, university
+course texts, and so forth. All of these signals can capture some social
+process: networking on social media, signalling specific job
+requirements, or university course prerequisites. This also means that
+digital footprints can contain a lot of different and sometimes
+unstructured data types. Social network data is obvious: who is friends
+with whom on Facebook, who Tweets to whom, and so forth. Network data
+(not social) is also obvious. For instance, which website links to what
+other websites. (Sidenote: Google’s page-rank algorithm made them
+successful, and this page-rank algorithm is based on network centrality
+that essentially filters out “influential” websites quickly. In other
+words, Google became such an influential company because of network
+analyses.) It can also contain (unstructured) text data, which in itself
+signals a lot of interesting social processes that one may
+consider.</li>
+<li>Computational sociology –&gt; Problem-driven, empirical sociology,
+but with the empirical part specifically containing some form of digital
+footprint data and/or some new methodological technique. Sociologists
+are usually (necessarily?) interested in digital footprints concerning
+some social process. Because digital footprints are often related to
+social network processes (e.g., befriending on Facebook, messaging on
+Twitter, etc.), a lot of computational sociology includes some form of
+social network analysis. Because this is often, though not always, the
+case, discussing webscraping in the context of this book on social
+network analyses makes perfect sense. Some claim Agent-Based Modelling
+to be part of computational sociology too, others not. Again others
+claim performing RSiena analyses is part of computational sociology,
+others not. Note that this definition-issue is somewhat of a useless
+moving target. Computational sociology’s definition will be different
+next week depending on who you ask. In this book, we use a pragmatic
+definition. This means that you are a computational sociologists if you
+use digital footprint data and/or use relatively new methodological
+techniques in your research. Also note that there is a certain
+cause-effect sequence in the three definions above: using webscraping
+techniques to gather digital footprint data to study social problems
+makes you a computational sociologist.</li>
+</ul>
+</div>
+<div id="advantages-and-disadvantages-of-webscraped-data"
+class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Advantages and
+disadvantages of webscraped data</h1>
+<p>Advantages: + Relatively easy and cheap to collect interesting data +
+Data are often time-stamped (and sometimes geo-stamped). This means that
+the the researcher knows exactly when (and where) the digital trace
+occurred. + Social network data collected in, for instance, school
+classes often puts the same time-stamp on a given network (e.g., the
+time that class was surveyed), whereas networks online may contain
+more-detailed time-stamps. These time-stamped (network) data can in some
+cases be considered relational events. + Webscraped data can potentially
+capture behavioral and/or attitudinal signals that are otherwise hard to
+come by. Furthermore, survey respondents may be a bit hesitant to write
+about their own attitudes that are perceived to be socially undesirable
+(like severe ethnic prejudice). In that case, one may collect digital
+trace data on Twitter, where you can observe and then operationalize
+ethnic prejudice happening in real time. + The sheer size of webscraped
+data – under appropriate sampling! – may make it easier to observe
+relationships between the variables of interest when they are small in
+magnitude.</p>
+<p>Disadvantages : + Despite potentially large datasets, a larger
+dataset doesn’t automatically mean more generalizability.
+Disproportional use by certain types of people can lead to ‘biased’
+data. Ideally, you would have some anchor data set from which you know
+that it generalizes to a given target population and link that to some
+source of digital trace data. On the other end, one could attempt to
+study an entire population such that you are pretty certain that you can
+generalize your results to that population. + Huge numbers of
+observations (again, into the many if not hundreds of millions) may be
+pretty difficult to manipulate and analyze. In some cases, the data
+become so large that it is necessary to move to computing clusters
+because your laptop’s memory cannot handle it anymore. Dependent on what
+type of data you analyze you thus might need to adjust your data
+workflow. Solution: draw a random sample from the data and run that
+sample. Disadvantage of the solution: The interdependent nature of
+networks; some of the inherently clustered structure of networks is lost
+when you only draw a subset of agents from the network. + Webscraped
+digital trace data is usually structured very differently compared to
+the “flat” data files social scientists are used to working with.
+Usually, we open a dataset with columns (variables) and rows
+(observations). Webscraped data is usually stored in nested structured
+such as XML or JSON or contains text data. Therefore, additional
+manipulation is needed before we arrive at the data formats that
+standard statistical packages can read/analyze. Sometimes the
+networks-of-interest are stored in text data, for instance if you’re
+interested in letter-writing relationships. Hence, if you want to
+manipulate and analyze these data at scale, some form of programming
+becomes nearly unavoidable. + Unobserved variables –&gt; most often no
+demographic information.</p>
+</div>
+<div id="three-most-prevalent-advantages" class="section level1"
+number="3">
+<h1><span class="header-section-number">3</span> Three most prevalent
+advantages:</h1>
+<ol style="list-style-type: decimal">
+<li>New tests of old social science hypotheses made possible by the
+availability of digital footprint data.</li>
+<li>Tests of newly derived social science hypotheses made possible by
+the availability of digital footprint data.</li>
+<li>Tests of new theories about “the internet” as social phenomenon by
+itself.</li>
+</ol>
+</div>
+<div id="ways-of-webscraping" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Ways of
+webscraping</h1>
+<ol style="list-style-type: decimal">
+<li>Do it yourself/research assistants and save the data manually</li>
+<li>Application Programming Interface: Utilizing existing structures in
+place, usually a connection between a computer/program to another
+computer/program that makes use of an interface to provide some
+service.</li>
+<li>You can also design your own webscraping crawlers.</li>
+<li>You can also collaborate with companies like Facebook or Twitter
+such that they provide data for researchers</li>
+</ol>
+<hr />
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlN1bW1hcnkgU05BU1MgQ2hhcHRlciAxMSINCm91dHB1dDoNCiAgaHRtbF9kb2N1bWVudDoNCiAgICB0b2M6IHRydWUNCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUNCmF1dGhvcjogImJ5OiBTdGlqbiB2YW4gSGVsbW9uZHQiDQpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQoNCi0tLQ0KDQoqKlN1bW1hcnkgU05BU1MgQ2hhcHRlciAxMSoqDQoNCiMgRGVmaW5pdGlvbnM6DQoNCiAtCVdlYnNjcmFwaW5nIC0tPiBUaGUgcHJvY2VzcyBieSB3aGljaCB5b3UgY29sbGVjdCBkYXRhIGZyb20gdGhlIGludGVybmV0LiBUaGlzIGNhbiBlbnRhaWwgZGlmZmVyZW50IHJvdXRlczogbWFudWFsIGRhdGEgY29sbGVjdGlvbiwgYXV0b21hdGVkIGRhdGEgY29sbGVjdGlvbiB2aWEgY29kZSwgdXNlIG9mIGFwcGxpY2F0aW9uIHByb2dyYW1taW5nIGludGVyZmFjZXMsIGFuZCBzbyBmb3J0aC4NCiAtCURpZ2l0YWwgZm9vdHByaW50cyAtLT4gQXV0b21hdGljYWxseSBsb2dnZWQgYmVoYXZpb3VyYWwgc2lnbmFscyB0aGF0IGFjdG9ycyDigJMgYnJvYWRseSBjb25zdHJ1ZWQ6IGluZGl2aWR1YWxzLCBjb21wYW5pZXMsIG9yZ2FuaXphdGlvbnMsIGdyb3VwcywgZXRjLiDigJMgbGVhdmUgb24gdGhlIGludGVybmV0LiBUaGlzIG1heSBpbXBseSBtYW55IHRoaW5ncywgaW5jbHVkaW5nIHRoZSBtZXNzYWdlcyBvbmUgbGVhdmVzIG9uIEluc3RhZ3JhbSBwb3N0cywgYmFjay1hbmQtZm9ydGggY29udmVyc2F0aW9ucyBvbiBXaGF0c2FwcCwgY29tcGFuaWVz4oCZIGpvYiBhZHZlcnRpc2VtZW50cywgdW5pdmVyc2l0eSBjb3Vyc2UgdGV4dHMsIGFuZCBzbyBmb3J0aC4gQWxsIG9mIHRoZXNlIHNpZ25hbHMgY2FuIGNhcHR1cmUgc29tZSBzb2NpYWwgcHJvY2VzczogbmV0d29ya2luZyBvbiBzb2NpYWwgbWVkaWEsIHNpZ25hbGxpbmcgc3BlY2lmaWMgam9iIHJlcXVpcmVtZW50cywgb3IgdW5pdmVyc2l0eSBjb3Vyc2UgcHJlcmVxdWlzaXRlcy4gVGhpcyBhbHNvIG1lYW5zIHRoYXQgZGlnaXRhbCBmb290cHJpbnRzIGNhbiBjb250YWluIGEgbG90IG9mIGRpZmZlcmVudCBhbmQgc29tZXRpbWVzIHVuc3RydWN0dXJlZCBkYXRhIHR5cGVzLiBTb2NpYWwgbmV0d29yayBkYXRhIGlzIG9idmlvdXM6IHdobyBpcyBmcmllbmRzIHdpdGggd2hvbSBvbiBGYWNlYm9vaywgd2hvIFR3ZWV0cyB0byB3aG9tLCBhbmQgc28gZm9ydGguIE5ldHdvcmsgZGF0YSAobm90IHNvY2lhbCkgaXMgYWxzbyBvYnZpb3VzLiBGb3IgaW5zdGFuY2UsIHdoaWNoIHdlYnNpdGUgbGlua3MgdG8gd2hhdCBvdGhlciB3ZWJzaXRlcy4gKFNpZGVub3RlOiBHb29nbGXigJlzIHBhZ2UtcmFuayBhbGdvcml0aG0gbWFkZSB0aGVtIHN1Y2Nlc3NmdWwsIGFuZCB0aGlzIHBhZ2UtcmFuayBhbGdvcml0aG0gaXMgYmFzZWQgb24gbmV0d29yayBjZW50cmFsaXR5IHRoYXQgZXNzZW50aWFsbHkgZmlsdGVycyBvdXQg4oCcaW5mbHVlbnRpYWzigJ0gd2Vic2l0ZXMgcXVpY2tseS4gSW4gb3RoZXIgd29yZHMsIEdvb2dsZSBiZWNhbWUgc3VjaCBhbiBpbmZsdWVudGlhbCBjb21wYW55IGJlY2F1c2Ugb2YgbmV0d29yayBhbmFseXNlcy4pIEl0IGNhbiBhbHNvIGNvbnRhaW4gKHVuc3RydWN0dXJlZCkgdGV4dCBkYXRhLCB3aGljaCBpbiBpdHNlbGYgc2lnbmFscyBhIGxvdCBvZiBpbnRlcmVzdGluZyBzb2NpYWwgcHJvY2Vzc2VzIHRoYXQgb25lIG1heSBjb25zaWRlci4NCiAtCUNvbXB1dGF0aW9uYWwgc29jaW9sb2d5IC0tPiBQcm9ibGVtLWRyaXZlbiwgZW1waXJpY2FsIHNvY2lvbG9neSwgYnV0IHdpdGggdGhlIGVtcGlyaWNhbCBwYXJ0IHNwZWNpZmljYWxseSBjb250YWluaW5nIHNvbWUgZm9ybSBvZiBkaWdpdGFsIGZvb3RwcmludCBkYXRhIGFuZC9vciBzb21lIG5ldyBtZXRob2RvbG9naWNhbCB0ZWNobmlxdWUuIFNvY2lvbG9naXN0cyBhcmUgdXN1YWxseSAobmVjZXNzYXJpbHk/KSBpbnRlcmVzdGVkIGluIGRpZ2l0YWwgZm9vdHByaW50cyBjb25jZXJuaW5nIHNvbWUgc29jaWFsIHByb2Nlc3MuIEJlY2F1c2UgZGlnaXRhbCBmb290cHJpbnRzIGFyZSBvZnRlbiByZWxhdGVkIHRvIHNvY2lhbCBuZXR3b3JrIHByb2Nlc3NlcyAoZS5nLiwgYmVmcmllbmRpbmcgb24gRmFjZWJvb2ssIG1lc3NhZ2luZyBvbiBUd2l0dGVyLCBldGMuKSwgYSBsb3Qgb2YgY29tcHV0YXRpb25hbCBzb2Npb2xvZ3kgaW5jbHVkZXMgc29tZSBmb3JtIG9mIHNvY2lhbCBuZXR3b3JrIGFuYWx5c2lzLiBCZWNhdXNlIHRoaXMgaXMgb2Z0ZW4sIHRob3VnaCBub3QgYWx3YXlzLCB0aGUgY2FzZSwgZGlzY3Vzc2luZyB3ZWJzY3JhcGluZyBpbiB0aGUgY29udGV4dCBvZiB0aGlzIGJvb2sgb24gc29jaWFsIG5ldHdvcmsgYW5hbHlzZXMgbWFrZXMgcGVyZmVjdCBzZW5zZS4gU29tZSBjbGFpbSBBZ2VudC1CYXNlZCBNb2RlbGxpbmcgdG8gYmUgcGFydCBvZiBjb21wdXRhdGlvbmFsIHNvY2lvbG9neSB0b28sIG90aGVycyBub3QuIEFnYWluIG90aGVycyBjbGFpbSBwZXJmb3JtaW5nIFJTaWVuYSBhbmFseXNlcyBpcyBwYXJ0IG9mIGNvbXB1dGF0aW9uYWwgc29jaW9sb2d5LCBvdGhlcnMgbm90LiBOb3RlIHRoYXQgdGhpcyBkZWZpbml0aW9uLWlzc3VlIGlzIHNvbWV3aGF0IG9mIGEgdXNlbGVzcyBtb3ZpbmcgdGFyZ2V0LiBDb21wdXRhdGlvbmFsIHNvY2lvbG9neeKAmXMgZGVmaW5pdGlvbiB3aWxsIGJlIGRpZmZlcmVudCBuZXh0IHdlZWsgZGVwZW5kaW5nIG9uIHdobyB5b3UgYXNrLiBJbiB0aGlzIGJvb2ssIHdlIHVzZSBhIHByYWdtYXRpYyBkZWZpbml0aW9uLiBUaGlzIG1lYW5zIHRoYXQgeW91IGFyZSBhIGNvbXB1dGF0aW9uYWwgc29jaW9sb2dpc3RzIGlmIHlvdSB1c2UgZGlnaXRhbCBmb290cHJpbnQgZGF0YSBhbmQvb3IgdXNlIHJlbGF0aXZlbHkgbmV3IG1ldGhvZG9sb2dpY2FsIHRlY2huaXF1ZXMgaW4geW91ciByZXNlYXJjaC4gQWxzbyBub3RlIHRoYXQgdGhlcmUgaXMgYSBjZXJ0YWluIGNhdXNlLWVmZmVjdCBzZXF1ZW5jZSBpbiB0aGUgdGhyZWUgZGVmaW5pb25zIGFib3ZlOiB1c2luZyB3ZWJzY3JhcGluZyB0ZWNobmlxdWVzIHRvIGdhdGhlciBkaWdpdGFsIGZvb3RwcmludCBkYXRhIHRvIHN0dWR5IHNvY2lhbCBwcm9ibGVtcyBtYWtlcyB5b3UgYSBjb21wdXRhdGlvbmFsIHNvY2lvbG9naXN0Lg0KDQojIEFkdmFudGFnZXMgYW5kIGRpc2FkdmFudGFnZXMgb2Ygd2Vic2NyYXBlZCBkYXRhDQoNCkFkdmFudGFnZXM6DQogKwlSZWxhdGl2ZWx5IGVhc3kgYW5kIGNoZWFwIHRvIGNvbGxlY3QgaW50ZXJlc3RpbmcgZGF0YQ0KICsJRGF0YSBhcmUgb2Z0ZW4gdGltZS1zdGFtcGVkIChhbmQgc29tZXRpbWVzIGdlby1zdGFtcGVkKS4gVGhpcyBtZWFucyB0aGF0IHRoZSB0aGUgcmVzZWFyY2hlciBrbm93cyBleGFjdGx5IHdoZW4gKGFuZCB3aGVyZSkgdGhlIGRpZ2l0YWwgdHJhY2Ugb2NjdXJyZWQuDQogKwlTb2NpYWwgbmV0d29yayBkYXRhIGNvbGxlY3RlZCBpbiwgZm9yIGluc3RhbmNlLCBzY2hvb2wgY2xhc3NlcyBvZnRlbiBwdXRzIHRoZSBzYW1lIHRpbWUtc3RhbXAgb24gYSBnaXZlbiBuZXR3b3JrIChlLmcuLCB0aGUgdGltZSB0aGF0IGNsYXNzIHdhcyBzdXJ2ZXllZCksIHdoZXJlYXMgbmV0d29ya3Mgb25saW5lIG1heSBjb250YWluIG1vcmUtZGV0YWlsZWQgdGltZS1zdGFtcHMuIFRoZXNlIHRpbWUtc3RhbXBlZCAobmV0d29yaykgZGF0YSBjYW4gaW4gc29tZSBjYXNlcyBiZSBjb25zaWRlcmVkIHJlbGF0aW9uYWwgZXZlbnRzLg0KICsJV2Vic2NyYXBlZCBkYXRhIGNhbiBwb3RlbnRpYWxseSBjYXB0dXJlIGJlaGF2aW9yYWwgYW5kL29yIGF0dGl0dWRpbmFsIHNpZ25hbHMgdGhhdCBhcmUgb3RoZXJ3aXNlIGhhcmQgdG8gY29tZSBieS4gRnVydGhlcm1vcmUsIHN1cnZleSByZXNwb25kZW50cyBtYXkgYmUgYSBiaXQgaGVzaXRhbnQgdG8gd3JpdGUgYWJvdXQgdGhlaXIgb3duIGF0dGl0dWRlcyB0aGF0IGFyZSBwZXJjZWl2ZWQgdG8gYmUgc29jaWFsbHkgdW5kZXNpcmFibGUgKGxpa2Ugc2V2ZXJlIGV0aG5pYyBwcmVqdWRpY2UpLiBJbiB0aGF0IGNhc2UsIG9uZSBtYXkgY29sbGVjdCBkaWdpdGFsIHRyYWNlIGRhdGEgb24gVHdpdHRlciwgd2hlcmUgeW91IGNhbiBvYnNlcnZlIGFuZCB0aGVuIG9wZXJhdGlvbmFsaXplIGV0aG5pYyBwcmVqdWRpY2UgaGFwcGVuaW5nIGluIHJlYWwgdGltZS4NCiArCVRoZSBzaGVlciBzaXplIG9mIHdlYnNjcmFwZWQgZGF0YSDigJMgdW5kZXIgYXBwcm9wcmlhdGUgc2FtcGxpbmchIOKAkyBtYXkgbWFrZSBpdCBlYXNpZXIgdG8gb2JzZXJ2ZSByZWxhdGlvbnNoaXBzIGJldHdlZW4gdGhlIHZhcmlhYmxlcyBvZiBpbnRlcmVzdCB3aGVuIHRoZXkgYXJlIHNtYWxsIGluIG1hZ25pdHVkZS4NCg0KRGlzYWR2YW50YWdlcyA6DQogKwlEZXNwaXRlIHBvdGVudGlhbGx5IGxhcmdlIGRhdGFzZXRzLCBhIGxhcmdlciBkYXRhc2V0IGRvZXNu4oCZdCBhdXRvbWF0aWNhbGx5IG1lYW4gbW9yZSBnZW5lcmFsaXphYmlsaXR5LiBEaXNwcm9wb3J0aW9uYWwgdXNlIGJ5IGNlcnRhaW4gdHlwZXMgb2YgcGVvcGxlIGNhbiBsZWFkIHRvIOKAmGJpYXNlZOKAmSBkYXRhLiBJZGVhbGx5LCB5b3Ugd291bGQgaGF2ZSBzb21lIGFuY2hvciBkYXRhIHNldCBmcm9tIHdoaWNoIHlvdSBrbm93IHRoYXQgaXQgZ2VuZXJhbGl6ZXMgdG8gYSBnaXZlbiB0YXJnZXQgcG9wdWxhdGlvbiBhbmQgbGluayB0aGF0IHRvIHNvbWUgc291cmNlIG9mIGRpZ2l0YWwgdHJhY2UgZGF0YS4gT24gdGhlIG90aGVyIGVuZCwgb25lIGNvdWxkIGF0dGVtcHQgdG8gc3R1ZHkgYW4gZW50aXJlIHBvcHVsYXRpb24gc3VjaCB0aGF0IHlvdSBhcmUgcHJldHR5IGNlcnRhaW4gdGhhdCB5b3UgY2FuIGdlbmVyYWxpemUgeW91ciByZXN1bHRzIHRvIHRoYXQgcG9wdWxhdGlvbi4NCiArCUh1Z2UgbnVtYmVycyBvZiBvYnNlcnZhdGlvbnMgKGFnYWluLCBpbnRvIHRoZSBtYW55IGlmIG5vdCBodW5kcmVkcyBvZiBtaWxsaW9ucykgbWF5IGJlIHByZXR0eSBkaWZmaWN1bHQgdG8gbWFuaXB1bGF0ZSBhbmQgYW5hbHl6ZS4gSW4gc29tZSBjYXNlcywgdGhlIGRhdGEgYmVjb21lIHNvIGxhcmdlIHRoYXQgaXQgaXMgbmVjZXNzYXJ5IHRvIG1vdmUgdG8gY29tcHV0aW5nIGNsdXN0ZXJzIGJlY2F1c2UgeW91ciBsYXB0b3DigJlzIG1lbW9yeSBjYW5ub3QgaGFuZGxlIGl0IGFueW1vcmUuIERlcGVuZGVudCBvbiB3aGF0IHR5cGUgb2YgZGF0YSB5b3UgYW5hbHl6ZSB5b3UgdGh1cyBtaWdodCBuZWVkIHRvIGFkanVzdCB5b3VyIGRhdGEgd29ya2Zsb3cuIFNvbHV0aW9uOiBkcmF3IGEgcmFuZG9tIHNhbXBsZSBmcm9tIHRoZSBkYXRhIGFuZCBydW4gdGhhdCBzYW1wbGUuIERpc2FkdmFudGFnZSBvZiB0aGUgc29sdXRpb246IFRoZSBpbnRlcmRlcGVuZGVudCBuYXR1cmUgb2YgbmV0d29ya3M7IHNvbWUgb2YgdGhlIGluaGVyZW50bHkgY2x1c3RlcmVkIHN0cnVjdHVyZSBvZiBuZXR3b3JrcyBpcyBsb3N0IHdoZW4geW91IG9ubHkgZHJhdyBhIHN1YnNldCBvZiBhZ2VudHMgZnJvbSB0aGUgbmV0d29yay4NCiArCVdlYnNjcmFwZWQgZGlnaXRhbCB0cmFjZSBkYXRhIGlzIHVzdWFsbHkgc3RydWN0dXJlZCB2ZXJ5IGRpZmZlcmVudGx5IGNvbXBhcmVkIHRvIHRoZSDigJxmbGF04oCdIGRhdGEgZmlsZXMgc29jaWFsIHNjaWVudGlzdHMgYXJlIHVzZWQgdG8gd29ya2luZyB3aXRoLiBVc3VhbGx5LCB3ZSBvcGVuIGEgZGF0YXNldCB3aXRoIGNvbHVtbnMgKHZhcmlhYmxlcykgYW5kIHJvd3MgKG9ic2VydmF0aW9ucykuIFdlYnNjcmFwZWQgZGF0YSBpcyB1c3VhbGx5IHN0b3JlZCBpbiBuZXN0ZWQgc3RydWN0dXJlZCBzdWNoIGFzIFhNTCBvciBKU09OIG9yIGNvbnRhaW5zIHRleHQgZGF0YS4gVGhlcmVmb3JlLCBhZGRpdGlvbmFsIG1hbmlwdWxhdGlvbiBpcyBuZWVkZWQgYmVmb3JlIHdlIGFycml2ZSBhdCB0aGUgZGF0YSBmb3JtYXRzIHRoYXQgc3RhbmRhcmQgc3RhdGlzdGljYWwgcGFja2FnZXMgY2FuIHJlYWQvYW5hbHl6ZS4gU29tZXRpbWVzIHRoZSBuZXR3b3Jrcy1vZi1pbnRlcmVzdCBhcmUgc3RvcmVkIGluIHRleHQgZGF0YSwgZm9yIGluc3RhbmNlIGlmIHlvdeKAmXJlIGludGVyZXN0ZWQgaW4gbGV0dGVyLXdyaXRpbmcgcmVsYXRpb25zaGlwcy4gSGVuY2UsIGlmIHlvdSB3YW50IHRvIG1hbmlwdWxhdGUgYW5kIGFuYWx5emUgdGhlc2UgZGF0YSBhdCBzY2FsZSwgc29tZSBmb3JtIG9mIHByb2dyYW1taW5nIGJlY29tZXMgbmVhcmx5IHVuYXZvaWRhYmxlLg0KICsJVW5vYnNlcnZlZCB2YXJpYWJsZXMgLS0+IG1vc3Qgb2Z0ZW4gbm8gZGVtb2dyYXBoaWMgaW5mb3JtYXRpb24uDQogDQojIFRocmVlIG1vc3QgcHJldmFsZW50IGFkdmFudGFnZXM6IA0KDQoxLglOZXcgdGVzdHMgb2Ygb2xkIHNvY2lhbCBzY2llbmNlIGh5cG90aGVzZXMgbWFkZSBwb3NzaWJsZSBieSB0aGUgYXZhaWxhYmlsaXR5IG9mIGRpZ2l0YWwgZm9vdHByaW50IGRhdGEuDQoyLglUZXN0cyBvZiBuZXdseSBkZXJpdmVkIHNvY2lhbCBzY2llbmNlIGh5cG90aGVzZXMgbWFkZSBwb3NzaWJsZSBieSB0aGUgYXZhaWxhYmlsaXR5IG9mIGRpZ2l0YWwgZm9vdHByaW50IGRhdGEuDQozLglUZXN0cyBvZiBuZXcgdGhlb3JpZXMgYWJvdXQg4oCcdGhlIGludGVybmV04oCdIGFzIHNvY2lhbCBwaGVub21lbm9uIGJ5IGl0c2VsZi4NCg0KIyBXYXlzIG9mIHdlYnNjcmFwaW5nDQoxLglEbyBpdCB5b3Vyc2VsZi9yZXNlYXJjaCBhc3Npc3RhbnRzIGFuZCBzYXZlIHRoZSBkYXRhIG1hbnVhbGx5DQoyLglBcHBsaWNhdGlvbiBQcm9ncmFtbWluZyBJbnRlcmZhY2U6IFV0aWxpemluZyBleGlzdGluZyBzdHJ1Y3R1cmVzIGluIHBsYWNlLCB1c3VhbGx5IGEgY29ubmVjdGlvbiBiZXR3ZWVuIGEgY29tcHV0ZXIvcHJvZ3JhbSB0byBhbm90aGVyIGNvbXB1dGVyL3Byb2dyYW0gdGhhdCBtYWtlcyB1c2Ugb2YgYW4gaW50ZXJmYWNlIHRvIHByb3ZpZGUgc29tZSBzZXJ2aWNlLg0KMy4JWW91IGNhbiBhbHNvIGRlc2lnbiB5b3VyIG93biB3ZWJzY3JhcGluZyBjcmF3bGVycy4NCjQuCVlvdSBjYW4gYWxzbyBjb2xsYWJvcmF0ZSB3aXRoIGNvbXBhbmllcyBsaWtlIEZhY2Vib29rIG9yIFR3aXR0ZXIgc3VjaCB0aGF0IHRoZXkgcHJvdmlkZSBkYXRhIGZvciByZXNlYXJjaGVycw0KDQotLS0=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("summaryCh11.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

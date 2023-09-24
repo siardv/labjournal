@@ -1,0 +1,61 @@
+name: "Assignment 1"
+author:
+  - 'Siard van den Bosch'
+output_dir: "docs"
+exclude:
+  - "data"
+  - "_test"
+bibliography: references.bib
+navbar:
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: "My journal"
+      menu:
+      - text: "week 1"
+        menu:
+          - text: "test1"
+            href: test.html
+          - text: "test2"
+            href: test.html
+      - text: "week 2"
+        menu:
+          - text: "descriptive statistics"
+            href: pracdes.html
+      - text: "week 3"
+        menu:
+          - text: "Summary SNASS chapter 11"
+            href: summaryCh11.html
+          - text: "Workshop on webscraping"
+            href: webscraping_workshop.html
+      
+      - text: "Research Report"
+        menu:
+          - text: "Introduction"
+            href: Introduction.html
+          - text: "Theory"
+            href: Theory.html
+          - text: "Methods"
+            href: Methods.html
+          - text: "Results"
+            href: Results.html
+          - text: "Conclusion and discussion"
+            href: Conc_Disc.html
+
+
+        # here, other .Rmds can be added
+
+
+  right:
+  - icon: fab fa-github
+    href: https://github.com/siardv/LabJournal
+output:
+  html_document:
+    theme: flatly
+    highlight: default
+    toc:  true
+    toc_float: true
+    number_sections: true
+    code_folding: show
+    code_download: yes
+    css: tweaks.css

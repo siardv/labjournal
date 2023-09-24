@@ -1,0 +1,47 @@
+---
+title: "Theory"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+
+
+---
+
+# Theory
+
+
+Assumptions
+
+- There are more male researchers than there are women researchers
+
+- People prefer to work with people that have the same gender as them
+
+- As there are more potential male collaborators, the likelihood of contacting a male researcher is higher
+
+- Homophily effect
+
+
+H1a: Men are more likely to collaborate with men
+H1b: Women are more likely to collaborate with women
+H1c: Men are more likely to collaborate with men than women are likely to collaborate with women
+
+
+H2: The transitivity effect is stronger for men than for women
+
+
+Assumptions
+ 
+ - Men are more preferred when starting in academics
+ 
+ - Therefore men have a higher likelihood of being preferred for a paper
+ 
+ - With more published papers, women gain more 'respect' and popularity compared to men 
+ 
+ - Effect of more published papers is therefore bigger for women than for men
+
+H3: The effect of the amount of published papers is stronger for women than for men
+
+
