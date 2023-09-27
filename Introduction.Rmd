@@ -11,25 +11,12 @@ bibliography: references.bib
 ---
 
 # Introduction
+Decades of research demonstrates persistent and troubling gender inequities across scientific fields (Fox 2005; Xie & Shauman 2003). While more women are earning PhDs and obtaining faculty positions, they continue to face marginalization and exclusion from scholarly networks critical for productivity and advancement (Misra et al. 2011; Smith et al. 2022). Women remain underrepresented as authors on published studies, often as "silent contributors" providing undisclosed labor (Mongeon et al. 2017). These ongoing gender gaps likely stem, in part, from homophily bias shaping collaboration patterns in ways that disadvantage women (McPherson et al. 2001).
 
-In his famous research Milgram (1967) found that on average there are most three connections separating two random Americans. More recently, Bakhshandeh et al. (2011) found that between two random Twitter users there is an average degree of separation of 3.43 connections. This means that between two randomly selected Twitter users, there are on average three or four Twitter users in between these randomly selected users. 
+Homophily, the tendency to associate with similar others, powerfully segregates social networks along salient lines of difference like gender (McPherson et al. 2001). Same-gender preferences likely arise due to psychological affinity but also structural barriers that increase the costs of crossing group boundaries (Ruef et al. 2003). Gender homophily in research collaborations may be further amplified by skewed settings with few women faculty, as posited by Kanter’s (1977) theory of token minorities facing heightened boundary policing.
 
-Such network analyses can not only be performed on Twitter data, but also in the context of science. Since 1996 the percentage of single-author papers has rapidly decreased. Where in 1996 50 percent of all published papers in economics journals were single-author papers, in 2021 just 2,1 percent of all papers were written by just one author (Choueiry, 2022; London School of Economics and Political Science, 2018). On the other hand, there has been a major rise in papers with three authors (London School of Economics and Political Science, 2018). 
+This study quantitatively examines how the gender composition of academic departments impacts gender homophily in faculty research collaborations. It tests the hypothesis that environments with more imbalanced gender ratios exhibit greater gender homophily in co-authorship networks. The objective is to model the extent of gender homophily and assess how it varies based on the demographic makeup of departments.
 
-With the rise of the amount of multi-author papers is also the rise of the internet. The ability of being able to connect to others around the world, and have access to others' papers more easily, makes for one reason for the increase of multi-author papers (source). In the literature, papers with more than one author are also referred to as co-authorship, or when used to refer to a network 'co-authorship networks' (SOURCE).
+Dynamic social network modeling enables analyzing the evolution of faculty co-authorship networks over time (Snijders et al. 2010). This technique estimates the changing tendencies for authors to select collaborators based on gender and other factors, while accounting for existing network structures that also shape tie formation (Ripley et al. 2022). The rsiena package in R is utilized, which facilitates modeling the interdependent, longitudinal network dynamics (Ripley et al. 2022).
 
-This increase of multi-author papers, and the online availability of information surrounding the authors, creates opportunities to look at collaborations from a different perspective. In this paper I will be trying to understand the relation between the preferences of researchers by taking a social network perspective. This perspective follows a different logic than 'mainstream' science, as in this perspective it is acknowledged that people do not 'stand alone', but are embedded in a network of people that (unconsciouly) influence the behaviour of the ego (SNASS book --> (Look at how to reference!!!)). 
-
-** Still to add: Description of gender differences, introduction of concepts like homophily, research topics of researchers etc. **
-
-
-
-This leads me to the following research question: 'What is the relative preference of men for men and women for women when collaborating for an academic research paper?'
-
-A second research question that will be central to this paper is: 'What mechanisms can help explain the difference in preference of gender when looking for people to collaborate on an academic paper?'
-
-# Research questions
-
-Descriptive RQ: What is the relative preference of men for men and women for women?
-Explanatory RQ: 'What mechanisms can help explain the difference in preference of gender when looking for people to work on an academic paper?' Moet nog iets verklaren. Preferentie verklaren waarom mannen voor mannen kiezen en vrouwen voor vrouwen
-Paar mechanismen uitsluiten: homophily, productivity, research topics, seniority?
+This research applies a social networks perspective to the sociology of science (Granovetter 1973). It recognizes scholars are embedded within collaborative structures impacting their productivity and advancement (Fox 2005). Theoretically, it accounts for how an author’s connections shape their output and status. Methodologically, it models the non-independence of co-authorship ties rather than treating observations as atomized - a key tenet of social network analysis (Wasserman & Faust 1994).

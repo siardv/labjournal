@@ -1,5 +1,5 @@
 ---
-title: "Conclusion and discussion"
+title: "Discussion & Conclusion"
 output:
   html_document:
     toc: true
@@ -10,11 +10,8 @@ bibliography: references.bib
 
 ---
 
-# Conclusion
-
-Start entering text here 
-
-
 # Discussion
+...
 
-type to start
+# Conclusion
+...

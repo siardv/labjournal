@@ -11,5 +11,4 @@ bibliography: references.bib
 ---
 
 # Results
-
-Start entering text here 
+...

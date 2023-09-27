@@ -11,27 +11,3 @@ bibliography: references.bib
 ---
 
 # Methods
-
-In order to be able to answer the research questions, there is a need for data. For this paper, I make use of a technique called 'webscraping'. Webscraping is a process by which a researcher collects data from the internet. 
-
-# Preparation for week 3, what type of data do I need?
-
-Type of information I need in my dataset:
-- Gender of researcher
-- Age of researcher
-- Number of articles published
-- Amount of times the researcher has worked with a person --> could be an indicator of the strength of the relationship between researchers
-- Speciality of topic of researcher -> lots of knowledge on specific, but niche, topics may be affecting the likelihood of fellow researchers wanting to work with you.
-- Seniority -> how long has someone been in academia
-- Average publications per year
-- The number of working hours per week -> time available for academic writing
-- The University which the authors work for -> potentially at the time of publishing the article -> potentially partially explaining why they work together in the first place -> options to meet?
-
-Whereas before looking at the SNASS chapter I was contemplating using the Radboud Social Science department as a sample, however, with the tutorial in mind, would it be better to take another university's Social Science staff as my sample?
-
-
-Data can be undirected, as there is no information available on who initiated the collaboration for the paper(s). With wanting to know how often researchers have collaborated, I add weights to the ties between researchers. I believe that more collaborations can indicate a pleasant previous experiences when working together, so the combinations of characteristics are more likely to match, or influence preference for collaborations. 
-As I will be looking at the collaborations between researchers, I will be looking at an egonetwerk structure type of data.
-
-
----

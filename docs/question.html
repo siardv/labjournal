@@ -12,9 +12,9 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Theory</title>
+<title>Research Question</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -38,6 +38,10 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+<link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+<link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+<script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -340,58 +344,52 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    My journal
+    My Journal
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 1</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="test.html">test1</a>
-        </li>
-        <li>
-          <a href="test.html">test2</a>
+          <a href="question.html">Research Question</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 2</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="pracdes.html">descriptive statistics</a>
+          <a href="descriptives.html">Descriptive Statistics</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 3</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="summaryCh11.html">Summary SNASS chapter 11</a>
-        </li>
-        <li>
-          <a href="webscraping_workshop.html">Workshop on webscraping</a>
+          <a href="webscraping.html">Web Scraping</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Report</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Paper</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="Introduction.html">Introduction</a>
+          <a href="introduction.html">Introduction</a>
         </li>
         <li>
-          <a href="Theory.html">Theory</a>
+          <a href="theory.html">Theory</a>
         </li>
         <li>
-          <a href="Methods.html">Methods</a>
+          <a href="methods.html">Methods</a>
         </li>
         <li>
-          <a href="Results.html">Results</a>
+          <a href="results.html">Results</a>
         </li>
         <li>
-          <a href="Conc_Disc.html">Conclusion and discussion</a>
+          <a href="discussion_conclusion.html">Discussion &amp; Conclusion</a>
         </li>
       </ul>
     </li>
@@ -424,43 +422,36 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Theory</h1>
+<h1 class="title toc-ignore">Research Question</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<div id="theory" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Theory</h1>
-<p>Assumptions</p>
-<ul>
-<li><p>There are more male researchers than there are women
-researchers</p></li>
-<li><p>People prefer to work with people that have the same gender as
-them</p></li>
-<li><p>As there are more potential male collaborators, the likelihood of
-contacting a male researcher is higher</p></li>
-<li><p>Homophily effect</p></li>
-</ul>
-<p>H1a: Men are more likely to collaborate with men H1b: Women are more
-likely to collaborate with women H1c: Men are more likely to collaborate
-with men than women are likely to collaborate with women</p>
-<p>H2: The transitivity effect is stronger for men than for women</p>
-<p>Assumptions</p>
-<ul>
-<li><p>Men are more preferred when starting in academics</p></li>
-<li><p>Therefore men have a higher likelihood of being preferred for a
-paper</p></li>
-<li><p>With more published papers, women gain more ‘respect’ and
-popularity compared to men</p></li>
-<li><p>Effect of more published papers is therefore bigger for women
-than for men</p></li>
-</ul>
-<p>H3: The effect of the amount of published papers is stronger for
-women than for men</p>
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<div
+id="gender-homophily-in-scientific-publishing-patterns-of-authorship-collaboration"
+class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Gender Homophily in
+Scientific Publishing: Patterns of Authorship Collaboration</h1>
+<p>How does the gender composition of an academic department
+quantitatively relate to the likelihood of gender homophilous
+collaboration patterns in authorship of scientific publications?</p>
+<p>To examine this, the RSiena package could model the evolution of
+co-authorship networks within a faculty over time. It allows modeling of
+network dynamics and could estimate the extent to which authors are more
+likely to form new collaborations with others of the same gender,
+controlling for other factors. The gender homophily effects could then
+be compared across departments with different gender balances to see if
+more heavily male or female dominated environments exhibit greater
+gender homophily in research collaborations.</p>
+<hr />
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlRoZW9yeSINCm91dHB1dDoNCiAgaHRtbF9kb2N1bWVudDoNCiAgICB0b2M6IHRydWUNCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUNCmF1dGhvcjogImJ5OiBTdGlqbiB2YW4gSGVsbW9uZHQiDQpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliDQoNCg0KLS0tDQoNCiMgVGhlb3J5DQoNCg0KQXNzdW1wdGlvbnMNCg0KLSBUaGVyZSBhcmUgbW9yZSBtYWxlIHJlc2VhcmNoZXJzIHRoYW4gdGhlcmUgYXJlIHdvbWVuIHJlc2VhcmNoZXJzDQoNCi0gUGVvcGxlIHByZWZlciB0byB3b3JrIHdpdGggcGVvcGxlIHRoYXQgaGF2ZSB0aGUgc2FtZSBnZW5kZXIgYXMgdGhlbQ0KDQotIEFzIHRoZXJlIGFyZSBtb3JlIHBvdGVudGlhbCBtYWxlIGNvbGxhYm9yYXRvcnMsIHRoZSBsaWtlbGlob29kIG9mIGNvbnRhY3RpbmcgYSBtYWxlIHJlc2VhcmNoZXIgaXMgaGlnaGVyDQoNCi0gSG9tb3BoaWx5IGVmZmVjdA0KDQoNCkgxYTogTWVuIGFyZSBtb3JlIGxpa2VseSB0byBjb2xsYWJvcmF0ZSB3aXRoIG1lbg0KSDFiOiBXb21lbiBhcmUgbW9yZSBsaWtlbHkgdG8gY29sbGFib3JhdGUgd2l0aCB3b21lbg0KSDFjOiBNZW4gYXJlIG1vcmUgbGlrZWx5IHRvIGNvbGxhYm9yYXRlIHdpdGggbWVuIHRoYW4gd29tZW4gYXJlIGxpa2VseSB0byBjb2xsYWJvcmF0ZSB3aXRoIHdvbWVuDQoNCg0KSDI6IFRoZSB0cmFuc2l0aXZpdHkgZWZmZWN0IGlzIHN0cm9uZ2VyIGZvciBtZW4gdGhhbiBmb3Igd29tZW4NCg0KDQpBc3N1bXB0aW9ucw0KIA0KIC0gTWVuIGFyZSBtb3JlIHByZWZlcnJlZCB3aGVuIHN0YXJ0aW5nIGluIGFjYWRlbWljcw0KIA0KIC0gVGhlcmVmb3JlIG1lbiBoYXZlIGEgaGlnaGVyIGxpa2VsaWhvb2Qgb2YgYmVpbmcgcHJlZmVycmVkIGZvciBhIHBhcGVyDQogDQogLSBXaXRoIG1vcmUgcHVibGlzaGVkIHBhcGVycywgd29tZW4gZ2FpbiBtb3JlICdyZXNwZWN0JyBhbmQgcG9wdWxhcml0eSBjb21wYXJlZCB0byBtZW4gDQogDQogLSBFZmZlY3Qgb2YgbW9yZSBwdWJsaXNoZWQgcGFwZXJzIGlzIHRoZXJlZm9yZSBiaWdnZXIgZm9yIHdvbWVuIHRoYW4gZm9yIG1lbg0KDQpIMzogVGhlIGVmZmVjdCBvZiB0aGUgYW1vdW50IG9mIHB1Ymxpc2hlZCBwYXBlcnMgaXMgc3Ryb25nZXIgZm9yIHdvbWVuIHRoYW4gZm9yIG1lbg0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVzZWFyY2ggUXVlc3Rpb24iCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKCi0tLQoKCmBgYHtyLCBlY2hvPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KIyBpbnN0YWxsLnBhY2thZ2VzKCJyZW1vdGVzIikKIyByZW1vdGVzOjppbnN0YWxsX2dpdGh1Yigicmxlc3VyL2tsaXBweSIpCmBgYCAKCmBgYHtyLCBlY2hvPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KbGlicmFyeShrbml0cikKCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKb3B0c19jaHVuayRzZXQodGlkeS5vcHRzPWxpc3Qod2lkdGguY3V0b2ZmPTEwMCksdGlkeT1UUlVFLCB3YXJuaW5nID0gRkFMU0UsIG1lc3NhZ2UgPSBGQUxTRSxjb21tZW50ID0gIiM+IiwgY2FjaGU9VFJVRSwgY2xhc3Muc291cmNlPWMoIlJlc2VhcmNoIHF1ZXN0aW9uIikpCm9wdGlvbnMod2lkdGggPSAxMDApCnJnbDo6c2V0dXBLbml0cigpCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9CgpgYGAKCmBgYHtyICwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgojIEdlbmRlciBIb21vcGhpbHkgaW4gU2NpZW50aWZpYyBQdWJsaXNoaW5nOiBQYXR0ZXJucyBvZiBBdXRob3JzaGlwIENvbGxhYm9yYXRpb24KCkhvdyBkb2VzIHRoZSBnZW5kZXIgY29tcG9zaXRpb24gb2YgYW4gYWNhZGVtaWMgZGVwYXJ0bWVudCBxdWFudGl0YXRpdmVseSByZWxhdGUgdG8gdGhlIGxpa2VsaWhvb2Qgb2YgZ2VuZGVyIGhvbW9waGlsb3VzIGNvbGxhYm9yYXRpb24gcGF0dGVybnMgaW4gYXV0aG9yc2hpcCBvZiBzY2llbnRpZmljIHB1YmxpY2F0aW9ucz8KClRvIGV4YW1pbmUgdGhpcywgdGhlIFJTaWVuYSBwYWNrYWdlIGNvdWxkIG1vZGVsIHRoZSBldm9sdXRpb24gb2YgY28tYXV0aG9yc2hpcCBuZXR3b3JrcyB3aXRoaW4gYSBmYWN1bHR5IG92ZXIgdGltZS4gSXQgYWxsb3dzIG1vZGVsaW5nIG9mIG5ldHdvcmsgZHluYW1pY3MgYW5kIGNvdWxkIGVzdGltYXRlIHRoZSBleHRlbnQgdG8gd2hpY2ggYXV0aG9ycyBhcmUgbW9yZSBsaWtlbHkgdG8gZm9ybSBuZXcgY29sbGFib3JhdGlvbnMgd2l0aCBvdGhlcnMgb2YgdGhlIHNhbWUgZ2VuZGVyLCBjb250cm9sbGluZyBmb3Igb3RoZXIgZmFjdG9ycy4gVGhlIGdlbmRlciBob21vcGhpbHkgZWZmZWN0cyBjb3VsZCB0aGVuIGJlIGNvbXBhcmVkIGFjcm9zcyBkZXBhcnRtZW50cyB3aXRoIGRpZmZlcmVudCBnZW5kZXIgYmFsYW5jZXMgdG8gc2VlIGlmIG1vcmUgaGVhdmlseSBtYWxlIG9yIGZlbWFsZSBkb21pbmF0ZWQgZW52aXJvbm1lbnRzIGV4aGliaXQgZ3JlYXRlciBnZW5kZXIgaG9tb3BoaWx5IGluIHJlc2VhcmNoIGNvbGxhYm9yYXRpb25zLgoKLS0tLQoKCgoKCgo=</div>
 
 
 </div>
@@ -498,7 +489,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("Theory.Rmd");
+  window.initializeSourceEmbed("question.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

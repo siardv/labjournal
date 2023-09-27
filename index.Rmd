@@ -19,7 +19,7 @@ bibliography: references.bib
 library(knitr)
 
 knitr::opts_chunk$set(echo = TRUE)
-opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("test"), class.output=c("test2"))
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("Research question"), class.output=c("test2"))
 options(width = 100)
 rgl::setupKnitr()
 
@@ -45,45 +45,6 @@ klippy::klippy(position = c('top', 'right'))
 
 # My Lab Journal
 Last compiled on `r format(Sys.time(), '%B, %Y')`
-
-*Describe lab journal here.*
-
-<br>
-
-----
-
-
-Everyone can fork this repository.
-
-Use this example to journal your lab work and assignments.
-
-
-:::
-::: {.column width="50%"}
-
-
-
-
-
-![](images/sciencedog.jpg)
-
-
-:::
-::::::::::::::
-
-
-
-## How to use
-
-<br>
-
-Use the top menu to navigate through the journal.
-
-
-```{r}
-2+2
-
-```
 
 
 ----

@@ -1,0 +1,47 @@
+---
+title: "Research Question"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+
+---
+
+
+```{r, echo=FALSE, warning=FALSE, results='hide'}
+# install.packages("remotes")
+# remotes::install_github("rlesur/klippy")
+``` 
+
+```{r, echo=FALSE, warning=FALSE, results='hide'}
+library(knitr)
+
+knitr::opts_chunk$set(echo = TRUE)
+opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("Research question"))
+options(width = 100)
+rgl::setupKnitr()
+colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+
+```
+
+```{r , echo=FALSE, include=TRUE}
+klippy::klippy(position = c('top', 'right'))
+#klippy::klippy(color = 'darkred')
+#klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
+```
+
+# Gender Homophily in Scientific Publishing: Patterns of Authorship Collaboration
+
+How does the gender composition of an academic department quantitatively relate to the likelihood of gender homophilous collaboration patterns in authorship of scientific publications?
+
+To examine this, the RSiena package could model the evolution of co-authorship networks within a faculty over time. It allows modeling of network dynamics and could estimate the extent to which authors are more likely to form new collaborations with others of the same gender, controlling for other factors. The gender homophily effects could then be compared across departments with different gender balances to see if more heavily male or female dominated environments exhibit greater gender homophily in research collaborations.
+
+----
+
+
+
+
+
+

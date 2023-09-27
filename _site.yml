@@ -10,37 +10,33 @@ navbar:
   left:
     - icon: fa-home
       href: index.html
-    - text: "My journal"
+    - text: "My Journal"
       menu:
-      - text: "week 1"
+      - text: "Week 1"
         menu:
-          - text: "test1"
-            href: test.html
-          - text: "test2"
-            href: test.html
-      - text: "week 2"
+          - text: "Research Question"
+            href: question.html
+      - text: "Week 2"
         menu:
-          - text: "descriptive statistics"
-            href: pracdes.html
-      - text: "week 3"
+          - text: "Descriptive Statistics"
+            href: zacharys.html
+      - text: "Week 3"
         menu:
-          - text: "Summary SNASS chapter 11"
-            href: summaryCh11.html
-          - text: "Workshop on webscraping"
-            href: webscraping_workshop.html
+          - text: "Web Scraping"
+            href: webscraping.html
       
-      - text: "Research Report"
+      - text: "Research Paper"
         menu:
           - text: "Introduction"
-            href: Introduction.html
+            href: introduction.html
           - text: "Theory"
-            href: Theory.html
+            href: theory.html
           - text: "Methods"
-            href: Methods.html
+            href: methods.html
           - text: "Results"
-            href: Results.html
-          - text: "Conclusion and discussion"
-            href: Conc_Disc.html
+            href: results.html
+          - text: "Discussion & Conclusion"
+            href: discussion_conclusion.html
 
 
         # here, other .Rmds can be added

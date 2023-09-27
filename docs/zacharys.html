@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="by: Siard van den Bosch" />
+
+
+<title>Descriptive Network Statistics of Zachary’s Karate Club</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My Journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="question.html">Research Question</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="zacharys.html">Descriptive Statistics</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="webscraping.html">Web Scraping</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Paper</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="introduction.html">Introduction</a>
+        </li>
+        <li>
+          <a href="theory.html">Theory</a>
+        </li>
+        <li>
+          <a href="methods.html">Methods</a>
+        </li>
+        <li>
+          <a href="results.html">Results</a>
+        </li>
+        <li>
+          <a href="discussion_conclusion.html">Discussion &amp; Conclusion</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/siardv/LabJournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Descriptive Network Statistics of Zachary’s
+Karate Club</h1>
+<h4 class="author">by: Siard van den Bosch</h4>
+
+</div>
+
+
+<div id="social-network-analysis-of-karate-club" class="section level1"
+number="1">
+<h1><span class="header-section-number">1</span> Social Network Analysis
+of Karate Club</h1>
+<pre class="r"><code># install.packages(&quot;igraph&quot;)
+library(igraph)
+library(igraphdata)
+data(&quot;karate&quot;)</code></pre>
+<div id="import-network-data" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Import Network
+Data</h2>
+<pre class="r"><code>data(&quot;karate&quot;) </code></pre>
+</div>
+<div id="individual-statistics" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Individual
+Statistics</h2>
+<p><em>Calculate node-level statistics like degree, betweenness, and
+closeness centrality.</em></p>
+<p>The karate club network has 34 nodes representing members.</p>
+<pre class="r"><code># Individual-level statistics (degree, betweenness, closeness centrality)
+degree_stats &lt;- degree(karate)
+print(degree_stats)</code></pre>
+<pre><code>##    Mr Hi  Actor 2  Actor 3  Actor 4  Actor 5  Actor 6  Actor 7  Actor 8 
+##       16        9       10        6        3        4        4        4 
+##  Actor 9 Actor 10 Actor 11 Actor 12 Actor 13 Actor 14 Actor 15 Actor 16 
+##        5        2        3        1        2        5        2        2 
+## Actor 17 Actor 18 Actor 19 Actor 20 Actor 21 Actor 22 Actor 23 Actor 24 
+##        2        2        2        3        2        2        2        5 
+## Actor 25 Actor 26 Actor 27 Actor 28 Actor 29 Actor 30 Actor 31 Actor 32 
+##        3        3        2        4        3        4        4        6 
+## Actor 33   John A 
+##       12       17</code></pre>
+<pre class="r"><code>betweenness_stats &lt;- betweenness(karate)
+print(betweenness_stats)</code></pre>
+<pre><code>##      Mr Hi    Actor 2    Actor 3    Actor 4    Actor 5    Actor 6    Actor 7 
+## 250.150000  33.800000  36.650000   1.333333   0.500000  15.500000  15.500000 
+##    Actor 8    Actor 9   Actor 10   Actor 11   Actor 12   Actor 13   Actor 14 
+##   0.000000  13.100000   7.283333   0.500000   0.000000   0.000000   1.200000 
+##   Actor 15   Actor 16   Actor 17   Actor 18   Actor 19   Actor 20   Actor 21 
+##   0.000000   0.000000   0.000000  16.100000   3.000000 127.066667   0.000000 
+##   Actor 22   Actor 23   Actor 24   Actor 25   Actor 26   Actor 27   Actor 28 
+##   0.000000   0.000000   1.000000  33.833333   0.500000   0.000000   6.500000 
+##   Actor 29   Actor 30   Actor 31   Actor 32   Actor 33     John A 
+##  10.100000   0.000000   3.000000  66.333333  38.133333 209.500000</code></pre>
+<pre class="r"><code>closeness_stats &lt;- closeness(karate)
+print(closeness_stats)</code></pre>
+<pre><code>##       Mr Hi     Actor 2     Actor 3     Actor 4     Actor 5     Actor 6 
+## 0.007575758 0.005494505 0.005847953 0.005235602 0.004587156 0.004587156 
+##     Actor 7     Actor 8     Actor 9    Actor 10    Actor 11    Actor 12 
+## 0.004629630 0.005494505 0.005882353 0.005494505 0.005291005 0.004405286 
+##    Actor 13    Actor 14    Actor 15    Actor 16    Actor 17    Actor 18 
+## 0.006134969 0.005747126 0.005154639 0.004098361 0.003267974 0.005780347 
+##    Actor 19    Actor 20    Actor 21    Actor 22    Actor 23    Actor 24 
+## 0.005586592 0.007246377 0.006134969 0.005319149 0.004716981 0.004149378 
+##    Actor 25    Actor 26    Actor 27    Actor 28    Actor 29    Actor 30 
+## 0.004694836 0.003690037 0.005076142 0.004629630 0.006097561 0.005263158 
+##    Actor 31    Actor 32    Actor 33      John A 
+## 0.004878049 0.006097561 0.005952381 0.007575758</code></pre>
+</div>
+<div id="dyad-statistics" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Dyad Statistics</h2>
+<p><em>Convert to a directed graph and calculate dyad-level statistics
+like mutual, asymmetric, and null dyads.</em></p>
+<pre class="r"><code># Convert to a directed graph to prevent warnings in
+# dyad_census(karate) : At motifs.c:858 :Dyad census called on undirected graph
+# triad_census(karate) : At motifs.c:1052 :Triad census called on an undirected graph
+karate_directed &lt;- as.directed(karate)
+print(karate_directed)</code></pre>
+<pre><code>## IGRAPH 494755f DNW- 34 156 -- Zachary&#39;s karate club network
+## + attr: name (g/c), Citation (g/c), Author (g/c), Faction (v/n), name
+## | (v/c), label (v/c), color (v/n), weight (e/n)
+## + edges from 494755f (vertex names):
+##  [1] Mr Hi  -&gt;Actor 2  Mr Hi  -&gt;Actor 3  Mr Hi  -&gt;Actor 4  Mr Hi  -&gt;Actor 5 
+##  [5] Mr Hi  -&gt;Actor 6  Mr Hi  -&gt;Actor 7  Mr Hi  -&gt;Actor 8  Mr Hi  -&gt;Actor 9 
+##  [9] Mr Hi  -&gt;Actor 11 Mr Hi  -&gt;Actor 12 Mr Hi  -&gt;Actor 13 Mr Hi  -&gt;Actor 14
+## [13] Mr Hi  -&gt;Actor 18 Mr Hi  -&gt;Actor 20 Mr Hi  -&gt;Actor 22 Mr Hi  -&gt;Actor 32
+## [17] Actor 2-&gt;Actor 3  Actor 2-&gt;Actor 4  Actor 2-&gt;Actor 8  Actor 2-&gt;Actor 14
+## [21] Actor 2-&gt;Actor 18 Actor 2-&gt;Actor 20 Actor 2-&gt;Actor 22 Actor 2-&gt;Actor 31
+## [25] Actor 3-&gt;Actor 4  Actor 3-&gt;Actor 8  Actor 3-&gt;Actor 9  Actor 3-&gt;Actor 10
+## + ... omitted several edges</code></pre>
+<p>Analysis of dyadic ties shows:</p>
+<ul>
+<li><p>78 mutual dyads: This means there are 78 bidirectional ties
+between pairs of members. Mutual dyads indicate reciprocity and close
+bonding between connected members. The low number here points to limited
+reciprocity.</p></li>
+<li><p>0 asymmetric dyads: This means there are no unidirectional ties.
+Lack of asymmetry implies ties form mutually between members.</p></li>
+<li><p>483 null dyads: This high number means 483 pairs of members have
+no tie at all. This confirms overall low connectivity in the
+network.</p></li>
+</ul>
+<pre class="r"><code># Dyad-level statistics (number of mutual, asymmetric and null dyads)
+dyad_census &lt;- dyad_census(karate_directed) 
+print(dyad_census)</code></pre>
+<pre><code>## $mut
+## [1] 78
+## 
+## $asym
+## [1] 0
+## 
+## $null
+## [1] 483</code></pre>
+</div>
+<div id="triad-statistics" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Triad Statistics</h2>
+<p><em>Calculate triad-level statistics by counting the number of each
+type of triad motif.</em></p>
+<pre class="r"><code># Triad-level statistics (number of each type of triads)
+triad_census &lt;- triad_census(karate_directed)
+print(triad_census)</code></pre>
+<pre><code>##  [1] 3971    0 1575    0    0    0    0    0    0    0  393    0    0    0    0
+## [16]   45</code></pre>
+</div>
+<div id="network-statistics" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Network
+Statistics</h2>
+<p>Calculate statistics summarizing the overall network
+structure(density, transitivity)</p>
+<div id="calculating-edge-density" class="section level3"
+number="1.5.1">
+<h3><span class="header-section-number">1.5.1</span> Calculating Edge
+Density</h3>
+<pre class="r"><code>density_stats &lt;- edge_density(karate)
+print(density_stats)</code></pre>
+<pre><code>## [1] 0.1390374</code></pre>
+</div>
+<div id="calculating-edge-density-using-vertex-and-edge-counts"
+class="section level3" number="1.5.2">
+<h3><span class="header-section-number">1.5.2</span> Calculating Edge
+Density Using Vertex and Edge Counts</h3>
+<p>This section demonstrates how to calculate edge density from first
+principles by directly counting the number of vertices and edges. This
+provides an alternative to relying on the <code>edge_density()</code>
+function.</p>
+<pre class="r"><code># Count number of vertices
+num_vertices &lt;- vcount(karate)  
+
+# Count number of edges
+num_edges &lt;- ecount(karate)
+
+# Calculate maximum possible number of edges  
+max_possible_edges &lt;- num_vertices * (num_vertices - 1) / 2 
+
+# Compute edge density
+edge_density &lt;- num_edges / max_possible_edges  
+
+print(edge_density)</code></pre>
+<pre><code>## [1] 0.1390374</code></pre>
+</div>
+</div>
+<div id="transitivity" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Transitivity</h2>
+<p>Transitivity measures the probability that adjacent vertices of a
+vertex are connected.</p>
+<pre class="r"><code>transitivity_stats &lt;- transitivity(karate)
+print(transitivity_stats)</code></pre>
+<pre><code>## [1] 0.2556818</code></pre>
+</div>
+</div>
+<div id="descriptive-network-analysis-of-zacharys-karate-club-network"
+class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Descriptive network
+analysis of Zachary’s karate club network</h1>
+<div id="individual-level" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Individual Level</h2>
+<ul>
+<li><p>The degree distribution shows that some members like Mr. Hi and
+John A have very high degree (16-17) while most members have low degree
+(1-6). This indicates Mr. Hi and John A are central hubs with many
+connections.</p></li>
+<li><p>Betweenness is concentrated on Mr. Hi and John A, suggesting they
+connect otherwise disconnected groups within the network. Their
+potential control over information flow gives them informal
+power.</p></li>
+<li><p>Closeness centrality scores are fairly similar across members,
+indicating no members are particularly close or distant from others in
+terms of network position. Information or resources could spread
+relatively efficiently through the network.</p></li>
+</ul>
+</div>
+<div id="dyad-level" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Dyad Level</h2>
+<ul>
+<li><p>The high number of null dyads (483) compared to mutual dyads (78)
+indicates overall low connectivity and limited bonding between members.
+There is an opportunity to increase connectivity.</p></li>
+<li><p>The lack of any asymmetric dyads implies relationships form
+mutually when they exist. Ties are reciprocal rather than
+unidirectional. This points to strong bonding within existing
+connections.</p></li>
+</ul>
+</div>
+<div id="triad-level" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Triad Level</h2>
+<ul>
+<li><p>The low ratio of open (1575) to closed (45) triads shows limited
+clustering and dense subgroups. Members do not tend to be part of
+tightly knit local neighborhoods.</p></li>
+<li><p>The low transitivity value reinforces the lack of local
+clustering. Only 26% of potential triadic closures are realized,
+limiting small cliques.</p></li>
+</ul>
+</div>
+<div id="overall-network-structure" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Overall Network
+Structure</h2>
+<ul>
+<li><p>Low density indicates only a fraction of possible ties are
+actually present. This limits network cohesion and information flow.
+More connections could be beneficial.</p></li>
+<li><p>The sparse density along with low transitivity confirms an
+overall network with minimal connectivity and clustering. The network
+has potential to become more interconnected.</p></li>
+</ul>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGVzY3JpcHRpdmUgTmV0d29yayBTdGF0aXN0aWNzIG9mIFphY2hhcnnigJlzIEthcmF0ZSBDbHViIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCgotLS0KIyBTb2NpYWwgTmV0d29yayBBbmFseXNpcyBvZiBLYXJhdGUgQ2x1YgpgYGB7ciBlY2hvPVRSVUUsIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHBhZ2VkLnByaW50PUZBTFNFfQojIGluc3RhbGwucGFja2FnZXMoImlncmFwaCIpCmxpYnJhcnkoaWdyYXBoKQpsaWJyYXJ5KGlncmFwaGRhdGEpCmRhdGEoImthcmF0ZSIpCmBgYAoKIyMgSW1wb3J0IE5ldHdvcmsgRGF0YQoKYGBge3IgZWNobz1UUlVFLCBtZXNzYWdlPUZBTFNFLCBwYWdlZC5wcmludD1GQUxTRX0KZGF0YSgia2FyYXRlIikgCmBgYAoKIyMgSW5kaXZpZHVhbCBTdGF0aXN0aWNzCgoqQ2FsY3VsYXRlIG5vZGUtbGV2ZWwgc3RhdGlzdGljcyBsaWtlIGRlZ3JlZSwgYmV0d2Vlbm5lc3MsIGFuZCBjbG9zZW5lc3MgY2VudHJhbGl0eS4qCgpUaGUga2FyYXRlIGNsdWIgbmV0d29yayBoYXMgMzQgbm9kZXMgcmVwcmVzZW50aW5nIG1lbWJlcnMuCgpgYGB7ciBlY2hvPVRSVUUsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFLCBwYWdlZC5wcmludD1GQUxTRX0KIyBJbmRpdmlkdWFsLWxldmVsIHN0YXRpc3RpY3MgKGRlZ3JlZSwgYmV0d2Vlbm5lc3MsIGNsb3NlbmVzcyBjZW50cmFsaXR5KQpkZWdyZWVfc3RhdHMgPC0gZGVncmVlKGthcmF0ZSkKcHJpbnQoZGVncmVlX3N0YXRzKQpiZXR3ZWVubmVzc19zdGF0cyA8LSBiZXR3ZWVubmVzcyhrYXJhdGUpCnByaW50KGJldHdlZW5uZXNzX3N0YXRzKQpjbG9zZW5lc3Nfc3RhdHMgPC0gY2xvc2VuZXNzKGthcmF0ZSkKcHJpbnQoY2xvc2VuZXNzX3N0YXRzKQpgYGAKCiMjIER5YWQgU3RhdGlzdGljcwoKKkNvbnZlcnQgdG8gYSBkaXJlY3RlZCBncmFwaCBhbmQgY2FsY3VsYXRlIGR5YWQtbGV2ZWwgc3RhdGlzdGljcyBsaWtlIG11dHVhbCwgYXN5bW1ldHJpYywgYW5kIG51bGwgZHlhZHMuKgoKYGBge3IgZWNobz1UUlVFLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRSwgcGFnZWQucHJpbnQ9RkFMU0V9CiMgQ29udmVydCB0byBhIGRpcmVjdGVkIGdyYXBoIHRvIHByZXZlbnQgd2FybmluZ3MgaW4KIyBkeWFkX2NlbnN1cyhrYXJhdGUpIDogQXQgbW90aWZzLmM6ODU4IDpEeWFkIGNlbnN1cyBjYWxsZWQgb24gdW5kaXJlY3RlZCBncmFwaAojIHRyaWFkX2NlbnN1cyhrYXJhdGUpIDogQXQgbW90aWZzLmM6MTA1MiA6VHJpYWQgY2Vuc3VzIGNhbGxlZCBvbiBhbiB1bmRpcmVjdGVkIGdyYXBoCmthcmF0ZV9kaXJlY3RlZCA8LSBhcy5kaXJlY3RlZChrYXJhdGUpCnByaW50KGthcmF0ZV9kaXJlY3RlZCkKYGBgCgpBbmFseXNpcyBvZiBkeWFkaWMgdGllcyBzaG93czoKCi0gICA3OCBtdXR1YWwgZHlhZHM6IFRoaXMgbWVhbnMgdGhlcmUgYXJlIDc4IGJpZGlyZWN0aW9uYWwgdGllcyBiZXR3ZWVuIHBhaXJzIG9mIG1lbWJlcnMuCiAgICBNdXR1YWwgZHlhZHMgaW5kaWNhdGUgcmVjaXByb2NpdHkgYW5kIGNsb3NlIGJvbmRpbmcgYmV0d2VlbiBjb25uZWN0ZWQgbWVtYmVycy4KICAgIFRoZSBsb3cgbnVtYmVyIGhlcmUgcG9pbnRzIHRvIGxpbWl0ZWQgcmVjaXByb2NpdHkuCgotICAgMCBhc3ltbWV0cmljIGR5YWRzOiBUaGlzIG1lYW5zIHRoZXJlIGFyZSBubyB1bmlkaXJlY3Rpb25hbCB0aWVzLgogICAgTGFjayBvZiBhc3ltbWV0cnkgaW1wbGllcyB0aWVzIGZvcm0gbXV0dWFsbHkgYmV0d2VlbiBtZW1iZXJzLgoKLSAgIDQ4MyBudWxsIGR5YWRzOiBUaGlzIGhpZ2ggbnVtYmVyIG1lYW5zIDQ4MyBwYWlycyBvZiBtZW1iZXJzIGhhdmUgbm8gdGllIGF0IGFsbC4KICAgIFRoaXMgY29uZmlybXMgb3ZlcmFsbCBsb3cgY29ubmVjdGl2aXR5IGluIHRoZSBuZXR3b3JrLgoKYGBge3IgZWNobz1UUlVFLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRSwgcGFnZWQucHJpbnQ9RkFMU0V9CiMgRHlhZC1sZXZlbCBzdGF0aXN0aWNzIChudW1iZXIgb2YgbXV0dWFsLCBhc3ltbWV0cmljIGFuZCBudWxsIGR5YWRzKQpkeWFkX2NlbnN1cyA8LSBkeWFkX2NlbnN1cyhrYXJhdGVfZGlyZWN0ZWQpIApwcmludChkeWFkX2NlbnN1cykKYGBgCgojIyBUcmlhZCBTdGF0aXN0aWNzCgoqQ2FsY3VsYXRlIHRyaWFkLWxldmVsIHN0YXRpc3RpY3MgYnkgY291bnRpbmcgdGhlIG51bWJlciBvZiBlYWNoIHR5cGUgb2YgdHJpYWQgbW90aWYuKgoKYGBge3IgZWNobz1UUlVFLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRSwgcGFnZWQucHJpbnQ9RkFMU0V9CiMgVHJpYWQtbGV2ZWwgc3RhdGlzdGljcyAobnVtYmVyIG9mIGVhY2ggdHlwZSBvZiB0cmlhZHMpCnRyaWFkX2NlbnN1cyA8LSB0cmlhZF9jZW5zdXMoa2FyYXRlX2RpcmVjdGVkKQpwcmludCh0cmlhZF9jZW5zdXMpCmBgYAoKIyMgTmV0d29yayBTdGF0aXN0aWNzCgpDYWxjdWxhdGUgc3RhdGlzdGljcyBzdW1tYXJpemluZyB0aGUgb3ZlcmFsbCBuZXR3b3JrIHN0cnVjdHVyZShkZW5zaXR5LCB0cmFuc2l0aXZpdHkpCgojIyMgQ2FsY3VsYXRpbmcgRWRnZSBEZW5zaXR5CgpgYGB7ciBlY2hvPVRSVUUsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFLCBwYWdlZC5wcmludD1GQUxTRX0KZGVuc2l0eV9zdGF0cyA8LSBlZGdlX2RlbnNpdHkoa2FyYXRlKQpwcmludChkZW5zaXR5X3N0YXRzKQpgYGAKCiMjIyBDYWxjdWxhdGluZyBFZGdlIERlbnNpdHkgVXNpbmcgVmVydGV4IGFuZCBFZGdlIENvdW50cwoKVGhpcyBzZWN0aW9uIGRlbW9uc3RyYXRlcyBob3cgdG8gY2FsY3VsYXRlIGVkZ2UgZGVuc2l0eSBmcm9tIGZpcnN0IHByaW5jaXBsZXMgYnkgZGlyZWN0bHkgY291bnRpbmcgdGhlIG51bWJlciBvZiB2ZXJ0aWNlcyBhbmQgZWRnZXMuClRoaXMgcHJvdmlkZXMgYW4gYWx0ZXJuYXRpdmUgdG8gcmVseWluZyBvbiB0aGUgYGVkZ2VfZGVuc2l0eSgpYCBmdW5jdGlvbi4KCmBgYHtyIGVjaG89VFJVRSwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUUsIHBhZ2VkLnByaW50PUZBTFNFfQojIENvdW50IG51bWJlciBvZiB2ZXJ0aWNlcwpudW1fdmVydGljZXMgPC0gdmNvdW50KGthcmF0ZSkgIAoKIyBDb3VudCBudW1iZXIgb2YgZWRnZXMKbnVtX2VkZ2VzIDwtIGVjb3VudChrYXJhdGUpCgojIENhbGN1bGF0ZSBtYXhpbXVtIHBvc3NpYmxlIG51bWJlciBvZiBlZGdlcyAgCm1heF9wb3NzaWJsZV9lZGdlcyA8LSBudW1fdmVydGljZXMgKiAobnVtX3ZlcnRpY2VzIC0gMSkgLyAyIAoKIyBDb21wdXRlIGVkZ2UgZGVuc2l0eQplZGdlX2RlbnNpdHkgPC0gbnVtX2VkZ2VzIC8gbWF4X3Bvc3NpYmxlX2VkZ2VzICAKCnByaW50KGVkZ2VfZGVuc2l0eSkKYGBgCgojIyBUcmFuc2l0aXZpdHkKClRyYW5zaXRpdml0eSBtZWFzdXJlcyB0aGUgcHJvYmFiaWxpdHkgdGhhdCBhZGphY2VudCB2ZXJ0aWNlcyBvZiBhIHZlcnRleCBhcmUgY29ubmVjdGVkLgoKYGBge3IgZWNobz1UUlVFLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRSwgcGFnZWQucHJpbnQ9RkFMU0V9CnRyYW5zaXRpdml0eV9zdGF0cyA8LSB0cmFuc2l0aXZpdHkoa2FyYXRlKQpwcmludCh0cmFuc2l0aXZpdHlfc3RhdHMpCmBgYAoKCiMgRGVzY3JpcHRpdmUgbmV0d29yayBhbmFseXNpcyBvZiBaYWNoYXJ5J3Mga2FyYXRlIGNsdWIgbmV0d29yawojIyBJbmRpdmlkdWFsIExldmVsCgotIFRoZSBkZWdyZWUgZGlzdHJpYnV0aW9uIHNob3dzIHRoYXQgc29tZSBtZW1iZXJzIGxpa2UgTXIuIEhpIGFuZCBKb2huIEEgaGF2ZSB2ZXJ5IGhpZ2ggZGVncmVlICgxNi0xNykgd2hpbGUgbW9zdCBtZW1iZXJzIGhhdmUgbG93IGRlZ3JlZSAoMS02KS4gVGhpcyBpbmRpY2F0ZXMgTXIuIEhpIGFuZCBKb2huIEEgYXJlIGNlbnRyYWwgaHVicyB3aXRoIG1hbnkgY29ubmVjdGlvbnMuIAoKLSBCZXR3ZWVubmVzcyBpcyBjb25jZW50cmF0ZWQgb24gTXIuIEhpIGFuZCBKb2huIEEsIHN1Z2dlc3RpbmcgdGhleSBjb25uZWN0IG90aGVyd2lzZSBkaXNjb25uZWN0ZWQgZ3JvdXBzIHdpdGhpbiB0aGUgbmV0d29yay4gVGhlaXIgcG90ZW50aWFsIGNvbnRyb2wgb3ZlciBpbmZvcm1hdGlvbiBmbG93IGdpdmVzIHRoZW0gaW5mb3JtYWwgcG93ZXIuCgotIENsb3NlbmVzcyBjZW50cmFsaXR5IHNjb3JlcyBhcmUgZmFpcmx5IHNpbWlsYXIgYWNyb3NzIG1lbWJlcnMsIGluZGljYXRpbmcgbm8gbWVtYmVycyBhcmUgcGFydGljdWxhcmx5IGNsb3NlIG9yIGRpc3RhbnQgZnJvbSBvdGhlcnMgaW4gdGVybXMgb2YgbmV0d29yayBwb3NpdGlvbi4gSW5mb3JtYXRpb24gb3IgcmVzb3VyY2VzIGNvdWxkIHNwcmVhZCByZWxhdGl2ZWx5IGVmZmljaWVudGx5IHRocm91Z2ggdGhlIG5ldHdvcmsuCgojIyBEeWFkIExldmVsCgotIFRoZSBoaWdoIG51bWJlciBvZiBudWxsIGR5YWRzICg0ODMpIGNvbXBhcmVkIHRvIG11dHVhbCBkeWFkcyAoNzgpIGluZGljYXRlcyBvdmVyYWxsIGxvdyBjb25uZWN0aXZpdHkgYW5kIGxpbWl0ZWQgYm9uZGluZyBiZXR3ZWVuIG1lbWJlcnMuIFRoZXJlIGlzIGFuIG9wcG9ydHVuaXR5IHRvIGluY3JlYXNlIGNvbm5lY3Rpdml0eS4KCi0gVGhlIGxhY2sgb2YgYW55IGFzeW1tZXRyaWMgZHlhZHMgaW1wbGllcyByZWxhdGlvbnNoaXBzIGZvcm0gbXV0dWFsbHkgd2hlbiB0aGV5IGV4aXN0LiBUaWVzIGFyZSByZWNpcHJvY2FsIHJhdGhlciB0aGFuIHVuaWRpcmVjdGlvbmFsLiBUaGlzIHBvaW50cyB0byBzdHJvbmcgYm9uZGluZyB3aXRoaW4gZXhpc3RpbmcgY29ubmVjdGlvbnMuCgojIyBUcmlhZCBMZXZlbAoKLSBUaGUgbG93IHJhdGlvIG9mIG9wZW4gKDE1NzUpIHRvIGNsb3NlZCAoNDUpIHRyaWFkcyBzaG93cyBsaW1pdGVkIGNsdXN0ZXJpbmcgYW5kIGRlbnNlIHN1Ymdyb3Vwcy4gTWVtYmVycyBkbyBub3QgdGVuZCB0byBiZSBwYXJ0IG9mIHRpZ2h0bHkga25pdCBsb2NhbCBuZWlnaGJvcmhvb2RzLgoKLSBUaGUgbG93IHRyYW5zaXRpdml0eSB2YWx1ZSByZWluZm9yY2VzIHRoZSBsYWNrIG9mIGxvY2FsIGNsdXN0ZXJpbmcuIE9ubHkgMjYlIG9mIHBvdGVudGlhbCB0cmlhZGljIGNsb3N1cmVzIGFyZSByZWFsaXplZCwgbGltaXRpbmcgc21hbGwgY2xpcXVlcy4KCiMjIE92ZXJhbGwgTmV0d29yayBTdHJ1Y3R1cmUKCi0gTG93IGRlbnNpdHkgaW5kaWNhdGVzIG9ubHkgYSBmcmFjdGlvbiBvZiBwb3NzaWJsZSB0aWVzIGFyZSBhY3R1YWxseSBwcmVzZW50LiBUaGlzIGxpbWl0cyBuZXR3b3JrIGNvaGVzaW9uIGFuZCBpbmZvcm1hdGlvbiBmbG93LiBNb3JlIGNvbm5lY3Rpb25zIGNvdWxkIGJlIGJlbmVmaWNpYWwuCgotIFRoZSBzcGFyc2UgZGVuc2l0eSBhbG9uZyB3aXRoIGxvdyB0cmFuc2l0aXZpdHkgY29uZmlybXMgYW4gb3ZlcmFsbCBuZXR3b3JrIHdpdGggbWluaW1hbCBjb25uZWN0aXZpdHkgYW5kIGNsdXN0ZXJpbmcuIFRoZSBuZXR3b3JrIGhhcyBwb3RlbnRpYWwgdG8gYmVjb21lIG1vcmUgaW50ZXJjb25uZWN0ZWQuCgo=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("zacharys.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

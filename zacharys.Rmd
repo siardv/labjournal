@@ -1,0 +1,149 @@
+---
+title: "Descriptive Network Statistics of Zachary’s Karate Club"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+
+---
+# Social Network Analysis of Karate Club
+```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}
+# install.packages("igraph")
+library(igraph)
+library(igraphdata)
+data("karate")
+```
+
+## Import Network Data
+
+```{r echo=TRUE, message=FALSE, paged.print=FALSE}
+data("karate") 
+```
+
+## Individual Statistics
+
+*Calculate node-level statistics like degree, betweenness, and closeness centrality.*
+
+The karate club network has 34 nodes representing members.
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+# Individual-level statistics (degree, betweenness, closeness centrality)
+degree_stats <- degree(karate)
+print(degree_stats)
+betweenness_stats <- betweenness(karate)
+print(betweenness_stats)
+closeness_stats <- closeness(karate)
+print(closeness_stats)
+```
+
+## Dyad Statistics
+
+*Convert to a directed graph and calculate dyad-level statistics like mutual, asymmetric, and null dyads.*
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+# Convert to a directed graph to prevent warnings in
+# dyad_census(karate) : At motifs.c:858 :Dyad census called on undirected graph
+# triad_census(karate) : At motifs.c:1052 :Triad census called on an undirected graph
+karate_directed <- as.directed(karate)
+print(karate_directed)
+```
+
+Analysis of dyadic ties shows:
+
+-   78 mutual dyads: This means there are 78 bidirectional ties between pairs of members.
+    Mutual dyads indicate reciprocity and close bonding between connected members.
+    The low number here points to limited reciprocity.
+
+-   0 asymmetric dyads: This means there are no unidirectional ties.
+    Lack of asymmetry implies ties form mutually between members.
+
+-   483 null dyads: This high number means 483 pairs of members have no tie at all.
+    This confirms overall low connectivity in the network.
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+# Dyad-level statistics (number of mutual, asymmetric and null dyads)
+dyad_census <- dyad_census(karate_directed) 
+print(dyad_census)
+```
+
+## Triad Statistics
+
+*Calculate triad-level statistics by counting the number of each type of triad motif.*
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+# Triad-level statistics (number of each type of triads)
+triad_census <- triad_census(karate_directed)
+print(triad_census)
+```
+
+## Network Statistics
+
+Calculate statistics summarizing the overall network structure(density, transitivity)
+
+### Calculating Edge Density
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+density_stats <- edge_density(karate)
+print(density_stats)
+```
+
+### Calculating Edge Density Using Vertex and Edge Counts
+
+This section demonstrates how to calculate edge density from first principles by directly counting the number of vertices and edges.
+This provides an alternative to relying on the `edge_density()` function.
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+# Count number of vertices
+num_vertices <- vcount(karate)  
+
+# Count number of edges
+num_edges <- ecount(karate)
+
+# Calculate maximum possible number of edges  
+max_possible_edges <- num_vertices * (num_vertices - 1) / 2 
+
+# Compute edge density
+edge_density <- num_edges / max_possible_edges  
+
+print(edge_density)
+```
+
+## Transitivity
+
+Transitivity measures the probability that adjacent vertices of a vertex are connected.
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, paged.print=FALSE}
+transitivity_stats <- transitivity(karate)
+print(transitivity_stats)
+```
+
+
+# Descriptive network analysis of Zachary's karate club network
+## Individual Level
+
+- The degree distribution shows that some members like Mr. Hi and John A have very high degree (16-17) while most members have low degree (1-6). This indicates Mr. Hi and John A are central hubs with many connections. 
+
+- Betweenness is concentrated on Mr. Hi and John A, suggesting they connect otherwise disconnected groups within the network. Their potential control over information flow gives them informal power.
+
+- Closeness centrality scores are fairly similar across members, indicating no members are particularly close or distant from others in terms of network position. Information or resources could spread relatively efficiently through the network.
+
+## Dyad Level
+
+- The high number of null dyads (483) compared to mutual dyads (78) indicates overall low connectivity and limited bonding between members. There is an opportunity to increase connectivity.
+
+- The lack of any asymmetric dyads implies relationships form mutually when they exist. Ties are reciprocal rather than unidirectional. This points to strong bonding within existing connections.
+
+## Triad Level
+
+- The low ratio of open (1575) to closed (45) triads shows limited clustering and dense subgroups. Members do not tend to be part of tightly knit local neighborhoods.
+
+- The low transitivity value reinforces the lack of local clustering. Only 26% of potential triadic closures are realized, limiting small cliques.
+
+## Overall Network Structure
+
+- Low density indicates only a fraction of possible ties are actually present. This limits network cohesion and information flow. More connections could be beneficial.
+
+- The sparse density along with low transitivity confirms an overall network with minimal connectivity and clustering. The network has potential to become more interconnected.
+

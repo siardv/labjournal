@@ -12,9 +12,9 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Practive descriptive</title>
+<title>Discussion &amp; Conclusion</title>
 
-<script src="site_libs/header-attrs-2.24/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -340,58 +340,52 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    My journal
+    My Journal
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 1</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="test.html">test1</a>
-        </li>
-        <li>
-          <a href="test.html">test2</a>
+          <a href="question.html">Research Question</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 2</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="pracdes.html">descriptive statistics</a>
+          <a href="zacharys.html">Descriptive Statistics</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">week 3</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="summaryCh11.html">Summary SNASS chapter 11</a>
-        </li>
-        <li>
-          <a href="webscraping_workshop.html">Workshop on webscraping</a>
+          <a href="webscraping.html">Web Scraping</a>
         </li>
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Report</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Paper</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="Introduction.html">Introduction</a>
+          <a href="introduction.html">Introduction</a>
         </li>
         <li>
-          <a href="Theory.html">Theory</a>
+          <a href="theory.html">Theory</a>
         </li>
         <li>
-          <a href="Methods.html">Methods</a>
+          <a href="methods.html">Methods</a>
         </li>
         <li>
-          <a href="Results.html">Results</a>
+          <a href="results.html">Results</a>
         </li>
         <li>
-          <a href="Conc_Disc.html">Conclusion and discussion</a>
+          <a href="discussion_conclusion.html">Discussion &amp; Conclusion</a>
         </li>
       </ul>
     </li>
@@ -424,104 +418,22 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Practive descriptive</h1>
+<h1 class="title toc-ignore">Discussion &amp; Conclusion</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<div id="a-first-look" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> A first look</h1>
-<pre class="r"><code>require(igraph)</code></pre>
-<pre><code>## Loading required package: igraph</code></pre>
-<pre><code>## Warning: package &#39;igraph&#39; was built under R version 4.2.2</code></pre>
-<pre><code>## 
-## Attaching package: &#39;igraph&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     decompose, spectrum</code></pre>
-<pre><code>## The following object is masked from &#39;package:base&#39;:
-## 
-##     union</code></pre>
-<pre class="r"><code>g &lt;- make_graph(&quot;Zachary&quot;)
-plot(g)</code></pre>
-<p><img src="pracdes_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<pre class="r"><code>gm &lt;- as_adjacency_matrix(
-  graph = g,
-  type = c(&quot;both&quot;),
-  attr = NULL,
-  edges = FALSE,
-  names = TRUE,
-  sparse = FALSE
-)</code></pre>
-<pre><code>## Warning in as_adjacency_matrix(graph = g, type = c(&quot;both&quot;), attr = NULL, : The `edges` argument of
-## `as_adjacency_matrix` is deprecated; it will be removed in igraph 1.4.0</code></pre>
-<pre class="r"><code>isSymmetric(gm)</code></pre>
-<pre><code>## [1] TRUE</code></pre>
-<pre class="r"><code># number of nodes
-vcount(g)</code></pre>
-<pre><code>## [1] 34</code></pre>
-<pre class="r"><code>dim(gm)[1]</code></pre>
-<pre><code>## [1] 34</code></pre>
-<pre class="r"><code># number of edges (ties)
-ecount(g)</code></pre>
-<pre><code>## [1] 78</code></pre>
-<pre class="r"><code>sum(gm)/2</code></pre>
-<pre><code>## [1] 78</code></pre>
-<pre class="r"><code>dens &lt;- ecount(g)/((vcount(g) * vcount(g) - vcount(g)) /2)
-dens</code></pre>
-<pre><code>## [1] 0.1390374</code></pre>
-<pre class="r"><code>#ipath density
-edge_density(g, loops = FALSE)</code></pre>
-<pre><code>## [1] 0.1390374</code></pre>
-<pre class="r"><code>degree(
-  graph = g,
-  v = V(g),
-  mode = c(&quot;all&quot;, &quot;out&quot;, &quot;in&quot;, &quot;total&quot;),
-  loops = TRUE,
-  normalized = FALSE
-)</code></pre>
-<pre><code>##  [1] 16  9 10  6  3  4  4  4  5  2  3  1  2  5  2  2  2  2  2  3  2  2  2  5  3  3  2  4  3  4  4  6
-## [33] 12 17</code></pre>
-<pre class="r"><code># Degree is the amount of (undirected) relations a node has. Indegree is the amount of &#39;incoming&#39; ties, whereas outdegree constitutes the amount of &#39;outgoing&#39; ties.
-
-degree(g)</code></pre>
-<pre><code>##  [1] 16  9 10  6  3  4  4  4  5  2  3  1  2  5  2  2  2  2  2  3  2  2  2  5  3  3  2  4  3  4  4  6
-## [33] 12 17</code></pre>
-<pre class="r"><code>hist (degree_distribution(g, cumulative = FALSE))</code></pre>
-<p><img src="pracdes_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
-<pre class="r"><code># Closeness centrality measures how many steps is required to access every other vertex from a given vertex.
-closeness(
-  g,
-  vids = V(g),
-  mode = c(&quot;out&quot;, &quot;in&quot;, &quot;all&quot;, &quot;total&quot;),
-  weights = NULL,
-  normalized = FALSE,
-  cutoff = -1
-)</code></pre>
-<pre><code>##  [1] 0.01724138 0.01470588 0.01694915 0.01408451 0.01149425 0.01162791 0.01162791 0.01333333
-##  [9] 0.01562500 0.01315789 0.01149425 0.01111111 0.01123596 0.01562500 0.01123596 0.01123596
-## [17] 0.00862069 0.01136364 0.01123596 0.01515152 0.01123596 0.01136364 0.01123596 0.01190476
-## [25] 0.01136364 0.01136364 0.01098901 0.01388889 0.01369863 0.01162791 0.01388889 0.01639344
-## [33] 0.01562500 0.01666667</code></pre>
-<pre class="r"><code># Transitivity is the number of transitive triads divided by all possible transitive triads.
-transitivity(g, type = c(&quot;localundirected&quot;), isolates = c(&quot;NaN&quot;, &quot;zero&quot;))</code></pre>
-<pre><code>##  [1] 0.1500000 0.3333333 0.2444444 0.6666667 0.6666667 0.5000000 0.5000000 1.0000000 0.5000000
-## [10] 0.0000000 0.6666667       NaN 1.0000000 0.6000000 1.0000000 1.0000000 1.0000000 1.0000000
-## [19] 1.0000000 0.3333333 1.0000000 1.0000000 1.0000000 0.4000000 0.3333333 0.3333333 1.0000000
-## [28] 0.1666667 0.3333333 0.6666667 0.5000000 0.2000000 0.1969697 0.1102941</code></pre>
-<pre class="r"><code># Betweenness centrality is the amount of times a node is on the route of the shortest path from a node to another node
-igraph::betweenness(g, directed = FALSE)</code></pre>
-<pre><code>##  [1] 231.0714286  28.4785714  75.8507937   6.2880952   0.3333333  15.8333333  15.8333333   0.0000000
-##  [9]  29.5293651   0.4476190   0.3333333   0.0000000   0.0000000  24.2158730   0.0000000   0.0000000
-## [17]   0.0000000   0.0000000   0.0000000  17.1468254   0.0000000   0.0000000   0.0000000   9.3000000
-## [25]   1.1666667   2.0277778   0.0000000  11.7920635   0.9476190   1.5428571   7.6095238  73.0095238
-## [33]  76.6904762 160.5515873</code></pre>
-<pre class="r"><code># Standardization of betweenness centrality value
-# ((value of betweenness node) - minimum value betweenness centrality) / maximum value betweenness centrality - minimum value betweenness centrality</code></pre>
+<div id="discussion" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Discussion</h1>
+<p>…</p>
+</div>
+<div id="conclusion" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Conclusion</h1>
+<p>…</p>
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlByYWN0aXZlIGRlc2NyaXB0aXZlIg0Kb3V0cHV0Og0KICBodG1sX2RvY3VtZW50Og0KICAgIHRvYzogdHJ1ZQ0KICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQ0KYXV0aG9yOiAiYnk6IFN0aWpuIHZhbiBIZWxtb25kdCINCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWINCg0KLS0tDQojIEEgZmlyc3QgbG9vaw0KDQpgYGB7cn0NCg0KcmVxdWlyZShpZ3JhcGgpDQpnIDwtIG1ha2VfZ3JhcGgoIlphY2hhcnkiKQ0KcGxvdChnKQ0KDQpnbSA8LSBhc19hZGphY2VuY3lfbWF0cml4KA0KICBncmFwaCA9IGcsDQogIHR5cGUgPSBjKCJib3RoIiksDQogIGF0dHIgPSBOVUxMLA0KICBlZGdlcyA9IEZBTFNFLA0KICBuYW1lcyA9IFRSVUUsDQogIHNwYXJzZSA9IEZBTFNFDQopDQoNCmlzU3ltbWV0cmljKGdtKQ0KDQojIG51bWJlciBvZiBub2Rlcw0KdmNvdW50KGcpDQoNCmRpbShnbSlbMV0NCg0KIyBudW1iZXIgb2YgZWRnZXMgKHRpZXMpDQplY291bnQoZykNCnN1bShnbSkvMg0KDQpkZW5zIDwtIGVjb3VudChnKS8oKHZjb3VudChnKSAqIHZjb3VudChnKSAtIHZjb3VudChnKSkgLzIpDQpkZW5zDQoNCiNpcGF0aCBkZW5zaXR5DQplZGdlX2RlbnNpdHkoZywgbG9vcHMgPSBGQUxTRSkNCg0KDQoNCmRlZ3JlZSgNCiAgZ3JhcGggPSBnLA0KICB2ID0gVihnKSwNCiAgbW9kZSA9IGMoImFsbCIsICJvdXQiLCAiaW4iLCAidG90YWwiKSwNCiAgbG9vcHMgPSBUUlVFLA0KICBub3JtYWxpemVkID0gRkFMU0UNCikNCg0KDQoNCg0KIyBEZWdyZWUgaXMgdGhlIGFtb3VudCBvZiAodW5kaXJlY3RlZCkgcmVsYXRpb25zIGEgbm9kZSBoYXMuIEluZGVncmVlIGlzIHRoZSBhbW91bnQgb2YgJ2luY29taW5nJyB0aWVzLCB3aGVyZWFzIG91dGRlZ3JlZSBjb25zdGl0dXRlcyB0aGUgYW1vdW50IG9mICdvdXRnb2luZycgdGllcy4NCg0KZGVncmVlKGcpDQpoaXN0IChkZWdyZWVfZGlzdHJpYnV0aW9uKGcsIGN1bXVsYXRpdmUgPSBGQUxTRSkpDQoNCiMgQ2xvc2VuZXNzIGNlbnRyYWxpdHkgbWVhc3VyZXMgaG93IG1hbnkgc3RlcHMgaXMgcmVxdWlyZWQgdG8gYWNjZXNzIGV2ZXJ5IG90aGVyIHZlcnRleCBmcm9tIGEgZ2l2ZW4gdmVydGV4Lg0KY2xvc2VuZXNzKA0KICBnLA0KICB2aWRzID0gVihnKSwNCiAgbW9kZSA9IGMoIm91dCIsICJpbiIsICJhbGwiLCAidG90YWwiKSwNCiAgd2VpZ2h0cyA9IE5VTEwsDQogIG5vcm1hbGl6ZWQgPSBGQUxTRSwNCiAgY3V0b2ZmID0gLTENCikNCg0KDQojIFRyYW5zaXRpdml0eSBpcyB0aGUgbnVtYmVyIG9mIHRyYW5zaXRpdmUgdHJpYWRzIGRpdmlkZWQgYnkgYWxsIHBvc3NpYmxlIHRyYW5zaXRpdmUgdHJpYWRzLg0KdHJhbnNpdGl2aXR5KGcsIHR5cGUgPSBjKCJsb2NhbHVuZGlyZWN0ZWQiKSwgaXNvbGF0ZXMgPSBjKCJOYU4iLCAiemVybyIpKQ0KDQojIEJldHdlZW5uZXNzIGNlbnRyYWxpdHkgaXMgdGhlIGFtb3VudCBvZiB0aW1lcyBhIG5vZGUgaXMgb24gdGhlIHJvdXRlIG9mIHRoZSBzaG9ydGVzdCBwYXRoIGZyb20gYSBub2RlIHRvIGFub3RoZXIgbm9kZQ0KaWdyYXBoOjpiZXR3ZWVubmVzcyhnLCBkaXJlY3RlZCA9IEZBTFNFKQ0KDQojIFN0YW5kYXJkaXphdGlvbiBvZiBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IHZhbHVlDQojICgodmFsdWUgb2YgYmV0d2Vlbm5lc3Mgbm9kZSkgLSBtaW5pbXVtIHZhbHVlIGJldHdlZW5uZXNzIGNlbnRyYWxpdHkpIC8gbWF4aW11bSB2YWx1ZSBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IC0gbWluaW11bSB2YWx1ZSBiZXR3ZWVubmVzcyBjZW50cmFsaXR5DQoNCg0KDQpgYGANCg0KDQo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGlzY3Vzc2lvbiAmIENvbmNsdXNpb24iCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKCgotLS0KCiMgRGlzY3Vzc2lvbgouLi4KCiMgQ29uY2x1c2lvbgouLi4=</div>
 
 
 </div>
@@ -559,7 +471,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("pracdes.Rmd");
+  window.initializeSourceEmbed("discussion_conclusion.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>
