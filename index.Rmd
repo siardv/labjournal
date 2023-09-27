@@ -47,6 +47,60 @@ klippy::klippy(position = c('top', 'right'))
 Last compiled on `r format(Sys.time(), '%B, %Y')`
 
 
+- Week 1 
+  - Formulated research question on how gender composition of academic departments relates to gender homophily in research collaborations
+  - Conducted literature review on homophily, gender inequality in academia, social networks
+  - Identified relevant theories such as tokenism that may explain greater gender divides in skewed settings
+
+- Week 2
+  - Collected data on faculty names, gender, titles, and contact info by webscraping department website 
+  - Queried Crossref API to retrieve metadata on faculty publications
+  - Parsed HTML table into dataframe and cleaned column names 
+  - Standarized faculty names and predicted gender using R packages
+  - Difficulty handling API query errors for some author names
+  
+- Week 3 
+  - Filtered publications data to only journal articles
+  - Completed partial dates and formatted into standard structure
+  - Combined multiple affiliation columns into single column
+  - Removed missing data rows and columns
+  - Manipulated data into analysis format with author name, gender, affiliations etc.
+  - Challenges unnesting inconsistent author column lists
+  
+- Week 4
+  - ...
+  
+- Week 5
+   - ...
+
+<br>
+
+----
+
+
+Everyone can fork this repository.
+
+Use this example to journal your lab work and assignments.
+
+
+:::
+::: {.column width="50%"}
+
+
+
+
+:::
+::::::::::::::
+
+
+
+## How to use
+
+<br>
+
+Use the top menu to navigate through the journal.
+
+
 ----
 
 

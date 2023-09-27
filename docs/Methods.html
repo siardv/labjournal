@@ -357,7 +357,7 @@ div.tocify {
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="descriptives.html">Descriptive Statistics</a>
+          <a href="zacharys.html">Descriptive Statistics</a>
         </li>
       </ul>
     </li>
@@ -426,9 +426,37 @@ div.tocify {
 
 <div id="methods" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Methods</h1>
+<p>This study utilizes the ‘ipums’ method from the R package gender
+(Mullen, 2021) to predict gender from historical first names of
+sociology researchers at Radboud University. The sample consists of 50
+first names collected from the faculty list of the Sociology Department
+at Radboud University (Radboud University, 2022). Although the ‘ipums’
+method was originally developed using U.S. census data, we apply it here
+to infer gender from Dutch names. After compiling our dataset, the
+‘ipums’ method was selected due to its accurate gender predictions
+compared to other approaches.</p>
+<p>The key advantages of the ‘ipums’ technique align with the properties
+of our name sample. The faculty list provides names spanning a wide
+timeframe, from 1789 to the present day, allowing analysis of
+name-gender trends over an extensive period. The names represent diverse
+genders, religions, specialties, and career stages, improving
+generalizability. While further validation on Dutch data would be
+beneficial, this initial implementation demonstrates the potential of
+the ‘ipums’ method for analyzing name-gender relationships in our
+sociology faculty sample.</p>
+<div id="references" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> References</h2>
+<p>Mullen, L. (2021). Gender: Predict gender from names using historical
+data (R package version 0.5.2). <a
+href="https://CRAN.R-project.org/package=gender"
+class="uri">https://CRAN.R-project.org/package=gender</a></p>
+<p>Radboud University (2022). Sociology staff. Retrieved from <a
+href="https://www.ru.nl/sociology/research/staff/"
+class="uri">https://www.ru.nl/sociology/research/staff/</a></p>
+</div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTWV0aG9kcyIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgoKCi0tLQoKIyBNZXRob2RzCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTWV0aG9kcyIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgoKCi0tLQoKIyBNZXRob2RzCgpUaGlzIHN0dWR5IHV0aWxpemVzIHRoZSAnaXB1bXMnIG1ldGhvZCBmcm9tIHRoZSBSIHBhY2thZ2UgZ2VuZGVyIChNdWxsZW4sIDIwMjEpIHRvIHByZWRpY3QgZ2VuZGVyIGZyb20gaGlzdG9yaWNhbCBmaXJzdCBuYW1lcyBvZiBzb2Npb2xvZ3kgcmVzZWFyY2hlcnMgYXQgUmFkYm91ZCBVbml2ZXJzaXR5LiBUaGUgc2FtcGxlIGNvbnNpc3RzIG9mIDUwIGZpcnN0IG5hbWVzIGNvbGxlY3RlZCBmcm9tIHRoZSBmYWN1bHR5IGxpc3Qgb2YgdGhlIFNvY2lvbG9neSBEZXBhcnRtZW50IGF0IFJhZGJvdWQgVW5pdmVyc2l0eSAoUmFkYm91ZCBVbml2ZXJzaXR5LCAyMDIyKS4gQWx0aG91Z2ggdGhlICdpcHVtcycgbWV0aG9kIHdhcyBvcmlnaW5hbGx5IGRldmVsb3BlZCB1c2luZyBVLlMuIGNlbnN1cyBkYXRhLCB3ZSBhcHBseSBpdCBoZXJlIHRvIGluZmVyIGdlbmRlciBmcm9tIER1dGNoIG5hbWVzLiBBZnRlciBjb21waWxpbmcgb3VyIGRhdGFzZXQsIHRoZSAnaXB1bXMnIG1ldGhvZCB3YXMgc2VsZWN0ZWQgZHVlIHRvIGl0cyBhY2N1cmF0ZSBnZW5kZXIgcHJlZGljdGlvbnMgY29tcGFyZWQgdG8gb3RoZXIgYXBwcm9hY2hlcy4KClRoZSBrZXkgYWR2YW50YWdlcyBvZiB0aGUgJ2lwdW1zJyB0ZWNobmlxdWUgYWxpZ24gd2l0aCB0aGUgcHJvcGVydGllcyBvZiBvdXIgbmFtZSBzYW1wbGUuIFRoZSBmYWN1bHR5IGxpc3QgcHJvdmlkZXMgbmFtZXMgc3Bhbm5pbmcgYSB3aWRlIHRpbWVmcmFtZSwgZnJvbSAxNzg5IHRvIHRoZSBwcmVzZW50IGRheSwgYWxsb3dpbmcgYW5hbHlzaXMgb2YgbmFtZS1nZW5kZXIgdHJlbmRzIG92ZXIgYW4gZXh0ZW5zaXZlIHBlcmlvZC4gVGhlIG5hbWVzIHJlcHJlc2VudCBkaXZlcnNlIGdlbmRlcnMsIHJlbGlnaW9ucywgc3BlY2lhbHRpZXMsIGFuZCBjYXJlZXIgc3RhZ2VzLCBpbXByb3ZpbmcgZ2VuZXJhbGl6YWJpbGl0eS4gV2hpbGUgZnVydGhlciB2YWxpZGF0aW9uIG9uIER1dGNoIGRhdGEgd291bGQgYmUgYmVuZWZpY2lhbCwgdGhpcyBpbml0aWFsIGltcGxlbWVudGF0aW9uIGRlbW9uc3RyYXRlcyB0aGUgcG90ZW50aWFsIG9mIHRoZSDigJhpcHVtc+KAmSBtZXRob2QgZm9yIGFuYWx5emluZyBuYW1lLWdlbmRlciByZWxhdGlvbnNoaXBzIGluIG91ciBzb2Npb2xvZ3kgZmFjdWx0eSBzYW1wbGUuCgojIyBSZWZlcmVuY2VzCgpNdWxsZW4sIEwuICgyMDIxKS4gR2VuZGVyOiBQcmVkaWN0IGdlbmRlciBmcm9tIG5hbWVzIHVzaW5nIGhpc3RvcmljYWwgZGF0YSAoUiBwYWNrYWdlIHZlcnNpb24gMC41LjIpLiBodHRwczovL0NSQU4uUi1wcm9qZWN0Lm9yZy9wYWNrYWdlPWdlbmRlciAgCgpSYWRib3VkIFVuaXZlcnNpdHkgKDIwMjIpLiBTb2Npb2xvZ3kgc3RhZmYuIFJldHJpZXZlZCBmcm9tIGh0dHBzOi8vd3d3LnJ1Lm5sL3NvY2lvbG9neS9yZXNlYXJjaC9zdGFmZi8KCgoK</div>
 
 
 </div>

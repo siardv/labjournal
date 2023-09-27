@@ -361,7 +361,7 @@ div.tocify {
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="descriptives.html">Descriptive Statistics</a>
+          <a href="zacharys.html">Descriptive Statistics</a>
         </li>
       </ul>
     </li>
@@ -433,14 +433,67 @@ div.tocify {
   addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
 </script>
 <hr />
-<p>:::::::::::::: {.columns} ::: {.column width=“50%”}</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div id="my-lab-journal" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> My Lab Journal</h1>
 <p>Last compiled on September, 2023</p>
+<ul>
+<li>Week 1
+<ul>
+<li>Formulated research question on how gender composition of academic
+departments relates to gender homophily in research collaborations</li>
+<li>Conducted literature review on homophily, gender inequality in
+academia, social networks</li>
+<li>Identified relevant theories such as tokenism that may explain
+greater gender divides in skewed settings</li>
+</ul></li>
+<li>Week 2
+<ul>
+<li>Collected data on faculty names, gender, titles, and contact info by
+webscraping department website</li>
+<li>Queried Crossref API to retrieve metadata on faculty
+publications</li>
+<li>Parsed HTML table into dataframe and cleaned column names</li>
+<li>Standarized faculty names and predicted gender using R packages</li>
+<li>Difficulty handling API query errors for some author names</li>
+</ul></li>
+<li>Week 3
+<ul>
+<li>Filtered publications data to only journal articles</li>
+<li>Completed partial dates and formatted into standard structure</li>
+<li>Combined multiple affiliation columns into single column</li>
+<li>Removed missing data rows and columns</li>
+<li>Manipulated data into analysis format with author name, gender,
+affiliations etc.</li>
+<li>Challenges unnesting inconsistent author column lists</li>
+</ul></li>
+<li>Week 4
+<ul>
+<li>…</li>
+</ul></li>
+<li>Week 5
+<ul>
+<li>…</li>
+</ul></li>
+</ul>
+<p><br></p>
+<hr />
+<p>Everyone can fork this repository.</p>
+<p>Use this example to journal your lab work and assignments.</p>
+</div>
+</div><div class="column" style="width:50%;">
+
+</div>
+</div>
+<div id="how-to-use" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> How to use</h2>
+<p><br></p>
+<p>Use the top menu to navigate through the journal.</p>
 <hr />
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGFiIGpvdXJuYWwiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKCi0tLQoKCmBgYHtyLCBlY2hvPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KIyBpbnN0YWxsLnBhY2thZ2VzKCJyZW1vdGVzIikKIyByZW1vdGVzOjppbnN0YWxsX2dpdGh1Yigicmxlc3VyL2tsaXBweSIpCmBgYAoKYGBge3IsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQpsaWJyYXJ5KGtuaXRyKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygiUmVzZWFyY2ggcXVlc3Rpb24iKSwgY2xhc3Mub3V0cHV0PWMoInRlc3QyIikpCm9wdGlvbnMod2lkdGggPSAxMDApCnJnbDo6c2V0dXBLbml0cigpCgoKCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9CgpgYGAKCmBgYHtyICwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgoKCgotLS0tCgo6Ojo6Ojo6Ojo6Ojo6OiB7LmNvbHVtbnN9Cjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0KCiMgTXkgTGFiIEpvdXJuYWwKTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYAoKCi0tLS0KCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGFiIGpvdXJuYWwiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKCi0tLQoKCmBgYHtyLCBlY2hvPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KIyBpbnN0YWxsLnBhY2thZ2VzKCJyZW1vdGVzIikKIyByZW1vdGVzOjppbnN0YWxsX2dpdGh1Yigicmxlc3VyL2tsaXBweSIpCmBgYAoKYGBge3IsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQpsaWJyYXJ5KGtuaXRyKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygiUmVzZWFyY2ggcXVlc3Rpb24iKSwgY2xhc3Mub3V0cHV0PWMoInRlc3QyIikpCm9wdGlvbnMod2lkdGggPSAxMDApCnJnbDo6c2V0dXBLbml0cigpCgoKCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9CgpgYGAKCmBgYHtyICwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgoKCgotLS0tCgo6Ojo6Ojo6Ojo6Ojo6OiB7LmNvbHVtbnN9Cjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0KCiMgTXkgTGFiIEpvdXJuYWwKTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYAoKCi0gV2VlayAxIAogIC0gRm9ybXVsYXRlZCByZXNlYXJjaCBxdWVzdGlvbiBvbiBob3cgZ2VuZGVyIGNvbXBvc2l0aW9uIG9mIGFjYWRlbWljIGRlcGFydG1lbnRzIHJlbGF0ZXMgdG8gZ2VuZGVyIGhvbW9waGlseSBpbiByZXNlYXJjaCBjb2xsYWJvcmF0aW9ucwogIC0gQ29uZHVjdGVkIGxpdGVyYXR1cmUgcmV2aWV3IG9uIGhvbW9waGlseSwgZ2VuZGVyIGluZXF1YWxpdHkgaW4gYWNhZGVtaWEsIHNvY2lhbCBuZXR3b3JrcwogIC0gSWRlbnRpZmllZCByZWxldmFudCB0aGVvcmllcyBzdWNoIGFzIHRva2VuaXNtIHRoYXQgbWF5IGV4cGxhaW4gZ3JlYXRlciBnZW5kZXIgZGl2aWRlcyBpbiBza2V3ZWQgc2V0dGluZ3MKCi0gV2VlayAyCiAgLSBDb2xsZWN0ZWQgZGF0YSBvbiBmYWN1bHR5IG5hbWVzLCBnZW5kZXIsIHRpdGxlcywgYW5kIGNvbnRhY3QgaW5mbyBieSB3ZWJzY3JhcGluZyBkZXBhcnRtZW50IHdlYnNpdGUgCiAgLSBRdWVyaWVkIENyb3NzcmVmIEFQSSB0byByZXRyaWV2ZSBtZXRhZGF0YSBvbiBmYWN1bHR5IHB1YmxpY2F0aW9ucwogIC0gUGFyc2VkIEhUTUwgdGFibGUgaW50byBkYXRhZnJhbWUgYW5kIGNsZWFuZWQgY29sdW1uIG5hbWVzIAogIC0gU3RhbmRhcml6ZWQgZmFjdWx0eSBuYW1lcyBhbmQgcHJlZGljdGVkIGdlbmRlciB1c2luZyBSIHBhY2thZ2VzCiAgLSBEaWZmaWN1bHR5IGhhbmRsaW5nIEFQSSBxdWVyeSBlcnJvcnMgZm9yIHNvbWUgYXV0aG9yIG5hbWVzCiAgCi0gV2VlayAzIAogIC0gRmlsdGVyZWQgcHVibGljYXRpb25zIGRhdGEgdG8gb25seSBqb3VybmFsIGFydGljbGVzCiAgLSBDb21wbGV0ZWQgcGFydGlhbCBkYXRlcyBhbmQgZm9ybWF0dGVkIGludG8gc3RhbmRhcmQgc3RydWN0dXJlCiAgLSBDb21iaW5lZCBtdWx0aXBsZSBhZmZpbGlhdGlvbiBjb2x1bW5zIGludG8gc2luZ2xlIGNvbHVtbgogIC0gUmVtb3ZlZCBtaXNzaW5nIGRhdGEgcm93cyBhbmQgY29sdW1ucwogIC0gTWFuaXB1bGF0ZWQgZGF0YSBpbnRvIGFuYWx5c2lzIGZvcm1hdCB3aXRoIGF1dGhvciBuYW1lLCBnZW5kZXIsIGFmZmlsaWF0aW9ucyBldGMuCiAgLSBDaGFsbGVuZ2VzIHVubmVzdGluZyBpbmNvbnNpc3RlbnQgYXV0aG9yIGNvbHVtbiBsaXN0cwogIAotIFdlZWsgNAogIC0gLi4uCiAgCi0gV2VlayA1CiAgIC0gLi4uCgo8YnI+CgotLS0tCgoKRXZlcnlvbmUgY2FuIGZvcmsgdGhpcyByZXBvc2l0b3J5LgoKVXNlIHRoaXMgZXhhbXBsZSB0byBqb3VybmFsIHlvdXIgbGFiIHdvcmsgYW5kIGFzc2lnbm1lbnRzLgoKCjo6Ogo6Ojogey5jb2x1bW4gd2lkdGg9IjUwJSJ9CgoKCgo6OjoKOjo6Ojo6Ojo6Ojo6OjoKCgoKIyMgSG93IHRvIHVzZQoKPGJyPgoKVXNlIHRoZSB0b3AgbWVudSB0byBuYXZpZ2F0ZSB0aHJvdWdoIHRoZSBqb3VybmFsLgoKCi0tLS0KCgoKCgoK</div>
 
 
 </div>
