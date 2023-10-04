@@ -1,4 +1,4 @@
-#do not forget to also change your _site.yml file to make sure we exclude same stuff there. 
+#do not forget to also change your _site.yml file to make sure we exclude same stuff there.
 
 # History files
 .Rhistory
@@ -43,3 +43,8 @@
 # Personal folder
 /local/
 
+# R data files
+*.rdata
+*.r
+*.rds
+*.rda
