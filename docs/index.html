@@ -374,25 +374,76 @@ div.tocify {
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Paper</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="introduction.html">Introduction</a>
-        </li>
-        <li>
-          <a href="theory.html">Theory</a>
-        </li>
-        <li>
-          <a href="methods.html">Methods</a>
-        </li>
-        <li>
-          <a href="results.html">Results</a>
-        </li>
-        <li>
-          <a href="discussion_conclusion.html">Discussion &amp; Conclusion</a>
+          <a href="visualization.html">Network Visualization</a>
         </li>
       </ul>
     </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="rsiena_example.html">RSiena models (example)</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Research Paper
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data &amp; Methods</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="predicting_gender.html">Gender From Names</a>
+        </li>
+        <li>
+          <a href="assembling.html">Data Collection and Preparation</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="descriptive.html">Descriptive</a>
+        </li>
+        <li>
+          <a href="rsiena_example.html">RSiena</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="results.html">Results</a>
+    </li>
+    <li class="dropdown-header">Discussion &amp; Conclusion</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final Paper
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Introduction</li>
+    <li class="dropdown-header">Theory</li>
+    <li class="dropdown-header">Methods</li>
+    <li class="dropdown-header">Results</li>
+    <li class="dropdown-header">Discussion &amp; Conclusion</li>
   </ul>
 </li>
       </ul>
@@ -437,7 +488,7 @@ div.tocify {
 <div class="column" style="width:50%;">
 <div id="my-lab-journal" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> My Lab Journal</h1>
-<p>Last compiled on September, 2023</p>
+<p>Last compiled on October, 2023</p>
 <ul>
 <li>Week 1
 <ul>
@@ -451,11 +502,13 @@ greater gender divides in skewed settings</li>
 <li>Week 2
 <ul>
 <li>Collected data on faculty names, gender, titles, and contact info by
-webscraping department website</li>
+webscraping department website<br />
+</li>
 <li>Queried Crossref API to retrieve metadata on faculty
 publications</li>
 <li>Parsed HTML table into dataframe and cleaned column names</li>
-<li>Standarized faculty names and predicted gender using R packages</li>
+<li>Standardized faculty names and predicted gender using R
+packages</li>
 <li>Difficulty handling API query errors for some author names</li>
 </ul></li>
 <li>Week 3
@@ -470,11 +523,24 @@ affiliations etc.</li>
 </ul></li>
 <li>Week 4
 <ul>
-<li>…</li>
+<li>Generated node list and edge list data frames for co-authorship
+network</li>
+<li>Calculated basic network metrics like degree centrality and
+clustering coefficients</li>
+<li>Produced static network visualization using igraph package</li>
+<li>Started dynamic network modeling with RSiena but need to resolve
+model specification issues</li>
 </ul></li>
 <li>Week 5
 <ul>
-<li>…</li>
+<li>Improved RSiena model specification based on goodness-of-fit
+diagnostics</li>
+<li>Finalized model incorporating key structural effects and
+attributes</li>
+<li>Ran final models and produced estimates of gender homophily
+effects</li>
+<li>Evaluated hypothesis tests and effect sizes from model output</li>
+<li>Began drafting results and discussion based on model findings</li>
 </ul></li>
 </ul>
 <p><br></p>
@@ -493,7 +559,7 @@ affiliations etc.</li>
 <hr />
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGFiIGpvdXJuYWwiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKCi0tLQoKCmBgYHtyLCBlY2hvPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KIyBpbnN0YWxsLnBhY2thZ2VzKCJyZW1vdGVzIikKIyByZW1vdGVzOjppbnN0YWxsX2dpdGh1Yigicmxlc3VyL2tsaXBweSIpCmBgYAoKYGBge3IsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQpsaWJyYXJ5KGtuaXRyKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygiUmVzZWFyY2ggcXVlc3Rpb24iKSwgY2xhc3Mub3V0cHV0PWMoInRlc3QyIikpCm9wdGlvbnMod2lkdGggPSAxMDApCnJnbDo6c2V0dXBLbml0cigpCgoKCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9CgpgYGAKCmBgYHtyICwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgoKCgotLS0tCgo6Ojo6Ojo6Ojo6Ojo6OiB7LmNvbHVtbnN9Cjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0KCiMgTXkgTGFiIEpvdXJuYWwKTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYAoKCi0gV2VlayAxIAogIC0gRm9ybXVsYXRlZCByZXNlYXJjaCBxdWVzdGlvbiBvbiBob3cgZ2VuZGVyIGNvbXBvc2l0aW9uIG9mIGFjYWRlbWljIGRlcGFydG1lbnRzIHJlbGF0ZXMgdG8gZ2VuZGVyIGhvbW9waGlseSBpbiByZXNlYXJjaCBjb2xsYWJvcmF0aW9ucwogIC0gQ29uZHVjdGVkIGxpdGVyYXR1cmUgcmV2aWV3IG9uIGhvbW9waGlseSwgZ2VuZGVyIGluZXF1YWxpdHkgaW4gYWNhZGVtaWEsIHNvY2lhbCBuZXR3b3JrcwogIC0gSWRlbnRpZmllZCByZWxldmFudCB0aGVvcmllcyBzdWNoIGFzIHRva2VuaXNtIHRoYXQgbWF5IGV4cGxhaW4gZ3JlYXRlciBnZW5kZXIgZGl2aWRlcyBpbiBza2V3ZWQgc2V0dGluZ3MKCi0gV2VlayAyCiAgLSBDb2xsZWN0ZWQgZGF0YSBvbiBmYWN1bHR5IG5hbWVzLCBnZW5kZXIsIHRpdGxlcywgYW5kIGNvbnRhY3QgaW5mbyBieSB3ZWJzY3JhcGluZyBkZXBhcnRtZW50IHdlYnNpdGUgCiAgLSBRdWVyaWVkIENyb3NzcmVmIEFQSSB0byByZXRyaWV2ZSBtZXRhZGF0YSBvbiBmYWN1bHR5IHB1YmxpY2F0aW9ucwogIC0gUGFyc2VkIEhUTUwgdGFibGUgaW50byBkYXRhZnJhbWUgYW5kIGNsZWFuZWQgY29sdW1uIG5hbWVzIAogIC0gU3RhbmRhcml6ZWQgZmFjdWx0eSBuYW1lcyBhbmQgcHJlZGljdGVkIGdlbmRlciB1c2luZyBSIHBhY2thZ2VzCiAgLSBEaWZmaWN1bHR5IGhhbmRsaW5nIEFQSSBxdWVyeSBlcnJvcnMgZm9yIHNvbWUgYXV0aG9yIG5hbWVzCiAgCi0gV2VlayAzIAogIC0gRmlsdGVyZWQgcHVibGljYXRpb25zIGRhdGEgdG8gb25seSBqb3VybmFsIGFydGljbGVzCiAgLSBDb21wbGV0ZWQgcGFydGlhbCBkYXRlcyBhbmQgZm9ybWF0dGVkIGludG8gc3RhbmRhcmQgc3RydWN0dXJlCiAgLSBDb21iaW5lZCBtdWx0aXBsZSBhZmZpbGlhdGlvbiBjb2x1bW5zIGludG8gc2luZ2xlIGNvbHVtbgogIC0gUmVtb3ZlZCBtaXNzaW5nIGRhdGEgcm93cyBhbmQgY29sdW1ucwogIC0gTWFuaXB1bGF0ZWQgZGF0YSBpbnRvIGFuYWx5c2lzIGZvcm1hdCB3aXRoIGF1dGhvciBuYW1lLCBnZW5kZXIsIGFmZmlsaWF0aW9ucyBldGMuCiAgLSBDaGFsbGVuZ2VzIHVubmVzdGluZyBpbmNvbnNpc3RlbnQgYXV0aG9yIGNvbHVtbiBsaXN0cwogIAotIFdlZWsgNAogIC0gLi4uCiAgCi0gV2VlayA1CiAgIC0gLi4uCgo8YnI+CgotLS0tCgoKRXZlcnlvbmUgY2FuIGZvcmsgdGhpcyByZXBvc2l0b3J5LgoKVXNlIHRoaXMgZXhhbXBsZSB0byBqb3VybmFsIHlvdXIgbGFiIHdvcmsgYW5kIGFzc2lnbm1lbnRzLgoKCjo6Ogo6Ojogey5jb2x1bW4gd2lkdGg9IjUwJSJ9CgoKCgo6OjoKOjo6Ojo6Ojo6Ojo6OjoKCgoKIyMgSG93IHRvIHVzZQoKPGJyPgoKVXNlIHRoZSB0b3AgbWVudSB0byBuYXZpZ2F0ZSB0aHJvdWdoIHRoZSBqb3VybmFsLgoKCi0tLS0KCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiTGFiIGpvdXJuYWwiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKY3NsOiBhcGEuY3NsCi0tLQoKCmBgYHtyLCBlY2hvPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KIyBpbnN0YWxsLnBhY2thZ2VzKCJyZW1vdGVzIikKIyByZW1vdGVzOjppbnN0YWxsX2dpdGh1Yigicmxlc3VyL2tsaXBweSIpCmBgYAoKYGBge3IsIGVjaG89RkFMU0UsIHdhcm5pbmc9RkFMU0UsIHJlc3VsdHM9J2hpZGUnfQpsaWJyYXJ5KGtuaXRyKQoKa25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpvcHRzX2NodW5rJHNldCh0aWR5Lm9wdHM9bGlzdCh3aWR0aC5jdXRvZmY9MTAwKSx0aWR5PVRSVUUsIHdhcm5pbmcgPSBGQUxTRSwgbWVzc2FnZSA9IEZBTFNFLGNvbW1lbnQgPSAiIz4iLCBjYWNoZT1UUlVFLCBjbGFzcy5zb3VyY2U9YygiUmVzZWFyY2ggcXVlc3Rpb24iKSwgY2xhc3Mub3V0cHV0PWMoInRlc3QyIikpCm9wdGlvbnMod2lkdGggPSAxMDApCnJnbDo6c2V0dXBLbml0cigpCgoKCmNvbG9yaXplIDwtIGZ1bmN0aW9uKHgsIGNvbG9yKSB7c3ByaW50ZigiPHNwYW4gc3R5bGU9J2NvbG9yOiAlczsnPiVzPC9zcGFuPiIsIGNvbG9yLCB4KSB9CgpgYGAKCmBgYHtyICwgZWNobz1GQUxTRSwgaW5jbHVkZT1UUlVFfQprbGlwcHk6OmtsaXBweShwb3NpdGlvbiA9IGMoJ3RvcCcsICdyaWdodCcpKQoja2xpcHB5OjprbGlwcHkoY29sb3IgPSAnZGFya3JlZCcpCiNrbGlwcHk6OmtsaXBweSh0b29sdGlwX21lc3NhZ2UgPSAnQ2xpY2sgdG8gY29weScsIHRvb2x0aXBfc3VjY2VzcyA9ICdEb25lJykKYGBgCgoKCgotLS0tCgo6Ojo6Ojo6Ojo6Ojo6OiB7LmNvbHVtbnN9Cjo6OiB7LmNvbHVtbiB3aWR0aD0iNTAlIn0KCiMgTXkgTGFiIEpvdXJuYWwKTGFzdCBjb21waWxlZCBvbiBgciBmb3JtYXQoU3lzLnRpbWUoKSwgJyVCLCAlWScpYAoKCi0gV2VlayAxIAogIC0gRm9ybXVsYXRlZCByZXNlYXJjaCBxdWVzdGlvbiBvbiBob3cgZ2VuZGVyIGNvbXBvc2l0aW9uIG9mIGFjYWRlbWljIGRlcGFydG1lbnRzIHJlbGF0ZXMgdG8gZ2VuZGVyIGhvbW9waGlseSBpbiByZXNlYXJjaCBjb2xsYWJvcmF0aW9ucwogIC0gQ29uZHVjdGVkIGxpdGVyYXR1cmUgcmV2aWV3IG9uIGhvbW9waGlseSwgZ2VuZGVyIGluZXF1YWxpdHkgaW4gYWNhZGVtaWEsIHNvY2lhbCBuZXR3b3JrcwogIC0gSWRlbnRpZmllZCByZWxldmFudCB0aGVvcmllcyBzdWNoIGFzIHRva2VuaXNtIHRoYXQgbWF5IGV4cGxhaW4gZ3JlYXRlciBnZW5kZXIgZGl2aWRlcyBpbiBza2V3ZWQgc2V0dGluZ3MKCi0gV2VlayAyCiAgLSBDb2xsZWN0ZWQgZGF0YSBvbiBmYWN1bHR5IG5hbWVzLCBnZW5kZXIsIHRpdGxlcywgYW5kIGNvbnRhY3QgaW5mbyBieSB3ZWJzY3JhcGluZyBkZXBhcnRtZW50IHdlYnNpdGUgIAogIC0gUXVlcmllZCBDcm9zc3JlZiBBUEkgdG8gcmV0cmlldmUgbWV0YWRhdGEgb24gZmFjdWx0eSBwdWJsaWNhdGlvbnMKICAtIFBhcnNlZCBIVE1MIHRhYmxlIGludG8gZGF0YWZyYW1lIGFuZCBjbGVhbmVkIGNvbHVtbiBuYW1lcwogIC0gU3RhbmRhcmRpemVkIGZhY3VsdHkgbmFtZXMgYW5kIHByZWRpY3RlZCBnZW5kZXIgdXNpbmcgUiBwYWNrYWdlcwogIC0gRGlmZmljdWx0eSBoYW5kbGluZyBBUEkgcXVlcnkgZXJyb3JzIGZvciBzb21lIGF1dGhvciBuYW1lcwogIAotIFdlZWsgMwogIC0gRmlsdGVyZWQgcHVibGljYXRpb25zIGRhdGEgdG8gb25seSBqb3VybmFsIGFydGljbGVzCiAgLSBDb21wbGV0ZWQgcGFydGlhbCBkYXRlcyBhbmQgZm9ybWF0dGVkIGludG8gc3RhbmRhcmQgc3RydWN0dXJlCiAgLSBDb21iaW5lZCBtdWx0aXBsZSBhZmZpbGlhdGlvbiBjb2x1bW5zIGludG8gc2luZ2xlIGNvbHVtbgogIC0gUmVtb3ZlZCBtaXNzaW5nIGRhdGEgcm93cyBhbmQgY29sdW1ucwogIC0gTWFuaXB1bGF0ZWQgZGF0YSBpbnRvIGFuYWx5c2lzIGZvcm1hdCB3aXRoIGF1dGhvciBuYW1lLCBnZW5kZXIsIGFmZmlsaWF0aW9ucyBldGMuIAogIC0gQ2hhbGxlbmdlcyB1bm5lc3RpbmcgaW5jb25zaXN0ZW50IGF1dGhvciBjb2x1bW4gbGlzdHMKICAKLSBXZWVrIDQKICAtIEdlbmVyYXRlZCBub2RlIGxpc3QgYW5kIGVkZ2UgbGlzdCBkYXRhIGZyYW1lcyBmb3IgY28tYXV0aG9yc2hpcCBuZXR3b3JrCiAgLSBDYWxjdWxhdGVkIGJhc2ljIG5ldHdvcmsgbWV0cmljcyBsaWtlIGRlZ3JlZSBjZW50cmFsaXR5IGFuZCBjbHVzdGVyaW5nIGNvZWZmaWNpZW50cwogIC0gUHJvZHVjZWQgc3RhdGljIG5ldHdvcmsgdmlzdWFsaXphdGlvbiB1c2luZyBpZ3JhcGggcGFja2FnZQogIC0gU3RhcnRlZCBkeW5hbWljIG5ldHdvcmsgbW9kZWxpbmcgd2l0aCBSU2llbmEgYnV0IG5lZWQgdG8gcmVzb2x2ZSBtb2RlbCBzcGVjaWZpY2F0aW9uIGlzc3VlcwogIAotIFdlZWsgNSAKICAtIEltcHJvdmVkIFJTaWVuYSBtb2RlbCBzcGVjaWZpY2F0aW9uIGJhc2VkIG9uIGdvb2RuZXNzLW9mLWZpdCBkaWFnbm9zdGljcwogIC0gRmluYWxpemVkIG1vZGVsIGluY29ycG9yYXRpbmcga2V5IHN0cnVjdHVyYWwgZWZmZWN0cyBhbmQgYXR0cmlidXRlcwogIC0gUmFuIGZpbmFsIG1vZGVscyBhbmQgcHJvZHVjZWQgZXN0aW1hdGVzIG9mIGdlbmRlciBob21vcGhpbHkgZWZmZWN0cwogIC0gRXZhbHVhdGVkIGh5cG90aGVzaXMgdGVzdHMgYW5kIGVmZmVjdCBzaXplcyBmcm9tIG1vZGVsIG91dHB1dAogIC0gQmVnYW4gZHJhZnRpbmcgcmVzdWx0cyBhbmQgZGlzY3Vzc2lvbiBiYXNlZCBvbiBtb2RlbCBmaW5kaW5ncwoKPGJyPgoKLS0tLQoKCkV2ZXJ5b25lIGNhbiBmb3JrIHRoaXMgcmVwb3NpdG9yeS4KClVzZSB0aGlzIGV4YW1wbGUgdG8gam91cm5hbCB5b3VyIGxhYiB3b3JrIGFuZCBhc3NpZ25tZW50cy4KCgo6OjoKOjo6IHsuY29sdW1uIHdpZHRoPSI1MCUifQoKCgoKOjo6Cjo6Ojo6Ojo6Ojo6Ojo6CgoKCiMjIEhvdyB0byB1c2UKCjxicj4KClVzZSB0aGUgdG9wIG1lbnUgdG8gbmF2aWdhdGUgdGhyb3VnaCB0aGUgam91cm5hbC4KCgotLS0tCgoKCgoKCg==</div>
 
 
 </div>

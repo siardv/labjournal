@@ -53,25 +53,32 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
   - Identified relevant theories such as tokenism that may explain greater gender divides in skewed settings
 
 - Week 2
-  - Collected data on faculty names, gender, titles, and contact info by webscraping department website 
+  - Collected data on faculty names, gender, titles, and contact info by webscraping department website  
   - Queried Crossref API to retrieve metadata on faculty publications
-  - Parsed HTML table into dataframe and cleaned column names 
-  - Standarized faculty names and predicted gender using R packages
+  - Parsed HTML table into dataframe and cleaned column names
+  - Standardized faculty names and predicted gender using R packages
   - Difficulty handling API query errors for some author names
   
-- Week 3 
+- Week 3
   - Filtered publications data to only journal articles
   - Completed partial dates and formatted into standard structure
   - Combined multiple affiliation columns into single column
   - Removed missing data rows and columns
-  - Manipulated data into analysis format with author name, gender, affiliations etc.
+  - Manipulated data into analysis format with author name, gender, affiliations etc. 
   - Challenges unnesting inconsistent author column lists
   
 - Week 4
-  - ...
+  - Generated node list and edge list data frames for co-authorship network
+  - Calculated basic network metrics like degree centrality and clustering coefficients
+  - Produced static network visualization using igraph package
+  - Started dynamic network modeling with RSiena but need to resolve model specification issues
   
-- Week 5
-   - ...
+- Week 5 
+  - Improved RSiena model specification based on goodness-of-fit diagnostics
+  - Finalized model incorporating key structural effects and attributes
+  - Ran final models and produced estimates of gender homophily effects
+  - Evaluated hypothesis tests and effect sizes from model output
+  - Began drafting results and discussion based on model findings
 
 <br>
 
