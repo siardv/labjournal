@@ -1,17 +1,16 @@
 ---
-title: "Methods"
+title: "Predicting Gender from Names"
 output:
   html_document:
     toc: true
     number_sections: true
+    highlight: kate
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
-
+csl: apa.csl
 ---
 
-# Methods
-
+# Gender From Names
 This study utilizes the 'ipums' method from the R package gender (Mullen, 2021) to predict gender from historical first names of sociology researchers at Radboud University. The sample consists of 50 first names collected from the faculty list of the Sociology Department at Radboud University (Radboud University, 2022). Although the 'ipums' method was originally developed using U.S. census data, we apply it here to infer gender from Dutch names. After compiling our dataset, the 'ipums' method was selected due to its accurate gender predictions compared to other approaches.
 
 The key advantages of the 'ipums' technique align with the properties of our name sample. The faculty list provides names spanning a wide timeframe, from 1789 to the present day, allowing analysis of name-gender trends over an extensive period. The names represent diverse genders, religions, specialties, and career stages, improving generalizability. While further validation on Dutch data would be beneficial, this initial implementation demonstrates the potential of the ‘ipums’ method for analyzing name-gender relationships in our sociology faculty sample.

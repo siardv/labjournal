@@ -6,8 +6,7 @@ output:
     number_sections: true
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
-
+csl: apa.csl
 ---
 
 ## Webscraping
@@ -69,6 +68,19 @@ load_packages(c(
   "igraph"
 ))
 
+print_data <- function(.dt) {
+  DT::datatable(
+    .dt,
+    rownames = FALSE,
+    options = list(
+      searching = FALSE,
+      scrollX = TRUE,
+      scrollY = TRUE,
+      pageLength = 35,
+      autoWidth = FALSE
+    )
+  )
+}
 
 #' Retrieve staff data by parsing HTML table from department website
 staff_url <- "https://www.ru.nl/sociology/research/staff/"
@@ -293,13 +305,10 @@ apwcdg <- apwcd_with_gender <-
 
 apwcdg <- apwcdg[!is.na(apwcdg$doi), ]
 
-
-
 apwcdg <- apwcdg[c(
   "given", "family", "sequence", "gender", "published", "doi", "references.count",
   "title", "type", "volume"
-)]
-
+)] %>% dplyr::distinct()
 # saveRDS(apwcdg, "apwcdg.rds")
-DT::datatable(apwcdg)
+print_data(apwcdg)
 ```

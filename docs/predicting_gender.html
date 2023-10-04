@@ -12,7 +12,7 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Research Question</title>
+<title>Predicting Gender from Names</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -457,72 +457,45 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Research Question</h1>
+<h1 class="title toc-ignore">Predicting Gender from Names</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<p>Given the data from a single academic faculty and the constraints of
-the <code>RSiena</code> R package, we can focus on the structure and
-patterns of the co-authorship network. Here are some additional research
-questions with a Social Network Analysis (SNA) perspective:</p>
-<ul>
-<li><span class="math inline">\(RQ_1\)</span>: What is the role of
-gender in triadic closure within the co-authorship network of this
-faculty?</li>
-</ul>
-<p>Triadic closure refers to the tendency in social networks for two
-people who have a common acquaintance to become connected. This question
-seeks to uncover whether there are gender influences in this
-phenomenon.</p>
-<ul>
-<li><span class="math inline">\(RQ_2\)</span>: Does gender impact the
-betweenness centrality of researchers in the co-authorship network
-within this faculty?</li>
-</ul>
-<p>Betweenness centrality is a measure of the extent to which a node
-appears on the shortest paths between other nodes. This question aims to
-understand whether gender plays a role in the researcher’s position as
-bridge-makers or gatekeepers in the network.</p>
-<ul>
-<li><span class="math inline">\(RQ_3\)</span>: Female researchers will
-demonstrate lower triadic closure in their co-authorship ties compared
-to Is there a difference in the ego-network density for male and female
-researchers within this faculty’s co-authorship network?</li>
-</ul>
-<p>Ego-network density refers to the proportion of possible ties that
-exist between the contacts of a particular individual (the ego). This
-question aims to explore whether there are gender differences in the
-interconnectedness of collaborators.</p>
-<ul>
-<li><span class="math inline">\(RQ_4\)</span>: Are there gender-based
-differences in the average path length or the diameter of the
-co-authorship network within this faculty?</li>
-</ul>
-<p>These measures relate to the average number of steps it takes to get
-from one member of the network to another and the longest shortest path
-in the network. This question seeks to understand whether gender
-influences the reachability and overall structure of the network.</p>
-<ul>
-<li><span class="math inline">\(RQ_5\)</span>: Does gender impact the
-clustering coefficient of researchers within the co-authorship network
-of this faculty?</li>
-</ul>
-<p>The clustering coefficient measures the extent to which the
-collaborators of a researcher (the neighbors of a node) are
-collaborators with each other. This question can help understand whether
-there are gender differences in the tendency to form tightly knit
-clusters.</p>
-<p>Each of these questions can be addressed with the <code>RSiena</code>
-R package, which allows for the calculation of various network metrics
-and the modeling of network structure and patterns. Please note that
-these questions might be influenced by other factors not considered in
-this model, like the academic rank or research interests of the
-researchers.</p>
-<hr />
+<div id="gender-from-names" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Gender From Names</h1>
+<p>This study utilizes the ‘ipums’ method from the R package gender
+(Mullen, 2021) to predict gender from historical first names of
+sociology researchers at Radboud University. The sample consists of 50
+first names collected from the faculty list of the Sociology Department
+at Radboud University (Radboud University, 2022). Although the ‘ipums’
+method was originally developed using U.S. census data, we apply it here
+to infer gender from Dutch names. After compiling our dataset, the
+‘ipums’ method was selected due to its accurate gender predictions
+compared to other approaches.</p>
+<p>The key advantages of the ‘ipums’ technique align with the properties
+of our name sample. The faculty list provides names spanning a wide
+timeframe, from 1789 to the present day, allowing analysis of
+name-gender trends over an extensive period. The names represent diverse
+genders, religions, specialties, and career stages, improving
+generalizability. While further validation on Dutch data would be
+beneficial, this initial implementation demonstrates the potential of
+the ‘ipums’ method for analyzing name-gender relationships in our
+sociology faculty sample.</p>
+<div id="references" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> References</h2>
+<p>Mullen, L. (2021). Gender: Predict gender from names using historical
+data (R package version 0.5.2). <a
+href="https://CRAN.R-project.org/package=gender"
+class="uri">https://CRAN.R-project.org/package=gender</a></p>
+<p>Radboud University (2022). Sociology staff. Retrieved from <a
+href="https://www.ru.nl/sociology/research/staff/"
+class="uri">https://www.ru.nl/sociology/research/staff/</a></p>
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVzZWFyY2ggUXVlc3Rpb24iCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKICAgIGhpZ2hsaWdodDoga2F0ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgpjc2w6IGFwYS5jc2wKLS0tCgoKR2l2ZW4gdGhlIGRhdGEgZnJvbSBhIHNpbmdsZSBhY2FkZW1pYyBmYWN1bHR5IGFuZCB0aGUgY29uc3RyYWludHMgb2YgdGhlIGBSU2llbmFgIFIgcGFja2FnZSwgd2UgY2FuIGZvY3VzIG9uIHRoZSBzdHJ1Y3R1cmUgYW5kIHBhdHRlcm5zIG9mIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsuIEhlcmUgYXJlIHNvbWUgYWRkaXRpb25hbCByZXNlYXJjaCBxdWVzdGlvbnMgd2l0aCBhIFNvY2lhbCBOZXR3b3JrIEFuYWx5c2lzIChTTkEpIHBlcnNwZWN0aXZlOgoKLSAkUlFfMSQ6IFdoYXQgaXMgdGhlIHJvbGUgb2YgZ2VuZGVyIGluIHRyaWFkaWMgY2xvc3VyZSB3aXRoaW4gdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yayBvZiB0aGlzIGZhY3VsdHk/CgpUcmlhZGljIGNsb3N1cmUgcmVmZXJzIHRvIHRoZSB0ZW5kZW5jeSBpbiBzb2NpYWwgbmV0d29ya3MgZm9yIHR3byBwZW9wbGUgd2hvIGhhdmUgYSBjb21tb24gYWNxdWFpbnRhbmNlIHRvIGJlY29tZSBjb25uZWN0ZWQuIFRoaXMgcXVlc3Rpb24gc2Vla3MgdG8gdW5jb3ZlciB3aGV0aGVyIHRoZXJlIGFyZSBnZW5kZXIgaW5mbHVlbmNlcyBpbiB0aGlzIHBoZW5vbWVub24uCgotICRSUV8yJDogRG9lcyBnZW5kZXIgaW1wYWN0IHRoZSBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IG9mIHJlc2VhcmNoZXJzIGluIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsgd2l0aGluIHRoaXMgZmFjdWx0eT8KCkJldHdlZW5uZXNzIGNlbnRyYWxpdHkgaXMgYSBtZWFzdXJlIG9mIHRoZSBleHRlbnQgdG8gd2hpY2ggYSBub2RlIGFwcGVhcnMgb24gdGhlIHNob3J0ZXN0IHBhdGhzIGJldHdlZW4gb3RoZXIgbm9kZXMuIFRoaXMgcXVlc3Rpb24gYWltcyB0byB1bmRlcnN0YW5kIHdoZXRoZXIgZ2VuZGVyIHBsYXlzIGEgcm9sZSBpbiB0aGUgcmVzZWFyY2hlcidzIHBvc2l0aW9uIGFzIGJyaWRnZS1tYWtlcnMgb3IgZ2F0ZWtlZXBlcnMgaW4gdGhlIG5ldHdvcmsuCgotICRSUV8zJDogRmVtYWxlIHJlc2VhcmNoZXJzIHdpbGwgZGVtb25zdHJhdGUgbG93ZXIgdHJpYWRpYyBjbG9zdXJlIGluIHRoZWlyIGNvLWF1dGhvcnNoaXAgdGllcyBjb21wYXJlZCB0byBJcyB0aGVyZSBhIGRpZmZlcmVuY2UgaW4gdGhlIGVnby1uZXR3b3JrIGRlbnNpdHkgZm9yIG1hbGUgYW5kIGZlbWFsZSByZXNlYXJjaGVycyB3aXRoaW4gdGhpcyBmYWN1bHR5J3MgY28tYXV0aG9yc2hpcCBuZXR3b3JrPwoKRWdvLW5ldHdvcmsgZGVuc2l0eSByZWZlcnMgdG8gdGhlIHByb3BvcnRpb24gb2YgcG9zc2libGUgdGllcyB0aGF0IGV4aXN0IGJldHdlZW4gdGhlIGNvbnRhY3RzIG9mIGEgcGFydGljdWxhciBpbmRpdmlkdWFsICh0aGUgZWdvKS4gVGhpcyBxdWVzdGlvbiBhaW1zIHRvIGV4cGxvcmUgd2hldGhlciB0aGVyZSBhcmUgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoZSBpbnRlcmNvbm5lY3RlZG5lc3Mgb2YgY29sbGFib3JhdG9ycy4KCi0gJFJRXzQkOiBBcmUgdGhlcmUgZ2VuZGVyLWJhc2VkIGRpZmZlcmVuY2VzIGluIHRoZSBhdmVyYWdlIHBhdGggbGVuZ3RoIG9yIHRoZSBkaWFtZXRlciBvZiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIHdpdGhpbiB0aGlzIGZhY3VsdHk/CgpUaGVzZSBtZWFzdXJlcyByZWxhdGUgdG8gdGhlIGF2ZXJhZ2UgbnVtYmVyIG9mIHN0ZXBzIGl0IHRha2VzIHRvIGdldCBmcm9tIG9uZSBtZW1iZXIgb2YgdGhlIG5ldHdvcmsgdG8gYW5vdGhlciBhbmQgdGhlIGxvbmdlc3Qgc2hvcnRlc3QgcGF0aCBpbiB0aGUgbmV0d29yay4gVGhpcyBxdWVzdGlvbiBzZWVrcyB0byB1bmRlcnN0YW5kIHdoZXRoZXIgZ2VuZGVyIGluZmx1ZW5jZXMgdGhlIHJlYWNoYWJpbGl0eSBhbmQgb3ZlcmFsbCBzdHJ1Y3R1cmUgb2YgdGhlIG5ldHdvcmsuCgotICRSUV81JDogRG9lcyBnZW5kZXIgaW1wYWN0IHRoZSBjbHVzdGVyaW5nIGNvZWZmaWNpZW50IG9mIHJlc2VhcmNoZXJzIHdpdGhpbiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIG9mIHRoaXMgZmFjdWx0eT8KClRoZSBjbHVzdGVyaW5nIGNvZWZmaWNpZW50IG1lYXN1cmVzIHRoZSBleHRlbnQgdG8gd2hpY2ggdGhlIGNvbGxhYm9yYXRvcnMgb2YgYSByZXNlYXJjaGVyICh0aGUgbmVpZ2hib3JzIG9mIGEgbm9kZSkgYXJlIGNvbGxhYm9yYXRvcnMgd2l0aCBlYWNoIG90aGVyLiBUaGlzIHF1ZXN0aW9uIGNhbiBoZWxwIHVuZGVyc3RhbmQgd2hldGhlciB0aGVyZSBhcmUgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoZSB0ZW5kZW5jeSB0byBmb3JtIHRpZ2h0bHkga25pdCBjbHVzdGVycy4KCkVhY2ggb2YgdGhlc2UgcXVlc3Rpb25zIGNhbiBiZSBhZGRyZXNzZWQgd2l0aCB0aGUgYFJTaWVuYWAgUiBwYWNrYWdlLCB3aGljaCBhbGxvd3MgZm9yIHRoZSBjYWxjdWxhdGlvbiBvZiB2YXJpb3VzIG5ldHdvcmsgbWV0cmljcyBhbmQgdGhlIG1vZGVsaW5nIG9mIG5ldHdvcmsgc3RydWN0dXJlIGFuZCBwYXR0ZXJucy4gUGxlYXNlIG5vdGUgdGhhdCB0aGVzZSBxdWVzdGlvbnMgbWlnaHQgYmUgaW5mbHVlbmNlZCBieSBvdGhlciBmYWN0b3JzIG5vdCBjb25zaWRlcmVkIGluIHRoaXMgbW9kZWwsIGxpa2UgdGhlIGFjYWRlbWljIHJhbmsgb3IgcmVzZWFyY2ggaW50ZXJlc3RzIG9mIHRoZSByZXNlYXJjaGVycy4KCi0tLS0KCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUHJlZGljdGluZyBHZW5kZXIgZnJvbSBOYW1lcyIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogICAgaGlnaGxpZ2h0OiBrYXRlCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmNzbDogYXBhLmNzbAotLS0KCiMgR2VuZGVyIEZyb20gTmFtZXMKVGhpcyBzdHVkeSB1dGlsaXplcyB0aGUgJ2lwdW1zJyBtZXRob2QgZnJvbSB0aGUgUiBwYWNrYWdlIGdlbmRlciAoTXVsbGVuLCAyMDIxKSB0byBwcmVkaWN0IGdlbmRlciBmcm9tIGhpc3RvcmljYWwgZmlyc3QgbmFtZXMgb2Ygc29jaW9sb2d5IHJlc2VhcmNoZXJzIGF0IFJhZGJvdWQgVW5pdmVyc2l0eS4gVGhlIHNhbXBsZSBjb25zaXN0cyBvZiA1MCBmaXJzdCBuYW1lcyBjb2xsZWN0ZWQgZnJvbSB0aGUgZmFjdWx0eSBsaXN0IG9mIHRoZSBTb2Npb2xvZ3kgRGVwYXJ0bWVudCBhdCBSYWRib3VkIFVuaXZlcnNpdHkgKFJhZGJvdWQgVW5pdmVyc2l0eSwgMjAyMikuIEFsdGhvdWdoIHRoZSAnaXB1bXMnIG1ldGhvZCB3YXMgb3JpZ2luYWxseSBkZXZlbG9wZWQgdXNpbmcgVS5TLiBjZW5zdXMgZGF0YSwgd2UgYXBwbHkgaXQgaGVyZSB0byBpbmZlciBnZW5kZXIgZnJvbSBEdXRjaCBuYW1lcy4gQWZ0ZXIgY29tcGlsaW5nIG91ciBkYXRhc2V0LCB0aGUgJ2lwdW1zJyBtZXRob2Qgd2FzIHNlbGVjdGVkIGR1ZSB0byBpdHMgYWNjdXJhdGUgZ2VuZGVyIHByZWRpY3Rpb25zIGNvbXBhcmVkIHRvIG90aGVyIGFwcHJvYWNoZXMuCgpUaGUga2V5IGFkdmFudGFnZXMgb2YgdGhlICdpcHVtcycgdGVjaG5pcXVlIGFsaWduIHdpdGggdGhlIHByb3BlcnRpZXMgb2Ygb3VyIG5hbWUgc2FtcGxlLiBUaGUgZmFjdWx0eSBsaXN0IHByb3ZpZGVzIG5hbWVzIHNwYW5uaW5nIGEgd2lkZSB0aW1lZnJhbWUsIGZyb20gMTc4OSB0byB0aGUgcHJlc2VudCBkYXksIGFsbG93aW5nIGFuYWx5c2lzIG9mIG5hbWUtZ2VuZGVyIHRyZW5kcyBvdmVyIGFuIGV4dGVuc2l2ZSBwZXJpb2QuIFRoZSBuYW1lcyByZXByZXNlbnQgZGl2ZXJzZSBnZW5kZXJzLCByZWxpZ2lvbnMsIHNwZWNpYWx0aWVzLCBhbmQgY2FyZWVyIHN0YWdlcywgaW1wcm92aW5nIGdlbmVyYWxpemFiaWxpdHkuIFdoaWxlIGZ1cnRoZXIgdmFsaWRhdGlvbiBvbiBEdXRjaCBkYXRhIHdvdWxkIGJlIGJlbmVmaWNpYWwsIHRoaXMgaW5pdGlhbCBpbXBsZW1lbnRhdGlvbiBkZW1vbnN0cmF0ZXMgdGhlIHBvdGVudGlhbCBvZiB0aGUg4oCYaXB1bXPigJkgbWV0aG9kIGZvciBhbmFseXppbmcgbmFtZS1nZW5kZXIgcmVsYXRpb25zaGlwcyBpbiBvdXIgc29jaW9sb2d5IGZhY3VsdHkgc2FtcGxlLgoKIyMgUmVmZXJlbmNlcwoKTXVsbGVuLCBMLiAoMjAyMSkuIEdlbmRlcjogUHJlZGljdCBnZW5kZXIgZnJvbSBuYW1lcyB1c2luZyBoaXN0b3JpY2FsIGRhdGEgKFIgcGFja2FnZSB2ZXJzaW9uIDAuNS4yKS4gaHR0cHM6Ly9DUkFOLlItcHJvamVjdC5vcmcvcGFja2FnZT1nZW5kZXIgIAoKUmFkYm91ZCBVbml2ZXJzaXR5ICgyMDIyKS4gU29jaW9sb2d5IHN0YWZmLiBSZXRyaWV2ZWQgZnJvbSBodHRwczovL3d3dy5ydS5ubC9zb2Npb2xvZ3kvcmVzZWFyY2gvc3RhZmYvCgoKCg==</div>
 
 
 </div>
@@ -560,7 +533,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("question.Rmd");
+  window.initializeSourceEmbed("predicting_gender.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

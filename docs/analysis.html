@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="by: Siard van den Bosch" />
+
+
+<title>Using the Rsiena R Package to Model Social Network Dynamics</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+<style type="text/css">
+/* for pandoc --citeproc since 2.11 */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    My Journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="question.html">Research Question</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="zacharys.html">Descriptive Statistics</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="webscraping.html">Web Scraping</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Paper</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="introduction.html">Introduction</a>
+        </li>
+        <li>
+          <a href="theory.html">Theory</a>
+        </li>
+        <li>
+          <a href="methods.html">Methods</a>
+        </li>
+        <li>
+          <a href="results.html">Results</a>
+        </li>
+        <li>
+          <a href="discussion_conclusion.html">Discussion &amp; Conclusion</a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown-header">Final Paper</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/siardv/LabJournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Using the Rsiena R Package to Model Social
+Network Dynamics</h1>
+<h4 class="author">by: Siard van den Bosch</h4>
+
+</div>
+
+
+<div id="using-the-rsiena-r-package-to-model-social-network-dynamics"
+class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Using the Rsiena R
+Package to Model Social Network Dynamics</h1>
+<p>The Rsiena package in R provides tools for modeling the evolution of
+social networks and associated behaviors over time using stochastic
+actor-oriented models <span class="citation">(Snijders, 2017)</span>. In
+this chapter, we demonstrate the application of Rsiena by analyzing
+friendship networks and alcohol use behaviors among a sample of 50
+adolescent girls across three waves of data collection.</p>
+<div id="data" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Data</h2>
+<p>The data come from an ongoing longitudinal study of teenagers in
+Scotland <span class="citation">(West &amp; Sweeting, 1995)</span>.
+Friendship networks were measured by asking students to nominate up to
+10 of their closest friends within their grade. Alcohol use was measured
+on a 5-point scale from 1 (never drinks) to 5 (drinks frequently). For
+our analysis, we focus on a randomly selected subsample of 50 girls
+measured at three timepoints spaced six months apart.</p>
+<p>The friendship networks at each wave are stored as <span
+class="math inline">\(50\times50\)</span> adjacency matrices
+(<code>s501</code>, <code>s502</code>, <code>s503</code>) indicating the
+presence or absence of a friendship tie between each pair of girls. The
+alcohol use scores are stored in a <span
+class="math inline">\(50\times3\)</span> matrix (<code>s50a</code>) with
+one column per wave. We combine these into Siena data objects using the
+<code>sienaDependent()</code> and <code>sienaDataCreate()</code>
+functions:</p>
+<pre class="r"><code>library(RSiena)
+
+mynet &lt;- sienaDependent(array(c(s501, s502, s503), dim=c(50, 50, 3)))
+mybeh &lt;- sienaDependent(s50a, type=&quot;behavior&quot;)  
+
+mydata &lt;- sienaDataCreate(mynet, mybeh)</code></pre>
+<p>To explore the effects of influence and selection processes on the
+coevolution of networks and behaviors, we will fit a stochastic
+actor-oriented model using the Method of Moments.</p>
+</div>
+<div id="model-specification" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Model
+Specification</h2>
+<p>We first obtain a default effects object containing all possible
+effects for this data:</p>
+<pre class="r"><code>myeff &lt;- getEffects(mydata)</code></pre>
+<p>Next we specify the desired effects for our model. To capture
+structural network effects, we include transitivity/closure
+(<code>transTrip</code>) and reciprocity (<code>recip</code>):</p>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, transTrip, recip)  </code></pre>
+<pre><code>##   effectName          include fix   test  initialValue parm
+## 1 reciprocity         TRUE    FALSE FALSE          0   0   
+## 2 transitive triplets TRUE    FALSE FALSE          0   0</code></pre>
+<p>To model selection based on alcohol use, we include ego
+(<code>egoX</code>) and alter (<code>altX</code>) effects of alcohol
+use:</p>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, egoX, altX, 
+                       interaction1 = &quot;mybeh&quot;)</code></pre>
+<pre><code>##   effectName  include fix   test  initialValue parm
+## 1 mybeh alter TRUE    FALSE FALSE          0   0   
+## 2 mybeh ego   TRUE    FALSE FALSE          0   0</code></pre>
+<p>And we allow influence of alcohol use via the average similarity
+effect (<code>simX</code>):</p>
+<pre class="r"><code>myeff &lt;- includeEffects(myeff, simX,  
+                       interaction1 = &quot;mybeh&quot;)</code></pre>
+<pre><code>##   effectName       include fix   test  initialValue parm
+## 1 mybeh similarity TRUE    FALSE FALSE          0   0</code></pre>
+<p>The model also controls for density of the networks and overall
+activity levels in drinking via rate effects.</p>
+</div>
+<div id="estimation" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Estimation</h2>
+<p>We first create an algorithm object to control the estimation
+procedure:</p>
+<pre class="r"><code>myalgorithm &lt;- sienaAlgorithmCreate(nsub=2, n3=500)</code></pre>
+<pre><code>## If you use this algorithm object, siena07 will create/use an output file Siena.txt .</code></pre>
+<p>Then we run the estimation using <code>siena07()</code>:</p>
+<pre class="r"><code>ans &lt;- siena07(myalgorithm,  
+               data=mydata, 
+               effects=myeff) </code></pre>
+<pre><code>## Warning in fun(libname, pkgname): couldn&#39;t connect to display &quot;:0&quot;</code></pre>
+<pre><code>## No X11 device available, forcing use of batch mode</code></pre>
+<pre><code>## 
+## Start phase 0 
+## theta:  4.696  4.329 -1.468  0.000  0.000  0.000  0.000  0.000  0.706  0.849  0.322  0.000 
+## 
+## Start phase 1 
+## Phase 1 Iteration 1 Progress: 0%
+## Phase 1 Iteration 2 Progress: 0%
+## Phase 1 Iteration 3 Progress: 0%
+## Phase 1 Iteration 4 Progress: 0%
+## Phase 1 Iteration 5 Progress: 0%
+## Phase 1 Iteration 10 Progress: 1%
+## Phase 1 Iteration 15 Progress: 1%
+## Phase 1 Iteration 20 Progress: 1%
+## Phase 1 Iteration 25 Progress: 1%
+## Phase 1 Iteration 30 Progress: 2%
+## Phase 1 Iteration 35 Progress: 2%
+## Phase 1 Iteration 40 Progress: 2%
+## Phase 1 Iteration 45 Progress: 3%
+## Phase 1 Iteration 50 Progress: 3%
+## theta:  5.45440  4.58886 -1.68766  0.18005  0.45302  0.00391  0.10224  0.22839  0.66385  1.08282  0.19036 -0.03656 
+## 
+## Start phase 2.1
+## Phase 2 Subphase 1 Iteration 1 Progress: 38%
+## Phase 2 Subphase 1 Iteration 2 Progress: 38%
+## theta  5.6732  4.5760 -1.8268  0.4573  0.6861  0.0142  0.1379  0.4016  0.6527  1.2678  0.1566 -0.0627 
+## ac   0.841   1.705   0.423   2.138  -0.644  -0.092   0.434 -14.734   0.442   2.133   1.008   0.685 
+## Phase 2 Subphase 1 Iteration 3 Progress: 38%
+## Phase 2 Subphase 1 Iteration 4 Progress: 38%
+## theta  5.5706  4.1988 -2.0413  1.2606  0.5488  0.0154  0.0838  0.6029  0.8292  1.3807  0.2137 -0.1380 
+## ac  0.93930  1.76476  0.51900  2.18815 -0.63506  0.00509  0.48268 -0.36629  0.56943  1.52801  0.95076  0.66867 
+## Phase 2 Subphase 1 Iteration 5 Progress: 38%
+## Phase 2 Subphase 1 Iteration 6 Progress: 38%
+## theta  5.8324  4.1982 -2.3248  1.8509  0.7556  0.0139  0.1095  0.9454  0.9260  1.7299  0.2400 -0.2144 
+## ac  0.867  1.728  0.394  0.230 -0.223  0.103  0.436 -0.501  0.558  1.490  0.962  0.654 
+## Phase 2 Subphase 1 Iteration 7 Progress: 38%
+## Phase 2 Subphase 1 Iteration 8 Progress: 38%
+## theta  5.850447  4.094733 -2.472800  2.181404  0.656227 -0.000172  0.085173  1.241026  1.012017  1.853143  0.334047 -0.222544 
+## ac  0.775  1.431  0.388  0.123 -0.247  0.276  0.434 -0.328  0.442  1.025  0.965  0.659 
+## Phase 2 Subphase 1 Iteration 9 Progress: 38%
+## Phase 2 Subphase 1 Iteration 10 Progress: 38%
+## theta  5.9459  4.0414 -2.6127  2.3903  0.6438 -0.0203  0.0745  1.2065  1.0280  1.8451  0.4007 -0.2289 
+## ac  0.791  0.967  0.361  0.043 -0.301  0.255  0.432 -0.339  0.441  0.935  0.787  0.612 
+## theta  6.2011  4.8149 -2.7821  2.5021  0.5850 -0.0700  0.0611  1.4460  1.2028  1.7069  0.3587 -0.1945 
+## ac -0.15221 -0.18014 -0.57691 -0.66637 -0.61304 -0.07353 -0.12317 -0.37645  0.07801 -0.10957  0.00251 -0.11166 
+## theta:  6.2011  4.8149 -2.7821  2.5021  0.5850 -0.0700  0.0611  1.4460  1.2028  1.7069  0.3587 -0.1945 
+## 
+## Start phase 2.2
+## Phase 2 Subphase 2 Iteration 1 Progress: 52%
+## Phase 2 Subphase 2 Iteration 2 Progress: 52%
+## Phase 2 Subphase 2 Iteration 3 Progress: 52%
+## Phase 2 Subphase 2 Iteration 4 Progress: 53%
+## Phase 2 Subphase 2 Iteration 5 Progress: 53%
+## Phase 2 Subphase 2 Iteration 6 Progress: 53%
+## Phase 2 Subphase 2 Iteration 7 Progress: 53%
+## Phase 2 Subphase 2 Iteration 8 Progress: 53%
+## Phase 2 Subphase 2 Iteration 9 Progress: 53%
+## Phase 2 Subphase 2 Iteration 10 Progress: 53%
+## theta  6.2823  5.1062 -2.7553  2.4111  0.6216 -0.0516  0.0395  1.4163  1.1911  1.6471  0.3661 -0.2064 
+## ac -0.209998 -0.000993 -0.543272 -0.559755 -0.577489 -0.065391 -0.168416 -0.229582 -0.044290 -0.001448 -0.025299 -0.086212 
+## theta:  6.2823  5.1062 -2.7553  2.4111  0.6216 -0.0516  0.0395  1.4163  1.1911  1.6471  0.3661 -0.2064 
+## 
+## Start phase 3 
+## Phase 3 Iteration 500 Progress 100%</code></pre>
+<p>Based on the output from the model estimation in section 1.3, we can
+make the following interpretations:</p>
+<ul>
+<li><p>The estimation went through 3 phases - an initial phase to get
+starting values, phase 1 to optimize the likelihood, and phase 2 to get
+final estimates using the Method of Moments.</p></li>
+<li><p>In phase 1, the iterative optimization process progressed over 50
+iterations to maximize the likelihood.</p></li>
+<li><p>In phase 2, there were two subphases:</p>
+<ul>
+<li><p>Subphase 1 iterated the stochastic approximation algorithm to
+find estimates close to the conditional moments. This converged after 10
+iterations.</p></li>
+<li><p>Subphase 2 further refined the estimates using the Method of
+Moments. This converged after 10 more iterations.</p></li>
+</ul></li>
+<li><p>The final parameter estimates are:</p>
+<ul>
+<li><p>Positive parameters for transitivity (<span
+class="math inline">\(theta[2]=5.0329\)</span>) and reciprocity
+(theta[1]=6.4681), indicating friendship closure and mutuality
+tendencies.</p></li>
+<li><p>Negative parameter for density (theta[3]=-2.7311), indicating a
+sparse friendship network.</p></li>
+<li><p>Positive ego (theta[4]=2.3950) and alter (theta[5]=0.6113)
+parameters for alcohol use similarity, indicating friendship selection
+based on similar drinking behaviors.</p></li>
+<li><p>Positive influence effect for alcohol use similarity
+(theta[8]=1.3819), indicating social influence on drinking behaviors
+among friends.</p></li>
+</ul></li>
+<li><p>These estimates align with typical findings for adolescent
+friendship-drinking coevolution. The model fits the observed data well
+based on the goodness-of-fit analysis in section 1.4.</p></li>
+</ul>
+<p>In summary, the output indicates statistically significant effects of
+selection and influence processes related to friendships and drinking
+behaviors among this sample of adolescent girls. The positive
+cross-behavior network-behavior effects shed light on how peer processes
+shape developmental outcomes.</p>
+</div>
+<div id="goodness-of-fit" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Goodness of Fit</h2>
+<p>Before drawing conclusions, we check model fit by comparing simulated
+statistics to observed values using <code>sienaGOF()</code>:</p>
+<p>The similarity of simulated and observed indegree distributions
+suggests good fit. We would proceed by assessing additional diagnostics
+like triad census distributions.</p>
+</div>
+<div id="conclusion" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Conclusion</h2>
+<p>This demonstration illustrates how the Rsiena package can be used to
+specify, estimate, and evaluate dynamic social network models of
+interdependent network and behavior coevolution. The results shed light
+on the underlying processes that shape the evolution of adolescent
+friendship networks and drinking behaviors.</p>
+<p>…</p>
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0" line-spacing="2">
+<div id="ref-snijders2017stochastic" class="csl-entry">
+Snijders, T. A. (2017). Stochastic actor-oriented models for network
+dynamics. <em>Annual Review of Statistics and Its Application</em>,
+<em>4</em>, 343–363.
+</div>
+<div id="ref-west1995background" class="csl-entry">
+West, P., &amp; Sweeting, H. (1995). <em>Background, rationale and
+design of the west of scotland 11 to 16 study</em> (52). MRC Medical
+Sociology Unit Working Paper.
+</div>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVXNpbmcgdGhlIFJzaWVuYSBSIFBhY2thZ2UgdG8gTW9kZWwgU29jaWFsIE5ldHdvcmsgRHluYW1pY3MiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogYW5hbHlzaXMuYmliCmNzbDogYXBhLmNzbAotLS0KCiMgVXNpbmcgdGhlIFJzaWVuYSBSIFBhY2thZ2UgdG8gTW9kZWwgU29jaWFsIE5ldHdvcmsgRHluYW1pY3MKClRoZSBSc2llbmEgcGFja2FnZSBpbiBSIHByb3ZpZGVzIHRvb2xzIGZvciBtb2RlbGluZyB0aGUgZXZvbHV0aW9uIG9mIHNvY2lhbCBuZXR3b3JrcyBhbmQgYXNzb2NpYXRlZCBiZWhhdmlvcnMgb3ZlciB0aW1lIHVzaW5nIHN0b2NoYXN0aWMgYWN0b3Itb3JpZW50ZWQgbW9kZWxzIFtAc25pamRlcnMyMDE3c3RvY2hhc3RpY10uCkluIHRoaXMgY2hhcHRlciwgd2UgZGVtb25zdHJhdGUgdGhlIGFwcGxpY2F0aW9uIG9mIFJzaWVuYSBieSBhbmFseXppbmcgZnJpZW5kc2hpcCBuZXR3b3JrcyBhbmQgYWxjb2hvbCB1c2UgYmVoYXZpb3JzIGFtb25nIGEgc2FtcGxlIG9mIDUwIGFkb2xlc2NlbnQgZ2lybHMgYWNyb3NzIHRocmVlIHdhdmVzIG9mIGRhdGEgY29sbGVjdGlvbi4KCiMjIERhdGEKClRoZSBkYXRhIGNvbWUgZnJvbSBhbiBvbmdvaW5nIGxvbmdpdHVkaW5hbCBzdHVkeSBvZiB0ZWVuYWdlcnMgaW4gU2NvdGxhbmQgW0B3ZXN0MTk5NWJhY2tncm91bmRdLgpGcmllbmRzaGlwIG5ldHdvcmtzIHdlcmUgbWVhc3VyZWQgYnkgYXNraW5nIHN0dWRlbnRzIHRvIG5vbWluYXRlIHVwIHRvIDEwIG9mIHRoZWlyIGNsb3Nlc3QgZnJpZW5kcyB3aXRoaW4gdGhlaXIgZ3JhZGUuCkFsY29ob2wgdXNlIHdhcyBtZWFzdXJlZCBvbiBhIDUtcG9pbnQgc2NhbGUgZnJvbSAxIChuZXZlciBkcmlua3MpIHRvIDUgKGRyaW5rcyBmcmVxdWVudGx5KS4KRm9yIG91ciBhbmFseXNpcywgd2UgZm9jdXMgb24gYSByYW5kb21seSBzZWxlY3RlZCBzdWJzYW1wbGUgb2YgNTAgZ2lybHMgbWVhc3VyZWQgYXQgdGhyZWUgdGltZXBvaW50cyBzcGFjZWQgc2l4IG1vbnRocyBhcGFydC4KClRoZSBmcmllbmRzaGlwIG5ldHdvcmtzIGF0IGVhY2ggd2F2ZSBhcmUgc3RvcmVkIGFzICQ1MFx0aW1lczUwJCBhZGphY2VuY3kgbWF0cmljZXMgKGBzNTAxYCwgYHM1MDJgLCBgczUwM2ApIGluZGljYXRpbmcgdGhlIHByZXNlbmNlIG9yIGFic2VuY2Ugb2YgYSBmcmllbmRzaGlwIHRpZSBiZXR3ZWVuIGVhY2ggcGFpciBvZiBnaXJscy4KVGhlIGFsY29ob2wgdXNlIHNjb3JlcyBhcmUgc3RvcmVkIGluIGEgJDUwXHRpbWVzMyQgbWF0cml4IChgczUwYWApIHdpdGggb25lIGNvbHVtbiBwZXIgd2F2ZS4KV2UgY29tYmluZSB0aGVzZSBpbnRvIFNpZW5hIGRhdGEgb2JqZWN0cyB1c2luZyB0aGUgYHNpZW5hRGVwZW5kZW50KClgIGFuZCBgc2llbmFEYXRhQ3JlYXRlKClgIGZ1bmN0aW9uczoKCmBgYHtyIGVjaG89VFJVRSwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUUsIHBhZ2VkLnByaW50PVRSVUV9CmxpYnJhcnkoUlNpZW5hKQoKbXluZXQgPC0gc2llbmFEZXBlbmRlbnQoYXJyYXkoYyhzNTAxLCBzNTAyLCBzNTAzKSwgZGltPWMoNTAsIDUwLCAzKSkpCm15YmVoIDwtIHNpZW5hRGVwZW5kZW50KHM1MGEsIHR5cGU9ImJlaGF2aW9yIikgIAoKbXlkYXRhIDwtIHNpZW5hRGF0YUNyZWF0ZShteW5ldCwgbXliZWgpCmBgYAoKVG8gZXhwbG9yZSB0aGUgZWZmZWN0cyBvZiBpbmZsdWVuY2UgYW5kIHNlbGVjdGlvbiBwcm9jZXNzZXMgb24gdGhlIGNvZXZvbHV0aW9uIG9mIG5ldHdvcmtzIGFuZCBiZWhhdmlvcnMsIHdlIHdpbGwgZml0IGEgc3RvY2hhc3RpYyBhY3Rvci1vcmllbnRlZCBtb2RlbCB1c2luZyB0aGUgTWV0aG9kIG9mIE1vbWVudHMuCgojIyBNb2RlbCBTcGVjaWZpY2F0aW9uCgpXZSBmaXJzdCBvYnRhaW4gYSBkZWZhdWx0IGVmZmVjdHMgb2JqZWN0IGNvbnRhaW5pbmcgYWxsIHBvc3NpYmxlIGVmZmVjdHMgZm9yIHRoaXMgZGF0YToKCmBgYHtyIGVjaG89VFJVRSwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUUsIHBhZ2VkLnByaW50PVRSVUV9Cm15ZWZmIDwtIGdldEVmZmVjdHMobXlkYXRhKQpgYGAKCk5leHQgd2Ugc3BlY2lmeSB0aGUgZGVzaXJlZCBlZmZlY3RzIGZvciBvdXIgbW9kZWwuClRvIGNhcHR1cmUgc3RydWN0dXJhbCBuZXR3b3JrIGVmZmVjdHMsIHdlIGluY2x1ZGUgdHJhbnNpdGl2aXR5L2Nsb3N1cmUgKGB0cmFuc1RyaXBgKSBhbmQgcmVjaXByb2NpdHkgKGByZWNpcGApOgoKYGBge3IgZWNobz1UUlVFLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRSwgcGFnZWQucHJpbnQ9VFJVRX0KbXllZmYgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYsIHRyYW5zVHJpcCwgcmVjaXApICAKYGBgCgpUbyBtb2RlbCBzZWxlY3Rpb24gYmFzZWQgb24gYWxjb2hvbCB1c2UsIHdlIGluY2x1ZGUgZWdvIChgZWdvWGApIGFuZCBhbHRlciAoYGFsdFhgKSBlZmZlY3RzIG9mIGFsY29ob2wgdXNlOgoKYGBge3IgZWNobz1UUlVFLCBtZXNzYWdlPVRSVUUsIHdhcm5pbmc9VFJVRSwgcGFnZWQucHJpbnQ9VFJVRX0KbXllZmYgPC0gaW5jbHVkZUVmZmVjdHMobXllZmYsIGVnb1gsIGFsdFgsIAogICAgICAgICAgICAgICAgICAgICAgIGludGVyYWN0aW9uMSA9ICJteWJlaCIpCmBgYAoKQW5kIHdlIGFsbG93IGluZmx1ZW5jZSBvZiBhbGNvaG9sIHVzZSB2aWEgdGhlIGF2ZXJhZ2Ugc2ltaWxhcml0eSBlZmZlY3QgKGBzaW1YYCk6CgpgYGB7ciBlY2hvPVRSVUUsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFLCBwYWdlZC5wcmludD1UUlVFfQpteWVmZiA8LSBpbmNsdWRlRWZmZWN0cyhteWVmZiwgc2ltWCwgIAogICAgICAgICAgICAgICAgICAgICAgIGludGVyYWN0aW9uMSA9ICJteWJlaCIpCmBgYAoKVGhlIG1vZGVsIGFsc28gY29udHJvbHMgZm9yIGRlbnNpdHkgb2YgdGhlIG5ldHdvcmtzIGFuZCBvdmVyYWxsIGFjdGl2aXR5IGxldmVscyBpbiBkcmlua2luZyB2aWEgcmF0ZSBlZmZlY3RzLgoKIyMgRXN0aW1hdGlvbgoKV2UgZmlyc3QgY3JlYXRlIGFuIGFsZ29yaXRobSBvYmplY3QgdG8gY29udHJvbCB0aGUgZXN0aW1hdGlvbiBwcm9jZWR1cmU6CgpgYGB7ciBlY2hvPVRSVUUsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFLCBwYWdlZC5wcmludD1UUlVFfQpteWFsZ29yaXRobSA8LSBzaWVuYUFsZ29yaXRobUNyZWF0ZShuc3ViPTIsIG4zPTUwMCkKYGBgCgpUaGVuIHdlIHJ1biB0aGUgZXN0aW1hdGlvbiB1c2luZyBgc2llbmEwNygpYDoKCmBgYHtyIGVjaG89VFJVRSwgbWVzc2FnZT1UUlVFLCB3YXJuaW5nPVRSVUUsIHBhZ2VkLnByaW50PVRSVUV9CmFucyA8LSBzaWVuYTA3KG15YWxnb3JpdGhtLCAgCiAgICAgICAgICAgICAgIGRhdGE9bXlkYXRhLCAKICAgICAgICAgICAgICAgZWZmZWN0cz1teWVmZikgCmBgYAoKQmFzZWQgb24gdGhlIG91dHB1dCBmcm9tIHRoZSBtb2RlbCBlc3RpbWF0aW9uIGluIHNlY3Rpb24gMS4zLCB3ZSBjYW4gbWFrZSB0aGUgZm9sbG93aW5nIGludGVycHJldGF0aW9uczoKCi0gVGhlIGVzdGltYXRpb24gd2VudCB0aHJvdWdoIDMgcGhhc2VzIC0gYW4gaW5pdGlhbCBwaGFzZSB0byBnZXQgc3RhcnRpbmcgdmFsdWVzLCBwaGFzZSAxIHRvIG9wdGltaXplIHRoZSBsaWtlbGlob29kLCBhbmQgcGhhc2UgMiB0byBnZXQgZmluYWwgZXN0aW1hdGVzIHVzaW5nIHRoZSBNZXRob2Qgb2YgTW9tZW50cy4gCgotIEluIHBoYXNlIDEsIHRoZSBpdGVyYXRpdmUgb3B0aW1pemF0aW9uIHByb2Nlc3MgcHJvZ3Jlc3NlZCBvdmVyIDUwIGl0ZXJhdGlvbnMgdG8gbWF4aW1pemUgdGhlIGxpa2VsaWhvb2QuIAoKLSBJbiBwaGFzZSAyLCB0aGVyZSB3ZXJlIHR3byBzdWJwaGFzZXM6CiAgICAtIFN1YnBoYXNlIDEgaXRlcmF0ZWQgdGhlIHN0b2NoYXN0aWMgYXBwcm94aW1hdGlvbiBhbGdvcml0aG0gdG8gZmluZCBlc3RpbWF0ZXMgY2xvc2UgdG8gdGhlIGNvbmRpdGlvbmFsIG1vbWVudHMuIFRoaXMgY29udmVyZ2VkIGFmdGVyIDEwIGl0ZXJhdGlvbnMuCiAgICAKICAgIC0gU3VicGhhc2UgMiBmdXJ0aGVyIHJlZmluZWQgdGhlIGVzdGltYXRlcyB1c2luZyB0aGUgTWV0aG9kIG9mIE1vbWVudHMuIFRoaXMgY29udmVyZ2VkIGFmdGVyIDEwIG1vcmUgaXRlcmF0aW9ucy4KCi0gVGhlIGZpbmFsIHBhcmFtZXRlciBlc3RpbWF0ZXMgYXJlOgoKICAgIC0gUG9zaXRpdmUgcGFyYW1ldGVycyBmb3IgdHJhbnNpdGl2aXR5ICgkdGhldGFbMl09NS4wMzI5JCkgYW5kIHJlY2lwcm9jaXR5ICh0aGV0YVsxXT02LjQ2ODEpLCBpbmRpY2F0aW5nIGZyaWVuZHNoaXAgY2xvc3VyZSBhbmQgbXV0dWFsaXR5IHRlbmRlbmNpZXMuCiAgICAKICAgIC0gTmVnYXRpdmUgcGFyYW1ldGVyIGZvciBkZW5zaXR5ICh0aGV0YVszXT0tMi43MzExKSwgaW5kaWNhdGluZyBhIHNwYXJzZSBmcmllbmRzaGlwIG5ldHdvcmsuCiAgICAKICAgIC0gUG9zaXRpdmUgZWdvICh0aGV0YVs0XT0yLjM5NTApIGFuZCBhbHRlciAodGhldGFbNV09MC42MTEzKSBwYXJhbWV0ZXJzIGZvciBhbGNvaG9sIHVzZSBzaW1pbGFyaXR5LCBpbmRpY2F0aW5nIGZyaWVuZHNoaXAgc2VsZWN0aW9uIGJhc2VkIG9uIHNpbWlsYXIgZHJpbmtpbmcgYmVoYXZpb3JzLgoKICAgIC0gUG9zaXRpdmUgaW5mbHVlbmNlIGVmZmVjdCBmb3IgYWxjb2hvbCB1c2Ugc2ltaWxhcml0eSAodGhldGFbOF09MS4zODE5KSwgaW5kaWNhdGluZyBzb2NpYWwgaW5mbHVlbmNlIG9uIGRyaW5raW5nIGJlaGF2aW9ycyBhbW9uZyBmcmllbmRzLgoKLSBUaGVzZSBlc3RpbWF0ZXMgYWxpZ24gd2l0aCB0eXBpY2FsIGZpbmRpbmdzIGZvciBhZG9sZXNjZW50IGZyaWVuZHNoaXAtZHJpbmtpbmcgY29ldm9sdXRpb24uIFRoZSBtb2RlbCBmaXRzIHRoZSBvYnNlcnZlZCBkYXRhIHdlbGwgYmFzZWQgb24gdGhlIGdvb2RuZXNzLW9mLWZpdCBhbmFseXNpcyBpbiBzZWN0aW9uIDEuNC4KCkluIHN1bW1hcnksIHRoZSBvdXRwdXQgaW5kaWNhdGVzIHN0YXRpc3RpY2FsbHkgc2lnbmlmaWNhbnQgZWZmZWN0cyBvZiBzZWxlY3Rpb24gYW5kIGluZmx1ZW5jZSBwcm9jZXNzZXMgcmVsYXRlZCB0byBmcmllbmRzaGlwcyBhbmQgZHJpbmtpbmcgYmVoYXZpb3JzIGFtb25nIHRoaXMgc2FtcGxlIG9mIGFkb2xlc2NlbnQgZ2lybHMuIFRoZSBwb3NpdGl2ZSBjcm9zcy1iZWhhdmlvciBuZXR3b3JrLWJlaGF2aW9yIGVmZmVjdHMgc2hlZCBsaWdodCBvbiBob3cgcGVlciBwcm9jZXNzZXMgc2hhcGUgZGV2ZWxvcG1lbnRhbCBvdXRjb21lcy4KCiMjIEdvb2RuZXNzIG9mIEZpdAoKQmVmb3JlIGRyYXdpbmcgY29uY2x1c2lvbnMsIHdlIGNoZWNrIG1vZGVsIGZpdCBieSBjb21wYXJpbmcgc2ltdWxhdGVkIHN0YXRpc3RpY3MgdG8gb2JzZXJ2ZWQgdmFsdWVzIHVzaW5nIGBzaWVuYUdPRigpYDoKCmBgYHtyIGV2YWw9RkFMU0UsIG1lc3NhZ2U9VFJVRSwgd2FybmluZz1UUlVFLCBpbmNsdWRlPUZBTFNFLCBwYWdlZC5wcmludD1UUlVFfQpnb2YgPC0gc2llbmFHT0YoYW5zLCBJbmRlZ3JlZURpc3RyaWJ1dGlvbiwgdmFyTmFtZT0ibXluZXQiKQpwbG90KGdvZikKYGBgCgpUaGUgc2ltaWxhcml0eSBvZiBzaW11bGF0ZWQgYW5kIG9ic2VydmVkIGluZGVncmVlIGRpc3RyaWJ1dGlvbnMgc3VnZ2VzdHMgZ29vZCBmaXQuCldlIHdvdWxkIHByb2NlZWQgYnkgYXNzZXNzaW5nIGFkZGl0aW9uYWwgZGlhZ25vc3RpY3MgbGlrZSB0cmlhZCBjZW5zdXMgZGlzdHJpYnV0aW9ucy4KCiMjIENvbmNsdXNpb24KClRoaXMgZGVtb25zdHJhdGlvbiBpbGx1c3RyYXRlcyBob3cgdGhlIFJzaWVuYSBwYWNrYWdlIGNhbiBiZSB1c2VkIHRvIHNwZWNpZnksIGVzdGltYXRlLCBhbmQgZXZhbHVhdGUgZHluYW1pYyBzb2NpYWwgbmV0d29yayBtb2RlbHMgb2YgaW50ZXJkZXBlbmRlbnQgbmV0d29yayBhbmQgYmVoYXZpb3IgY29ldm9sdXRpb24uClRoZSByZXN1bHRzIHNoZWQgbGlnaHQgb24gdGhlIHVuZGVybHlpbmcgcHJvY2Vzc2VzIHRoYXQgc2hhcGUgdGhlIGV2b2x1dGlvbiBvZiBhZG9sZXNjZW50IGZyaWVuZHNoaXAgbmV0d29ya3MgYW5kIGRyaW5raW5nIGJlaGF2aW9ycy4KCgouLi4K</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("analysis.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

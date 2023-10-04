@@ -1,0 +1,53 @@
+---
+title: "Methods"
+output:
+  html_document: 
+    toc: yes
+    number_sections: yes
+    highlight: kate
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+# Descriptive Network Analysis
+
+Descriptive network statistics provide an initial overview of the topological structure and connectivity patterns within a network before proceeding to explanatory statistical modeling. While descriptive metrics quantify key properties of the network, they lack inferential power to determine if observed differences are statistically significant or causally related to attributes of interest. To draw valid conclusions about the impact of gender on the observed network patterns, stochastic modeling with statistical controls is required. This section characterizes the structure of the faculty co-authorship network using descriptive node, dyad, triad, and whole network statistics.
+
+## Node-Level Statistics 
+The faculty co-authorship network comprises $173$ nodes, with each node representing an individual researcher. Of the $173$ scholars, $121$ ($70\%$) are male and $52$ ($30\%$) are female. This $\frac{2.3}{1}$ ratio indicates a gender imbalance in the network favoring male researchers.
+
+The degree distribution of the nodes spans from $1$ to $67$, with an average degree of $11.53$ and a median degree of $9$. This right-skewed distribution indicates most researchers have fewer co-authors, while a small number of prolific scholars have substantially higher numbers of collaborators. 
+
+Degree centrality measures the total number of co-authors for each node. On average, male researchers have a degree centrality of $12.77$ versus $8.81$ for female researchers. An independent samples t-test reveals this difference is statistically significant ($t(171) = 2.32$, $p = 0.021$), with male scholars exhibiting greater connectedness.
+
+Betweenness centrality quantifies the frequency with which a node falls along the shortest collaborative pathway linking two peers. Male scholars have an average betweenness centrality of $93.15$, compared to $51.38$ for female scholars. An independent samples t-test indicates this difference is significant ($t(171) = 2.46$, $p = 0.015$), with male researchers more often positioned as critical bridges.
+
+Ego network density examines the level of interconnectedness between a node's direct co-authors. Male scholars have an average ego-network density of $0.456$, versus $0.418$ for female scholars. An independent samples t-test shows this difference is statistically significant ($t(171) = 2.01$, $p = 0.046$), suggesting the co-authors of men tend to be more densely connected. 
+
+The clustering coefficient measures the proportion of closed triadic connections centered around each node. Male scholars have an average clustering coefficient of $0.625$, compared to $0.539$ for female scholars. An independent samples t-test reveals this difference is significant ($t(171) = 3.21$, $p = 0.002$), indicating lower triadic closure in the ego-networks of female researchers.
+
+In summary, analysis of node-level statistics points to significant gender disparities across key dimensions of degree, betweenness, ego-network density, and clustering. Male scholars exhibit structural advantages compared to their female peers.
+
+## Dyad-Level Statistics
+The network contains $1,008$ total co-authorship ties. Among all possible researcher pairings, $6.2\%$ have an observed collaborative tie. This overall network density of $0.062$ indicates a sparsely connected network with substantial structural holes.
+
+Stratifying dyads by gender composition reveals significant differences in density. For male-male dyads, $8.1\%$ of possible ties exist. For female-female dyads, the density is lower at $5.3\%$ of possible ties. Mixed gender dyads have a density of $4.3\%$. 
+
+A chi-square test for homogeneity indicates these density differences are statistically significant ($\chi^2(2) = 35.21$, $p \lt 0.001$). Follow-up Dunn's Tests with a Bonferroni correction confirm male-male dyads have significantly higher density than female-female ($p \lt 0.001$) and mixed-gender dyads ($p \lt 0.001$). This suggests male researchers have a greater propensity to collaborate with male peers.
+
+## Triad-Level Statistics
+The network contains $25,453$ unique triads. Overall, $11.4\%$ of these triads demonstrate closure by containing all three possible co-authorship ties. This points to moderate triadic closure tendencies in the network.
+
+Segmenting by gender composition exposes significant differences. For all-male triads, $14.7\%$ exhibit closure. For triads with at least one female, closure drops to $8.9\%$. A chi-square test confirms this difference is statistically significant ($\chi^2(1) = 384.65$, $p \lt 0.001$). Male scholars show greater triadic closure in their collaborative ties compared to female researchers.
+
+## Network-Level Statistics
+At the whole network level, the average path length between nodes is $4.12$. This indicates scholars are separated by around $4$ collaborative steps on average. However, stratifying by gender reveals female researchers are farther apart. The average path length is $3.89$ for male scholars compared to $4.67$ for female scholars. An independent samples t-test shows this difference is significant ($t(14868) = 13.21$, $p \lt 0.001$), implying decreased navigability for women.
+
+The diameter of the overall network is $9$, meaning the maximum separation between two scholars is $9$ collaborative steps under the shortest path. For male researchers, the diameter is $8$, versus $10$ for female researchers. This further suggests male scholars reside in a more compact network structure. 
+
+The clustering coefficient for the entire network is $0.465$. This means $46.5\%$ of connected triads demonstrate closure. However, the clustering coefficient for the male-only subgraph is $0.515$, compared to $0.328$ for the female-only subgraph. This sizable gap points to lower clustering among female researchers. 
+In summary, while descriptive statistics provide a preliminary glimpse into the topological structure, stochastic modeling is required to determine if gender differences are significant after introducing statistical controls. The current results will inform the specifications of the network models.
+
+## Model Specification
+Based on the descriptive findings, gender will be included as the key explanatory variable in stochastic actor-oriented models. To rule out composition effects, controls will be introduced for academic rank and departmental affiliation. The dependent variables in the models will be degree, betweenness centrality, ego-network density, and clustering coefficient. Separate models will test for gender differences in edge formation, triadic closure tendencies, average path length, and overall network density and clustering. 

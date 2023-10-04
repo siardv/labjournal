@@ -6,107 +6,54 @@ output:
     number_sections: true
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
-
+csl: apa.csl
 ---
 
 # Theory
-## Theoretical Foundations of Homophily
-### Homophily and Social Networks
-Homophily refers to the pervasive tendency of humans to associate and bond with similar others (Melamed & Simpson, 2020). It powerfully shapes social ties along multiple dimensions including race, ethnicity, age, gender, religion, education, occupation, and social class (McPherson et al., 2001). Homophily plays an important role in determining who people interact with and connect with, often leading to segregated networks divided along lines of similarity (Ingram & Morris, 2007).
 
-Although research often examines homophily on singular dimensions, multidimensional analyses reveal its widespread influence in shaping human interaction simultaneously across spheres (Block, 2014). For instance, an analysis of online networks during independence movements found that national identity homophily is critical in shaping connections (Zubiaga et al., 2018). Homophily appears to enable in-group cooperation but limits diversified social ties (Freeman 2014). Young people exhibit homophily preferences yet value inclusion, highlighting ethical considerations (Koutsouris et al., 2014). Overall, homophily substantially affects the structure and function of social networks.
+This research is grounded in social network theory, which provides a powerful lens for analyzing the relational architecture underpinning collaboration in academia.
+In particular, we draw on key concepts from Granovetter's seminal work on the strength of weak ties (Granovetter, 1973) and Burt's structural holes theory (Burt, 1992).
 
-### Homophily by Gender
-Extensive evidence confirms that homophily powerfully shapes social ties by gender (McPherson and Smith-Lovin 1987). Same-gender preferences emerge in childhood and persist into adulthood, influencing friendships and cliques (Kirke 2009). Homophily also characterizes workplace relationships, as men frequently connect with others (Rumens, 2010). This is also evident in mentoring, with gender-shaping perceptions and experiences of mentors and mentees (Welsh et al., 2018). Although beneficial, cross-gender mentoring relationships face impediments from gender role expectations and hierarchies (Buzzanell et al., 2014; McWilliams & Howard, 1993). Even assigned mentoring partnerships exhibit increasing gender homophily over time (Weinberg and Lankau 2011). Overall, the research definitively demonstrates that gender homophily broadly affects social bonds.
+Granovetter demonstrated that weak interpersonal ties often serve as indispensable bridges between densely knit social clusters, enabling novel ideas and opportunities to diffuse across the network.
+This highlights the importance of analyzing patterns of connectivity and closure.
+Structural holes theory further explicates how strategically bridging disconnected groups in a network yields competitive advantages in access to information and control over flows.
 
-### Homophily's Organizational Effects
-Gender homophily also has critical implications for organizations. It limits exposure to diverse perspectives and shapes access to resources, information, and opportunities (McPherson and Smith-Lovin 1987). Homophily hinders innovation arising from the interdependence between diverse collaborators (Lungeanu & Contractor, 2015). Although diversity offers talent benefits, realizing these benefits requires moving beyond homophily through inclusion and integration (Ollapally & Bhatnagar, 2009). Campus diversity alone does not guarantee diverse exposures and ideas (Milem et al., 2004). Small firms face innovation barriers from homophilous networks (Corredoira and Rosenkopf, 2018). Thus, organizational policies and practices must actively manage homophily's effects on tap diversity's potential, aided by positive framing of ambiguity (Unzueta et al., 2012).
+Together, these foundational network theories underscore how the specific structure and topology of scholarly collaboration networks can profoundly shape diffusion of knowledge and inequality of access.
+This provides the impetus for our granular network analysis.
 
-### Homophily and Minority Group Size
-Homophily also intensifies with the minority group size, as hypothesized by Kanter (1977). When the proportion drops below 15%, minorities can face exclusion from networks, resources, and opportunities. Extreme imbalances impede cross-group ties and support. Research confirms that biases and social perceptions worsen as groups shrink (Karimi et al., 2019; Karimi et al., 2018). Skewed ratios increase the boundaries between similar minority groups because of the need for positive distinctiveness (White & Langer, 1999). Although minority identity offers belongingness benefits, a small group size restricts access to the majority of resources and networks key for advancement (Dávid & Turner, 1996). Persistent demographic divides arise from these categorization processes and the resulting barriers (Chua 2013). To overcome this divide, skewed organizations must facilitate minority inclusion. Intergroup contact and relationship-building activities help integrate minorities into mainstream networks and activities (Walseth and Strandbu, 2014). Carefully managed minority ties provide resilience while preventing adverse isolation (Dapilah et al., 2020).
+We also situate our research within the extensive literature on gender disparities in academia.
+Prior studies have documented lower research output, weaker international visibility, and lower citations rates for female scholars, even after controlling for academic rank, discipline and other factors (Larivière et al., 2013; Dion et al., 2018).
 
-### Drivers of Gender Divides
-Vertical segregation and cultural forces also drive the gender divide, as women concentrate in lower-status, isolated positions (Charles and Grusky 2004; Simpson and Fitzgerald 2014). Early socialization emphasizes gender differentiation (Maccoby, 1987), while cultural norms link occupations and gender (Charles & Bradley, 2009). Gendered fields of study in education perpetuate segregated careers (Wilson and Boldizar 1990). Organizational practices further stratify access, as male technical networks provide greater mobility (Kankkunen 2009). The gendered division of labor concentrates women in lower-paid roles, reproducing income inequality (Seguino, 2018). Tackling segregation requires addressing the cultural beliefs and structural practices that perpetuate gender across occupations, hierarchies, and networks.
+These disadvantages accumulate over careers and are mirrored in striking underrepresentation of women in senior positions.
+Extensive research points to subtle but pervasive gender biases permeating peer review, hiring, promotion, remuneration, and service burdens as contributing factors (Reuben et al., 2014; Raj et al., 2016).
 
-### Homophily and Gender Inequality in Academia
-Within academia, systemic biases permeate hiring, promotion, collaboration, recognition, and resources (Bleijenbergh et al., 2013). Complex barriers impede women's entry and advancement (Semela 2020). Despite similar productivity, structural bias disadvantages women in promotions (Filandri and O'Neill 2021). Persistent gender divides partly reflect demographic inertia, but isolation in skewed settings impedes retention and promotion (Shaw & Stanton, 2012). Male-dominated departments foster perceived discrimination (Reid et al., 1987) and doubt women's competence (Siskind & Kearns, 1997). The resulting chilly climate mainly affects fields such as engineering, with highly skewed ratios (Blosser, 2017; Savigny, 2014). Isolation seems to hinder advancement, as gender predicts slower promotion and retention for female faculty members (Box-Steffensmeier et al., 2015). This finding suggests worsening homophily effects as gender imbalances increase. Addressing homophily and underrepresentation is critical for supporting female faculty members and improving gender diversity in academia.
+However, less attention has focused directly on elucidating gender effects embedded within the intricate relational networks underpinning scholarly collaboration.
+This echoes Granovetter's (1985) assertion that economic action is inherently "embedded in ongoing networks of personal relationships".
 
-In summary, theory and research on homophily provide a strong foundation for understanding the factors that produce persistent gender divides. Tackling segregation requires raising awareness of homophily while implementing structural changes to ensure that evaluations and opportunities are based on qualifications rather than gender. Organizations can only progress toward equality, inclusion, and innovation by actively managing this fundamental human tendency.
+Charting gender asymmetries in the relational architecture shaping knowledge creation is therefore pivotal.
+Our application of social network analysis to map collaborative ties enables empirically tracking how gender may permeate this core academic process.
 
-## References
-Bleijenbergh, I., Van Engen, M., & Vinkenburg, C. (2013). Othering women: Fluid images of the ideal academic. Equality, Diversity and Inclusion: An International Journal, 32(1), 22-35. https://doi.org/10.1108/02610151311305631 
+Integrating these perspectives, we posit the structure of faculty co-authorship networks may be shaped by gender effects, with significant implications. We propose and test six hypotheses.
 
-Block, P. (2014). Multidimensional homophily in friendship networks. Network Science, 2(2), 189-212. https://doi.org/10.1017/nws.2014.17
+## Hypotheses
 
-Buzzanell, P. M., Liu, M., Remke, R. V., Liu, Y., & Bowers, V. R. (2014). Intimate, ambivalent and erotic mentoring: Popular culture and mentor–mentee relational processes in Mad Men. Human Relations, 68(4), 595-620. https://doi.org/10.1177/0018726713503023
+- $H_1$: Female researchers will demonstrate lower triadic closure in their co-authorship ties compared to male researchers.
 
-Charles, M., & Bradley, K. (2009). Indulging our gendered selves? Sex segregation by field of study in 44 countries. American Journal of Sociology, 114(4), 924–976. https://doi.org/10.1086/595942
+- $H_2$:Female scholars will have lower betweenness centrality compared to male counterparts.
 
-Charles, M., & Grusky, D. B. (2004). Occupational ghettos: The worldwide segregation of women and men. Stanford University Press.
+- $H_3$:Ego-network density will be lower for female versus male researchers.
 
-Chua, V. (2013). Categorical sources of varieties of network inequalities. Social Science Research, 42(3), 755-769. https://doi.org/10.1016/j.ssresearch.2013.04.002
+- $H_4$:Average path length and diameter will be greater in the networks of female researchers.
 
-Corredoira, R. A., & Rosenkopf, L. (2018). Does size still matter? How micro firms and SMEs vary in network learning. Strategic Organization. https://doi.org/10.1177/1476127018783765
+- $H_5$:Female scholars will have a lower clustering coefficient than male scholars.
 
-Dávid, B., & Turner, J. C. (1996). Studies in self‐categorization and minority conversion: Is being a member of the out‐group an advantage? British Journal of Social Psychology, 35(1), 179-199. https://doi.org/10.1111/j.2044-8309.1996.tb01091.x
+- $H_6$:Controlling for academic rank, gender differences across $H_1$-$H_5$ will persist.
 
-Dapilah, F., Nielsen, J. Ø., & Friis, C. (2020). The role of social networks in building adaptive capacity and resilience to climate change: A case study from northern Ghana. Climate Risk Management, 29, 100231. https://doi.org/10.1016/j.crm.2020.100231 
+Support for these hypotheses would suggest female scholars may contend with more fragmented, less navigable collaboration networks.
+This could hinder innovation and advancement.
 
-Filandri, M., & O’Neill, M. (2021). ‘Being good isn’t good enough’: Gender discrimination in Italian academia. Higher Education, 81(1), 57-76. https://doi.org/10.1007/s10734-019-00466-0
+Conversely, null results would imply the topological structure of co-authorship ties is not influenced by gender.
+By empirically testing for gender effects across critical network dimensions, this research elucidates hidden relational dynamics shaping academia.
 
-Freeman, R. (2014). Collaboration: Strength in diversity. Nature, 513(7518), 305. https://doi.org/10.1038/513305a
-
-Ingram, P., & Morris, M. W. (2007). Do people mix at mixers? Structure, homophily, and the "life of the party". Administrative Science Quarterly, 52(4), 558-585. https://doi.org/10.2189/asqu.52.4.558
-
-Kanter, R. M. (1977). Some effects of proportions on group life: Skewed sex ratios and responses to token women. American Journal of Sociology, 82(5), 965–990. https://doi.org/10.1086/226425
-
-Karimi, F., Génois, M., Wagner, C., Singer, P., & Strohmaier, M. (2018). Homophily influences ranking of minorities in social networks. Scientific Reports, 8(1). https://doi.org/10.1038/s41598-018-29405-7
-
-Kankkunen, T. I. (2009). Access to networks in genderized contexts: The construction of hierarchical networks and inequalities in feminized, caring and masculinized, technical occupations. Gender, Work & Organization, 16(5), 560-578. https://doi.org/10.1111/j.1468-0432.2009.00447.x
-
-Kirke, D. M. (2009). Gender clustering in friendship networks: Some sociological implications. Methodological Innovations Online, 4(1), 13-24. https://doi.org/10.1177/205979910900400103
-
-Koutsouris, G., Norwich, B., & Slhe, R. (2014). Young people’s preferences for social interaction in terms of homophily and social inclusion: a critical discussion about respect. International Journal of Inclusive Education. https://doi.org/10.1080/08856257.2014.933547
-
-Lee, E., Karimi, F., Wagner, C., Jo, H.-H., Strohmaier, M., & Galesic, M. (2019). Homophily and minority-group size explain perception biases in social networks. Nature Human Behaviour, 3(10), 1078–1086. https://doi.org/10.1038/s41562-019-0677-4
-
-Lungeanu, A., & Contractor, N. S. (2015). The effects of diversity and network ties on innovations: The emergence of a new scientific field. American Behavioral Scientist, 59(5), 548-564. https://doi.org/10.1177/0002764214556804
-
-Maccoby, E. E. (1987). Gender segregation in childhood. Advances in Child Development and Behavior, 20, 239-287. https://doi.org/10.1016/S0065-2407(08)60404-8
-
-McPherson, J. M., & Smith-Lovin, L. (1987). Homophily in voluntary organizations: Status distance and the composition of face-to-face groups. American Sociological Review, 52(3), 370. https://doi.org/10.2307/2095356 
-
-McPherson, M., Smith-Lovin, L., & Cook, J. M. (2001). Birds of a feather: Homophily in social networks. Annual Review of Sociology, 27(1), 415-444. https://doi.org/10.1146/annurev.soc.27.1.415
-
-McWilliams, S., & Howard, J. A. (1993). Solidarity and hierarchy in cross‐sex friendships. The Journal of Social Psychology, 133(5), 579-590. https://doi.org/10.1080/00224545.1993.9712189
-
-Melamed, D., & Simpson, B. (2020). Homophily and segregation in cooperative networks. American Sociological Review, 85(3), 398-422. https://doi.org/10.1086/708142
-
-Milem, J. F., Chang, M. J., & antonio, a. l. (2004). Exploring the perpetuation hypothesis: The role of colleges and universities in desegregating society. Journal of College Student Development, 45(6), 688-700. https://doi.org/10.1353/csd.2004.0070
-
-Ollapally, A., & Bhatnagar, J. (2009). The holistic approach to diversity management: HR implications. Indian Journal of Industrial Relations, 44(3), 454-472.
-
-Rumens, N. (2010). Workplace friendships between men: Gay men’s perspectives and experiences. Human Relations, 64(12), 1541-1562. https://doi.org/10.1177/0018726710361987
-
-Seguino, S. (2018). The costs of exclusion: Gender job segregation, structural change and the labour share of income. Development and Change, 50(1), 25-54. https://doi.org/10.1111/dech.12462
-
-Semela, T. (2020). Navigating the river Nile: The chronicle of female academics in Ethiopian higher education. Gender and Education, 32(3), 444-459. https://doi.org/10.1080/09540253.2017.1400522
-
-Shaw, A. K., & Stanton, D. E. (2012). Leaks in the pipeline: Separating demographic inertia from ongoing gender differences in academia. Proceedings of the Royal Society B: Biological Sciences, 279(1743), 3736-3741. https://doi.org/10.1098/rspb.2012.0822
-
-Simpson, R., & Fitzgerald, T. (2014). Organisational and occupational boundaries in Australian universities: The hierarchical positioning of female professional staff. Studies in Higher Education, 39(10), 1895-1907. https://doi.org/10.1080/03075079.2013.806466
-
-Unzueta, M. M., Knowles, E. D., & Ho, G. C. (2012). Diversity is what you want it to be. Psychological Science, 23(3), 303-309. https://doi.org/10.1177/0956797611426727
-
-Walseth, K., & Strandbu, Å. (2014). Sport within Muslim organizations in Norway: Ethnic segregated activities as arena for integration. Leisure Studies, 35(1), 78-99. https://doi.org/10.1080/02614367.2015.1055293
-
-Weinberg, F. J., & Lankau, M. J. (2011). Formal mentoring programs: A mentor-centric and longitudinal analysis. Journal of Management, 37(6), 1527–1557. https://doi.org/10.1177/0149206309349310
-
-Welsh, E. T., Bhave, D. P., & Kim, K. Y. (2018). Mentoring and gender: Perception is not reality. Academy of Management Briarcliff Manor, NY. https://doi.org/10.5465/ambpp.2018.16738abstract
-
-White, J. B., & Langer, E. (1999). Horizontal hostility: Relations between similar minority groups. Journal of Social Issues, 55(3), 537–559. https://doi.org/10.1111/0022-4537.00132
-
-Wilson, K. L., & Boldizar, J. P. (1990). Gender segregation in higher education: Effects of aspirations, mathematics achievement, and income. Sociology of Education, 63(1), 62. https://doi.org/10.2307/2112897
-
-Zubiaga, A., Spina, D., Martínez, R., & Fresno, V. (2018). Real-time classification of twitter trends. Journal of the Association for Information Science and Technology, 69(3), 462-473. https://doi.org/10.1002/asi.23960
+Uncovering obfuscated collaborative barriers is essential for constructing more equitable pathways to scientific innovation.
+This study's integration of social network and gender theories provides a robust framework to investigate gender disparities within the relational architecture enabling scholarship.

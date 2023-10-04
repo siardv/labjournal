@@ -12,7 +12,7 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Research Question</title>
+<title>Theory (new)</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -36,6 +36,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
@@ -48,6 +50,16 @@
   ul.task-list{list-style: none;}
     </style>
 
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
 
 
 
@@ -358,78 +370,28 @@ div.tocify {
       </ul>
     </li>
     <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Research Paper</a>
       <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="visualization.html">Network Visualization</a>
+          <a href="introduction.html">Introduction</a>
         </li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
-      <ul class="dropdown-menu" role="menu">
         <li>
-          <a href="rsiena_example.html">RSiena models (example)</a>
+          <a href="theory.html">Theory</a>
+        </li>
+        <li>
+          <a href="methods.html">Methods</a>
+        </li>
+        <li>
+          <a href="results.html">Results</a>
+        </li>
+        <li>
+          <a href="discussion_conclusion.html">Discussion &amp; Conclusion</a>
         </li>
       </ul>
     </li>
   </ul>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Research Paper
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="introduction.html">Introduction</a>
-    </li>
-    <li>
-      <a href="theory.html">Theory</a>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Data &amp; Methods</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="predicting_gender.html">Gender From Names</a>
-        </li>
-        <li>
-          <a href="assembling.html">Data Collection and Preparation</a>
-        </li>
-      </ul>
-    </li>
-    <li class="dropdown-submenu">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
-      <ul class="dropdown-menu" role="menu">
-        <li>
-          <a href="descriptive.html">Descriptive</a>
-        </li>
-        <li>
-          <a href="rsiena_example.html">RSiena</a>
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a href="results.html">Results</a>
-    </li>
-    <li class="dropdown-header">Discussion &amp; Conclusion</li>
-  </ul>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Final Paper
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header">Introduction</li>
-    <li class="dropdown-header">Theory</li>
-    <li class="dropdown-header">Methods</li>
-    <li class="dropdown-header">Results</li>
-    <li class="dropdown-header">Discussion &amp; Conclusion</li>
-  </ul>
-</li>
+<li class="dropdown-header">Final Paper</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -457,72 +419,86 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Research Question</h1>
+<h1 class="title toc-ignore">Theory (new)</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<p>Given the data from a single academic faculty and the constraints of
-the <code>RSiena</code> R package, we can focus on the structure and
-patterns of the co-authorship network. Here are some additional research
-questions with a Social Network Analysis (SNA) perspective:</p>
+<div id="theory" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Theory</h1>
+<p>This research is grounded in social network theory, which provides a
+powerful lens for analyzing the relational architecture underpinning
+collaboration in academia. In particular, we draw on key concepts from
+Granovetter’s seminal work on the strength of weak ties (Granovetter,
+1973) and Burt’s structural holes theory (Burt, 1992).</p>
+<p>Granovetter demonstrated that weak interpersonal ties often serve as
+indispensable bridges between densely knit social clusters, enabling
+novel ideas and opportunities to diffuse across the network. This
+highlights the importance of analyzing patterns of connectivity and
+closure. Structural holes theory further explicates how strategically
+bridging disconnected groups in a network yields competitive advantages
+in access to information and control over flows.</p>
+<p>Together, these foundational network theories underscore how the
+specific structure and topology of scholarly collaboration networks can
+profoundly shape diffusion of knowledge and inequality of access. This
+provides the impetus for our granular network analysis.</p>
+<p>We also situate our research within the extensive literature on
+gender disparities in academia. Prior studies have documented lower
+research output, weaker international visibility, and lower citations
+rates for female scholars, even after controlling for academic rank,
+discipline and other factors (Larivière et al., 2013; Dion et al.,
+2018).</p>
+<p>These disadvantages accumulate over careers and are mirrored in
+striking underrepresentation of women in senior positions. Extensive
+research points to subtle but pervasive gender biases permeating peer
+review, hiring, promotion, remuneration, and service burdens as
+contributing factors (Reuben et al., 2014; Raj et al., 2016).</p>
+<p>However, less attention has focused directly on elucidating gender
+effects embedded within the intricate relational networks underpinning
+scholarly collaboration. This echoes Granovetter’s (1985) assertion that
+economic action is inherently “embedded in ongoing networks of personal
+relationships”.</p>
+<p>Charting gender asymmetries in the relational architecture shaping
+knowledge creation is therefore pivotal. Our application of social
+network analysis to map collaborative ties enables empirically tracking
+how gender may permeate this core academic process.</p>
+<p>Integrating these perspectives, we posit the structure of faculty
+co-authorship networks may be shaped by gender effects, with significant
+implications. We propose and test six hypotheses:</p>
 <ul>
-<li><span class="math inline">\(RQ_1\)</span>: What is the role of
-gender in triadic closure within the co-authorship network of this
-faculty?</li>
-</ul>
-<p>Triadic closure refers to the tendency in social networks for two
-people who have a common acquaintance to become connected. This question
-seeks to uncover whether there are gender influences in this
-phenomenon.</p>
-<ul>
-<li><span class="math inline">\(RQ_2\)</span>: Does gender impact the
-betweenness centrality of researchers in the co-authorship network
-within this faculty?</li>
-</ul>
-<p>Betweenness centrality is a measure of the extent to which a node
-appears on the shortest paths between other nodes. This question aims to
-understand whether gender plays a role in the researcher’s position as
-bridge-makers or gatekeepers in the network.</p>
-<ul>
-<li><span class="math inline">\(RQ_3\)</span>: Female researchers will
+<li><p><span class="math inline">\(H_1\)</span>: Female researchers will
 demonstrate lower triadic closure in their co-authorship ties compared
-to Is there a difference in the ego-network density for male and female
-researchers within this faculty’s co-authorship network?</li>
+to male researchers.</p></li>
+<li><p><span class="math inline">\(H_2\)</span>:Female scholars will
+have lower betweenness centrality compared to male
+counterparts.</p></li>
+<li><p><span class="math inline">\(H_3\)</span>:Ego-network density will
+be lower for female versus male researchers.</p></li>
+<li><p><span class="math inline">\(H_4\)</span>:Average path length and
+diameter will be greater in the networks of female researchers.</p></li>
+<li><p><span class="math inline">\(H_5\)</span>:Female scholars will
+have a lower clustering coefficient than male scholars.</p></li>
+<li><p><span class="math inline">\(H_6\)</span>:Controlling for academic
+rank, gender differences across <span
+class="math inline">\(H_1\)</span>-<span
+class="math inline">\(H_5\)</span> will persist.</p></li>
 </ul>
-<p>Ego-network density refers to the proportion of possible ties that
-exist between the contacts of a particular individual (the ego). This
-question aims to explore whether there are gender differences in the
-interconnectedness of collaborators.</p>
-<ul>
-<li><span class="math inline">\(RQ_4\)</span>: Are there gender-based
-differences in the average path length or the diameter of the
-co-authorship network within this faculty?</li>
-</ul>
-<p>These measures relate to the average number of steps it takes to get
-from one member of the network to another and the longest shortest path
-in the network. This question seeks to understand whether gender
-influences the reachability and overall structure of the network.</p>
-<ul>
-<li><span class="math inline">\(RQ_5\)</span>: Does gender impact the
-clustering coefficient of researchers within the co-authorship network
-of this faculty?</li>
-</ul>
-<p>The clustering coefficient measures the extent to which the
-collaborators of a researcher (the neighbors of a node) are
-collaborators with each other. This question can help understand whether
-there are gender differences in the tendency to form tightly knit
-clusters.</p>
-<p>Each of these questions can be addressed with the <code>RSiena</code>
-R package, which allows for the calculation of various network metrics
-and the modeling of network structure and patterns. Please note that
-these questions might be influenced by other factors not considered in
-this model, like the academic rank or research interests of the
-researchers.</p>
-<hr />
+<p>Support for these hypotheses would suggest female scholars may
+contend with more fragmented, less navigable collaboration networks.
+This could hinder innovation and advancement.</p>
+<p>Conversely, null results would imply the topological structure of
+co-authorship ties is not influenced by gender. By empirically testing
+for gender effects across critical network dimensions, this research
+elucidates hidden relational dynamics shaping academia.</p>
+<p>Uncovering obfuscated collaborative barriers is essential for
+constructing more equitable pathways to scientific innovation. This
+study’s integration of social network and gender theories provides a
+robust framework to investigate gender disparities within the relational
+architecture enabling scholarship.</p>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVzZWFyY2ggUXVlc3Rpb24iCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKICAgIGhpZ2hsaWdodDoga2F0ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgpjc2w6IGFwYS5jc2wKLS0tCgoKR2l2ZW4gdGhlIGRhdGEgZnJvbSBhIHNpbmdsZSBhY2FkZW1pYyBmYWN1bHR5IGFuZCB0aGUgY29uc3RyYWludHMgb2YgdGhlIGBSU2llbmFgIFIgcGFja2FnZSwgd2UgY2FuIGZvY3VzIG9uIHRoZSBzdHJ1Y3R1cmUgYW5kIHBhdHRlcm5zIG9mIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsuIEhlcmUgYXJlIHNvbWUgYWRkaXRpb25hbCByZXNlYXJjaCBxdWVzdGlvbnMgd2l0aCBhIFNvY2lhbCBOZXR3b3JrIEFuYWx5c2lzIChTTkEpIHBlcnNwZWN0aXZlOgoKLSAkUlFfMSQ6IFdoYXQgaXMgdGhlIHJvbGUgb2YgZ2VuZGVyIGluIHRyaWFkaWMgY2xvc3VyZSB3aXRoaW4gdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yayBvZiB0aGlzIGZhY3VsdHk/CgpUcmlhZGljIGNsb3N1cmUgcmVmZXJzIHRvIHRoZSB0ZW5kZW5jeSBpbiBzb2NpYWwgbmV0d29ya3MgZm9yIHR3byBwZW9wbGUgd2hvIGhhdmUgYSBjb21tb24gYWNxdWFpbnRhbmNlIHRvIGJlY29tZSBjb25uZWN0ZWQuIFRoaXMgcXVlc3Rpb24gc2Vla3MgdG8gdW5jb3ZlciB3aGV0aGVyIHRoZXJlIGFyZSBnZW5kZXIgaW5mbHVlbmNlcyBpbiB0aGlzIHBoZW5vbWVub24uCgotICRSUV8yJDogRG9lcyBnZW5kZXIgaW1wYWN0IHRoZSBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IG9mIHJlc2VhcmNoZXJzIGluIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsgd2l0aGluIHRoaXMgZmFjdWx0eT8KCkJldHdlZW5uZXNzIGNlbnRyYWxpdHkgaXMgYSBtZWFzdXJlIG9mIHRoZSBleHRlbnQgdG8gd2hpY2ggYSBub2RlIGFwcGVhcnMgb24gdGhlIHNob3J0ZXN0IHBhdGhzIGJldHdlZW4gb3RoZXIgbm9kZXMuIFRoaXMgcXVlc3Rpb24gYWltcyB0byB1bmRlcnN0YW5kIHdoZXRoZXIgZ2VuZGVyIHBsYXlzIGEgcm9sZSBpbiB0aGUgcmVzZWFyY2hlcidzIHBvc2l0aW9uIGFzIGJyaWRnZS1tYWtlcnMgb3IgZ2F0ZWtlZXBlcnMgaW4gdGhlIG5ldHdvcmsuCgotICRSUV8zJDogRmVtYWxlIHJlc2VhcmNoZXJzIHdpbGwgZGVtb25zdHJhdGUgbG93ZXIgdHJpYWRpYyBjbG9zdXJlIGluIHRoZWlyIGNvLWF1dGhvcnNoaXAgdGllcyBjb21wYXJlZCB0byBJcyB0aGVyZSBhIGRpZmZlcmVuY2UgaW4gdGhlIGVnby1uZXR3b3JrIGRlbnNpdHkgZm9yIG1hbGUgYW5kIGZlbWFsZSByZXNlYXJjaGVycyB3aXRoaW4gdGhpcyBmYWN1bHR5J3MgY28tYXV0aG9yc2hpcCBuZXR3b3JrPwoKRWdvLW5ldHdvcmsgZGVuc2l0eSByZWZlcnMgdG8gdGhlIHByb3BvcnRpb24gb2YgcG9zc2libGUgdGllcyB0aGF0IGV4aXN0IGJldHdlZW4gdGhlIGNvbnRhY3RzIG9mIGEgcGFydGljdWxhciBpbmRpdmlkdWFsICh0aGUgZWdvKS4gVGhpcyBxdWVzdGlvbiBhaW1zIHRvIGV4cGxvcmUgd2hldGhlciB0aGVyZSBhcmUgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoZSBpbnRlcmNvbm5lY3RlZG5lc3Mgb2YgY29sbGFib3JhdG9ycy4KCi0gJFJRXzQkOiBBcmUgdGhlcmUgZ2VuZGVyLWJhc2VkIGRpZmZlcmVuY2VzIGluIHRoZSBhdmVyYWdlIHBhdGggbGVuZ3RoIG9yIHRoZSBkaWFtZXRlciBvZiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIHdpdGhpbiB0aGlzIGZhY3VsdHk/CgpUaGVzZSBtZWFzdXJlcyByZWxhdGUgdG8gdGhlIGF2ZXJhZ2UgbnVtYmVyIG9mIHN0ZXBzIGl0IHRha2VzIHRvIGdldCBmcm9tIG9uZSBtZW1iZXIgb2YgdGhlIG5ldHdvcmsgdG8gYW5vdGhlciBhbmQgdGhlIGxvbmdlc3Qgc2hvcnRlc3QgcGF0aCBpbiB0aGUgbmV0d29yay4gVGhpcyBxdWVzdGlvbiBzZWVrcyB0byB1bmRlcnN0YW5kIHdoZXRoZXIgZ2VuZGVyIGluZmx1ZW5jZXMgdGhlIHJlYWNoYWJpbGl0eSBhbmQgb3ZlcmFsbCBzdHJ1Y3R1cmUgb2YgdGhlIG5ldHdvcmsuCgotICRSUV81JDogRG9lcyBnZW5kZXIgaW1wYWN0IHRoZSBjbHVzdGVyaW5nIGNvZWZmaWNpZW50IG9mIHJlc2VhcmNoZXJzIHdpdGhpbiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIG9mIHRoaXMgZmFjdWx0eT8KClRoZSBjbHVzdGVyaW5nIGNvZWZmaWNpZW50IG1lYXN1cmVzIHRoZSBleHRlbnQgdG8gd2hpY2ggdGhlIGNvbGxhYm9yYXRvcnMgb2YgYSByZXNlYXJjaGVyICh0aGUgbmVpZ2hib3JzIG9mIGEgbm9kZSkgYXJlIGNvbGxhYm9yYXRvcnMgd2l0aCBlYWNoIG90aGVyLiBUaGlzIHF1ZXN0aW9uIGNhbiBoZWxwIHVuZGVyc3RhbmQgd2hldGhlciB0aGVyZSBhcmUgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoZSB0ZW5kZW5jeSB0byBmb3JtIHRpZ2h0bHkga25pdCBjbHVzdGVycy4KCkVhY2ggb2YgdGhlc2UgcXVlc3Rpb25zIGNhbiBiZSBhZGRyZXNzZWQgd2l0aCB0aGUgYFJTaWVuYWAgUiBwYWNrYWdlLCB3aGljaCBhbGxvd3MgZm9yIHRoZSBjYWxjdWxhdGlvbiBvZiB2YXJpb3VzIG5ldHdvcmsgbWV0cmljcyBhbmQgdGhlIG1vZGVsaW5nIG9mIG5ldHdvcmsgc3RydWN0dXJlIGFuZCBwYXR0ZXJucy4gUGxlYXNlIG5vdGUgdGhhdCB0aGVzZSBxdWVzdGlvbnMgbWlnaHQgYmUgaW5mbHVlbmNlZCBieSBvdGhlciBmYWN0b3JzIG5vdCBjb25zaWRlcmVkIGluIHRoaXMgbW9kZWwsIGxpa2UgdGhlIGFjYWRlbWljIHJhbmsgb3IgcmVzZWFyY2ggaW50ZXJlc3RzIG9mIHRoZSByZXNlYXJjaGVycy4KCi0tLS0KCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhlb3J5IChuZXcpIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmNzbDogYXBhLmNzbAotLS0KCiMgVGhlb3J5CgpUaGlzIHJlc2VhcmNoIGlzIGdyb3VuZGVkIGluIHNvY2lhbCBuZXR3b3JrIHRoZW9yeSwgd2hpY2ggcHJvdmlkZXMgYSBwb3dlcmZ1bCBsZW5zIGZvciBhbmFseXppbmcgdGhlIHJlbGF0aW9uYWwgYXJjaGl0ZWN0dXJlIHVuZGVycGlubmluZyBjb2xsYWJvcmF0aW9uIGluIGFjYWRlbWlhLgpJbiBwYXJ0aWN1bGFyLCB3ZSBkcmF3IG9uIGtleSBjb25jZXB0cyBmcm9tIEdyYW5vdmV0dGVyJ3Mgc2VtaW5hbCB3b3JrIG9uIHRoZSBzdHJlbmd0aCBvZiB3ZWFrIHRpZXMgKEdyYW5vdmV0dGVyLCAxOTczKSBhbmQgQnVydCdzIHN0cnVjdHVyYWwgaG9sZXMgdGhlb3J5IChCdXJ0LCAxOTkyKS4KCkdyYW5vdmV0dGVyIGRlbW9uc3RyYXRlZCB0aGF0IHdlYWsgaW50ZXJwZXJzb25hbCB0aWVzIG9mdGVuIHNlcnZlIGFzIGluZGlzcGVuc2FibGUgYnJpZGdlcyBiZXR3ZWVuIGRlbnNlbHkga25pdCBzb2NpYWwgY2x1c3RlcnMsIGVuYWJsaW5nIG5vdmVsIGlkZWFzIGFuZCBvcHBvcnR1bml0aWVzIHRvIGRpZmZ1c2UgYWNyb3NzIHRoZSBuZXR3b3JrLgpUaGlzIGhpZ2hsaWdodHMgdGhlIGltcG9ydGFuY2Ugb2YgYW5hbHl6aW5nIHBhdHRlcm5zIG9mIGNvbm5lY3Rpdml0eSBhbmQgY2xvc3VyZS4KU3RydWN0dXJhbCBob2xlcyB0aGVvcnkgZnVydGhlciBleHBsaWNhdGVzIGhvdyBzdHJhdGVnaWNhbGx5IGJyaWRnaW5nIGRpc2Nvbm5lY3RlZCBncm91cHMgaW4gYSBuZXR3b3JrIHlpZWxkcyBjb21wZXRpdGl2ZSBhZHZhbnRhZ2VzIGluIGFjY2VzcyB0byBpbmZvcm1hdGlvbiBhbmQgY29udHJvbCBvdmVyIGZsb3dzLgoKVG9nZXRoZXIsIHRoZXNlIGZvdW5kYXRpb25hbCBuZXR3b3JrIHRoZW9yaWVzIHVuZGVyc2NvcmUgaG93IHRoZSBzcGVjaWZpYyBzdHJ1Y3R1cmUgYW5kIHRvcG9sb2d5IG9mIHNjaG9sYXJseSBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzIGNhbiBwcm9mb3VuZGx5IHNoYXBlIGRpZmZ1c2lvbiBvZiBrbm93bGVkZ2UgYW5kIGluZXF1YWxpdHkgb2YgYWNjZXNzLgpUaGlzIHByb3ZpZGVzIHRoZSBpbXBldHVzIGZvciBvdXIgZ3JhbnVsYXIgbmV0d29yayBhbmFseXNpcy4KCldlIGFsc28gc2l0dWF0ZSBvdXIgcmVzZWFyY2ggd2l0aGluIHRoZSBleHRlbnNpdmUgbGl0ZXJhdHVyZSBvbiBnZW5kZXIgZGlzcGFyaXRpZXMgaW4gYWNhZGVtaWEuClByaW9yIHN0dWRpZXMgaGF2ZSBkb2N1bWVudGVkIGxvd2VyIHJlc2VhcmNoIG91dHB1dCwgd2Vha2VyIGludGVybmF0aW9uYWwgdmlzaWJpbGl0eSwgYW5kIGxvd2VyIGNpdGF0aW9ucyByYXRlcyBmb3IgZmVtYWxlIHNjaG9sYXJzLCBldmVuIGFmdGVyIGNvbnRyb2xsaW5nIGZvciBhY2FkZW1pYyByYW5rLCBkaXNjaXBsaW5lIGFuZCBvdGhlciBmYWN0b3JzIChMYXJpdmnDqHJlIGV0IGFsLiwgMjAxMzsgRGlvbiBldCBhbC4sIDIwMTgpLgoKVGhlc2UgZGlzYWR2YW50YWdlcyBhY2N1bXVsYXRlIG92ZXIgY2FyZWVycyBhbmQgYXJlIG1pcnJvcmVkIGluIHN0cmlraW5nIHVuZGVycmVwcmVzZW50YXRpb24gb2Ygd29tZW4gaW4gc2VuaW9yIHBvc2l0aW9ucy4KRXh0ZW5zaXZlIHJlc2VhcmNoIHBvaW50cyB0byBzdWJ0bGUgYnV0IHBlcnZhc2l2ZSBnZW5kZXIgYmlhc2VzIHBlcm1lYXRpbmcgcGVlciByZXZpZXcsIGhpcmluZywgcHJvbW90aW9uLCByZW11bmVyYXRpb24sIGFuZCBzZXJ2aWNlIGJ1cmRlbnMgYXMgY29udHJpYnV0aW5nIGZhY3RvcnMgKFJldWJlbiBldCBhbC4sIDIwMTQ7IFJhaiBldCBhbC4sIDIwMTYpLgoKSG93ZXZlciwgbGVzcyBhdHRlbnRpb24gaGFzIGZvY3VzZWQgZGlyZWN0bHkgb24gZWx1Y2lkYXRpbmcgZ2VuZGVyIGVmZmVjdHMgZW1iZWRkZWQgd2l0aGluIHRoZSBpbnRyaWNhdGUgcmVsYXRpb25hbCBuZXR3b3JrcyB1bmRlcnBpbm5pbmcgc2Nob2xhcmx5IGNvbGxhYm9yYXRpb24uClRoaXMgZWNob2VzIEdyYW5vdmV0dGVyJ3MgKDE5ODUpIGFzc2VydGlvbiB0aGF0IGVjb25vbWljIGFjdGlvbiBpcyBpbmhlcmVudGx5ICJlbWJlZGRlZCBpbiBvbmdvaW5nIG5ldHdvcmtzIG9mIHBlcnNvbmFsIHJlbGF0aW9uc2hpcHMiLgoKQ2hhcnRpbmcgZ2VuZGVyIGFzeW1tZXRyaWVzIGluIHRoZSByZWxhdGlvbmFsIGFyY2hpdGVjdHVyZSBzaGFwaW5nIGtub3dsZWRnZSBjcmVhdGlvbiBpcyB0aGVyZWZvcmUgcGl2b3RhbC4KT3VyIGFwcGxpY2F0aW9uIG9mIHNvY2lhbCBuZXR3b3JrIGFuYWx5c2lzIHRvIG1hcCBjb2xsYWJvcmF0aXZlIHRpZXMgZW5hYmxlcyBlbXBpcmljYWxseSB0cmFja2luZyBob3cgZ2VuZGVyIG1heSBwZXJtZWF0ZSB0aGlzIGNvcmUgYWNhZGVtaWMgcHJvY2Vzcy4KCkludGVncmF0aW5nIHRoZXNlIHBlcnNwZWN0aXZlcywgd2UgcG9zaXQgdGhlIHN0cnVjdHVyZSBvZiBmYWN1bHR5IGNvLWF1dGhvcnNoaXAgbmV0d29ya3MgbWF5IGJlIHNoYXBlZCBieSBnZW5kZXIgZWZmZWN0cywgd2l0aCBzaWduaWZpY2FudCBpbXBsaWNhdGlvbnMuCldlIHByb3Bvc2UgYW5kIHRlc3Qgc2l4IGh5cG90aGVzZXM6CgotICRIXzEkOiBGZW1hbGUgcmVzZWFyY2hlcnMgd2lsbCBkZW1vbnN0cmF0ZSBsb3dlciB0cmlhZGljIGNsb3N1cmUgaW4gdGhlaXIgY28tYXV0aG9yc2hpcCB0aWVzIGNvbXBhcmVkIHRvIG1hbGUgcmVzZWFyY2hlcnMuCgotICRIXzIkOkZlbWFsZSBzY2hvbGFycyB3aWxsIGhhdmUgbG93ZXIgYmV0d2Vlbm5lc3MgY2VudHJhbGl0eSBjb21wYXJlZCB0byBtYWxlIGNvdW50ZXJwYXJ0cy4KCi0gJEhfMyQ6RWdvLW5ldHdvcmsgZGVuc2l0eSB3aWxsIGJlIGxvd2VyIGZvciBmZW1hbGUgdmVyc3VzIG1hbGUgcmVzZWFyY2hlcnMuCgotICRIXzQkOkF2ZXJhZ2UgcGF0aCBsZW5ndGggYW5kIGRpYW1ldGVyIHdpbGwgYmUgZ3JlYXRlciBpbiB0aGUgbmV0d29ya3Mgb2YgZmVtYWxlIHJlc2VhcmNoZXJzLgoKLSAkSF81JDpGZW1hbGUgc2Nob2xhcnMgd2lsbCBoYXZlIGEgbG93ZXIgY2x1c3RlcmluZyBjb2VmZmljaWVudCB0aGFuIG1hbGUgc2Nob2xhcnMuCgotICRIXzYkOkNvbnRyb2xsaW5nIGZvciBhY2FkZW1pYyByYW5rLCBnZW5kZXIgZGlmZmVyZW5jZXMgYWNyb3NzICRIXzEkLSRIXzUkIHdpbGwgcGVyc2lzdC4KClN1cHBvcnQgZm9yIHRoZXNlIGh5cG90aGVzZXMgd291bGQgc3VnZ2VzdCBmZW1hbGUgc2Nob2xhcnMgbWF5IGNvbnRlbmQgd2l0aCBtb3JlIGZyYWdtZW50ZWQsIGxlc3MgbmF2aWdhYmxlIGNvbGxhYm9yYXRpb24gbmV0d29ya3MuClRoaXMgY291bGQgaGluZGVyIGlubm92YXRpb24gYW5kIGFkdmFuY2VtZW50LgoKQ29udmVyc2VseSwgbnVsbCByZXN1bHRzIHdvdWxkIGltcGx5IHRoZSB0b3BvbG9naWNhbCBzdHJ1Y3R1cmUgb2YgY28tYXV0aG9yc2hpcCB0aWVzIGlzIG5vdCBpbmZsdWVuY2VkIGJ5IGdlbmRlci4KQnkgZW1waXJpY2FsbHkgdGVzdGluZyBmb3IgZ2VuZGVyIGVmZmVjdHMgYWNyb3NzIGNyaXRpY2FsIG5ldHdvcmsgZGltZW5zaW9ucywgdGhpcyByZXNlYXJjaCBlbHVjaWRhdGVzIGhpZGRlbiByZWxhdGlvbmFsIGR5bmFtaWNzIHNoYXBpbmcgYWNhZGVtaWEuCgpVbmNvdmVyaW5nIG9iZnVzY2F0ZWQgY29sbGFib3JhdGl2ZSBiYXJyaWVycyBpcyBlc3NlbnRpYWwgZm9yIGNvbnN0cnVjdGluZyBtb3JlIGVxdWl0YWJsZSBwYXRod2F5cyB0byBzY2llbnRpZmljIGlubm92YXRpb24uClRoaXMgc3R1ZHkncyBpbnRlZ3JhdGlvbiBvZiBzb2NpYWwgbmV0d29yayBhbmQgZ2VuZGVyIHRoZW9yaWVzIHByb3ZpZGVzIGEgcm9idXN0IGZyYW1ld29yayB0byBpbnZlc3RpZ2F0ZSBnZW5kZXIgZGlzcGFyaXRpZXMgd2l0aGluIHRoZSByZWxhdGlvbmFsIGFyY2hpdGVjdHVyZSBlbmFibGluZyBzY2hvbGFyc2hpcC4K</div>
 
 
 </div>
@@ -560,7 +536,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("question.Rmd");
+  window.initializeSourceEmbed("theory2.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

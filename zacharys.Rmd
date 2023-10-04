@@ -6,7 +6,7 @@ output:
     number_sections: true
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
+csl: apa.csl
 ---
 # Social Network Analysis of Karate Club
 ```{r echo=TRUE, message=FALSE, warning=FALSE, paged.print=FALSE}

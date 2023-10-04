@@ -1,0 +1,48 @@
+---
+title: "Data Collection and Preparation"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    highlight: kate
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+
+
+---
+
+# Key Data Components for Social Network Analysis
+
+## Nodes
+
+The nodes refer to the individual researchers or authors that will form the basis of the co-authorship network analysis. It is important at this stage to gather the names and unique identifiers for each researcher that will be included in the network. Unique identifiers could include ORCID IDs, employee IDs, or other identifiers that can disambiguate researchers with common names.
+
+## Node Attributes 
+
+In addition to identifying the nodes, it is useful to collect attribute data for each node. For researcher nodes, this could include data on gender identity, academic rank or position, departmental or institutional affiliation, seniority, and any other attributes that may be relevant to the analysis. Gathering extensive attribute data for each node enables conducting more sophisticated analysis on how different researcher characteristics may influence the structure of the co-authorship network.
+
+## Ties
+
+The ties represent the co-authorship relationships and connections between the researcher nodes. It is crucial to systematically capture every instance of co-authorship between the researchers that are included in the defined network boundary. This enables comprehensively mapping out the connections and relationships that exist between the nodes.
+
+## Tie Attributes
+
+In addition to capturing the co-authorship ties, collecting attribute data on each tie can also provide valuable context. Tie attributes could include details like publication name, publication year, journal name, number of citations, or other attributes that describe the nature of that specific co-authorship tie. Capturing tie attributes allows for conducting more granular analysis.
+
+## Network Boundary 
+
+An important early step is to clearly define the criteria that will be used to delineate the boundary of the co-authorship network under study. This involves determining what specific researchers will be included versus excluded from the faculty network. Defining the network boundary also entails specifying what constitutes a tie - for instance, whether only co-authorship of journal articles is considered, or if other publication types are included.
+
+## Temporal Data
+
+In addition to static data on the network structure, capturing temporal data is also important for enabling analysis of how the network changes over time. Collecting information on the time periods when specific co-authorship ties were active can enable more sophisticated temporal network analysis and allow examining the evolution of the network.
+
+## Missing Data
+
+As with any research study, it is important to thoroughly document any issues with incomplete data on nodes, ties, attributes, or temporal data. Missing data can bias network metrics and analysis. Keeping track of missing data enables being aware of limitations and being cautious about over-interpreting the results.
+
+## Data Structure 
+
+The data collected will need to be structured and formatted in a way that is compatible with the social network analysis tools that will be used. This may require converting and restructuring the raw data into edge lists, adjacency matrices, or other required formats. Data formatting is an essential step to ensure the information can be properly imported and analyzed.
+
+---

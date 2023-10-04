@@ -1,0 +1,33 @@
+---
+title: "Theory"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+# Theory
+Homophily refers to the pervasive tendency of humans to associate and bond with similar others [@melamed2020homophily]. It powerfully shapes social ties along multiple dimensions including race, ethnicity, age, gender, religion, education, occupation, and social class [@mcpherson2001birds][]. Homophily plays an important role in determining who people interact with and connect with, often leading to segregated networks divided along lines of similarity [@ingram2007friendship].
+
+Although research often examines homophily on singular dimensions, multidimensional analyses reveal its widespread influence in shaping human interaction simultaneously across spheres [@block2014multidimensional]. For instance, an analysis of online networks during independence movements found that national identity homophily is critical in shaping connections [@zubiaga2018homophily]. Homophily appears to enable in-group cooperation but limits diversified social ties [@freeman2014homophily]. Young people exhibit homophily preferences yet value inclusion, highlighting ethical considerations [@koutsouris2014young]. Overall, homophily substantially affects the structure and function of social networks.
+
+## Homophily by Gender
+
+Extensive evidence confirms that homophily powerfully shapes social ties by gender [@mcpherson1987homophily]. Same-gender preferences emerge in childhood and persist into adulthood, influencing friendships and cliques [@kirke2009]. Homophily also characterizes workplace relationships, as men frequently connect with others [@rumens2010gender]. This is also evident in mentoring, with gender-shaping perceptions and experiences of mentors and mentees [@welsh2018gender]. Although beneficial, cross-gender mentoring relationships face impediments from gender role expectations and hierarchies [@buzzanell2014mentoring; @mcwilliams1993gender]. Even assigned mentoring partnerships exhibit increasing gender homophily over time [@weinberg2011gender]. Overall, the research definitively demonstrates that gender homophily broadly affects social bonds.
+
+## Homophily's Organizational Effects
+Gender homophily also has critical implications for organizations. It limits exposure to diverse perspectives and shapes access to resources, information, and opportunities [@mcpherson1987homophily]. Homophily hinders innovation arising from the interdependence between diverse collaborators [@lungeanu2015exploring]. Although diversity offers talent benefits, realizing these benefits requires moving beyond homophily through inclusion and integration [@ollapally2009diversity]. Campus diversity alone does not guarantee diverse exposures and ideas [@milem2004making]. Small firms face innovation barriers from homophilous networks [@corredoira2018small]. Thus, organizational policies and practices must actively manage homophily's effects on tap diversity's potential, aided by positive framing of ambiguity [@unzueta2012benefits].
+
+## Homophily and Minority Group Size
+Homophily also intensifies with the minority group size, as hypothesized by Kanter [@kanter1977some]. When the proportion drops below 15%, minorities can face exclusion from networks, resources, and opportunities. Extreme imbalances impede cross-group ties and support. Research confirms that biases and social perceptions worsen as groups shrink [@karimi2019homophily; @karimi2018homophily]. Skewed ratios increase the boundaries between similar minority groups because of the need for positive distinctiveness [@white1999minority]. Although minority identity offers belongingness benefits, a small group size restricts access to the majority of resources and networks key for advancement [@david1996minority]. Persistent demographic divides arise from these categorization processes and the resulting barriers [@chua2013diversity]. To overcome this divide, skewed organizations must facilitate minority inclusion. Intergroup contact and relationship-building activities help integrate minorities into mainstream networks and activities [@walseth2014minority]. Carefully managed minority ties provide resilience while preventing adverse isolation [@dapilah2020minority].
+
+## Drivers of Gender Divides
+Vertical segregation and cultural forces also drive the gender divide, as women concentrate in lower-status, isolated positions [@charles2004gender; @simpson2014gender]. Early socialization emphasizes gender differentiation [@maccoby1987], while cultural norms link occupations and gender [@charles2009]. Gendered fields of study in education perpetuate segregated careers [@wilson1990]. Organizational practices further stratify access, as male technical networks provide greater mobility [@kankkunen2009]. The gendered division of labor concentrates women in lower-paid roles, reproducing income inequality [@seguino2018]. Tackling segregation requires addressing the cultural beliefs and structural practices that perpetuate gender across occupations, hierarchies, and networks.
+
+## Homophily and Gender Inequality in Academia
+Within academia, systemic biases permeate hiring, promotion, collaboration, recognition, and resources [@bleijenbergh2013]. Complex barriers impede women's entry and advancement [@semela2020]. Despite similar productivity, structural bias disadvantages women in promotions [@filandri2021]. Persistent gender divides partly reflect demographic inertia, but isolation in skewed settings impedes retention and promotion [@shaw2012]. Male-dominated departments foster perceived discrimination [@reid1987] and doubt women's competence [@siskind1997]. The resulting chilly climate mainly affects fields such as engineering, with highly skewed ratios [@blosser2017; @savigny2014]. Isolation seems to hinder advancement, as gender predicts slower promotion and retention for female faculty members [@boxsteffensmeier2015]. This finding suggests worsening homophily effects as gender imbalances increase. Addressing homophily and underrepresentation is critical for supporting female faculty members and improving gender diversity in academia.
+
+In summary, theory and research on homophily provide a strong foundation for understanding the factors that produce persistent gender divides. Tackling segregation requires raising awareness of homophily while implementing structural changes to ensure that evaluations and opportunities are based on qualifications rather than gender. Organizations can only progress toward equality, inclusion, and innovation by actively managing this fundamental human tendency.

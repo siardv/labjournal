@@ -1,0 +1,111 @@
+---
+title: "Network Visualization"
+output:
+  html_document: 
+    toc: yes
+    number_sections: yes
+    highlight: kate
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+# Network Visualization
+
+Visualizing the network is crucial to understand its structure and identify insights.This document will demonstrate basic approaches for visualizing networks in R using two popular packages:
+
+- `igraph` for simple static network visualizations 
+- `networkD3` for interactive, web-based visualizations
+
+Proper data wrangling and formatting is necessary in order to generate the network diagrams correctly. The examples below will walk through typical workflows for preparing network data and producing plots for analysis.
+
+## Static Network Visualization with `igraph`
+
+The `igraph` package provides functionality for generating, manipulating, and analyzing network data in R. It can also produce basic network visualizations.
+
+### Generate a random graph
+
+This code chunk loads the `igraph` package and uses the `erdos.renyi.game()` function to generate a random [Erdős-Rényi](https://en.wikipedia.org/wiki/Erd%C5%91s%E2%80%93R%C3%A9nyi_model) graph with 10 nodes and an edge probability of 0.5. 
+
+The Erdős-Rényi model assigns edges randomly between nodes with a given probability, creating a purely random network topology.
+
+The `set.seed()` ensures consistent results across multiple runs.
+
+```{r}
+library(igraph)
+
+set.seed(123)
+g <- erdos.renyi.game(10, 0.5)
+```
+
+### Static plot
+
+The `plot()` function provides a quick way to visualize our graph `g`. 
+
+We customize the vertex size and label size slightly to improve readability.
+
+```{r}
+plot(g, vertex.size = 10, vertex.label.cex = 0.8)
+```
+
+This generates a fast static network plot. It provides a simple visualization for small graphs. However, for larger networks, an interactive diagram is often much easier to work with.
+
+## Interactive Network Visualization with `networkD3`
+
+```{r}
+library(networkD3)
+```
+The `networkD3` package leverages the D3.js JavaScript library to create interactive network visualizations that can be viewed in the RStudio Viewer pane or web browser.
+
+### Prepare the data
+
+To use `networkD3`, the network data must be formatted as "node" and "edge" data frames. 
+
+First we manually create an edge list data frame containing source and target nodes.
+
+```{r}
+edges <- data.frame(
+  source = c("A", "A", "A", "A", "B", "B", "C", "C", "D"),
+  target = c("B", "C", "D", "J", "E", "F", "G", "H", "I")
+)
+```
+
+Then we create a node data frame with the unique node names. 
+
+```{r}
+nodes <- data.frame(
+  name = unique(c(edges$source, edges$target))
+)
+```
+
+We add an `id` column assigning integer indices to each node.
+
+```{r}
+nodes$id <- seq_len(nrow(nodes))
+```
+
+Finally, we map the source and target strings to the corresponding index values from the `nodes` dataframe using `match()`.
+
+```{r}
+edges$source <- match(edges$source, nodes$name) - 1
+edges$target <- match(edges$target, nodes$name) - 1
+```
+
+Now our data is properly formatted for the network graph.
+
+### Create the interactive network diagram 
+
+The `forceNetwork()` function brings the nodes and edges together to generate the visualization.
+
+We pass our prepared `edges` and `nodes` data frames, specifying the relevant column names. 
+
+Setting `zoom = TRUE` enables zooming and panning for deeper exploration.
+
+```{r}
+forceNetwork(
+  Links = edges, Nodes = nodes, Source = "source",
+  Target = "target", NodeID = "name", Group = "name", zoom = TRUE
+)
+```
+
+This network diagram is now interactive and much more readable for understanding the network structure. The ability to zoom and pan allows exploration of patterns and communities in large networks with many nodes and edges.

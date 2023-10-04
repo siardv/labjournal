@@ -12,7 +12,7 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Research Question</title>
+<title>Data Collection and Preparation</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -457,72 +457,94 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Research Question</h1>
+<h1 class="title toc-ignore">Data Collection and Preparation</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<p>Given the data from a single academic faculty and the constraints of
-the <code>RSiena</code> R package, we can focus on the structure and
-patterns of the co-authorship network. Here are some additional research
-questions with a Social Network Analysis (SNA) perspective:</p>
-<ul>
-<li><span class="math inline">\(RQ_1\)</span>: What is the role of
-gender in triadic closure within the co-authorship network of this
-faculty?</li>
-</ul>
-<p>Triadic closure refers to the tendency in social networks for two
-people who have a common acquaintance to become connected. This question
-seeks to uncover whether there are gender influences in this
-phenomenon.</p>
-<ul>
-<li><span class="math inline">\(RQ_2\)</span>: Does gender impact the
-betweenness centrality of researchers in the co-authorship network
-within this faculty?</li>
-</ul>
-<p>Betweenness centrality is a measure of the extent to which a node
-appears on the shortest paths between other nodes. This question aims to
-understand whether gender plays a role in the researcher’s position as
-bridge-makers or gatekeepers in the network.</p>
-<ul>
-<li><span class="math inline">\(RQ_3\)</span>: Female researchers will
-demonstrate lower triadic closure in their co-authorship ties compared
-to Is there a difference in the ego-network density for male and female
-researchers within this faculty’s co-authorship network?</li>
-</ul>
-<p>Ego-network density refers to the proportion of possible ties that
-exist between the contacts of a particular individual (the ego). This
-question aims to explore whether there are gender differences in the
-interconnectedness of collaborators.</p>
-<ul>
-<li><span class="math inline">\(RQ_4\)</span>: Are there gender-based
-differences in the average path length or the diameter of the
-co-authorship network within this faculty?</li>
-</ul>
-<p>These measures relate to the average number of steps it takes to get
-from one member of the network to another and the longest shortest path
-in the network. This question seeks to understand whether gender
-influences the reachability and overall structure of the network.</p>
-<ul>
-<li><span class="math inline">\(RQ_5\)</span>: Does gender impact the
-clustering coefficient of researchers within the co-authorship network
-of this faculty?</li>
-</ul>
-<p>The clustering coefficient measures the extent to which the
-collaborators of a researcher (the neighbors of a node) are
-collaborators with each other. This question can help understand whether
-there are gender differences in the tendency to form tightly knit
-clusters.</p>
-<p>Each of these questions can be addressed with the <code>RSiena</code>
-R package, which allows for the calculation of various network metrics
-and the modeling of network structure and patterns. Please note that
-these questions might be influenced by other factors not considered in
-this model, like the academic rank or research interests of the
-researchers.</p>
+<div id="key-data-components-for-social-network-analysis"
+class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Key Data Components for
+Social Network Analysis</h1>
+<div id="nodes" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Nodes</h2>
+<p>The nodes refer to the individual researchers or authors that will
+form the basis of the co-authorship network analysis. It is important at
+this stage to gather the names and unique identifiers for each
+researcher that will be included in the network. Unique identifiers
+could include ORCID IDs, employee IDs, or other identifiers that can
+disambiguate researchers with common names.</p>
+</div>
+<div id="node-attributes" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Node Attributes</h2>
+<p>In addition to identifying the nodes, it is useful to collect
+attribute data for each node. For researcher nodes, this could include
+data on gender identity, academic rank or position, departmental or
+institutional affiliation, seniority, and any other attributes that may
+be relevant to the analysis. Gathering extensive attribute data for each
+node enables conducting more sophisticated analysis on how different
+researcher characteristics may influence the structure of the
+co-authorship network.</p>
+</div>
+<div id="ties" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Ties</h2>
+<p>The ties represent the co-authorship relationships and connections
+between the researcher nodes. It is crucial to systematically capture
+every instance of co-authorship between the researchers that are
+included in the defined network boundary. This enables comprehensively
+mapping out the connections and relationships that exist between the
+nodes.</p>
+</div>
+<div id="tie-attributes" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Tie Attributes</h2>
+<p>In addition to capturing the co-authorship ties, collecting attribute
+data on each tie can also provide valuable context. Tie attributes could
+include details like publication name, publication year, journal name,
+number of citations, or other attributes that describe the nature of
+that specific co-authorship tie. Capturing tie attributes allows for
+conducting more granular analysis.</p>
+</div>
+<div id="network-boundary" class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Network Boundary</h2>
+<p>An important early step is to clearly define the criteria that will
+be used to delineate the boundary of the co-authorship network under
+study. This involves determining what specific researchers will be
+included versus excluded from the faculty network. Defining the network
+boundary also entails specifying what constitutes a tie - for instance,
+whether only co-authorship of journal articles is considered, or if
+other publication types are included.</p>
+</div>
+<div id="temporal-data" class="section level2" number="1.6">
+<h2><span class="header-section-number">1.6</span> Temporal Data</h2>
+<p>In addition to static data on the network structure, capturing
+temporal data is also important for enabling analysis of how the network
+changes over time. Collecting information on the time periods when
+specific co-authorship ties were active can enable more sophisticated
+temporal network analysis and allow examining the evolution of the
+network.</p>
+</div>
+<div id="missing-data" class="section level2" number="1.7">
+<h2><span class="header-section-number">1.7</span> Missing Data</h2>
+<p>As with any research study, it is important to thoroughly document
+any issues with incomplete data on nodes, ties, attributes, or temporal
+data. Missing data can bias network metrics and analysis. Keeping track
+of missing data enables being aware of limitations and being cautious
+about over-interpreting the results.</p>
+</div>
+<div id="data-structure" class="section level2" number="1.8">
+<h2><span class="header-section-number">1.8</span> Data Structure</h2>
+<p>The data collected will need to be structured and formatted in a way
+that is compatible with the social network analysis tools that will be
+used. This may require converting and restructuring the raw data into
+edge lists, adjacency matrices, or other required formats. Data
+formatting is an essential step to ensure the information can be
+properly imported and analyzed.</p>
 <hr />
+</div>
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVzZWFyY2ggUXVlc3Rpb24iCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKICAgIGhpZ2hsaWdodDoga2F0ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgpjc2w6IGFwYS5jc2wKLS0tCgoKR2l2ZW4gdGhlIGRhdGEgZnJvbSBhIHNpbmdsZSBhY2FkZW1pYyBmYWN1bHR5IGFuZCB0aGUgY29uc3RyYWludHMgb2YgdGhlIGBSU2llbmFgIFIgcGFja2FnZSwgd2UgY2FuIGZvY3VzIG9uIHRoZSBzdHJ1Y3R1cmUgYW5kIHBhdHRlcm5zIG9mIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsuIEhlcmUgYXJlIHNvbWUgYWRkaXRpb25hbCByZXNlYXJjaCBxdWVzdGlvbnMgd2l0aCBhIFNvY2lhbCBOZXR3b3JrIEFuYWx5c2lzIChTTkEpIHBlcnNwZWN0aXZlOgoKLSAkUlFfMSQ6IFdoYXQgaXMgdGhlIHJvbGUgb2YgZ2VuZGVyIGluIHRyaWFkaWMgY2xvc3VyZSB3aXRoaW4gdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yayBvZiB0aGlzIGZhY3VsdHk/CgpUcmlhZGljIGNsb3N1cmUgcmVmZXJzIHRvIHRoZSB0ZW5kZW5jeSBpbiBzb2NpYWwgbmV0d29ya3MgZm9yIHR3byBwZW9wbGUgd2hvIGhhdmUgYSBjb21tb24gYWNxdWFpbnRhbmNlIHRvIGJlY29tZSBjb25uZWN0ZWQuIFRoaXMgcXVlc3Rpb24gc2Vla3MgdG8gdW5jb3ZlciB3aGV0aGVyIHRoZXJlIGFyZSBnZW5kZXIgaW5mbHVlbmNlcyBpbiB0aGlzIHBoZW5vbWVub24uCgotICRSUV8yJDogRG9lcyBnZW5kZXIgaW1wYWN0IHRoZSBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IG9mIHJlc2VhcmNoZXJzIGluIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsgd2l0aGluIHRoaXMgZmFjdWx0eT8KCkJldHdlZW5uZXNzIGNlbnRyYWxpdHkgaXMgYSBtZWFzdXJlIG9mIHRoZSBleHRlbnQgdG8gd2hpY2ggYSBub2RlIGFwcGVhcnMgb24gdGhlIHNob3J0ZXN0IHBhdGhzIGJldHdlZW4gb3RoZXIgbm9kZXMuIFRoaXMgcXVlc3Rpb24gYWltcyB0byB1bmRlcnN0YW5kIHdoZXRoZXIgZ2VuZGVyIHBsYXlzIGEgcm9sZSBpbiB0aGUgcmVzZWFyY2hlcidzIHBvc2l0aW9uIGFzIGJyaWRnZS1tYWtlcnMgb3IgZ2F0ZWtlZXBlcnMgaW4gdGhlIG5ldHdvcmsuCgotICRSUV8zJDogRmVtYWxlIHJlc2VhcmNoZXJzIHdpbGwgZGVtb25zdHJhdGUgbG93ZXIgdHJpYWRpYyBjbG9zdXJlIGluIHRoZWlyIGNvLWF1dGhvcnNoaXAgdGllcyBjb21wYXJlZCB0byBJcyB0aGVyZSBhIGRpZmZlcmVuY2UgaW4gdGhlIGVnby1uZXR3b3JrIGRlbnNpdHkgZm9yIG1hbGUgYW5kIGZlbWFsZSByZXNlYXJjaGVycyB3aXRoaW4gdGhpcyBmYWN1bHR5J3MgY28tYXV0aG9yc2hpcCBuZXR3b3JrPwoKRWdvLW5ldHdvcmsgZGVuc2l0eSByZWZlcnMgdG8gdGhlIHByb3BvcnRpb24gb2YgcG9zc2libGUgdGllcyB0aGF0IGV4aXN0IGJldHdlZW4gdGhlIGNvbnRhY3RzIG9mIGEgcGFydGljdWxhciBpbmRpdmlkdWFsICh0aGUgZWdvKS4gVGhpcyBxdWVzdGlvbiBhaW1zIHRvIGV4cGxvcmUgd2hldGhlciB0aGVyZSBhcmUgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoZSBpbnRlcmNvbm5lY3RlZG5lc3Mgb2YgY29sbGFib3JhdG9ycy4KCi0gJFJRXzQkOiBBcmUgdGhlcmUgZ2VuZGVyLWJhc2VkIGRpZmZlcmVuY2VzIGluIHRoZSBhdmVyYWdlIHBhdGggbGVuZ3RoIG9yIHRoZSBkaWFtZXRlciBvZiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIHdpdGhpbiB0aGlzIGZhY3VsdHk/CgpUaGVzZSBtZWFzdXJlcyByZWxhdGUgdG8gdGhlIGF2ZXJhZ2UgbnVtYmVyIG9mIHN0ZXBzIGl0IHRha2VzIHRvIGdldCBmcm9tIG9uZSBtZW1iZXIgb2YgdGhlIG5ldHdvcmsgdG8gYW5vdGhlciBhbmQgdGhlIGxvbmdlc3Qgc2hvcnRlc3QgcGF0aCBpbiB0aGUgbmV0d29yay4gVGhpcyBxdWVzdGlvbiBzZWVrcyB0byB1bmRlcnN0YW5kIHdoZXRoZXIgZ2VuZGVyIGluZmx1ZW5jZXMgdGhlIHJlYWNoYWJpbGl0eSBhbmQgb3ZlcmFsbCBzdHJ1Y3R1cmUgb2YgdGhlIG5ldHdvcmsuCgotICRSUV81JDogRG9lcyBnZW5kZXIgaW1wYWN0IHRoZSBjbHVzdGVyaW5nIGNvZWZmaWNpZW50IG9mIHJlc2VhcmNoZXJzIHdpdGhpbiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIG9mIHRoaXMgZmFjdWx0eT8KClRoZSBjbHVzdGVyaW5nIGNvZWZmaWNpZW50IG1lYXN1cmVzIHRoZSBleHRlbnQgdG8gd2hpY2ggdGhlIGNvbGxhYm9yYXRvcnMgb2YgYSByZXNlYXJjaGVyICh0aGUgbmVpZ2hib3JzIG9mIGEgbm9kZSkgYXJlIGNvbGxhYm9yYXRvcnMgd2l0aCBlYWNoIG90aGVyLiBUaGlzIHF1ZXN0aW9uIGNhbiBoZWxwIHVuZGVyc3RhbmQgd2hldGhlciB0aGVyZSBhcmUgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoZSB0ZW5kZW5jeSB0byBmb3JtIHRpZ2h0bHkga25pdCBjbHVzdGVycy4KCkVhY2ggb2YgdGhlc2UgcXVlc3Rpb25zIGNhbiBiZSBhZGRyZXNzZWQgd2l0aCB0aGUgYFJTaWVuYWAgUiBwYWNrYWdlLCB3aGljaCBhbGxvd3MgZm9yIHRoZSBjYWxjdWxhdGlvbiBvZiB2YXJpb3VzIG5ldHdvcmsgbWV0cmljcyBhbmQgdGhlIG1vZGVsaW5nIG9mIG5ldHdvcmsgc3RydWN0dXJlIGFuZCBwYXR0ZXJucy4gUGxlYXNlIG5vdGUgdGhhdCB0aGVzZSBxdWVzdGlvbnMgbWlnaHQgYmUgaW5mbHVlbmNlZCBieSBvdGhlciBmYWN0b3JzIG5vdCBjb25zaWRlcmVkIGluIHRoaXMgbW9kZWwsIGxpa2UgdGhlIGFjYWRlbWljIHJhbmsgb3IgcmVzZWFyY2ggaW50ZXJlc3RzIG9mIHRoZSByZXNlYXJjaGVycy4KCi0tLS0KCgoKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRGF0YSBDb2xsZWN0aW9uIGFuZCBQcmVwYXJhdGlvbiIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQogICAgaGlnaGxpZ2h0OiBrYXRlCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCgoKLS0tCgojIEtleSBEYXRhIENvbXBvbmVudHMgZm9yIFNvY2lhbCBOZXR3b3JrIEFuYWx5c2lzCgojIyBOb2RlcwoKVGhlIG5vZGVzIHJlZmVyIHRvIHRoZSBpbmRpdmlkdWFsIHJlc2VhcmNoZXJzIG9yIGF1dGhvcnMgdGhhdCB3aWxsIGZvcm0gdGhlIGJhc2lzIG9mIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsgYW5hbHlzaXMuIEl0IGlzIGltcG9ydGFudCBhdCB0aGlzIHN0YWdlIHRvIGdhdGhlciB0aGUgbmFtZXMgYW5kIHVuaXF1ZSBpZGVudGlmaWVycyBmb3IgZWFjaCByZXNlYXJjaGVyIHRoYXQgd2lsbCBiZSBpbmNsdWRlZCBpbiB0aGUgbmV0d29yay4gVW5pcXVlIGlkZW50aWZpZXJzIGNvdWxkIGluY2x1ZGUgT1JDSUQgSURzLCBlbXBsb3llZSBJRHMsIG9yIG90aGVyIGlkZW50aWZpZXJzIHRoYXQgY2FuIGRpc2FtYmlndWF0ZSByZXNlYXJjaGVycyB3aXRoIGNvbW1vbiBuYW1lcy4KCiMjIE5vZGUgQXR0cmlidXRlcyAKCkluIGFkZGl0aW9uIHRvIGlkZW50aWZ5aW5nIHRoZSBub2RlcywgaXQgaXMgdXNlZnVsIHRvIGNvbGxlY3QgYXR0cmlidXRlIGRhdGEgZm9yIGVhY2ggbm9kZS4gRm9yIHJlc2VhcmNoZXIgbm9kZXMsIHRoaXMgY291bGQgaW5jbHVkZSBkYXRhIG9uIGdlbmRlciBpZGVudGl0eSwgYWNhZGVtaWMgcmFuayBvciBwb3NpdGlvbiwgZGVwYXJ0bWVudGFsIG9yIGluc3RpdHV0aW9uYWwgYWZmaWxpYXRpb24sIHNlbmlvcml0eSwgYW5kIGFueSBvdGhlciBhdHRyaWJ1dGVzIHRoYXQgbWF5IGJlIHJlbGV2YW50IHRvIHRoZSBhbmFseXNpcy4gR2F0aGVyaW5nIGV4dGVuc2l2ZSBhdHRyaWJ1dGUgZGF0YSBmb3IgZWFjaCBub2RlIGVuYWJsZXMgY29uZHVjdGluZyBtb3JlIHNvcGhpc3RpY2F0ZWQgYW5hbHlzaXMgb24gaG93IGRpZmZlcmVudCByZXNlYXJjaGVyIGNoYXJhY3RlcmlzdGljcyBtYXkgaW5mbHVlbmNlIHRoZSBzdHJ1Y3R1cmUgb2YgdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yay4KCiMjIFRpZXMKClRoZSB0aWVzIHJlcHJlc2VudCB0aGUgY28tYXV0aG9yc2hpcCByZWxhdGlvbnNoaXBzIGFuZCBjb25uZWN0aW9ucyBiZXR3ZWVuIHRoZSByZXNlYXJjaGVyIG5vZGVzLiBJdCBpcyBjcnVjaWFsIHRvIHN5c3RlbWF0aWNhbGx5IGNhcHR1cmUgZXZlcnkgaW5zdGFuY2Ugb2YgY28tYXV0aG9yc2hpcCBiZXR3ZWVuIHRoZSByZXNlYXJjaGVycyB0aGF0IGFyZSBpbmNsdWRlZCBpbiB0aGUgZGVmaW5lZCBuZXR3b3JrIGJvdW5kYXJ5LiBUaGlzIGVuYWJsZXMgY29tcHJlaGVuc2l2ZWx5IG1hcHBpbmcgb3V0IHRoZSBjb25uZWN0aW9ucyBhbmQgcmVsYXRpb25zaGlwcyB0aGF0IGV4aXN0IGJldHdlZW4gdGhlIG5vZGVzLgoKIyMgVGllIEF0dHJpYnV0ZXMKCkluIGFkZGl0aW9uIHRvIGNhcHR1cmluZyB0aGUgY28tYXV0aG9yc2hpcCB0aWVzLCBjb2xsZWN0aW5nIGF0dHJpYnV0ZSBkYXRhIG9uIGVhY2ggdGllIGNhbiBhbHNvIHByb3ZpZGUgdmFsdWFibGUgY29udGV4dC4gVGllIGF0dHJpYnV0ZXMgY291bGQgaW5jbHVkZSBkZXRhaWxzIGxpa2UgcHVibGljYXRpb24gbmFtZSwgcHVibGljYXRpb24geWVhciwgam91cm5hbCBuYW1lLCBudW1iZXIgb2YgY2l0YXRpb25zLCBvciBvdGhlciBhdHRyaWJ1dGVzIHRoYXQgZGVzY3JpYmUgdGhlIG5hdHVyZSBvZiB0aGF0IHNwZWNpZmljIGNvLWF1dGhvcnNoaXAgdGllLiBDYXB0dXJpbmcgdGllIGF0dHJpYnV0ZXMgYWxsb3dzIGZvciBjb25kdWN0aW5nIG1vcmUgZ3JhbnVsYXIgYW5hbHlzaXMuCgojIyBOZXR3b3JrIEJvdW5kYXJ5IAoKQW4gaW1wb3J0YW50IGVhcmx5IHN0ZXAgaXMgdG8gY2xlYXJseSBkZWZpbmUgdGhlIGNyaXRlcmlhIHRoYXQgd2lsbCBiZSB1c2VkIHRvIGRlbGluZWF0ZSB0aGUgYm91bmRhcnkgb2YgdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yayB1bmRlciBzdHVkeS4gVGhpcyBpbnZvbHZlcyBkZXRlcm1pbmluZyB3aGF0IHNwZWNpZmljIHJlc2VhcmNoZXJzIHdpbGwgYmUgaW5jbHVkZWQgdmVyc3VzIGV4Y2x1ZGVkIGZyb20gdGhlIGZhY3VsdHkgbmV0d29yay4gRGVmaW5pbmcgdGhlIG5ldHdvcmsgYm91bmRhcnkgYWxzbyBlbnRhaWxzIHNwZWNpZnlpbmcgd2hhdCBjb25zdGl0dXRlcyBhIHRpZSAtIGZvciBpbnN0YW5jZSwgd2hldGhlciBvbmx5IGNvLWF1dGhvcnNoaXAgb2Ygam91cm5hbCBhcnRpY2xlcyBpcyBjb25zaWRlcmVkLCBvciBpZiBvdGhlciBwdWJsaWNhdGlvbiB0eXBlcyBhcmUgaW5jbHVkZWQuCgojIyBUZW1wb3JhbCBEYXRhCgpJbiBhZGRpdGlvbiB0byBzdGF0aWMgZGF0YSBvbiB0aGUgbmV0d29yayBzdHJ1Y3R1cmUsIGNhcHR1cmluZyB0ZW1wb3JhbCBkYXRhIGlzIGFsc28gaW1wb3J0YW50IGZvciBlbmFibGluZyBhbmFseXNpcyBvZiBob3cgdGhlIG5ldHdvcmsgY2hhbmdlcyBvdmVyIHRpbWUuIENvbGxlY3RpbmcgaW5mb3JtYXRpb24gb24gdGhlIHRpbWUgcGVyaW9kcyB3aGVuIHNwZWNpZmljIGNvLWF1dGhvcnNoaXAgdGllcyB3ZXJlIGFjdGl2ZSBjYW4gZW5hYmxlIG1vcmUgc29waGlzdGljYXRlZCB0ZW1wb3JhbCBuZXR3b3JrIGFuYWx5c2lzIGFuZCBhbGxvdyBleGFtaW5pbmcgdGhlIGV2b2x1dGlvbiBvZiB0aGUgbmV0d29yay4KCiMjIE1pc3NpbmcgRGF0YQoKQXMgd2l0aCBhbnkgcmVzZWFyY2ggc3R1ZHksIGl0IGlzIGltcG9ydGFudCB0byB0aG9yb3VnaGx5IGRvY3VtZW50IGFueSBpc3N1ZXMgd2l0aCBpbmNvbXBsZXRlIGRhdGEgb24gbm9kZXMsIHRpZXMsIGF0dHJpYnV0ZXMsIG9yIHRlbXBvcmFsIGRhdGEuIE1pc3NpbmcgZGF0YSBjYW4gYmlhcyBuZXR3b3JrIG1ldHJpY3MgYW5kIGFuYWx5c2lzLiBLZWVwaW5nIHRyYWNrIG9mIG1pc3NpbmcgZGF0YSBlbmFibGVzIGJlaW5nIGF3YXJlIG9mIGxpbWl0YXRpb25zIGFuZCBiZWluZyBjYXV0aW91cyBhYm91dCBvdmVyLWludGVycHJldGluZyB0aGUgcmVzdWx0cy4KCiMjIERhdGEgU3RydWN0dXJlIAoKVGhlIGRhdGEgY29sbGVjdGVkIHdpbGwgbmVlZCB0byBiZSBzdHJ1Y3R1cmVkIGFuZCBmb3JtYXR0ZWQgaW4gYSB3YXkgdGhhdCBpcyBjb21wYXRpYmxlIHdpdGggdGhlIHNvY2lhbCBuZXR3b3JrIGFuYWx5c2lzIHRvb2xzIHRoYXQgd2lsbCBiZSB1c2VkLiBUaGlzIG1heSByZXF1aXJlIGNvbnZlcnRpbmcgYW5kIHJlc3RydWN0dXJpbmcgdGhlIHJhdyBkYXRhIGludG8gZWRnZSBsaXN0cywgYWRqYWNlbmN5IG1hdHJpY2VzLCBvciBvdGhlciByZXF1aXJlZCBmb3JtYXRzLiBEYXRhIGZvcm1hdHRpbmcgaXMgYW4gZXNzZW50aWFsIHN0ZXAgdG8gZW5zdXJlIHRoZSBpbmZvcm1hdGlvbiBjYW4gYmUgcHJvcGVybHkgaW1wb3J0ZWQgYW5kIGFuYWx5emVkLgoKLS0t</div>
 
 
 </div>
@@ -560,7 +582,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("question.Rmd");
+  window.initializeSourceEmbed("assembling.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

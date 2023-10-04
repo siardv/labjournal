@@ -12,4 +12,10 @@ Encoding: UTF-8
 RnwWeave: Sweave
 LaTeX: pdfLaTeX
 
+StripTrailingWhitespace: Yes
+
 BuildType: Website
+
+ZoteroLibraries: "My Library"
+
+SpellingDictionary: en_US

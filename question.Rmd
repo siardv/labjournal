@@ -1,42 +1,39 @@
 ---
-title: "Research Question"
+title: "Research Questions"
 output:
   html_document:
     toc: true
     number_sections: true
+    highlight: kate
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
+csl: apa.csl
 ---
 
 
-```{r, echo=FALSE, warning=FALSE, results='hide'}
-# install.packages("remotes")
-# remotes::install_github("rlesur/klippy")
-``` 
+## Research Questions
 
-```{r, echo=FALSE, warning=FALSE, results='hide'}
-library(knitr)
+- $RQ_1$: What is the role of gender in triadic closure within the co-authorship network of this faculty?
 
-knitr::opts_chunk$set(echo = TRUE)
-opts_chunk$set(tidy.opts=list(width.cutoff=100),tidy=TRUE, warning = FALSE, message = FALSE,comment = "#>", cache=TRUE, class.source=c("Research question"))
-options(width = 100)
-rgl::setupKnitr()
-colorize <- function(x, color) {sprintf("<span style='color: %s;'>%s</span>", color, x) }
+Triadic closure refers to the tendency in social networks for two people who have a common acquaintance to become connected. This question seeks to uncover whether there are gender influences in this phenomenon.
 
-```
+- $RQ_2$: Does gender impact the betweenness centrality of researchers in the co-authorship network within this faculty?
 
-```{r , echo=FALSE, include=TRUE}
-klippy::klippy(position = c('top', 'right'))
-#klippy::klippy(color = 'darkred')
-#klippy::klippy(tooltip_message = 'Click to copy', tooltip_success = 'Done')
-```
+Betweenness centrality is a measure of the extent to which a node appears on the shortest paths between other nodes. This question aims to understand whether gender plays a role in the researcher's position as bridge-makers or gatekeepers in the network.
 
-# Gender Homophily in Scientific Publishing: Patterns of Authorship Collaboration
+- $RQ_3$: Female researchers will demonstrate lower triadic closure in their co-authorship ties compared to Is there a difference in the ego-network density for male and female researchers within this faculty's co-authorship network?
 
-How does the gender composition of an academic department quantitatively relate to the likelihood of gender homophilous collaboration patterns in authorship of scientific publications?
+Ego-network density refers to the proportion of possible ties that exist between the contacts of a particular individual (the ego). This question aims to explore whether there are gender differences in the interconnectedness of collaborators.
 
-To examine this, the RSiena package could model the evolution of co-authorship networks within a faculty over time. It allows modeling of network dynamics and could estimate the extent to which authors are more likely to form new collaborations with others of the same gender, controlling for other factors. The gender homophily effects could then be compared across departments with different gender balances to see if more heavily male or female dominated environments exhibit greater gender homophily in research collaborations.
+- $RQ_4$: Are there gender-based differences in the average path length or the diameter of the co-authorship network within this faculty?
+
+These measures relate to the average number of steps it takes to get from one member of the network to another and the longest shortest path in the network. This question seeks to understand whether gender influences the reachability and overall structure of the network.
+
+- $RQ_5$: Does gender impact the clustering coefficient of researchers within the co-authorship network of this faculty?
+
+The clustering coefficient measures the extent to which the collaborators of a researcher (the neighbors of a node) are collaborators with each other. This question can help understand whether there are gender differences in the tendency to form tightly knit clusters.
+
+Each of these questions can be addressed with the `RSiena` R package, which allows for the calculation of various network metrics and the modeling of network structure and patterns. Please note that these questions might be influenced by other factors not considered in this model, like the academic rank or research interests of the researchers.
 
 ----
 

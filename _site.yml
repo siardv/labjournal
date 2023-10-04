@@ -1,6 +1,5 @@
 name: "Assignment 1"
-author:
-  - 'Siard van den Bosch'
+author: 'Siard van den Bosch'
 output_dir: "docs"
 exclude:
   - "data"
@@ -12,44 +11,71 @@ navbar:
       href: index.html
     - text: "My Journal"
       menu:
-      - text: "Week 1"
-        menu:
-          - text: "Research Question"
-            href: question.html
-      - text: "Week 2"
-        menu:
-          - text: "Descriptive Statistics"
-            href: zacharys.html
-      - text: "Week 3"
-        menu:
-          - text: "Web Scraping"
-            href: webscraping.html
-      
-      - text: "Research Paper"
-        menu:
-          - text: "Introduction"
-            href: introduction.html
-          - text: "Theory"
-            href: theory.html
-          - text: "Methods"
-            href: methods.html
-          - text: "Results"
-            href: results.html
-          - text: "Discussion & Conclusion"
-            href: discussion_conclusion.html
-
-
-        # here, other .Rmds can be added
-
+        - text: "Week 1"
+          menu:
+            - text: "Research Question"
+              href: question.html
+        - text: "Week 2"
+          menu:
+            - text: "Descriptive Statistics"
+              href: zacharys.html
+        - text: "Week 3"
+          menu:
+            - text: "Web Scraping"
+              href: webscraping.html
+        - text: "Week 4"
+          menu:
+            - text: "Network Visualization"
+              href: visualization.html
+        - text: "Week 5"
+          menu:
+            - text: "RSiena models (example)"
+              href: rsiena_example.html
+    - text: "Research Paper"
+      menu:
+        - text: "Introduction"
+          href: introduction.html
+        - text: "Theory"
+          href: theory.html
+        - text: "Data & Methods"
+          menu:
+            - text: "Gender From Names"
+              href: predicting_gender.html
+            - text: "Data Collection and Preparation"
+              href: assembling.html
+          href: methods.html
+        - text: "Analysis"
+          menu:
+            - text: "Descriptive"
+              href: descriptive.html
+            - text: "RSiena"
+              href: rsiena_example.html
+        - text: "Results"
+          href: results.html
+        - text: "Discussion & Conclusion"
+          href:
+    - text: "Final Paper"
+      menu:
+        - text: "Introduction"
+          href:
+        - text: "Theory"
+          href:
+        - text: "Methods"
+          href:
+        - text: "Results"
+          href:
+        - text: "Discussion & Conclusion"
+          href:
 
   right:
-  - icon: fab fa-github
-    href: https://github.com/siardv/LabJournal
+    - icon: fab fa-github
+      href: https://github.com/siardv/LabJournal
+
 output:
   html_document:
     theme: flatly
     highlight: default
-    toc:  true
+    toc: true
     toc_float: true
     number_sections: true
     code_folding: show
