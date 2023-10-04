@@ -27,51 +27,74 @@ navbar:
   left:
     - icon: fa-home
       href: index.html
-    - text: "My Journal"
+
+    - text: "Journal"
       menu:
+
         - text: "Week 1"
           menu:
             - text: "Research Question"
               href: question.html
+
         - text: "Week 2"
           menu:
             - text: "Descriptive Statistics"
               href: zacharys.html
+
         - text: "Week 3"
           menu:
             - text: "Web Scraping"
               href: webscraping.html
+
         - text: "Week 4"
           menu:
             - text: "Network Visualization"
               href: visualization.html
+
         - text: "Week 5"
           menu:
-            - text: "RSiena models (example)"
+            - text: "RSiena models"
               href: rsiena_example.html
+
+        - text: "Week 6"
+          menu:
+            - text: "SNA in Practice"
+              href:
+
+        - text: "Week 7"
+          menu:
+            - text: "RSiena Advanced"
+              href:
+
     - text: "Research Paper"
       menu:
+
         - text: "Introduction"
           href: introduction.html
+
         - text: "Theory"
           href: theory.html
-        - text: "Data & Methods"
+
+        - text: "Methods"
           menu:
             - text: "Gender From Names"
               href: predicting_gender.html
             - text: "Data Collection and Preparation"
               href: assembling.html
-          href: methods.html
+
         - text: "Analysis"
           menu:
             - text: "Descriptive"
               href: descriptive.html
             - text: "RSiena"
               href: rsiena_example.html
+
         - text: "Results"
-          href: results.html
-        - text: "Discussion & Conclusion"
           href:
+
+        - text: "Discussion"
+          href:
+
     - text: "Final Paper"
       menu:
         - text: "Introduction"
@@ -82,7 +105,7 @@ navbar:
           href:
         - text: "Results"
           href:
-        - text: "Discussion & Conclusion"
+        - text: "Discussion"
           href:
 
   right:

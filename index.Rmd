@@ -2,7 +2,7 @@
 title: "Lab journal"
 output:
   html_document:
-    toc: true
+    toc: false
     number_sections: true
 author: "by: Siard van den Bosch"
 bibliography: references.bib
@@ -41,7 +41,7 @@ klippy::klippy(position = c('top', 'right'))
 ----
 
 :::::::::::::: {.columns}
-::: {.column width="50%"}
+::: {.column width="100%"}
 
 # My Lab Journal
 Last compiled on `r format(Sys.time(), '%B, %Y')`
@@ -88,13 +88,8 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
 ----
 
 
-Everyone can fork this repository.
-
-Use this example to journal your lab work and assignments.
-
-
 :::
-::: {.column width="50%"}
+::: {.column width="10%"}
 
 
 
@@ -102,13 +97,6 @@ Use this example to journal your lab work and assignments.
 :::
 ::::::::::::::
 
-
-
-## How to use
-
-<br>
-
-Use the top menu to navigate through the journal.
 
 
 ----

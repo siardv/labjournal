@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="by: Siard van den Bosch" />
+
+
+<title>Theory</title>
+
+<script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+<style type="text/css">
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+<link rel="stylesheet" href="tweaks.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Journal
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="question.html">Research Question</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="zacharys.html">Descriptive Statistics</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="webscraping.html">Web Scraping</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="visualization.html">Network Visualization</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="rsiena_example.html">RSiena models</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 6</a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-header">SNA in Practice</li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 7</a>
+      <ul class="dropdown-menu" role="menu">
+        <li class="dropdown-header">RSiena Advanced</li>
+      </ul>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Research Paper
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="theory.html">Theory</a>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Methods</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="predicting_gender.html">Gender From Names</a>
+        </li>
+        <li>
+          <a href="assembling.html">Data Collection and Preparation</a>
+        </li>
+      </ul>
+    </li>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="descriptive.html">Descriptive</a>
+        </li>
+        <li>
+          <a href="rsiena_example.html">RSiena</a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="results.html">Results</a>
+    </li>
+    <li class="dropdown-header">Discussion</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Final Paper
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Introduction</li>
+    <li class="dropdown-header">Theory</li>
+    <li class="dropdown-header">Methods</li>
+    <li class="dropdown-header">Results</li>
+    <li class="dropdown-header">Discussion</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/siardv/LabJournal">
+    <span class="fab fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+<div class="btn-group pull-right float-right">
+<button type="button" class="btn btn-default btn-xs btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu dropdown-menu-right" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+<li role="separator" class="divider"></li>
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Theory</h1>
+<h4 class="author">by: Siard van den Bosch</h4>
+
+</div>
+
+
+<div id="theory" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Theory</h1>
+<p>Homophily refers to the pervasive tendency of humans to associate and
+bond with similar others <span
+class="citation">(<strong>melamed2020homophily?</strong>)</span>. It
+powerfully shapes social ties along multiple dimensions including race,
+ethnicity, age, gender, religion, education, occupation, and social
+class [<span
+class="citation">(<strong>mcpherson2001birds?</strong>)</span>][].
+Homophily plays an important role in determining who people interact
+with and connect with, often leading to segregated networks divided
+along lines of similarity <span
+class="citation">(<strong>ingram2007friendship?</strong>)</span>.</p>
+<p>Although research often examines homophily on singular dimensions,
+multidimensional analyses reveal its widespread influence in shaping
+human interaction simultaneously across spheres <span
+class="citation">(<strong>block2014multidimensional?</strong>)</span>.
+For instance, an analysis of online networks during independence
+movements found that national identity homophily is critical in shaping
+connections <span
+class="citation">(<strong>zubiaga2018homophily?</strong>)</span>.
+Homophily appears to enable in-group cooperation but limits diversified
+social ties <span
+class="citation">(<strong>freeman2014homophily?</strong>)</span>. Young
+people exhibit homophily preferences yet value inclusion, highlighting
+ethical considerations <span
+class="citation">(<strong>koutsouris2014young?</strong>)</span>.
+Overall, homophily substantially affects the structure and function of
+social networks.</p>
+<div id="homophily-by-gender" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Homophily by
+Gender</h2>
+<p>Extensive evidence confirms that homophily powerfully shapes social
+ties by gender <span
+class="citation">(<strong>mcpherson1987homophily?</strong>)</span>.
+Same-gender preferences emerge in childhood and persist into adulthood,
+influencing friendships and cliques <span
+class="citation">(<strong>kirke2009?</strong>)</span>. Homophily also
+characterizes workplace relationships, as men frequently connect with
+others <span
+class="citation">(<strong>rumens2010gender?</strong>)</span>. This is
+also evident in mentoring, with gender-shaping perceptions and
+experiences of mentors and mentees <span
+class="citation">(<strong>welsh2018gender?</strong>)</span>. Although
+beneficial, cross-gender mentoring relationships face impediments from
+gender role expectations and hierarchies <span
+class="citation">(<strong>buzzanell2014mentoring?</strong>;
+<strong>mcwilliams1993gender?</strong>)</span>. Even assigned mentoring
+partnerships exhibit increasing gender homophily over time <span
+class="citation">(<strong>weinberg2011gender?</strong>)</span>. Overall,
+the research definitively demonstrates that gender homophily broadly
+affects social bonds.</p>
+</div>
+<div id="homophilys-organizational-effects" class="section level2"
+number="1.2">
+<h2><span class="header-section-number">1.2</span> Homophily’s
+Organizational Effects</h2>
+<p>Gender homophily also has critical implications for organizations. It
+limits exposure to diverse perspectives and shapes access to resources,
+information, and opportunities <span
+class="citation">(<strong>mcpherson1987homophily?</strong>)</span>.
+Homophily hinders innovation arising from the interdependence between
+diverse collaborators <span
+class="citation">(<strong>lungeanu2015exploring?</strong>)</span>.
+Although diversity offers talent benefits, realizing these benefits
+requires moving beyond homophily through inclusion and integration <span
+class="citation">(<strong>ollapally2009diversity?</strong>)</span>.
+Campus diversity alone does not guarantee diverse exposures and ideas
+<span class="citation">(<strong>milem2004making?</strong>)</span>. Small
+firms face innovation barriers from homophilous networks <span
+class="citation">(<strong>corredoira2018small?</strong>)</span>. Thus,
+organizational policies and practices must actively manage homophily’s
+effects on tap diversity’s potential, aided by positive framing of
+ambiguity <span
+class="citation">(<strong>unzueta2012benefits?</strong>)</span>.</p>
+</div>
+<div id="homophily-and-minority-group-size" class="section level2"
+number="1.3">
+<h2><span class="header-section-number">1.3</span> Homophily and
+Minority Group Size</h2>
+<p>Homophily also intensifies with the minority group size, as
+hypothesized by Kanter <span
+class="citation">(<strong>kanter1977some?</strong>)</span>. When the
+proportion drops below 15%, minorities can face exclusion from networks,
+resources, and opportunities. Extreme imbalances impede cross-group ties
+and support. Research confirms that biases and social perceptions worsen
+as groups shrink <span
+class="citation">(<strong>karimi2019homophily?</strong>;
+<strong>karimi2018homophily?</strong>)</span>. Skewed ratios increase
+the boundaries between similar minority groups because of the need for
+positive distinctiveness <span
+class="citation">(<strong>white1999minority?</strong>)</span>. Although
+minority identity offers belongingness benefits, a small group size
+restricts access to the majority of resources and networks key for
+advancement <span
+class="citation">(<strong>david1996minority?</strong>)</span>.
+Persistent demographic divides arise from these categorization processes
+and the resulting barriers <span
+class="citation">(<strong>chua2013diversity?</strong>)</span>. To
+overcome this divide, skewed organizations must facilitate minority
+inclusion. Intergroup contact and relationship-building activities help
+integrate minorities into mainstream networks and activities <span
+class="citation">(<strong>walseth2014minority?</strong>)</span>.
+Carefully managed minority ties provide resilience while preventing
+adverse isolation <span
+class="citation">(<strong>dapilah2020minority?</strong>)</span>.</p>
+</div>
+<div id="drivers-of-gender-divides" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Drivers of Gender
+Divides</h2>
+<p>Vertical segregation and cultural forces also drive the gender
+divide, as women concentrate in lower-status, isolated positions <span
+class="citation">(<strong>charles2004gender?</strong>;
+<strong>simpson2014gender?</strong>)</span>. Early socialization
+emphasizes gender differentiation <span
+class="citation">(<strong>maccoby1987?</strong>)</span>, while cultural
+norms link occupations and gender <span
+class="citation">(<strong>charles2009?</strong>)</span>. Gendered fields
+of study in education perpetuate segregated careers <span
+class="citation">(<strong>wilson1990?</strong>)</span>. Organizational
+practices further stratify access, as male technical networks provide
+greater mobility <span
+class="citation">(<strong>kankkunen2009?</strong>)</span>. The gendered
+division of labor concentrates women in lower-paid roles, reproducing
+income inequality <span
+class="citation">(<strong>seguino2018?</strong>)</span>. Tackling
+segregation requires addressing the cultural beliefs and structural
+practices that perpetuate gender across occupations, hierarchies, and
+networks.</p>
+</div>
+<div id="homophily-and-gender-inequality-in-academia"
+class="section level2" number="1.5">
+<h2><span class="header-section-number">1.5</span> Homophily and Gender
+Inequality in Academia</h2>
+<p>Within academia, systemic biases permeate hiring, promotion,
+collaboration, recognition, and resources <span
+class="citation">(<strong>bleijenbergh2013?</strong>)</span>. Complex
+barriers impede women’s entry and advancement <span
+class="citation">(<strong>semela2020?</strong>)</span>. Despite similar
+productivity, structural bias disadvantages women in promotions <span
+class="citation">(<strong>filandri2021?</strong>)</span>. Persistent
+gender divides partly reflect demographic inertia, but isolation in
+skewed settings impedes retention and promotion <span
+class="citation">(<strong>shaw2012?</strong>)</span>. Male-dominated
+departments foster perceived discrimination <span
+class="citation">(<strong>reid1987?</strong>)</span> and doubt women’s
+competence <span
+class="citation">(<strong>siskind1997?</strong>)</span>. The resulting
+chilly climate mainly affects fields such as engineering, with highly
+skewed ratios <span class="citation">(<strong>blosser2017?</strong>;
+<strong>savigny2014?</strong>)</span>. Isolation seems to hinder
+advancement, as gender predicts slower promotion and retention for
+female faculty members <span
+class="citation">(<strong>boxsteffensmeier2015?</strong>)</span>. This
+finding suggests worsening homophily effects as gender imbalances
+increase. Addressing homophily and underrepresentation is critical for
+supporting female faculty members and improving gender diversity in
+academia.</p>
+<p>In summary, theory and research on homophily provide a strong
+foundation for understanding the factors that produce persistent gender
+divides. Tackling segregation requires raising awareness of homophily
+while implementing structural changes to ensure that evaluations and
+opportunities are based on qualifications rather than gender.
+Organizations can only progress toward equality, inclusion, and
+innovation by actively managing this fundamental human tendency.</p>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhlb3J5IgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgbnVtYmVyX3NlY3Rpb25zOiB0cnVlCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmNzbDogYXBhLmNzbAotLS0KCiMgVGhlb3J5CkhvbW9waGlseSByZWZlcnMgdG8gdGhlIHBlcnZhc2l2ZSB0ZW5kZW5jeSBvZiBodW1hbnMgdG8gYXNzb2NpYXRlIGFuZCBib25kIHdpdGggc2ltaWxhciBvdGhlcnMgW0BtZWxhbWVkMjAyMGhvbW9waGlseV0uIEl0IHBvd2VyZnVsbHkgc2hhcGVzIHNvY2lhbCB0aWVzIGFsb25nIG11bHRpcGxlIGRpbWVuc2lvbnMgaW5jbHVkaW5nIHJhY2UsIGV0aG5pY2l0eSwgYWdlLCBnZW5kZXIsIHJlbGlnaW9uLCBlZHVjYXRpb24sIG9jY3VwYXRpb24sIGFuZCBzb2NpYWwgY2xhc3MgW0BtY3BoZXJzb24yMDAxYmlyZHNdW10uIEhvbW9waGlseSBwbGF5cyBhbiBpbXBvcnRhbnQgcm9sZSBpbiBkZXRlcm1pbmluZyB3aG8gcGVvcGxlIGludGVyYWN0IHdpdGggYW5kIGNvbm5lY3Qgd2l0aCwgb2Z0ZW4gbGVhZGluZyB0byBzZWdyZWdhdGVkIG5ldHdvcmtzIGRpdmlkZWQgYWxvbmcgbGluZXMgb2Ygc2ltaWxhcml0eSBbQGluZ3JhbTIwMDdmcmllbmRzaGlwXS4KCkFsdGhvdWdoIHJlc2VhcmNoIG9mdGVuIGV4YW1pbmVzIGhvbW9waGlseSBvbiBzaW5ndWxhciBkaW1lbnNpb25zLCBtdWx0aWRpbWVuc2lvbmFsIGFuYWx5c2VzIHJldmVhbCBpdHMgd2lkZXNwcmVhZCBpbmZsdWVuY2UgaW4gc2hhcGluZyBodW1hbiBpbnRlcmFjdGlvbiBzaW11bHRhbmVvdXNseSBhY3Jvc3Mgc3BoZXJlcyBbQGJsb2NrMjAxNG11bHRpZGltZW5zaW9uYWxdLiBGb3IgaW5zdGFuY2UsIGFuIGFuYWx5c2lzIG9mIG9ubGluZSBuZXR3b3JrcyBkdXJpbmcgaW5kZXBlbmRlbmNlIG1vdmVtZW50cyBmb3VuZCB0aGF0IG5hdGlvbmFsIGlkZW50aXR5IGhvbW9waGlseSBpcyBjcml0aWNhbCBpbiBzaGFwaW5nIGNvbm5lY3Rpb25zIFtAenViaWFnYTIwMThob21vcGhpbHldLiBIb21vcGhpbHkgYXBwZWFycyB0byBlbmFibGUgaW4tZ3JvdXAgY29vcGVyYXRpb24gYnV0IGxpbWl0cyBkaXZlcnNpZmllZCBzb2NpYWwgdGllcyBbQGZyZWVtYW4yMDE0aG9tb3BoaWx5XS4gWW91bmcgcGVvcGxlIGV4aGliaXQgaG9tb3BoaWx5IHByZWZlcmVuY2VzIHlldCB2YWx1ZSBpbmNsdXNpb24sIGhpZ2hsaWdodGluZyBldGhpY2FsIGNvbnNpZGVyYXRpb25zIFtAa291dHNvdXJpczIwMTR5b3VuZ10uIE92ZXJhbGwsIGhvbW9waGlseSBzdWJzdGFudGlhbGx5IGFmZmVjdHMgdGhlIHN0cnVjdHVyZSBhbmQgZnVuY3Rpb24gb2Ygc29jaWFsIG5ldHdvcmtzLgoKIyMgSG9tb3BoaWx5IGJ5IEdlbmRlcgoKRXh0ZW5zaXZlIGV2aWRlbmNlIGNvbmZpcm1zIHRoYXQgaG9tb3BoaWx5IHBvd2VyZnVsbHkgc2hhcGVzIHNvY2lhbCB0aWVzIGJ5IGdlbmRlciBbQG1jcGhlcnNvbjE5ODdob21vcGhpbHldLiBTYW1lLWdlbmRlciBwcmVmZXJlbmNlcyBlbWVyZ2UgaW4gY2hpbGRob29kIGFuZCBwZXJzaXN0IGludG8gYWR1bHRob29kLCBpbmZsdWVuY2luZyBmcmllbmRzaGlwcyBhbmQgY2xpcXVlcyBbQGtpcmtlMjAwOV0uIEhvbW9waGlseSBhbHNvIGNoYXJhY3Rlcml6ZXMgd29ya3BsYWNlIHJlbGF0aW9uc2hpcHMsIGFzIG1lbiBmcmVxdWVudGx5IGNvbm5lY3Qgd2l0aCBvdGhlcnMgW0BydW1lbnMyMDEwZ2VuZGVyXS4gVGhpcyBpcyBhbHNvIGV2aWRlbnQgaW4gbWVudG9yaW5nLCB3aXRoIGdlbmRlci1zaGFwaW5nIHBlcmNlcHRpb25zIGFuZCBleHBlcmllbmNlcyBvZiBtZW50b3JzIGFuZCBtZW50ZWVzIFtAd2Vsc2gyMDE4Z2VuZGVyXS4gQWx0aG91Z2ggYmVuZWZpY2lhbCwgY3Jvc3MtZ2VuZGVyIG1lbnRvcmluZyByZWxhdGlvbnNoaXBzIGZhY2UgaW1wZWRpbWVudHMgZnJvbSBnZW5kZXIgcm9sZSBleHBlY3RhdGlvbnMgYW5kIGhpZXJhcmNoaWVzIFtAYnV6emFuZWxsMjAxNG1lbnRvcmluZzsgQG1jd2lsbGlhbXMxOTkzZ2VuZGVyXS4gRXZlbiBhc3NpZ25lZCBtZW50b3JpbmcgcGFydG5lcnNoaXBzIGV4aGliaXQgaW5jcmVhc2luZyBnZW5kZXIgaG9tb3BoaWx5IG92ZXIgdGltZSBbQHdlaW5iZXJnMjAxMWdlbmRlcl0uIE92ZXJhbGwsIHRoZSByZXNlYXJjaCBkZWZpbml0aXZlbHkgZGVtb25zdHJhdGVzIHRoYXQgZ2VuZGVyIGhvbW9waGlseSBicm9hZGx5IGFmZmVjdHMgc29jaWFsIGJvbmRzLgoKIyMgSG9tb3BoaWx5J3MgT3JnYW5pemF0aW9uYWwgRWZmZWN0cwpHZW5kZXIgaG9tb3BoaWx5IGFsc28gaGFzIGNyaXRpY2FsIGltcGxpY2F0aW9ucyBmb3Igb3JnYW5pemF0aW9ucy4gSXQgbGltaXRzIGV4cG9zdXJlIHRvIGRpdmVyc2UgcGVyc3BlY3RpdmVzIGFuZCBzaGFwZXMgYWNjZXNzIHRvIHJlc291cmNlcywgaW5mb3JtYXRpb24sIGFuZCBvcHBvcnR1bml0aWVzIFtAbWNwaGVyc29uMTk4N2hvbW9waGlseV0uIEhvbW9waGlseSBoaW5kZXJzIGlubm92YXRpb24gYXJpc2luZyBmcm9tIHRoZSBpbnRlcmRlcGVuZGVuY2UgYmV0d2VlbiBkaXZlcnNlIGNvbGxhYm9yYXRvcnMgW0BsdW5nZWFudTIwMTVleHBsb3JpbmddLiBBbHRob3VnaCBkaXZlcnNpdHkgb2ZmZXJzIHRhbGVudCBiZW5lZml0cywgcmVhbGl6aW5nIHRoZXNlIGJlbmVmaXRzIHJlcXVpcmVzIG1vdmluZyBiZXlvbmQgaG9tb3BoaWx5IHRocm91Z2ggaW5jbHVzaW9uIGFuZCBpbnRlZ3JhdGlvbiBbQG9sbGFwYWxseTIwMDlkaXZlcnNpdHldLiBDYW1wdXMgZGl2ZXJzaXR5IGFsb25lIGRvZXMgbm90IGd1YXJhbnRlZSBkaXZlcnNlIGV4cG9zdXJlcyBhbmQgaWRlYXMgW0BtaWxlbTIwMDRtYWtpbmddLiBTbWFsbCBmaXJtcyBmYWNlIGlubm92YXRpb24gYmFycmllcnMgZnJvbSBob21vcGhpbG91cyBuZXR3b3JrcyBbQGNvcnJlZG9pcmEyMDE4c21hbGxdLiBUaHVzLCBvcmdhbml6YXRpb25hbCBwb2xpY2llcyBhbmQgcHJhY3RpY2VzIG11c3QgYWN0aXZlbHkgbWFuYWdlIGhvbW9waGlseSdzIGVmZmVjdHMgb24gdGFwIGRpdmVyc2l0eSdzIHBvdGVudGlhbCwgYWlkZWQgYnkgcG9zaXRpdmUgZnJhbWluZyBvZiBhbWJpZ3VpdHkgW0B1bnp1ZXRhMjAxMmJlbmVmaXRzXS4KCiMjIEhvbW9waGlseSBhbmQgTWlub3JpdHkgR3JvdXAgU2l6ZQpIb21vcGhpbHkgYWxzbyBpbnRlbnNpZmllcyB3aXRoIHRoZSBtaW5vcml0eSBncm91cCBzaXplLCBhcyBoeXBvdGhlc2l6ZWQgYnkgS2FudGVyIFtAa2FudGVyMTk3N3NvbWVdLiBXaGVuIHRoZSBwcm9wb3J0aW9uIGRyb3BzIGJlbG93IDE1JSwgbWlub3JpdGllcyBjYW4gZmFjZSBleGNsdXNpb24gZnJvbSBuZXR3b3JrcywgcmVzb3VyY2VzLCBhbmQgb3Bwb3J0dW5pdGllcy4gRXh0cmVtZSBpbWJhbGFuY2VzIGltcGVkZSBjcm9zcy1ncm91cCB0aWVzIGFuZCBzdXBwb3J0LiBSZXNlYXJjaCBjb25maXJtcyB0aGF0IGJpYXNlcyBhbmQgc29jaWFsIHBlcmNlcHRpb25zIHdvcnNlbiBhcyBncm91cHMgc2hyaW5rIFtAa2FyaW1pMjAxOWhvbW9waGlseTsgQGthcmltaTIwMThob21vcGhpbHldLiBTa2V3ZWQgcmF0aW9zIGluY3JlYXNlIHRoZSBib3VuZGFyaWVzIGJldHdlZW4gc2ltaWxhciBtaW5vcml0eSBncm91cHMgYmVjYXVzZSBvZiB0aGUgbmVlZCBmb3IgcG9zaXRpdmUgZGlzdGluY3RpdmVuZXNzIFtAd2hpdGUxOTk5bWlub3JpdHldLiBBbHRob3VnaCBtaW5vcml0eSBpZGVudGl0eSBvZmZlcnMgYmVsb25naW5nbmVzcyBiZW5lZml0cywgYSBzbWFsbCBncm91cCBzaXplIHJlc3RyaWN0cyBhY2Nlc3MgdG8gdGhlIG1ham9yaXR5IG9mIHJlc291cmNlcyBhbmQgbmV0d29ya3Mga2V5IGZvciBhZHZhbmNlbWVudCBbQGRhdmlkMTk5Nm1pbm9yaXR5XS4gUGVyc2lzdGVudCBkZW1vZ3JhcGhpYyBkaXZpZGVzIGFyaXNlIGZyb20gdGhlc2UgY2F0ZWdvcml6YXRpb24gcHJvY2Vzc2VzIGFuZCB0aGUgcmVzdWx0aW5nIGJhcnJpZXJzIFtAY2h1YTIwMTNkaXZlcnNpdHldLiBUbyBvdmVyY29tZSB0aGlzIGRpdmlkZSwgc2tld2VkIG9yZ2FuaXphdGlvbnMgbXVzdCBmYWNpbGl0YXRlIG1pbm9yaXR5IGluY2x1c2lvbi4gSW50ZXJncm91cCBjb250YWN0IGFuZCByZWxhdGlvbnNoaXAtYnVpbGRpbmcgYWN0aXZpdGllcyBoZWxwIGludGVncmF0ZSBtaW5vcml0aWVzIGludG8gbWFpbnN0cmVhbSBuZXR3b3JrcyBhbmQgYWN0aXZpdGllcyBbQHdhbHNldGgyMDE0bWlub3JpdHldLiBDYXJlZnVsbHkgbWFuYWdlZCBtaW5vcml0eSB0aWVzIHByb3ZpZGUgcmVzaWxpZW5jZSB3aGlsZSBwcmV2ZW50aW5nIGFkdmVyc2UgaXNvbGF0aW9uIFtAZGFwaWxhaDIwMjBtaW5vcml0eV0uCgojIyBEcml2ZXJzIG9mIEdlbmRlciBEaXZpZGVzClZlcnRpY2FsIHNlZ3JlZ2F0aW9uIGFuZCBjdWx0dXJhbCBmb3JjZXMgYWxzbyBkcml2ZSB0aGUgZ2VuZGVyIGRpdmlkZSwgYXMgd29tZW4gY29uY2VudHJhdGUgaW4gbG93ZXItc3RhdHVzLCBpc29sYXRlZCBwb3NpdGlvbnMgW0BjaGFybGVzMjAwNGdlbmRlcjsgQHNpbXBzb24yMDE0Z2VuZGVyXS4gRWFybHkgc29jaWFsaXphdGlvbiBlbXBoYXNpemVzIGdlbmRlciBkaWZmZXJlbnRpYXRpb24gW0BtYWNjb2J5MTk4N10sIHdoaWxlIGN1bHR1cmFsIG5vcm1zIGxpbmsgb2NjdXBhdGlvbnMgYW5kIGdlbmRlciBbQGNoYXJsZXMyMDA5XS4gR2VuZGVyZWQgZmllbGRzIG9mIHN0dWR5IGluIGVkdWNhdGlvbiBwZXJwZXR1YXRlIHNlZ3JlZ2F0ZWQgY2FyZWVycyBbQHdpbHNvbjE5OTBdLiBPcmdhbml6YXRpb25hbCBwcmFjdGljZXMgZnVydGhlciBzdHJhdGlmeSBhY2Nlc3MsIGFzIG1hbGUgdGVjaG5pY2FsIG5ldHdvcmtzIHByb3ZpZGUgZ3JlYXRlciBtb2JpbGl0eSBbQGthbmtrdW5lbjIwMDldLiBUaGUgZ2VuZGVyZWQgZGl2aXNpb24gb2YgbGFib3IgY29uY2VudHJhdGVzIHdvbWVuIGluIGxvd2VyLXBhaWQgcm9sZXMsIHJlcHJvZHVjaW5nIGluY29tZSBpbmVxdWFsaXR5IFtAc2VndWlubzIwMThdLiBUYWNrbGluZyBzZWdyZWdhdGlvbiByZXF1aXJlcyBhZGRyZXNzaW5nIHRoZSBjdWx0dXJhbCBiZWxpZWZzIGFuZCBzdHJ1Y3R1cmFsIHByYWN0aWNlcyB0aGF0IHBlcnBldHVhdGUgZ2VuZGVyIGFjcm9zcyBvY2N1cGF0aW9ucywgaGllcmFyY2hpZXMsIGFuZCBuZXR3b3Jrcy4KCiMjIEhvbW9waGlseSBhbmQgR2VuZGVyIEluZXF1YWxpdHkgaW4gQWNhZGVtaWEKV2l0aGluIGFjYWRlbWlhLCBzeXN0ZW1pYyBiaWFzZXMgcGVybWVhdGUgaGlyaW5nLCBwcm9tb3Rpb24sIGNvbGxhYm9yYXRpb24sIHJlY29nbml0aW9uLCBhbmQgcmVzb3VyY2VzIFtAYmxlaWplbmJlcmdoMjAxM10uIENvbXBsZXggYmFycmllcnMgaW1wZWRlIHdvbWVuJ3MgZW50cnkgYW5kIGFkdmFuY2VtZW50IFtAc2VtZWxhMjAyMF0uIERlc3BpdGUgc2ltaWxhciBwcm9kdWN0aXZpdHksIHN0cnVjdHVyYWwgYmlhcyBkaXNhZHZhbnRhZ2VzIHdvbWVuIGluIHByb21vdGlvbnMgW0BmaWxhbmRyaTIwMjFdLiBQZXJzaXN0ZW50IGdlbmRlciBkaXZpZGVzIHBhcnRseSByZWZsZWN0IGRlbW9ncmFwaGljIGluZXJ0aWEsIGJ1dCBpc29sYXRpb24gaW4gc2tld2VkIHNldHRpbmdzIGltcGVkZXMgcmV0ZW50aW9uIGFuZCBwcm9tb3Rpb24gW0BzaGF3MjAxMl0uIE1hbGUtZG9taW5hdGVkIGRlcGFydG1lbnRzIGZvc3RlciBwZXJjZWl2ZWQgZGlzY3JpbWluYXRpb24gW0ByZWlkMTk4N10gYW5kIGRvdWJ0IHdvbWVuJ3MgY29tcGV0ZW5jZSBbQHNpc2tpbmQxOTk3XS4gVGhlIHJlc3VsdGluZyBjaGlsbHkgY2xpbWF0ZSBtYWlubHkgYWZmZWN0cyBmaWVsZHMgc3VjaCBhcyBlbmdpbmVlcmluZywgd2l0aCBoaWdobHkgc2tld2VkIHJhdGlvcyBbQGJsb3NzZXIyMDE3OyBAc2F2aWdueTIwMTRdLiBJc29sYXRpb24gc2VlbXMgdG8gaGluZGVyIGFkdmFuY2VtZW50LCBhcyBnZW5kZXIgcHJlZGljdHMgc2xvd2VyIHByb21vdGlvbiBhbmQgcmV0ZW50aW9uIGZvciBmZW1hbGUgZmFjdWx0eSBtZW1iZXJzIFtAYm94c3RlZmZlbnNtZWllcjIwMTVdLiBUaGlzIGZpbmRpbmcgc3VnZ2VzdHMgd29yc2VuaW5nIGhvbW9waGlseSBlZmZlY3RzIGFzIGdlbmRlciBpbWJhbGFuY2VzIGluY3JlYXNlLiBBZGRyZXNzaW5nIGhvbW9waGlseSBhbmQgdW5kZXJyZXByZXNlbnRhdGlvbiBpcyBjcml0aWNhbCBmb3Igc3VwcG9ydGluZyBmZW1hbGUgZmFjdWx0eSBtZW1iZXJzIGFuZCBpbXByb3ZpbmcgZ2VuZGVyIGRpdmVyc2l0eSBpbiBhY2FkZW1pYS4KCkluIHN1bW1hcnksIHRoZW9yeSBhbmQgcmVzZWFyY2ggb24gaG9tb3BoaWx5IHByb3ZpZGUgYSBzdHJvbmcgZm91bmRhdGlvbiBmb3IgdW5kZXJzdGFuZGluZyB0aGUgZmFjdG9ycyB0aGF0IHByb2R1Y2UgcGVyc2lzdGVudCBnZW5kZXIgZGl2aWRlcy4gVGFja2xpbmcgc2VncmVnYXRpb24gcmVxdWlyZXMgcmFpc2luZyBhd2FyZW5lc3Mgb2YgaG9tb3BoaWx5IHdoaWxlIGltcGxlbWVudGluZyBzdHJ1Y3R1cmFsIGNoYW5nZXMgdG8gZW5zdXJlIHRoYXQgZXZhbHVhdGlvbnMgYW5kIG9wcG9ydHVuaXRpZXMgYXJlIGJhc2VkIG9uIHF1YWxpZmljYXRpb25zIHJhdGhlciB0aGFuIGdlbmRlci4gT3JnYW5pemF0aW9ucyBjYW4gb25seSBwcm9ncmVzcyB0b3dhcmQgZXF1YWxpdHksIGluY2x1c2lvbiwgYW5kIGlubm92YXRpb24gYnkgYWN0aXZlbHkgbWFuYWdpbmcgdGhpcyBmdW5kYW1lbnRhbCBodW1hbiB0ZW5kZW5jeS4=</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("theory_old.Rmd");
+  window.initializeCodeFolding("show" === "show");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

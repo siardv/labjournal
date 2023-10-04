@@ -1,5 +1,5 @@
 ---
-title: "Methods"
+title: "Descriptive Network Analysis"
 output:
   html_document: 
     toc: yes

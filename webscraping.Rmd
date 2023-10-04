@@ -9,8 +9,8 @@ bibliography: references.bib
 csl: apa.csl
 ---
 
-## Webscraping
-### Data Collection
+# Webscraping
+## Data Collection
 
 - Used `rvest` package to webscrape HTML table from department website containing faculty names, titles, and contact info
 - Queried Crossref API using `rcrossref` package to retrieve metadata for publications by each faculty member 
@@ -19,7 +19,7 @@ csl: apa.csl
   - Handled API errors and missing author results
 - Filtered publications to only journal articles for analysis
 
-### Data Cleaning
+## Data Cleaning
 
 - Parsed HTML table into a dataframe and cleaned column names
 - Added last name column by separating first and last names  
@@ -31,22 +31,24 @@ csl: apa.csl
 - Combined multiple affiliation string columns into single column
 - Removed rows and columns with high proportion of missing values
 
-### Resulting Dataset
+## Resulting Dataset
 
 - Faculty data combined with predicted gender and matched publication metadata
 - One row for each faculty author on each published journal article  
 - Columns for standard author name, predicted binary gender, affiliation, publication date
 - Enables analysis of publishing trends by gender over time
 
-
+```{r include=FALSE}
+path_to_publications <- "addfiles/publications.rds"
+```
 
 ```{r echo=TRUE, message=TRUE, warning=TRUE}
-#' Whether to pull data from original sources
-#' When TRUE, fetch live data from remote sources
-#' When FALSE, use cached/local data
+# Whether to pull data from original sources
+# When TRUE, fetch live data from remote sources
+# When FALSE, use cached/local data
 pull_sources <- FALSE
 
-#' Load required R packages
+# Load required R packages
 load_packages <- function(libs) {
   sapply(setdiff(libs, installed.packages()),
     install.packages,
@@ -81,16 +83,21 @@ print_data <- function(.dt) {
     )
   )
 }
+```
 
-#' Retrieve staff data by parsing HTML table from department website
+# Retrieve staff data by parsing HTML table from department website
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 staff_url <- "https://www.ru.nl/sociology/research/staff/"
 staff_df <- init <- rvest::read_html(staff_url) %>%
   rvest::html_table(header = TRUE) %>%
   `[[`(1) %>%
   setNames(gsub("\\W+", "", names(.)) %>% tolower())
 
+print_data(staff_df)
+```
 
-#' Adds "family" column with last names to staff data frame
+# Adds "family" column with last names to staff data frame
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 staff_df$family <- sapply(strsplit(staff_df$staff, ","), function(x) {
   parts <- unlist(strsplit(base::trimws(x), " "))
   if (tolower(tail(parts, 1)) == "van") {
@@ -100,16 +107,23 @@ staff_df$family <- sapply(strsplit(staff_df$staff, ","), function(x) {
   }
 })
 
-#' Returns staff data frame with cleaned names
-#' Add full name column by combining given and family name
+print_data(staff_df)
+```
+
+# Returns staff data frame with cleaned names
+# Add full name column by combining given and family name
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 staff_df <- staff_df %>%
   transform(staff = gsub("(.*)\\\r.*", "\\1", staff)) %>%
   transform(staff = gsub("\\s+", " ", staff)) %>%
   transform(given = gsub(".*\\((.*)\\).*", "\\1", staff)) %>%
   transform(name = paste(given, family))
 
+print_data(staff_df)
+```
 
-#' Get publications for each staff member by querying Crossref API
+# Get publications for each staff member by querying Crossref API
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 get_author_publications <- function(author_name) {
   q <- gsub(" ", "+", tolower(author_name))
   tryCatch(
@@ -123,52 +137,52 @@ get_author_publications <- function(author_name) {
     }
   )
 }
+```
 
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 if (pull_sources) {
   publications <- lapply(staff_df$full_name, get_author_publications)
-  saveRDS(publications, "publications.rds")
+  saveRDS(publications, path_to_publications)
 } else {
-  publications <- readRDS("publications.rds")
+  publications <- readRDS(path_to_publications)
 }
-#' Bind publication results and unnest author column lists into separate rows
+
+publications
+```
+
+# Bind publication results and unnest author column lists into separate rows
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 all_publications <- dplyr::bind_rows(publications) %>%
   tidyr::unnest(cols = author)
 
-# Table: Frequency of publications types
-#
-# |Type                | Freq|
-# |:-------------------|----:|
-# |book                |   39|
-# |book-chapter        |  163|
-# |component           |   15|
-# |dataset             |   51|
-# |dissertation        |    6|
-# |journal-article     |  718|
-# |monograph           |    5|
-# |other               |    1|
-# |posted-content      |   67|
-# |proceedings-article |   11|
-# |reference-book      |    4|
-# |reference-entry     |    1|
-# |report              |   22|
+all_publications <- all_publications[all_publications$type == "journal-article", ] %>%
+  dplyr::select(-abstract)
+
+print_data(all_publications)
+```
 
 
-all_publications <- all_publications[all_publications$type == "journal-article", ]
-
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 all_dates <- all_publications %>%
   dplyr::select(doi, published.print) %>%
   dplyr::distinct() %>%
   `$`("published.print")
 
+all_dates
+```
+
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 tbl <- table(is.na(all_dates))
 cat(sprintf(
   "%.2f%% missing: %d missing, %d non-missing",
   100 * tbl["TRUE"] / sum(tbl), tbl["TRUE"], tbl["FALSE"]
 ))
-#' 19.33% missing: 52 missing, 217 non-missing
+```
 
 
-
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 complete_date <- function(x) {
   if (is.na(x) || !grepl("[0-9]{4}", x)) {
     return(NA)
@@ -199,8 +213,10 @@ format_date <- function(x) {
     }
   }
 }
+```
 
 
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 apwcd <- all_publications_with_complete_date <- transform(all_publications,
   published =
     ifelse(!is.na(published.print) & !is.na(published.online),
@@ -211,6 +227,10 @@ apwcd <- all_publications_with_complete_date <- transform(all_publications,
     )
 )
 
+print_data(apwcd)
+```
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 dates_from_assertion <-
   apwcd %>%
   dplyr::select(doi, published, assertion) %>%
@@ -226,29 +246,40 @@ apwcd <- dplyr::bind_rows(
 ) %>%
   dplyr::arrange(doi)
 
+print_data(apwcd)
+```
 
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 apwcd$published <- sapply(apwcd$published, complete_date, USE.NAMES = FALSE)
-
 
 affiliation_columns <- grep("affiliation", names(apwcd), value = TRUE)
 apwcd <- apwcd %>%
-  mutate(affiliation = dplyr::coalesce(!!!rlang::syms(affiliation_columns)))
+  dplyr::mutate(affiliation = dplyr::coalesce(!!!rlang::syms(affiliation_columns)))
 apwcd <- apwcd[!names(apwcd) %in% affiliation_columns]
-
 
 apwcd <- apwcd[!sapply(apwcd, is.list)]
 apwcd <- apwcd[, !(colSums(is.na(apwcd)) / nrow(apwcd)) > 0.20]
 apwcd <- apwcd[!c(rowSums(is.na(apwcd)) > ncol(apwcd) / 2), ]
 
-if (pull_sources) {
-  #' Test all gender prediction methods
-  gender_prediction_methods <- c("ssa", "ipums", "napp", "kantrowitz", "genderize")
-  all_gender_predictions <- lapply(gender_prediction_methods, function(method) {
-    gender(staff_df$given, method = method)
-  })
-}
+print_data(apwcd)
+```
 
-#' Predict gender using "ipums" then "genderize" if no match
+
+# Test all gender prediction methods
+```{r echo=TRUE, message=TRUE, warning=TRUE}
+gender_prediction_methods <-
+  c("ssa", "ipums", "napp", "kantrowitz", "genderize")
+all_gender_predictions <-
+  lapply(gender_prediction_methods, function(method) {
+    gender::gender(staff_df$given, method = method)
+  })
+
+all_gender_predictions
+```
+
+
+# Predict gender using "ipums" then "genderize" if no match
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 determine_gender_by_multiple_names <- function(name_array, method) {
   if (is.null(name_array) || length(name_array) == 0) {
     return(NA)
@@ -270,7 +301,10 @@ determine_gender_by_multiple_names <- function(name_array, method) {
     return(pred[[1]])
   }
 }
+```
 
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 predict_gender <- function(name) {
   name <- gsub("([a-z])([A-Z])", "\\1 \\2", name)
   name_enc <- gsub("\\W", "", iconv(name, to = "ascii//TRANSLIT")) %>%
@@ -282,8 +316,10 @@ predict_gender <- function(name) {
   pred$name <- paste(name_enc, collapse = " ")
   return(pred)
 }
+```
 
 
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 clean_given_name <- function(given_name) {
   gsub("\\.", " ", given_name) %>%
     stringr::str_squish() %>%
@@ -291,7 +327,10 @@ clean_given_name <- function(given_name) {
     `[[`(1) %>%
     `[`(nchar(.) > 1)
 }
+```
 
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 apwcdg <- apwcd_with_gender <-
   apwcd$given %>%
   unique() %>%
@@ -303,12 +342,18 @@ apwcdg <- apwcd_with_gender <-
   dplyr::distinct() %>%
   dplyr::left_join(apwcd, by = "given")
 
+print_data(apwcdg)
+```
+
+
+```{r echo=TRUE, message=TRUE, warning=TRUE}
 apwcdg <- apwcdg[!is.na(apwcdg$doi), ]
 
 apwcdg <- apwcdg[c(
-  "given", "family", "sequence", "gender", "published", "doi", "references.count",
+  "given", "family", "sequence", "gender",
+  "published", "doi", "references.count",
   "title", "type", "volume"
 )] %>% dplyr::distinct()
-# saveRDS(apwcdg, "apwcdg.rds")
+
 print_data(apwcdg)
 ```

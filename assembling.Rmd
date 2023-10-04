@@ -1,5 +1,5 @@
 ---
-title: "Data Collection and Preparation"
+title: "Key Data Components for Social Network Analysis"
 output:
   html_document:
     toc: true

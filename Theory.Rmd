@@ -3,6 +3,8 @@ title: "Theory"
 output:
   html_document:
     toc: true
+    toc_collapse: true
+    toc_float: true
     number_sections: true
 author: "by: Siard van den Bosch"
 bibliography: references.bib
