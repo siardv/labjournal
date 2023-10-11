@@ -1,0 +1,101 @@
+---
+title: "Examining Longitudinal Network Data to Determine Waves for RSiena Analysis"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    highlight: kate
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+# Examining Longitudinal Network Data to Determine Waves for RSiena Analysis
+Dividing longitudinal network data into suitable time waves is crucial for modeling network evolution over time using RSiena. This involves balancing detail versus model complexity. This code provides data exploration to guide wave determination based on time points, network changes, visualization, and theory.
+
+```{r eval=FALSE, echo=TRUE}
+# Load packages
+library(network)
+library(tidyverse)
+library(gganimate) # for network animation
+```
+
+```{r eval=FALSE, echo=TRUE}
+#' Generates a random directed network graph with n nodes and m edges
+#' Checks that n and m are valid integers >= 0 and that m <= n*(n-1)/2
+generate_network <- function(n, m) {
+  #' Stops if n or m are invalid
+  if (!is.numeric(n) || !is.numeric(m) || n < 0 || m < 0 || round(n) != n || round(m) != m) {
+    stop("n and m must be valid nonnegative integers")
+  }
+
+  #' Stops if m > n*(n-1)/2
+  if (m > n * (n - 1) / 2) {
+    stop("m must be <= n*(n-1)/2 for a simple directed graph")
+  }
+
+  #' Creates an empty directed graph with n nodes
+  g <- igraph::graph.empty(n, directed = TRUE)
+
+  #' Samples 2*m node IDs with replacement to generate m random edges
+  edge_pairs <- sample(1:n, size = 2 * m, replace = TRUE)
+
+  #' Arranges the node IDs into an edge list
+  edge_pairs <- matrix(edge_pairs, ncol = 2, byrow = TRUE)
+
+  #' Adds the m random edges to the graph
+  igraph::add_edges(g, edges = edge_pairs)
+}
+```
+
+
+```{r eval=FALSE, echo=TRUE}
+# Load longitudinal network data
+networks <- readRDS("networks.RDS") # e.g. 50x50 matrix per timepoint  
+```
+
+# Calculate time gaps
+```{r eval=FALSE, echo=TRUE}
+time_points <- seq(min(networks$time), max(networks$time), by = "month")
+time_deltas <- diff(time_points)
+```
+
+# Calculate % network change between time points
+```{r eval=FALSE, echo=TRUE}
+net_changes <- purrr::map2_dbl(
+  networks[-1], networks[-length(networks)],
+  ~ sum(.x != .y) / (nrow(.x)^2)
+)
+```
+# Plot networks 
+```{r eval=FALSE, echo=TRUE}
+# p <- plot_network(networks, animation = TRUE, layout = "kamadakawai")
+# p + animation_save("network_vis.gif")
+```
+
+Identify potential wave splits based on:
+- Time gaps
+- Net changes
+- Visual inspection
+- Theory/research question
+
+```{r eval=FALSE, echo=TRUE}
+wave_splits <- c(3, 7)  
+```
+
+# Split data into waves
+```{r eval=FALSE, echo=TRUE}
+wave_list <- split(networks, cut(seq_along(networks),
+  breaks = wave_splits,
+  labels = paste0("Wave", 1:length(wave_splits))
+))
+```
+
+# Print wave summary
+```{r eval=FALSE, echo=TRUE}
+purrr::map(wave_list, ~ tibble::tbl_df(tibble::tibble(
+  wave = .y,
+  time_points = purrr::map_int(wave_list[[.y]], "time"),
+  mean_change = mean(net_changes[seq_along(.x)])
+)))
+```

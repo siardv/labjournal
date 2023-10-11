@@ -58,8 +58,8 @@ navbar:
 
         - text: "Week 6"
           menu:
-            - text: "SNA in Practice"
-              href:
+            - text: "Summary of Chapter 7 Methods"
+              href: chapter7.html
 
         - text: "Week 7"
           menu:
@@ -81,6 +81,11 @@ navbar:
               href: predicting_gender.html
             - text: "Data Collection and Preparation"
               href: assembling.html
+            - text: "Research Design, Data, and Measures"
+              href: design_data_measures.html
+            - text: "Examining Longitudinal Network Data"
+              href: longitudinal_waves.html
+
 
         - text: "Analysis"
           menu:

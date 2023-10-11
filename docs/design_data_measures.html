@@ -12,7 +12,7 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Key Data Components for Social Network Analysis</title>
+<title>Research Design, Data, and Measures</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -475,94 +475,71 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Key Data Components for Social Network
-Analysis</h1>
+<h1 class="title toc-ignore">Research Design, Data, and Measures</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<div id="key-data-components-for-social-network-analysis"
-class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Key Data Components for
-Social Network Analysis</h1>
-<div id="nodes" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Nodes</h2>
-<p>The nodes refer to the individual researchers or authors that will
-form the basis of the co-authorship network analysis. It is important at
-this stage to gather the names and unique identifiers for each
-researcher that will be included in the network. Unique identifiers
-could include ORCID IDs, employee IDs, or other identifiers that can
-disambiguate researchers with common names.</p>
+<div id="research-design-data-and-measures" class="section level1"
+number="1">
+<h1><span class="header-section-number">1</span> Research Design, Data,
+and Measures</h1>
+<p>This research employs social network analysis to investigate the
+evolution of research collaboration networks among university faculty
+over a N-year period. The main goals are to examine the dynamics of tie
+formation between faculty members and understand how factors like
+gender, academic rank, and department affiliation shape collaborative
+patterns.</p>
+<div id="research-design" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Research Design</h2>
+<p>This study utilizes a longitudinal social network analysis design
+using stochastic actor-oriented models (SAOMs). SAOMs, implemented
+through the RSiena software package, allow modeling the co-evolution of
+networks and individual attributes through time (Ripley et al. 2021).
+This enables studying reciprocal effects between collaboration choices
+and faculty characteristics.</p>
 </div>
-<div id="node-attributes" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Node Attributes</h2>
-<p>In addition to identifying the nodes, it is useful to collect
-attribute data for each node. For researcher nodes, this could include
-data on gender identity, academic rank or position, departmental or
-institutional affiliation, seniority, and any other attributes that may
-be relevant to the analysis. Gathering extensive attribute data for each
-node enables conducting more sophisticated analysis on how different
-researcher characteristics may influence the structure of the
-co-authorship network.</p>
+<div id="data" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Data</h2>
+<p>The network population comprises 148 faculty members across science
+and social science departments at a large research university.
+Collaboration ties were constructed annually for a period of 5 years
+using archival data on co-authored publications. Each yearly network has
+148 actors and directed ties indicating collaborations where i → j means
+i has co-authored with j.</p>
+<p>The observed networks show an increasing trend in density over time,
+from 0.024 to 0.056, reflecting more collaborative activity. The average
+degree grows from 3.5 to 8.2, while the total number of ties increases
+from 524 to 1216. Visually, the networks evolve from fragmented to more
+clustered around interconnected collaborative groups.</p>
 </div>
-<div id="ties" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Ties</h2>
-<p>The ties represent the co-authorship relationships and connections
-between the researcher nodes. It is crucial to systematically capture
-every instance of co-authorship between the researchers that are
-included in the defined network boundary. This enables comprehensively
-mapping out the connections and relationships that exist between the
-nodes.</p>
+<div id="measures" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Measures</h2>
+<p>The dependent variables are the observed longitudinal changes in
+collaborative ties between faculty members over the 5 time points.
+Independent variables include gender, academic rank (assistant,
+associate, full professor), academic age, and department affiliation.
+These capture personal attributes and structural positions potentially
+influencing collaboration patterns.</p>
 </div>
-<div id="tie-attributes" class="section level2" number="1.4">
-<h2><span class="header-section-number">1.4</span> Tie Attributes</h2>
-<p>In addition to capturing the co-authorship ties, collecting attribute
-data on each tie can also provide valuable context. Tie attributes could
-include details like publication name, publication year, journal name,
-number of citations, or other attributes that describe the nature of
-that specific co-authorship tie. Capturing tie attributes allows for
-conducting more granular analysis.</p>
-</div>
-<div id="network-boundary" class="section level2" number="1.5">
-<h2><span class="header-section-number">1.5</span> Network Boundary</h2>
-<p>An important early step is to clearly define the criteria that will
-be used to delineate the boundary of the co-authorship network under
-study. This involves determining what specific researchers will be
-included versus excluded from the faculty network. Defining the network
-boundary also entails specifying what constitutes a tie - for instance,
-whether only co-authorship of journal articles is considered, or if
-other publication types are included.</p>
-</div>
-<div id="temporal-data" class="section level2" number="1.6">
-<h2><span class="header-section-number">1.6</span> Temporal Data</h2>
-<p>In addition to static data on the network structure, capturing
-temporal data is also important for enabling analysis of how the network
-changes over time. Collecting information on the time periods when
-specific co-authorship ties were active can enable more sophisticated
-temporal network analysis and allow examining the evolution of the
-network.</p>
-</div>
-<div id="missing-data" class="section level2" number="1.7">
-<h2><span class="header-section-number">1.7</span> Missing Data</h2>
-<p>As with any research study, it is important to thoroughly document
-any issues with incomplete data on nodes, ties, attributes, or temporal
-data. Missing data can bias network metrics and analysis. Keeping track
-of missing data enables being aware of limitations and being cautious
-about over-interpreting the results.</p>
-</div>
-<div id="data-structure" class="section level2" number="1.8">
-<h2><span class="header-section-number">1.8</span> Data Structure</h2>
-<p>The data collected will need to be structured and formatted in a way
-that is compatible with the social network analysis tools that will be
-used. This may require converting and restructuring the raw data into
-edge lists, adjacency matrices, or other required formats. Data
-formatting is an essential step to ensure the information can be
-properly imported and analyzed.</p>
+<div id="analysis-strategy" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> Analysis
+Strategy</h2>
+<p>SAOMs allow modeling the interdependent, co-evolving nature of tie
+formation alongside actor attributes (Snijders et al. 2010). The
+likelihood of forming or dissolving collaborations is influenced by
+various factors that faculty members optimize. Effects tested based on
+the research questions include gender homophily, preferential attachment
+by academic rank, transitive triplets, and department affiliation.</p>
+<p>The RSiena package in R estimates effects through iterative
+simulations to fit models and parameters to observed network data.
+Goodness-of-fit is assessed to ensure satisfactory model convergence and
+representation of network dynamics (Ripley et al. 2021).</p>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiS2V5IERhdGEgQ29tcG9uZW50cyBmb3IgU29jaWFsIE5ldHdvcmsgQW5hbHlzaXMiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKICAgIGhpZ2hsaWdodDoga2F0ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgoKCi0tLQoKIyBLZXkgRGF0YSBDb21wb25lbnRzIGZvciBTb2NpYWwgTmV0d29yayBBbmFseXNpcwoKIyMgTm9kZXMKClRoZSBub2RlcyByZWZlciB0byB0aGUgaW5kaXZpZHVhbCByZXNlYXJjaGVycyBvciBhdXRob3JzIHRoYXQgd2lsbCBmb3JtIHRoZSBiYXNpcyBvZiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIGFuYWx5c2lzLiBJdCBpcyBpbXBvcnRhbnQgYXQgdGhpcyBzdGFnZSB0byBnYXRoZXIgdGhlIG5hbWVzIGFuZCB1bmlxdWUgaWRlbnRpZmllcnMgZm9yIGVhY2ggcmVzZWFyY2hlciB0aGF0IHdpbGwgYmUgaW5jbHVkZWQgaW4gdGhlIG5ldHdvcmsuIFVuaXF1ZSBpZGVudGlmaWVycyBjb3VsZCBpbmNsdWRlIE9SQ0lEIElEcywgZW1wbG95ZWUgSURzLCBvciBvdGhlciBpZGVudGlmaWVycyB0aGF0IGNhbiBkaXNhbWJpZ3VhdGUgcmVzZWFyY2hlcnMgd2l0aCBjb21tb24gbmFtZXMuCgojIyBOb2RlIEF0dHJpYnV0ZXMgCgpJbiBhZGRpdGlvbiB0byBpZGVudGlmeWluZyB0aGUgbm9kZXMsIGl0IGlzIHVzZWZ1bCB0byBjb2xsZWN0IGF0dHJpYnV0ZSBkYXRhIGZvciBlYWNoIG5vZGUuIEZvciByZXNlYXJjaGVyIG5vZGVzLCB0aGlzIGNvdWxkIGluY2x1ZGUgZGF0YSBvbiBnZW5kZXIgaWRlbnRpdHksIGFjYWRlbWljIHJhbmsgb3IgcG9zaXRpb24sIGRlcGFydG1lbnRhbCBvciBpbnN0aXR1dGlvbmFsIGFmZmlsaWF0aW9uLCBzZW5pb3JpdHksIGFuZCBhbnkgb3RoZXIgYXR0cmlidXRlcyB0aGF0IG1heSBiZSByZWxldmFudCB0byB0aGUgYW5hbHlzaXMuIEdhdGhlcmluZyBleHRlbnNpdmUgYXR0cmlidXRlIGRhdGEgZm9yIGVhY2ggbm9kZSBlbmFibGVzIGNvbmR1Y3RpbmcgbW9yZSBzb3BoaXN0aWNhdGVkIGFuYWx5c2lzIG9uIGhvdyBkaWZmZXJlbnQgcmVzZWFyY2hlciBjaGFyYWN0ZXJpc3RpY3MgbWF5IGluZmx1ZW5jZSB0aGUgc3RydWN0dXJlIG9mIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsuCgojIyBUaWVzCgpUaGUgdGllcyByZXByZXNlbnQgdGhlIGNvLWF1dGhvcnNoaXAgcmVsYXRpb25zaGlwcyBhbmQgY29ubmVjdGlvbnMgYmV0d2VlbiB0aGUgcmVzZWFyY2hlciBub2Rlcy4gSXQgaXMgY3J1Y2lhbCB0byBzeXN0ZW1hdGljYWxseSBjYXB0dXJlIGV2ZXJ5IGluc3RhbmNlIG9mIGNvLWF1dGhvcnNoaXAgYmV0d2VlbiB0aGUgcmVzZWFyY2hlcnMgdGhhdCBhcmUgaW5jbHVkZWQgaW4gdGhlIGRlZmluZWQgbmV0d29yayBib3VuZGFyeS4gVGhpcyBlbmFibGVzIGNvbXByZWhlbnNpdmVseSBtYXBwaW5nIG91dCB0aGUgY29ubmVjdGlvbnMgYW5kIHJlbGF0aW9uc2hpcHMgdGhhdCBleGlzdCBiZXR3ZWVuIHRoZSBub2Rlcy4KCiMjIFRpZSBBdHRyaWJ1dGVzCgpJbiBhZGRpdGlvbiB0byBjYXB0dXJpbmcgdGhlIGNvLWF1dGhvcnNoaXAgdGllcywgY29sbGVjdGluZyBhdHRyaWJ1dGUgZGF0YSBvbiBlYWNoIHRpZSBjYW4gYWxzbyBwcm92aWRlIHZhbHVhYmxlIGNvbnRleHQuIFRpZSBhdHRyaWJ1dGVzIGNvdWxkIGluY2x1ZGUgZGV0YWlscyBsaWtlIHB1YmxpY2F0aW9uIG5hbWUsIHB1YmxpY2F0aW9uIHllYXIsIGpvdXJuYWwgbmFtZSwgbnVtYmVyIG9mIGNpdGF0aW9ucywgb3Igb3RoZXIgYXR0cmlidXRlcyB0aGF0IGRlc2NyaWJlIHRoZSBuYXR1cmUgb2YgdGhhdCBzcGVjaWZpYyBjby1hdXRob3JzaGlwIHRpZS4gQ2FwdHVyaW5nIHRpZSBhdHRyaWJ1dGVzIGFsbG93cyBmb3IgY29uZHVjdGluZyBtb3JlIGdyYW51bGFyIGFuYWx5c2lzLgoKIyMgTmV0d29yayBCb3VuZGFyeSAKCkFuIGltcG9ydGFudCBlYXJseSBzdGVwIGlzIHRvIGNsZWFybHkgZGVmaW5lIHRoZSBjcml0ZXJpYSB0aGF0IHdpbGwgYmUgdXNlZCB0byBkZWxpbmVhdGUgdGhlIGJvdW5kYXJ5IG9mIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsgdW5kZXIgc3R1ZHkuIFRoaXMgaW52b2x2ZXMgZGV0ZXJtaW5pbmcgd2hhdCBzcGVjaWZpYyByZXNlYXJjaGVycyB3aWxsIGJlIGluY2x1ZGVkIHZlcnN1cyBleGNsdWRlZCBmcm9tIHRoZSBmYWN1bHR5IG5ldHdvcmsuIERlZmluaW5nIHRoZSBuZXR3b3JrIGJvdW5kYXJ5IGFsc28gZW50YWlscyBzcGVjaWZ5aW5nIHdoYXQgY29uc3RpdHV0ZXMgYSB0aWUgLSBmb3IgaW5zdGFuY2UsIHdoZXRoZXIgb25seSBjby1hdXRob3JzaGlwIG9mIGpvdXJuYWwgYXJ0aWNsZXMgaXMgY29uc2lkZXJlZCwgb3IgaWYgb3RoZXIgcHVibGljYXRpb24gdHlwZXMgYXJlIGluY2x1ZGVkLgoKIyMgVGVtcG9yYWwgRGF0YQoKSW4gYWRkaXRpb24gdG8gc3RhdGljIGRhdGEgb24gdGhlIG5ldHdvcmsgc3RydWN0dXJlLCBjYXB0dXJpbmcgdGVtcG9yYWwgZGF0YSBpcyBhbHNvIGltcG9ydGFudCBmb3IgZW5hYmxpbmcgYW5hbHlzaXMgb2YgaG93IHRoZSBuZXR3b3JrIGNoYW5nZXMgb3ZlciB0aW1lLiBDb2xsZWN0aW5nIGluZm9ybWF0aW9uIG9uIHRoZSB0aW1lIHBlcmlvZHMgd2hlbiBzcGVjaWZpYyBjby1hdXRob3JzaGlwIHRpZXMgd2VyZSBhY3RpdmUgY2FuIGVuYWJsZSBtb3JlIHNvcGhpc3RpY2F0ZWQgdGVtcG9yYWwgbmV0d29yayBhbmFseXNpcyBhbmQgYWxsb3cgZXhhbWluaW5nIHRoZSBldm9sdXRpb24gb2YgdGhlIG5ldHdvcmsuCgojIyBNaXNzaW5nIERhdGEKCkFzIHdpdGggYW55IHJlc2VhcmNoIHN0dWR5LCBpdCBpcyBpbXBvcnRhbnQgdG8gdGhvcm91Z2hseSBkb2N1bWVudCBhbnkgaXNzdWVzIHdpdGggaW5jb21wbGV0ZSBkYXRhIG9uIG5vZGVzLCB0aWVzLCBhdHRyaWJ1dGVzLCBvciB0ZW1wb3JhbCBkYXRhLiBNaXNzaW5nIGRhdGEgY2FuIGJpYXMgbmV0d29yayBtZXRyaWNzIGFuZCBhbmFseXNpcy4gS2VlcGluZyB0cmFjayBvZiBtaXNzaW5nIGRhdGEgZW5hYmxlcyBiZWluZyBhd2FyZSBvZiBsaW1pdGF0aW9ucyBhbmQgYmVpbmcgY2F1dGlvdXMgYWJvdXQgb3Zlci1pbnRlcnByZXRpbmcgdGhlIHJlc3VsdHMuCgojIyBEYXRhIFN0cnVjdHVyZSAKClRoZSBkYXRhIGNvbGxlY3RlZCB3aWxsIG5lZWQgdG8gYmUgc3RydWN0dXJlZCBhbmQgZm9ybWF0dGVkIGluIGEgd2F5IHRoYXQgaXMgY29tcGF0aWJsZSB3aXRoIHRoZSBzb2NpYWwgbmV0d29yayBhbmFseXNpcyB0b29scyB0aGF0IHdpbGwgYmUgdXNlZC4gVGhpcyBtYXkgcmVxdWlyZSBjb252ZXJ0aW5nIGFuZCByZXN0cnVjdHVyaW5nIHRoZSByYXcgZGF0YSBpbnRvIGVkZ2UgbGlzdHMsIGFkamFjZW5jeSBtYXRyaWNlcywgb3Igb3RoZXIgcmVxdWlyZWQgZm9ybWF0cy4gRGF0YSBmb3JtYXR0aW5nIGlzIGFuIGVzc2VudGlhbCBzdGVwIHRvIGVuc3VyZSB0aGUgaW5mb3JtYXRpb24gY2FuIGJlIHByb3Blcmx5IGltcG9ydGVkIGFuZCBhbmFseXplZC4K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUmVzZWFyY2ggRGVzaWduLCBEYXRhLCBhbmQgTWVhc3VyZXMiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICBudW1iZXJfc2VjdGlvbnM6IHRydWUKICAgIGhpZ2hsaWdodDoga2F0ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgpjc2w6IGFwYS5jc2wKLS0tCgoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKYGBgCiMgUmVzZWFyY2ggRGVzaWduLCBEYXRhLCBhbmQgTWVhc3VyZXMKVGhpcyByZXNlYXJjaCBlbXBsb3lzIHNvY2lhbCBuZXR3b3JrIGFuYWx5c2lzIHRvIGludmVzdGlnYXRlIHRoZSBldm9sdXRpb24gb2YgcmVzZWFyY2ggY29sbGFib3JhdGlvbiBuZXR3b3JrcyBhbW9uZyB1bml2ZXJzaXR5IGZhY3VsdHkgb3ZlciBhIE4teWVhciBwZXJpb2QuIFRoZSBtYWluIGdvYWxzIGFyZSB0byBleGFtaW5lIHRoZSBkeW5hbWljcyBvZiB0aWUgZm9ybWF0aW9uIGJldHdlZW4gZmFjdWx0eSBtZW1iZXJzIGFuZCB1bmRlcnN0YW5kIGhvdyBmYWN0b3JzIGxpa2UgZ2VuZGVyLCBhY2FkZW1pYyByYW5rLCBhbmQgZGVwYXJ0bWVudCBhZmZpbGlhdGlvbiBzaGFwZSBjb2xsYWJvcmF0aXZlIHBhdHRlcm5zLiAKCiMjIFJlc2VhcmNoIERlc2lnbiAKVGhpcyBzdHVkeSB1dGlsaXplcyBhIGxvbmdpdHVkaW5hbCBzb2NpYWwgbmV0d29yayBhbmFseXNpcyBkZXNpZ24gdXNpbmcgc3RvY2hhc3RpYyBhY3Rvci1vcmllbnRlZCBtb2RlbHMgKFNBT01zKS4gU0FPTXMsIGltcGxlbWVudGVkIHRocm91Z2ggdGhlIFJTaWVuYSBzb2Z0d2FyZSBwYWNrYWdlLCBhbGxvdyBtb2RlbGluZyB0aGUgY28tZXZvbHV0aW9uIG9mIG5ldHdvcmtzIGFuZCBpbmRpdmlkdWFsIGF0dHJpYnV0ZXMgdGhyb3VnaCB0aW1lIChSaXBsZXkgZXQgYWwuIDIwMjEpLiBUaGlzIGVuYWJsZXMgc3R1ZHlpbmcgcmVjaXByb2NhbCBlZmZlY3RzIGJldHdlZW4gY29sbGFib3JhdGlvbiBjaG9pY2VzIGFuZCBmYWN1bHR5IGNoYXJhY3RlcmlzdGljcy4KCiMjIERhdGEKVGhlIG5ldHdvcmsgcG9wdWxhdGlvbiBjb21wcmlzZXMgMTQ4IGZhY3VsdHkgbWVtYmVycyBhY3Jvc3Mgc2NpZW5jZSBhbmQgc29jaWFsIHNjaWVuY2UgZGVwYXJ0bWVudHMgYXQgYSBsYXJnZSByZXNlYXJjaCB1bml2ZXJzaXR5LiBDb2xsYWJvcmF0aW9uIHRpZXMgd2VyZSBjb25zdHJ1Y3RlZCBhbm51YWxseSBmb3IgYSBwZXJpb2Qgb2YgNSB5ZWFycyB1c2luZyBhcmNoaXZhbCBkYXRhIG9uIGNvLWF1dGhvcmVkIHB1YmxpY2F0aW9ucy4gRWFjaCB5ZWFybHkgbmV0d29yayBoYXMgMTQ4IGFjdG9ycyBhbmQgZGlyZWN0ZWQgdGllcyBpbmRpY2F0aW5nIGNvbGxhYm9yYXRpb25zIHdoZXJlIGkg4oaSIGogbWVhbnMgaSBoYXMgY28tYXV0aG9yZWQgd2l0aCBqLiAgCgpUaGUgb2JzZXJ2ZWQgbmV0d29ya3Mgc2hvdyBhbiBpbmNyZWFzaW5nIHRyZW5kIGluIGRlbnNpdHkgb3ZlciB0aW1lLCBmcm9tIDAuMDI0IHRvIDAuMDU2LCByZWZsZWN0aW5nIG1vcmUgY29sbGFib3JhdGl2ZSBhY3Rpdml0eS4gVGhlIGF2ZXJhZ2UgZGVncmVlIGdyb3dzIGZyb20gMy41IHRvIDguMiwgd2hpbGUgdGhlIHRvdGFsIG51bWJlciBvZiB0aWVzIGluY3JlYXNlcyBmcm9tIDUyNCB0byAxMjE2LiBWaXN1YWxseSwgdGhlIG5ldHdvcmtzIGV2b2x2ZSBmcm9tIGZyYWdtZW50ZWQgdG8gbW9yZSBjbHVzdGVyZWQgYXJvdW5kIGludGVyY29ubmVjdGVkIGNvbGxhYm9yYXRpdmUgZ3JvdXBzLiAgCgojIyBNZWFzdXJlcwpUaGUgZGVwZW5kZW50IHZhcmlhYmxlcyBhcmUgdGhlIG9ic2VydmVkIGxvbmdpdHVkaW5hbCBjaGFuZ2VzIGluIGNvbGxhYm9yYXRpdmUgdGllcyBiZXR3ZWVuIGZhY3VsdHkgbWVtYmVycyBvdmVyIHRoZSA1IHRpbWUgcG9pbnRzLiBJbmRlcGVuZGVudCB2YXJpYWJsZXMgaW5jbHVkZSBnZW5kZXIsIGFjYWRlbWljIHJhbmsgKGFzc2lzdGFudCwgYXNzb2NpYXRlLCBmdWxsIHByb2Zlc3NvciksIGFjYWRlbWljIGFnZSwgYW5kIGRlcGFydG1lbnQgYWZmaWxpYXRpb24uIFRoZXNlIGNhcHR1cmUgcGVyc29uYWwgYXR0cmlidXRlcyBhbmQgc3RydWN0dXJhbCBwb3NpdGlvbnMgcG90ZW50aWFsbHkgaW5mbHVlbmNpbmcgY29sbGFib3JhdGlvbiBwYXR0ZXJucy4gCgojIyBBbmFseXNpcyBTdHJhdGVneQpTQU9NcyBhbGxvdyBtb2RlbGluZyB0aGUgaW50ZXJkZXBlbmRlbnQsIGNvLWV2b2x2aW5nIG5hdHVyZSBvZiB0aWUgZm9ybWF0aW9uIGFsb25nc2lkZSBhY3RvciBhdHRyaWJ1dGVzIChTbmlqZGVycyBldCBhbC4gMjAxMCkuIFRoZSBsaWtlbGlob29kIG9mIGZvcm1pbmcgb3IgZGlzc29sdmluZyBjb2xsYWJvcmF0aW9ucyBpcyBpbmZsdWVuY2VkIGJ5IHZhcmlvdXMgZmFjdG9ycyB0aGF0IGZhY3VsdHkgbWVtYmVycyBvcHRpbWl6ZS4gRWZmZWN0cyB0ZXN0ZWQgYmFzZWQgb24gdGhlIHJlc2VhcmNoIHF1ZXN0aW9ucyBpbmNsdWRlIGdlbmRlciBob21vcGhpbHksIHByZWZlcmVudGlhbCBhdHRhY2htZW50IGJ5IGFjYWRlbWljIHJhbmssIHRyYW5zaXRpdmUgdHJpcGxldHMsIGFuZCBkZXBhcnRtZW50IGFmZmlsaWF0aW9uLiAKClRoZSBSU2llbmEgcGFja2FnZSBpbiBSIGVzdGltYXRlcyBlZmZlY3RzIHRocm91Z2ggaXRlcmF0aXZlIHNpbXVsYXRpb25zIHRvIGZpdCBtb2RlbHMgYW5kIHBhcmFtZXRlcnMgdG8gb2JzZXJ2ZWQgbmV0d29yayBkYXRhLiBHb29kbmVzcy1vZi1maXQgaXMgYXNzZXNzZWQgdG8gZW5zdXJlIHNhdGlzZmFjdG9yeSBtb2RlbCBjb252ZXJnZW5jZSBhbmQgcmVwcmVzZW50YXRpb24gb2YgbmV0d29yayBkeW5hbWljcyAoUmlwbGV5IGV0IGFsLiAyMDIxKS4K</div>
 
 
 </div>
@@ -600,7 +577,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("assembling.Rmd");
+  window.initializeSourceEmbed("design_data_measures.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

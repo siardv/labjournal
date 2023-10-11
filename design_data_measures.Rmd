@@ -1,0 +1,31 @@
+---
+title: "Research Design, Data, and Measures"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    highlight: kate
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+
+# Research Design, Data, and Measures
+This research employs social network analysis to investigate the evolution of research collaboration networks among university faculty over a N-year period. The main goals are to examine the dynamics of tie formation between faculty members and understand how factors like gender, academic rank, and department affiliation shape collaborative patterns. 
+
+## Research Design 
+This study utilizes a longitudinal social network analysis design using stochastic actor-oriented models (SAOMs). SAOMs, implemented through the RSiena software package, allow modeling the co-evolution of networks and individual attributes through time (Ripley et al. 2021). This enables studying reciprocal effects between collaboration choices and faculty characteristics.
+
+## Data
+The network population comprises 148 faculty members across science and social science departments at a large research university. Collaboration ties were constructed annually for a period of 5 years using archival data on co-authored publications. Each yearly network has 148 actors and directed ties indicating collaborations where i → j means i has co-authored with j.  
+
+The observed networks show an increasing trend in density over time, from 0.024 to 0.056, reflecting more collaborative activity. The average degree grows from 3.5 to 8.2, while the total number of ties increases from 524 to 1216. Visually, the networks evolve from fragmented to more clustered around interconnected collaborative groups.  
+
+## Measures
+The dependent variables are the observed longitudinal changes in collaborative ties between faculty members over the 5 time points. Independent variables include gender, academic rank (assistant, associate, full professor), academic age, and department affiliation. These capture personal attributes and structural positions potentially influencing collaboration patterns. 
+
+## Analysis Strategy
+SAOMs allow modeling the interdependent, co-evolving nature of tie formation alongside actor attributes (Snijders et al. 2010). The likelihood of forming or dissolving collaborations is influenced by various factors that faculty members optimize. Effects tested based on the research questions include gender homophily, preferential attachment by academic rank, transitive triplets, and department affiliation. 
+
+The RSiena package in R estimates effects through iterative simulations to fit models and parameters to observed network data. Goodness-of-fit is assessed to ensure satisfactory model convergence and representation of network dynamics (Ripley et al. 2021).

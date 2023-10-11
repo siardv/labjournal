@@ -44,5 +44,3 @@ As with any research study, it is important to thoroughly document any issues wi
 ## Data Structure 
 
 The data collected will need to be structured and formatted in a way that is compatible with the social network analysis tools that will be used. This may require converting and restructuring the raw data into edge lists, adjacency matrices, or other required formats. Data formatting is an essential step to ensure the information can be properly imported and analyzed.
-
----

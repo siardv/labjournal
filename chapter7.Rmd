@@ -1,0 +1,185 @@
+---
+title: "Summary of Chapter 7 Methods"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+    highlight: kate
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+# Summary of Chapter 7 Methods 
+## Overview
+
+Chapter 7 discusses different methods for analyzing the four theoretical dimensions of social networks (size, composition, structure, evolution) in R. The main methods covered are:
+
+- Exponential-family Random Graph Models (ergm) 
+- Stochastic Actor Oriented Models (RSiena)
+
+The chapter recommends trying both methods, but focuses more on RSiena for several reasons:
+
+1. RSiena can model both network structure and composition evolution to distinguish selection and influence processes
+
+2. The author has more expertise with RSiena than ergm
+
+3. This book adds to existing RSiena tutorials
+
+## RSiena Logic
+
+### Ministep assumption
+```{r echo=TRUE}
+# RSiena ministep logic
+
+# Set up example network
+set.seed(123)
+(network <- matrix(sample(0:1, size = 25, replace = TRUE), ncol = 5))
+
+# Select random ego
+(ego <- sample(1:nrow(network), size = 1))
+
+# Get ego's outgoing ties
+out_ties <- network[ego, ]
+
+# Create all options for one tie change
+(options <- lapply(1:ncol(network), function(i) {
+  temp <- out_ties 
+  temp[i] <- 1 - temp[i]
+  return(temp)
+}))
+
+# Calculate evaluation for each option
+(eval <- sapply(options, function(x) sum(x)))
+
+# Pick one option based on evaluation
+(probs <- exp(eval) / sum(exp(eval)))
+(choice <- sample(1:length(options), size = 1, prob = probs))
+(new_out_ties <- options[[choice]])
+
+# Update network with ministep 
+(network[ego, ] <- new_out_ties)
+
+# Repeat process for next ministep
+(ego <- sample(1:nrow(network), size = 1))
+# etc...
+```
+The key assumption of RSiena models is the **ministep**:
+
+- All network changes are decomposed into very small steps where one actor creates or terminates one outgoing tie
+- Does not reflect any particular theory of action, simply an estimation procedure
+- Actors change ties to improve satisfaction with local network, evaluating one ministep at a time
+- No reactivity, simultaneity, coordination, negotiation, maximization of total utility, altruism, strategic behavior, or investment
+
+### Simulation logic
+```{r echo=TRUE}
+# Example code to demonstrate simulation logic
+set.seed(123)
+
+# 1. Sample ego
+(ego <- sample(1:5, size = 1))
+
+# 2. Construct possible networks
+(options <- list(matrix(0, 5, 5), matrix(1, 5, 5)))
+
+# 3. Calculate evaluation
+(eval <- sapply(options, function(x) sum(x[ego, ])))
+
+# 4. Ego picks network
+(choice <- sample(1:length(options), size = 1, prob = exp(eval) / sum(exp(eval))))
+
+# 5. Repeat
+for (i in 1:5) {
+  ego <- sample(1:5, size = 1)
+  options <- list(matrix(0, 5, 5), matrix(1, 5, 5))
+  eval <- sapply(options, function(x) sum(x[ego, ]))
+  choice <- sample(1:length(options),
+    size = 1,
+    prob = exp(eval) / sum(exp(eval))
+  )
+}
+```
+
+
+RSiena models network evolution as an agent-based simulation:
+
+1. Sample ego
+2. Construct possible networks after ego ministeps 
+3. Calculate ego evaluation of networks
+4. Ego picks network (decides on tie change)
+5. Repeat until enough ministeps
+
+### Estimation logic 
+
+RSiena estimation:
+
+1. Define model, specify effects
+2. Set initial parameter values (often 0)
+3. Simulate outcome network 
+4. Compare to observed outcome network
+5. Update parameters  
+6. Repeat until convergence
+7. Assess fit on multiple simulations
+
+## RSiena Example
+
+Simple RSiena analysis on co-author network with two waves:
+
+- Define dependent variable (adjacency matrices)
+- Specify independent variables (gender) 
+- Create RSienaData object
+- Define effects in model
+- Estimate model with siena07()
+- Assess model fit with sienaGOF() on auxiliary statistics
+
+```{r}
+# RSiena analysis example
+```
+
+## Interpretation of Parameters
+```{r echo=TRUE}
+# Rate parameter 
+rate <- 10
+
+# Network statistic
+beta <- 2  
+P1 <- 0.5
+(P2 <- exp(beta)*P1)
+```
+
+- **Rate parameter**: average opportunities for change per actor 
+- **Network statistics**: importance of local network configurations for tie changes
+- Like logistic regression coefficients: odds ratio = exp(beta)
+
+## Goodness of Fit
+
+- Compare observed vs expected statistics not directly modeled
+- Poor fit -> add effects, guided by sienaGOF
+- Assess distribution of outdegrees, indegrees, triads, distances, etc
+- Violin plots show observed vs simulated
+- Small p-value indicates poor fit
+
+```{r eval=FALSE, echo=TRUE}
+# Define statistics
+tri <- triadcensus(...)
+dist <- distanceDistribution(...) 
+
+# GOF 
+gof_tri <- sienaGOF(ans, tri, ...)
+gof_dist <- sienaGOF(ans, dist, ...)
+
+# Plot
+plot(gof_tri)
+plot(gof_dist)
+```
+
+## Conclusion
+
+- RSiena is a useful method for modeling network evolution as a simulation
+- Must understand ministep assumption limitations
+- Estimate, simulate, and assess fit for plausible generative model
+- Combine with theory and other methods like ERGMs
+
+```{r eval=FALSE, echo=TRUE}
+# Conclusion
+```
