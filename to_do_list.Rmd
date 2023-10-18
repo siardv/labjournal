@@ -1,0 +1,102 @@
+---
+title: "To-Do List"
+output:
+  html_document: 
+    toc: yes
+    number_sections: false
+    toc_collapse: yes
+    toc_float: yes
+author: "by: Siard van den Bosch"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# To-Do List
+
+## Introduction
+- Provide more specifics on the faculty being analyzed (size, departments, research areas, etc.)
+- Note 1-2 limitations of prior university-wide network studies that this faculty-level analysis aims to address  
+- Add extra recent references to further demonstrate familiarity with latest literature
+
+## Theory
+- Briefly mention the statistical network models that will be used to test the hypotheses (e.g. ERGMs, SAOMs)
+- Expand a bit more on Burt's structural holes theory and its relevance to the hypothesis about gender differences in betweenness centrality
+- Tie Hypothesis 3 about ego-network density more explicitly back to the theory of strength of weak ties 
+- Add recent referencea specifically related to gender differences in academic networks or collaboration 
+- Consider any additional gender-related academic collaboration factors relevant to the theory
+
+## Analysis
+### Descriptives
+- Briefly mention the timeframe/duration of the network data (e.g. co-authorships over the past 5 years).
+- Provide 1-2 example network visualizations to accompany the descriptive statistics (e.g. sociogram, degree distribution plot).
+- Report the assortativity coefficient to quantify homophily by gender.
+- Consider presenting the statistics in a table for conciseness
+- Indicate the network analytics software/code used to calculate the metrics. 
+
+### Data Preparation
+- Construct adjacency matrices representing the observed networks at each timepoint
+    - Necessary to represent the network data for analysis in RSiena
+- Integrate node attribute data (gender, rank, department, etc.)
+    - Enables testing effects of researcher characteristics on collaboration patterns
+- Address any missing data through imputation or other methods
+    - Reduces potential biases and improves accuracy of network metrics
+
+### Preliminary Analysis
+- Explore degree distributions and summary stats at each timepoint
+    - Provides insights into the overall network topology
+- Visualize network evolution over time using animations or plots
+    - Reveals patterns and guides model specification
+- Examine differences by gender, rank, and department using t-tests, ANOVA, etc.
+    - Quantifies differences along dimensions like gender and rank
+
+### RSiena Model Specification
+- Select effects based on research questions and theory
+    - Chosen effects should test hypothesized mechanisms 
+- Specify structural effects like reciprocity, transitivity/closure
+    - Tests how network configurations emerge
+- Add attribute-based effects like gender homophily and preferential attachment
+    - Assesses how researcher characteristics shape collaboration 
+- Introduce controls like density, connectivity, indegree popularity
+    - Accounts for overall connectivity patterns
+
+### RSiena Estimation
+- Select algorithm parameters and optimization procedure
+    - Ensures accurate parameter estimates
+- Assess convergence and t-ratios to refine model
+    - Improves model reliability
+- Check robustness across different random seeds
+    - Reduces dependence on initial values
+- Examine output to interpret parameters and effects
+    - Enables drawing valid conclusions
+
+### Model Diagnostics
+- Conduct goodness-of-fit analysis on multiple metrics
+    - Evaluates model fit to observed network patterns
+- Compare simulated vs observed degree distributions
+    - Checks similarity between simulated and empirical data
+- Check triad census distribution
+    - Assesses parameter estimation quality
+
+### Model Expansion
+- Build multilayer multiplex models to add richer data
+    - Incorporates interdependencies between networks
+- Incorporate additional covariates and interactions
+    - Tests new explanations and hypotheses
+- Test alternative specifications and constraints
+    - Improves model insights
+- Examine heterogeneity across departments
+    - Explores department variation
+
+## Sensitivity Analysis
+- Vary time window durations between waves
+    - Evaluates temporal model assumptions
+- Remove potential outlier nodes or periods
+    - Assesses impacts of outliers
+- Test model robustness to perturbations
+    - Checks stability and reproducibility
+
+# Justification
+
+Each step aims to rigorously test hypothesized effects, ensure valid and reliable conclusions, and maximize model insights. The tasks build a comprehensive analysis that moves from descriptive exploration to explaining network evolution through stochastic actor-oriented modeling. Let me know if any justifications need more explanation!

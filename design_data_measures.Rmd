@@ -10,7 +10,6 @@ bibliography: references.bib
 csl: apa.csl
 ---
 
-
 # Research Design, Data, and Measures
 This research employs social network analysis to investigate the evolution of research collaboration networks among university faculty over a N-year period. The main goals are to examine the dynamics of tie formation between faculty members and understand how factors like gender, academic rank, and department affiliation shape collaborative patterns. 
 

@@ -1,0 +1,58 @@
+---
+title: "RSiena Analysis Method"
+output:
+  html_document: 
+    toc: yes
+    number_sections: false
+    toc_collapse: yes
+    toc_float: yes
+author: "by: Siard van den Bosch"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# RSiena Analysis Method
+The most suitable RSiena analysis method to test the hypotheses is `siena07`. The key reasons are:
+
+### Single network longitudinal analysis  
+The research involves analyzing the co-authorship network within a single faculty department over time. `siena07` is most suitable for modeling the dynamics of a single network longitudinally.
+
+### Model network dynamics
+A key goal is assessing network dynamics like triadic closure tendencies over time. `siena07` estimates parameters for actor-oriented models to analyze such longitudinal dynamics.
+
+### Test gender differences 
+The hypotheses focus on comparing network measures like closure, centrality, and density between male and female researchers. `siena07` allows specifying gender as an attribute variable and interacting it with structural effects to test for differences.
+
+### Assess closure, centrality, density
+The hypotheses focus on comparing network measures like closure, centrality, and density between male and female researchers. `siena07` allows specifying gender as an attribute variable and interacting it with structural effects to test for differences.
+
+### Estimate parameters for actor-oriented models
+A key goal is assessing network dynamics like triadic closure tendencies over time. `siena07` estimates parameters for actor-oriented models to analyze such longitudinal dynamics.
+
+### Analyze network mechanisms like transitivity, reciprocity
+The theory highlights analyzing closure, bridges, redundancy etc. `siena07` enables including effects like transitivity, reciprocity, multiplexity to capture these mechanisms.
+
+### Model global network effects
+Assessing shortest paths, diameter, clustering is also important. `siena07` can directly model and test such global network effects.
+
+### Customized effects for hypotheses
+`siena07` allows specifying customized effects to test the specific hypotheses.
+
+### Longitudinal capabilities
+`siena07` is most suitable because it allows modeling longitudinal single network dynamics required for the research goals.
+
+### Single network focus
+No meta-analysis across multiple groups or networks is needed here, so `siena07`'s single network capabilities suffice. siena08 is more relevant for multi-network models.
+    
+```{r eval=FALSE, include=FALSE}
+# - The research involves analyzing a single faculty's co-authorship network, so `siena07` for analyzing one network (or network-behavior coevolution) is appropriate. siena08 is better suited for meta-analysis across multiple networks.
+# - The hypotheses focus on comparing various network measures (e.g. closure, centrality, density) between male and female researchers in the faculty. `siena07` allows specification of effects like gender attribute variables and their interaction with network effects to test such differences.
+# - The goal is to model the network dynamics and test effects like triadic closure tendencies. `siena07` estimates parameters for stochastic actor-oriented models to analyze such longitudinal network dynamics.
+# - No model aggregation or meta-analysis across multiple groups is needed, so the single-network capabilities of `siena07` suffice. siena08 is more relevant when combining models across different networks.
+# - The theory section highlights the importance of analyzing closure, bridges, redundancy etc. `siena07` allows inclusion of effects like transitivity, reciprocation, multiplexity that capture such mechanisms.
+# - The hypotheses also mention assessing shortest paths, diameter, clustering etc. `siena07` can directly model and test such global network structure effects.
+# 
+# In summary, `siena07` is the most appropriate RSiena method because it allows specification of customized effects to test differences by gender, can model and analyze longitudinal network dynamics, and enables assessing the various network properties discussed, all for a single network. The capabilities match the research goals better than meta-analytic approaches like siena08.
+``

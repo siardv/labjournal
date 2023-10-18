@@ -409,8 +409,16 @@ div.tocify {
     <li>
       <a href="introduction.html">Introduction</a>
     </li>
-    <li>
-      <a href="theory.html">Theory</a>
+    <li class="dropdown-submenu">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Theory</a>
+      <ul class="dropdown-menu" role="menu">
+        <li>
+          <a href="theory.html">Last version</a>
+        </li>
+        <li>
+          <a href="theory.html">Older version</a>
+        </li>
+      </ul>
     </li>
     <li class="dropdown-submenu">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Methods</a>
@@ -420,6 +428,9 @@ div.tocify {
         </li>
         <li>
           <a href="assembling.html">Data Collection and Preparation</a>
+        </li>
+        <li>
+          <a href="rsiena_analysis_method.html">RSiena Analysis Method</a>
         </li>
       </ul>
     </li>
@@ -434,10 +445,12 @@ div.tocify {
         </li>
       </ul>
     </li>
-    <li>
-      <a href="results.html">Results</a>
-    </li>
+    <li class="dropdown-header">Results</li>
     <li class="dropdown-header">Discussion</li>
+    <li class="dropdown-header">To-Do List</li>
+    <li>
+      <a href="To-Do List"></a>
+    </li>
   </ul>
 </li>
 <li class="dropdown">
@@ -487,83 +500,82 @@ div.tocify {
 </div>
 
 
-<div id="theory" class="section level1" number="1">
-<h1><span class="header-section-number">1</span> Theory</h1>
-<p>This research is grounded in social network theory, which provides a
-powerful lens for analyzing the relational architecture underpinning
-collaboration in academia. In particular, we draw on key concepts from
-Granovetter’s seminal work on the strength of weak ties (Granovetter,
-1973) and Burt’s structural holes theory (Burt, 1992).</p>
-<p>Granovetter demonstrated that weak interpersonal ties often serve as
-indispensable bridges between densely knit social clusters, enabling
-novel ideas and opportunities to diffuse across the network. This
-highlights the importance of analyzing patterns of connectivity and
-closure. Structural holes theory further explicates how strategically
-bridging disconnected groups in a network yields competitive advantages
-in access to information and control over flows.</p>
-<p>Together, these foundational network theories underscore how the
-specific structure and topology of scholarly collaboration networks can
-profoundly shape diffusion of knowledge and inequality of access. This
-provides the impetus for our granular network analysis.</p>
-<p>We also situate our research within the extensive literature on
-gender disparities in academia. Prior studies have documented lower
-research output, weaker international visibility, and lower citations
-rates for female scholars, even after controlling for academic rank,
-discipline and other factors (Larivière et al., 2013; Dion et al.,
-2018).</p>
-<p>These disadvantages accumulate over careers and are mirrored in
-striking underrepresentation of women in senior positions. Extensive
-research points to subtle but pervasive gender biases permeating peer
-review, hiring, promotion, remuneration, and service burdens as
-contributing factors (Reuben et al., 2014; Raj et al., 2016).</p>
-<p>However, less attention has focused directly on elucidating gender
-effects embedded within the intricate relational networks underpinning
-scholarly collaboration. This echoes Granovetter’s (1985) assertion that
-economic action is inherently “embedded in ongoing networks of personal
-relationships”.</p>
-<p>Charting gender asymmetries in the relational architecture shaping
-knowledge creation is therefore pivotal. Our application of social
-network analysis to map collaborative ties enables empirically tracking
-how gender may permeate this core academic process.</p>
-<p>Integrating these perspectives, we posit the structure of faculty
-co-authorship networks may be shaped by gender effects, with significant
-implications. We propose and test six hypotheses.</p>
-<div id="hypotheses" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Hypotheses</h2>
-<ul>
-<li><p><span class="math inline">\(H_1\)</span>: Female researchers will
-demonstrate lower triadic closure in their co-authorship ties compared
-to male researchers.</p></li>
-<li><p><span class="math inline">\(H_2\)</span>:Female scholars will
-have lower betweenness centrality compared to male
-counterparts.</p></li>
-<li><p><span class="math inline">\(H_3\)</span>:Ego-network density will
-be lower for female versus male researchers.</p></li>
-<li><p><span class="math inline">\(H_4\)</span>:Average path length and
-diameter will be greater in the networks of female researchers.</p></li>
-<li><p><span class="math inline">\(H_5\)</span>:Female scholars will
-have a lower clustering coefficient than male scholars.</p></li>
-<li><p><span class="math inline">\(H_6\)</span>:Controlling for academic
-rank, gender differences across <span
-class="math inline">\(H_1\)</span>-<span
-class="math inline">\(H_5\)</span> will persist.</p></li>
-</ul>
-<p>Support for these hypotheses would suggest female scholars may
-contend with more fragmented, less navigable collaboration networks.
-This could hinder innovation and advancement.</p>
-<p>Conversely, null results would imply the topological structure of
-co-authorship ties is not influenced by gender. By empirically testing
-for gender effects across critical network dimensions, this research
-elucidates hidden relational dynamics shaping academia.</p>
-<p>Uncovering obfuscated collaborative barriers is essential for
-constructing more equitable pathways to scientific innovation. This
-study’s integration of social network and gender theories provides a
-robust framework to investigate gender disparities within the relational
-architecture enabling scholarship.</p>
-</div>
+<div id="theory" class="section level1">
+<h1>2 Theory</h1>
+<p>This study employs two seminal sociological theories of social
+capital and social network structure: Granovetter’s theory of the
+strength of weak ties (1973) and Burt’s structural holes theory (1992).
+Granovetter demonstrated that weak bridging ties often link disconnected
+clusters in a network, enabling novel, nonredundant information to flow
+between groups. This is because weak ties connect actors embedded in
+different social circles, providing access to novel information from
+diverse network neighborhoods. Expanding on this, Burt showed that, by
+strategically building brokerage ties across structural holes between
+disconnected groups, actors accrue competitive social capital advantages
+through access to diverse, non-redundant knowledge spanning structural
+holes between clusters.</p>
+<p>These foundational network theories elucidate how specific network
+topology and connectivity patterns shape information diffusion dynamics
+and inequality of access to social capital resources embedded in the
+network structure. Highly interconnected small-world networks with high
+triadic closure propagate information rapidly through dense redundant
+ties but may impede the penetration of novel non-redundant information
+from outside clusters. Conversely, fragmented networks with many
+brokerage opportunities across structural holes between disconnected
+actors tend to constrain widespread collaborative innovation because of
+lack of connectivity. This provides the impetus for a detailed social
+network analysis to map the topology and connectivity patterns of
+faculty coauthorship networks.</p>
+<p>This research is also grounded in extensive sociological work on
+persistent gender disparities in academia. Past studies have shown that
+female scholars face lower research productivity, weaker international
+visibility, and lower citation impact than males, even after accounting
+for academic rank, discipline, and other factors (Dion et al., 2013;
+Dion et al., 2018). This occurs because of the accumulation of subtle
+gender biases permeating critical academic processes, including peer
+review, hiring, promotion, salaries, and service burden. However, few
+studies have focused directly on elucidating the gender asymmetry in
+collaborative social capital resources transmitted through scholarly
+co-authorship networks.</p>
+<p>Elucidating gender asymmetry in the relational architecture that
+shapes knowledge creation is pivotal. Collaboration provides access to
+information, resources, visibility, and career opportunities. If women
+lack access to equitable collaborative networks, it may exacerbate other
+structural disadvantages.</p>
+<p>Integrating these perspectives, we hypothesized that the structure of
+faculty co-authorship networks may exhibit gender asymmetry with
+significant implications. Specifically:</p>
+<p><span class="math inline">\(H_1\)</span>: Female researchers will
+have fewer network closures than male researchers, limiting access to
+novel non-redundant information from diverse network neighborhoods.
+<span class="math inline">\(H_2\)</span>: Female scholars will have
+lower betweenness centrality than male scholars, reducing brokerage
+power to transmit knowledge across disconnected scholarly communities.
+<span class="math inline">\(H_3\)</span>: Ego-network density will be
+lower for women than for men, potentially constraining collaborative
+opportunities and visibility. <span class="math inline">\(H_4\)</span>:
+The average shortest path length and network diameter are greater in the
+networks of female researchers, indicating lower global network
+navigability. <span class="math inline">\(H_5\)</span>: Female scholars
+have a lower clustering coefficient than male scholars, suggesting that
+knowledge diffusion may be less efficient through their local networks.
+<span class="math inline">\(H_6\)</span>: These gender asymmetries will
+persist after controlling for academic rank, signifying that they are
+not solely attributable to rank disparities, but rather embedded in the
+relational architecture.</p>
+<p>Support for these hypothesized gender asymmetries would imply that
+female scholars face more fragmented and less navigable collaboration
+networks, hindering innovation and advancement. The null results would
+indicate that the co-authorship network structure does not vary by
+gender. By empirically testing for gender effects, this research
+elucidates the obscured relational dynamics that shape academia.
+Uncovering hidden collaborative barriers is essential for constructing
+equitable pathways for scientific progress. Integrating social capital
+and gender theories provides a robust framework for investigating gender
+asymmetry in collaborative scholarship architectures.</p>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhlb3J5IgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2NvbGxhcHNlOiB0cnVlCiAgICB0b2NfZmxvYXQ6IHRydWUKICAgIG51bWJlcl9zZWN0aW9uczogdHJ1ZQphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgpjc2w6IGFwYS5jc2wKLS0tCgojIFRoZW9yeQoKVGhpcyByZXNlYXJjaCBpcyBncm91bmRlZCBpbiBzb2NpYWwgbmV0d29yayB0aGVvcnksIHdoaWNoIHByb3ZpZGVzIGEgcG93ZXJmdWwgbGVucyBmb3IgYW5hbHl6aW5nIHRoZSByZWxhdGlvbmFsIGFyY2hpdGVjdHVyZSB1bmRlcnBpbm5pbmcgY29sbGFib3JhdGlvbiBpbiBhY2FkZW1pYS4KSW4gcGFydGljdWxhciwgd2UgZHJhdyBvbiBrZXkgY29uY2VwdHMgZnJvbSBHcmFub3ZldHRlcidzIHNlbWluYWwgd29yayBvbiB0aGUgc3RyZW5ndGggb2Ygd2VhayB0aWVzIChHcmFub3ZldHRlciwgMTk3MykgYW5kIEJ1cnQncyBzdHJ1Y3R1cmFsIGhvbGVzIHRoZW9yeSAoQnVydCwgMTk5MikuCgpHcmFub3ZldHRlciBkZW1vbnN0cmF0ZWQgdGhhdCB3ZWFrIGludGVycGVyc29uYWwgdGllcyBvZnRlbiBzZXJ2ZSBhcyBpbmRpc3BlbnNhYmxlIGJyaWRnZXMgYmV0d2VlbiBkZW5zZWx5IGtuaXQgc29jaWFsIGNsdXN0ZXJzLCBlbmFibGluZyBub3ZlbCBpZGVhcyBhbmQgb3Bwb3J0dW5pdGllcyB0byBkaWZmdXNlIGFjcm9zcyB0aGUgbmV0d29yay4KVGhpcyBoaWdobGlnaHRzIHRoZSBpbXBvcnRhbmNlIG9mIGFuYWx5emluZyBwYXR0ZXJucyBvZiBjb25uZWN0aXZpdHkgYW5kIGNsb3N1cmUuClN0cnVjdHVyYWwgaG9sZXMgdGhlb3J5IGZ1cnRoZXIgZXhwbGljYXRlcyBob3cgc3RyYXRlZ2ljYWxseSBicmlkZ2luZyBkaXNjb25uZWN0ZWQgZ3JvdXBzIGluIGEgbmV0d29yayB5aWVsZHMgY29tcGV0aXRpdmUgYWR2YW50YWdlcyBpbiBhY2Nlc3MgdG8gaW5mb3JtYXRpb24gYW5kIGNvbnRyb2wgb3ZlciBmbG93cy4KClRvZ2V0aGVyLCB0aGVzZSBmb3VuZGF0aW9uYWwgbmV0d29yayB0aGVvcmllcyB1bmRlcnNjb3JlIGhvdyB0aGUgc3BlY2lmaWMgc3RydWN0dXJlIGFuZCB0b3BvbG9neSBvZiBzY2hvbGFybHkgY29sbGFib3JhdGlvbiBuZXR3b3JrcyBjYW4gcHJvZm91bmRseSBzaGFwZSBkaWZmdXNpb24gb2Yga25vd2xlZGdlIGFuZCBpbmVxdWFsaXR5IG9mIGFjY2Vzcy4KVGhpcyBwcm92aWRlcyB0aGUgaW1wZXR1cyBmb3Igb3VyIGdyYW51bGFyIG5ldHdvcmsgYW5hbHlzaXMuCgpXZSBhbHNvIHNpdHVhdGUgb3VyIHJlc2VhcmNoIHdpdGhpbiB0aGUgZXh0ZW5zaXZlIGxpdGVyYXR1cmUgb24gZ2VuZGVyIGRpc3Bhcml0aWVzIGluIGFjYWRlbWlhLgpQcmlvciBzdHVkaWVzIGhhdmUgZG9jdW1lbnRlZCBsb3dlciByZXNlYXJjaCBvdXRwdXQsIHdlYWtlciBpbnRlcm5hdGlvbmFsIHZpc2liaWxpdHksIGFuZCBsb3dlciBjaXRhdGlvbnMgcmF0ZXMgZm9yIGZlbWFsZSBzY2hvbGFycywgZXZlbiBhZnRlciBjb250cm9sbGluZyBmb3IgYWNhZGVtaWMgcmFuaywgZGlzY2lwbGluZSBhbmQgb3RoZXIgZmFjdG9ycyAoTGFyaXZpw6hyZSBldCBhbC4sIDIwMTM7IERpb24gZXQgYWwuLCAyMDE4KS4KClRoZXNlIGRpc2FkdmFudGFnZXMgYWNjdW11bGF0ZSBvdmVyIGNhcmVlcnMgYW5kIGFyZSBtaXJyb3JlZCBpbiBzdHJpa2luZyB1bmRlcnJlcHJlc2VudGF0aW9uIG9mIHdvbWVuIGluIHNlbmlvciBwb3NpdGlvbnMuCkV4dGVuc2l2ZSByZXNlYXJjaCBwb2ludHMgdG8gc3VidGxlIGJ1dCBwZXJ2YXNpdmUgZ2VuZGVyIGJpYXNlcyBwZXJtZWF0aW5nIHBlZXIgcmV2aWV3LCBoaXJpbmcsIHByb21vdGlvbiwgcmVtdW5lcmF0aW9uLCBhbmQgc2VydmljZSBidXJkZW5zIGFzIGNvbnRyaWJ1dGluZyBmYWN0b3JzIChSZXViZW4gZXQgYWwuLCAyMDE0OyBSYWogZXQgYWwuLCAyMDE2KS4KCkhvd2V2ZXIsIGxlc3MgYXR0ZW50aW9uIGhhcyBmb2N1c2VkIGRpcmVjdGx5IG9uIGVsdWNpZGF0aW5nIGdlbmRlciBlZmZlY3RzIGVtYmVkZGVkIHdpdGhpbiB0aGUgaW50cmljYXRlIHJlbGF0aW9uYWwgbmV0d29ya3MgdW5kZXJwaW5uaW5nIHNjaG9sYXJseSBjb2xsYWJvcmF0aW9uLgpUaGlzIGVjaG9lcyBHcmFub3ZldHRlcidzICgxOTg1KSBhc3NlcnRpb24gdGhhdCBlY29ub21pYyBhY3Rpb24gaXMgaW5oZXJlbnRseSAiZW1iZWRkZWQgaW4gb25nb2luZyBuZXR3b3JrcyBvZiBwZXJzb25hbCByZWxhdGlvbnNoaXBzIi4KCkNoYXJ0aW5nIGdlbmRlciBhc3ltbWV0cmllcyBpbiB0aGUgcmVsYXRpb25hbCBhcmNoaXRlY3R1cmUgc2hhcGluZyBrbm93bGVkZ2UgY3JlYXRpb24gaXMgdGhlcmVmb3JlIHBpdm90YWwuCk91ciBhcHBsaWNhdGlvbiBvZiBzb2NpYWwgbmV0d29yayBhbmFseXNpcyB0byBtYXAgY29sbGFib3JhdGl2ZSB0aWVzIGVuYWJsZXMgZW1waXJpY2FsbHkgdHJhY2tpbmcgaG93IGdlbmRlciBtYXkgcGVybWVhdGUgdGhpcyBjb3JlIGFjYWRlbWljIHByb2Nlc3MuCgpJbnRlZ3JhdGluZyB0aGVzZSBwZXJzcGVjdGl2ZXMsIHdlIHBvc2l0IHRoZSBzdHJ1Y3R1cmUgb2YgZmFjdWx0eSBjby1hdXRob3JzaGlwIG5ldHdvcmtzIG1heSBiZSBzaGFwZWQgYnkgZ2VuZGVyIGVmZmVjdHMsIHdpdGggc2lnbmlmaWNhbnQgaW1wbGljYXRpb25zLiBXZSBwcm9wb3NlIGFuZCB0ZXN0IHNpeCBoeXBvdGhlc2VzLgoKIyMgSHlwb3RoZXNlcwoKLSAkSF8xJDogRmVtYWxlIHJlc2VhcmNoZXJzIHdpbGwgZGVtb25zdHJhdGUgbG93ZXIgdHJpYWRpYyBjbG9zdXJlIGluIHRoZWlyIGNvLWF1dGhvcnNoaXAgdGllcyBjb21wYXJlZCB0byBtYWxlIHJlc2VhcmNoZXJzLgoKLSAkSF8yJDpGZW1hbGUgc2Nob2xhcnMgd2lsbCBoYXZlIGxvd2VyIGJldHdlZW5uZXNzIGNlbnRyYWxpdHkgY29tcGFyZWQgdG8gbWFsZSBjb3VudGVycGFydHMuCgotICRIXzMkOkVnby1uZXR3b3JrIGRlbnNpdHkgd2lsbCBiZSBsb3dlciBmb3IgZmVtYWxlIHZlcnN1cyBtYWxlIHJlc2VhcmNoZXJzLgoKLSAkSF80JDpBdmVyYWdlIHBhdGggbGVuZ3RoIGFuZCBkaWFtZXRlciB3aWxsIGJlIGdyZWF0ZXIgaW4gdGhlIG5ldHdvcmtzIG9mIGZlbWFsZSByZXNlYXJjaGVycy4KCi0gJEhfNSQ6RmVtYWxlIHNjaG9sYXJzIHdpbGwgaGF2ZSBhIGxvd2VyIGNsdXN0ZXJpbmcgY29lZmZpY2llbnQgdGhhbiBtYWxlIHNjaG9sYXJzLgoKLSAkSF82JDpDb250cm9sbGluZyBmb3IgYWNhZGVtaWMgcmFuaywgZ2VuZGVyIGRpZmZlcmVuY2VzIGFjcm9zcyAkSF8xJC0kSF81JCB3aWxsIHBlcnNpc3QuCgpTdXBwb3J0IGZvciB0aGVzZSBoeXBvdGhlc2VzIHdvdWxkIHN1Z2dlc3QgZmVtYWxlIHNjaG9sYXJzIG1heSBjb250ZW5kIHdpdGggbW9yZSBmcmFnbWVudGVkLCBsZXNzIG5hdmlnYWJsZSBjb2xsYWJvcmF0aW9uIG5ldHdvcmtzLgpUaGlzIGNvdWxkIGhpbmRlciBpbm5vdmF0aW9uIGFuZCBhZHZhbmNlbWVudC4KCkNvbnZlcnNlbHksIG51bGwgcmVzdWx0cyB3b3VsZCBpbXBseSB0aGUgdG9wb2xvZ2ljYWwgc3RydWN0dXJlIG9mIGNvLWF1dGhvcnNoaXAgdGllcyBpcyBub3QgaW5mbHVlbmNlZCBieSBnZW5kZXIuCkJ5IGVtcGlyaWNhbGx5IHRlc3RpbmcgZm9yIGdlbmRlciBlZmZlY3RzIGFjcm9zcyBjcml0aWNhbCBuZXR3b3JrIGRpbWVuc2lvbnMsIHRoaXMgcmVzZWFyY2ggZWx1Y2lkYXRlcyBoaWRkZW4gcmVsYXRpb25hbCBkeW5hbWljcyBzaGFwaW5nIGFjYWRlbWlhLgoKVW5jb3ZlcmluZyBvYmZ1c2NhdGVkIGNvbGxhYm9yYXRpdmUgYmFycmllcnMgaXMgZXNzZW50aWFsIGZvciBjb25zdHJ1Y3RpbmcgbW9yZSBlcXVpdGFibGUgcGF0aHdheXMgdG8gc2NpZW50aWZpYyBpbm5vdmF0aW9uLgpUaGlzIHN0dWR5J3MgaW50ZWdyYXRpb24gb2Ygc29jaWFsIG5ldHdvcmsgYW5kIGdlbmRlciB0aGVvcmllcyBwcm92aWRlcyBhIHJvYnVzdCBmcmFtZXdvcmsgdG8gaW52ZXN0aWdhdGUgZ2VuZGVyIGRpc3Bhcml0aWVzIHdpdGhpbiB0aGUgcmVsYXRpb25hbCBhcmNoaXRlY3R1cmUgZW5hYmxpbmcgc2Nob2xhcnNoaXAuCg==</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhlb3J5IgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDogCiAgICB0b2M6IHllcwogICAgbnVtYmVyX3NlY3Rpb25zOiBmYWxzZQogICAgdG9jX2NvbGxhcHNlOiB5ZXMKICAgIHRvY19mbG9hdDogeWVzCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmNzbDogYXBhLmNzbAotLS0KCgpgYGB7ciwgZWNobz1GQUxTRX0KaCA8LSAxCmBgYAojIGByIChoPC1oKzEpYCBUaGVvcnkKClRoaXMgc3R1ZHkgZW1wbG95cyB0d28gc2VtaW5hbCBzb2Npb2xvZ2ljYWwgdGhlb3JpZXMgb2Ygc29jaWFsIGNhcGl0YWwgYW5kIHNvY2lhbCBuZXR3b3JrIHN0cnVjdHVyZTogR3Jhbm92ZXR0ZXIncyB0aGVvcnkgb2YgdGhlIHN0cmVuZ3RoIG9mIHdlYWsgdGllcyAoMTk3MykgYW5kIEJ1cnQncyBzdHJ1Y3R1cmFsIGhvbGVzIHRoZW9yeSAoMTk5MikuCkdyYW5vdmV0dGVyIGRlbW9uc3RyYXRlZCB0aGF0IHdlYWsgYnJpZGdpbmcgdGllcyBvZnRlbiBsaW5rIGRpc2Nvbm5lY3RlZCBjbHVzdGVycyBpbiBhIG5ldHdvcmssIGVuYWJsaW5nIG5vdmVsLCBub25yZWR1bmRhbnQgaW5mb3JtYXRpb24gdG8gZmxvdyBiZXR3ZWVuIGdyb3Vwcy4KVGhpcyBpcyBiZWNhdXNlIHdlYWsgdGllcyBjb25uZWN0IGFjdG9ycyBlbWJlZGRlZCBpbiBkaWZmZXJlbnQgc29jaWFsIGNpcmNsZXMsIHByb3ZpZGluZyBhY2Nlc3MgdG8gbm92ZWwgaW5mb3JtYXRpb24gZnJvbSBkaXZlcnNlIG5ldHdvcmsgbmVpZ2hib3Job29kcy4KRXhwYW5kaW5nIG9uIHRoaXMsIEJ1cnQgc2hvd2VkIHRoYXQsIGJ5IHN0cmF0ZWdpY2FsbHkgYnVpbGRpbmcgYnJva2VyYWdlIHRpZXMgYWNyb3NzIHN0cnVjdHVyYWwgaG9sZXMgYmV0d2VlbiBkaXNjb25uZWN0ZWQgZ3JvdXBzLCBhY3RvcnMgYWNjcnVlIGNvbXBldGl0aXZlIHNvY2lhbCBjYXBpdGFsIGFkdmFudGFnZXMgdGhyb3VnaCBhY2Nlc3MgdG8gZGl2ZXJzZSwgbm9uLXJlZHVuZGFudCBrbm93bGVkZ2Ugc3Bhbm5pbmcgc3RydWN0dXJhbCBob2xlcyBiZXR3ZWVuIGNsdXN0ZXJzLgoKVGhlc2UgZm91bmRhdGlvbmFsIG5ldHdvcmsgdGhlb3JpZXMgZWx1Y2lkYXRlIGhvdyBzcGVjaWZpYyBuZXR3b3JrIHRvcG9sb2d5IGFuZCBjb25uZWN0aXZpdHkgcGF0dGVybnMgc2hhcGUgaW5mb3JtYXRpb24gZGlmZnVzaW9uIGR5bmFtaWNzIGFuZCBpbmVxdWFsaXR5IG9mIGFjY2VzcyB0byBzb2NpYWwgY2FwaXRhbCByZXNvdXJjZXMgZW1iZWRkZWQgaW4gdGhlIG5ldHdvcmsgc3RydWN0dXJlLgpIaWdobHkgaW50ZXJjb25uZWN0ZWQgc21hbGwtd29ybGQgbmV0d29ya3Mgd2l0aCBoaWdoIHRyaWFkaWMgY2xvc3VyZSBwcm9wYWdhdGUgaW5mb3JtYXRpb24gcmFwaWRseSB0aHJvdWdoIGRlbnNlIHJlZHVuZGFudCB0aWVzIGJ1dCBtYXkgaW1wZWRlIHRoZSBwZW5ldHJhdGlvbiBvZiBub3ZlbCBub24tcmVkdW5kYW50IGluZm9ybWF0aW9uIGZyb20gb3V0c2lkZSBjbHVzdGVycy4KQ29udmVyc2VseSwgZnJhZ21lbnRlZCBuZXR3b3JrcyB3aXRoIG1hbnkgYnJva2VyYWdlIG9wcG9ydHVuaXRpZXMgYWNyb3NzIHN0cnVjdHVyYWwgaG9sZXMgYmV0d2VlbiBkaXNjb25uZWN0ZWQgYWN0b3JzIHRlbmQgdG8gY29uc3RyYWluIHdpZGVzcHJlYWQgY29sbGFib3JhdGl2ZSBpbm5vdmF0aW9uIGJlY2F1c2Ugb2YgbGFjayBvZiBjb25uZWN0aXZpdHkuClRoaXMgcHJvdmlkZXMgdGhlIGltcGV0dXMgZm9yIGEgZGV0YWlsZWQgc29jaWFsIG5ldHdvcmsgYW5hbHlzaXMgdG8gbWFwIHRoZSB0b3BvbG9neSBhbmQgY29ubmVjdGl2aXR5IHBhdHRlcm5zIG9mIGZhY3VsdHkgY29hdXRob3JzaGlwIG5ldHdvcmtzLgoKVGhpcyByZXNlYXJjaCBpcyBhbHNvIGdyb3VuZGVkIGluIGV4dGVuc2l2ZSBzb2Npb2xvZ2ljYWwgd29yayBvbiBwZXJzaXN0ZW50IGdlbmRlciBkaXNwYXJpdGllcyBpbiBhY2FkZW1pYS4KUGFzdCBzdHVkaWVzIGhhdmUgc2hvd24gdGhhdCBmZW1hbGUgc2Nob2xhcnMgZmFjZSBsb3dlciByZXNlYXJjaCBwcm9kdWN0aXZpdHksIHdlYWtlciBpbnRlcm5hdGlvbmFsIHZpc2liaWxpdHksIGFuZCBsb3dlciBjaXRhdGlvbiBpbXBhY3QgdGhhbiBtYWxlcywgZXZlbiBhZnRlciBhY2NvdW50aW5nIGZvciBhY2FkZW1pYyByYW5rLCBkaXNjaXBsaW5lLCBhbmQgb3RoZXIgZmFjdG9ycyAoRGlvbiBldCBhbC4sIDIwMTM7IERpb24gZXQgYWwuLCAyMDE4KS4KVGhpcyBvY2N1cnMgYmVjYXVzZSBvZiB0aGUgYWNjdW11bGF0aW9uIG9mIHN1YnRsZSBnZW5kZXIgYmlhc2VzIHBlcm1lYXRpbmcgY3JpdGljYWwgYWNhZGVtaWMgcHJvY2Vzc2VzLCBpbmNsdWRpbmcgcGVlciByZXZpZXcsIGhpcmluZywgcHJvbW90aW9uLCBzYWxhcmllcywgYW5kIHNlcnZpY2UgYnVyZGVuLgpIb3dldmVyLCBmZXcgc3R1ZGllcyBoYXZlIGZvY3VzZWQgZGlyZWN0bHkgb24gZWx1Y2lkYXRpbmcgdGhlIGdlbmRlciBhc3ltbWV0cnkgaW4gY29sbGFib3JhdGl2ZSBzb2NpYWwgY2FwaXRhbCByZXNvdXJjZXMgdHJhbnNtaXR0ZWQgdGhyb3VnaCBzY2hvbGFybHkgY28tYXV0aG9yc2hpcCBuZXR3b3Jrcy4KCkVsdWNpZGF0aW5nIGdlbmRlciBhc3ltbWV0cnkgaW4gdGhlIHJlbGF0aW9uYWwgYXJjaGl0ZWN0dXJlIHRoYXQgc2hhcGVzIGtub3dsZWRnZSBjcmVhdGlvbiBpcyBwaXZvdGFsLgpDb2xsYWJvcmF0aW9uIHByb3ZpZGVzIGFjY2VzcyB0byBpbmZvcm1hdGlvbiwgcmVzb3VyY2VzLCB2aXNpYmlsaXR5LCBhbmQgY2FyZWVyIG9wcG9ydHVuaXRpZXMuCklmIHdvbWVuIGxhY2sgYWNjZXNzIHRvIGVxdWl0YWJsZSBjb2xsYWJvcmF0aXZlIG5ldHdvcmtzLCBpdCBtYXkgZXhhY2VyYmF0ZSBvdGhlciBzdHJ1Y3R1cmFsIGRpc2FkdmFudGFnZXMuCgpJbnRlZ3JhdGluZyB0aGVzZSBwZXJzcGVjdGl2ZXMsIHdlIGh5cG90aGVzaXplZCB0aGF0IHRoZSBzdHJ1Y3R1cmUgb2YgZmFjdWx0eSBjby1hdXRob3JzaGlwIG5ldHdvcmtzIG1heSBleGhpYml0IGdlbmRlciBhc3ltbWV0cnkgd2l0aCBzaWduaWZpY2FudCBpbXBsaWNhdGlvbnMuClNwZWNpZmljYWxseToKCiRIXzEkOiBGZW1hbGUgcmVzZWFyY2hlcnMgd2lsbCBoYXZlIGZld2VyIG5ldHdvcmsgY2xvc3VyZXMgdGhhbiBtYWxlIHJlc2VhcmNoZXJzLCBsaW1pdGluZyBhY2Nlc3MgdG8gbm92ZWwgbm9uLXJlZHVuZGFudCBpbmZvcm1hdGlvbiBmcm9tIGRpdmVyc2UgbmV0d29yayBuZWlnaGJvcmhvb2RzLgokSF8yJDogRmVtYWxlIHNjaG9sYXJzIHdpbGwgaGF2ZSBsb3dlciBiZXR3ZWVubmVzcyBjZW50cmFsaXR5IHRoYW4gbWFsZSBzY2hvbGFycywgcmVkdWNpbmcgYnJva2VyYWdlIHBvd2VyIHRvIHRyYW5zbWl0IGtub3dsZWRnZSBhY3Jvc3MgZGlzY29ubmVjdGVkIHNjaG9sYXJseSBjb21tdW5pdGllcy4KJEhfMyQ6IEVnby1uZXR3b3JrIGRlbnNpdHkgd2lsbCBiZSBsb3dlciBmb3Igd29tZW4gdGhhbiBmb3IgbWVuLCBwb3RlbnRpYWxseSBjb25zdHJhaW5pbmcgY29sbGFib3JhdGl2ZSBvcHBvcnR1bml0aWVzIGFuZCB2aXNpYmlsaXR5LgokSF80JDogVGhlIGF2ZXJhZ2Ugc2hvcnRlc3QgcGF0aCBsZW5ndGggYW5kIG5ldHdvcmsgZGlhbWV0ZXIgYXJlIGdyZWF0ZXIgaW4gdGhlIG5ldHdvcmtzIG9mIGZlbWFsZSByZXNlYXJjaGVycywgaW5kaWNhdGluZyBsb3dlciBnbG9iYWwgbmV0d29yayBuYXZpZ2FiaWxpdHkuCiRIXzUkOiBGZW1hbGUgc2Nob2xhcnMgaGF2ZSBhIGxvd2VyIGNsdXN0ZXJpbmcgY29lZmZpY2llbnQgdGhhbiBtYWxlIHNjaG9sYXJzLCBzdWdnZXN0aW5nIHRoYXQga25vd2xlZGdlIGRpZmZ1c2lvbiBtYXkgYmUgbGVzcyBlZmZpY2llbnQgdGhyb3VnaCB0aGVpciBsb2NhbCBuZXR3b3Jrcy4KJEhfNiQ6IFRoZXNlIGdlbmRlciBhc3ltbWV0cmllcyB3aWxsIHBlcnNpc3QgYWZ0ZXIgY29udHJvbGxpbmcgZm9yIGFjYWRlbWljIHJhbmssIHNpZ25pZnlpbmcgdGhhdCB0aGV5IGFyZSBub3Qgc29sZWx5IGF0dHJpYnV0YWJsZSB0byByYW5rIGRpc3Bhcml0aWVzLCBidXQgcmF0aGVyIGVtYmVkZGVkIGluIHRoZSByZWxhdGlvbmFsIGFyY2hpdGVjdHVyZS4KClN1cHBvcnQgZm9yIHRoZXNlIGh5cG90aGVzaXplZCBnZW5kZXIgYXN5bW1ldHJpZXMgd291bGQgaW1wbHkgdGhhdCBmZW1hbGUgc2Nob2xhcnMgZmFjZSBtb3JlIGZyYWdtZW50ZWQgYW5kIGxlc3MgbmF2aWdhYmxlIGNvbGxhYm9yYXRpb24gbmV0d29ya3MsIGhpbmRlcmluZyBpbm5vdmF0aW9uIGFuZCBhZHZhbmNlbWVudC4KVGhlIG51bGwgcmVzdWx0cyB3b3VsZCBpbmRpY2F0ZSB0aGF0IHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsgc3RydWN0dXJlIGRvZXMgbm90IHZhcnkgYnkgZ2VuZGVyLgpCeSBlbXBpcmljYWxseSB0ZXN0aW5nIGZvciBnZW5kZXIgZWZmZWN0cywgdGhpcyByZXNlYXJjaCBlbHVjaWRhdGVzIHRoZSBvYnNjdXJlZCByZWxhdGlvbmFsIGR5bmFtaWNzIHRoYXQgc2hhcGUgYWNhZGVtaWEuClVuY292ZXJpbmcgaGlkZGVuIGNvbGxhYm9yYXRpdmUgYmFycmllcnMgaXMgZXNzZW50aWFsIGZvciBjb25zdHJ1Y3RpbmcgZXF1aXRhYmxlIHBhdGh3YXlzIGZvciBzY2llbnRpZmljIHByb2dyZXNzLgpJbnRlZ3JhdGluZyBzb2NpYWwgY2FwaXRhbCBhbmQgZ2VuZGVyIHRoZW9yaWVzIHByb3ZpZGVzIGEgcm9idXN0IGZyYW1ld29yayBmb3IgaW52ZXN0aWdhdGluZyBnZW5kZXIgYXN5bW1ldHJ5IGluIGNvbGxhYm9yYXRpdmUgc2Nob2xhcnNoaXAgYXJjaGl0ZWN0dXJlcy4K</div>
 
 
 </div>

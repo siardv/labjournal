@@ -1,0 +1,205 @@
+---
+title: "Analysis (draft)"
+output:
+  html_document: 
+    toc: yes
+    number_sections: false
+    toc_collapse: yes
+    toc_float: yes
+author: "by: Siard van den Bosch"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Analysis (draft)
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+# Load RSiena package
+library(RSiena)
+library(sna)
+library(network)
+```
+
+Generate simulated collaboration network data with 50 nodes (researchers) and 3 time points
+```{r echo=TRUE}
+set.seed(123)
+net1 <- rgraph(50, mode = "graph")
+net2 <- rgraph(50, mode = "graph")
+net3 <- rgraph(50, mode = "graph")
+
+head(net1, 5)
+```
+
+### Simulate 3 networks with 50 nodes each to create longitudinal network data required for RSiena.
+
+The networks must be stored in an array with dimensions nodes x nodes x timepoints. This organizes the data properly for analysis in RSiena.
+```{r echo=TRUE}
+# Create an array to store the networks
+nets <- array(c(net1, net2, net3), dim = c(50, 50, 3))
+```
+
+### Convert the array into a RSiena network object
+This step is required for further analysis. "oneMode" indicates a single set of nodes.
+```{r echo=TRUE}
+(net <- sienaNet(nets, type = "oneMode"))
+```
+
+### Create a node attribute covariate for gender.
+This is required to test gender homophily and differences in network position.
+```{r echo=TRUE}
+# Generate node attribute for gender (male = 1, female = 2)
+(gender <- sample(1:2, 50, replace = TRUE))
+```
+
+### Convert the gender node attribute into a RSiena covariate object for use in effects.
+```{r echo=TRUE}
+# Create gender covariate
+(gender <- coCovar(gender))
+```
+
+### Combine network and covariates into one RSiena data object required for model estimation.
+```{r echo=TRUE}
+# Create siena data object
+(data <- sienaDataCreate(net, gender))
+```
+
+
+### Generate an initial effetcs object based on the variables in the data.
+This specifies the effects to include in the RSiena model.
+```{r echo=TRUE}
+# Get initial effects
+(eff <- getEffects(data))
+```
+
+
+### Add structural effects for transitivity and 3-cycles.
+This controls for basic structural network tendencies.
+```{r echo=TRUE}
+# Include structural effects
+(eff <- includeEffects(eff, transTrip, cycle3))
+```
+
+
+### Include homophily effect for the gender covariate.
+This will test gender similarity in collaborations (H1).
+```{r echo=TRUE}
+# Include gender homophily effect
+(eff <- includeEffects(eff, simX, interaction1 = gender))
+```
+
+
+Create model object to store results. "colab_model" gives the output file a name.
+```{r echo=TRUE}
+# Model creation
+(mod <- sienaModelCreate(projname = "colab_model"))
+```
+### Run the model
+[Why is `siena07` the most suitable method?](https://siardv.github.io/LabJournal/rsiena_analysis_method.html)
+```{r echo=TRUE}
+(ans <- readRDS("addfiles/ans.rds"))
+# (ans <- siena07(mod, data = data, effects = eff))
+```
+
+Estimate model parameters based on data and effects. Returns model results.
+
+```{r echo=TRUE}
+# Interpret results
+summary(ans)
+```
+
+## Test hypotheses
+Check significance and direction of effects to assess support for hypotheses.
+
+The positive and significant parameter for the gender homophily effect would indicate support for H1 - researchers collaborate with others of the same gender.
+
+To test the other hypotheses, we would need additional network metrics as covariates, such as:
+
+### Betweenness centrality
+```{r echo=TRUE}
+# gender_bet <- betweenness(net, v = V(net)$gender)
+```
+
+### Convert betweenness scores into a RSiena covariate.
+Calculate betweenness centrality scores separately for each gender. This is needed to test if position in the network differs by gender (H2).
+```{r echo=TRUE}
+# bet <- coCovar(gender_bet)
+```
+
+### Ego network density
+Calculate ego network density separately for each gender. This will be used to test for differences in local network interconnectedness (H3).
+```{r echo=TRUE}
+# ego_dens <- ego.density(net1, v = V(net1)$gender)
+```
+
+
+### Create density covariate
+Convert the ego density scores into a RSiena covariate.
+```{r echo=TRUE}
+# dens <- coCovar(ego_dens)
+```
+
+
+### Average path length
+Calculate average path length in network. Used to test for differences in global network navigation (H4).
+```{r echo=TRUE}
+# av_path <- average.path.length(net1, directed = FALSE)
+```
+
+
+### Diameter
+Calculate network diameter. Also indicates global network navigability (H4).
+```{r echo=TRUE}
+# diam <- diameter(net1, directed = FALSE)
+```
+
+### Clustering coefficient
+Calculate global clustering coefficient. Tests if local network interconnectedness differs by gender (H5).
+
+Include appropriate effects with these covariates to test hypotheses:
+
+```{r echo=TRUE}
+# clust <- transitivity(net1, type = "global")
+```
+
+
+**H2**
+Include effect of betweenness on incoming ties to test if position affects collaborations.
+
+```{r echo=TRUE}
+# eff <- includeEffects(eff, altX, interaction1 = bet)
+```
+
+
+**H3**
+Effect of ego density on out ties tests if local density shapes collaborations.
+
+```{r echo=TRUE}
+# eff <- includeEffects(eff, egoX, interaction1 = dens)
+```
+
+
+**H4**
+Effect of path length on in ties tests for differences in global network reach.
+
+```{r echo=TRUE}
+# eff <- includeEffects(eff, altX, interaction1=av_path)
+```
+
+
+**H5**
+Effect of diameter on in ties also indicates differences in global network structure.
+
+```{r echo=TRUE}
+# eff <- includeEffects(eff, altX, interaction1=diam)
+```
+
+
+**H6**
+Ego effect for clustering tests if local cohesion affects collaborations.  
+
+```{r echo=TRUE}
+# eff <- includeEffects(eff, egoX, interaction1=clust)
+```
+

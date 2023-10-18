@@ -3,8 +3,9 @@ title: "Descriptive Network Analysis"
 output:
   html_document: 
     toc: yes
-    number_sections: yes
-    highlight: kate
+    number_sections: false
+    toc_collapse: yes
+    toc_float: yes
 author: "by: Siard van den Bosch"
 bibliography: references.bib
 csl: apa.csl

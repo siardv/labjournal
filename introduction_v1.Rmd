@@ -1,11 +1,10 @@
 ---
 title: "Introduction"
 output:
-  html_document: 
-    toc: yes
-    number_sections: false
-    toc_collapse: yes
-    toc_float: yes
+  html_document:
+    toc: true
+    number_sections: true
+    highlight: kate
 author: "by: Siard van den Bosch"
 bibliography: references.bib
 csl: apa.csl
@@ -16,15 +15,15 @@ Academic research is predicated on collaboration, enabling scholars to collectiv
 
 While some studies have analyzed these gender differences through contextual lenses, social network analysis provides unique and powerful insights by directly elucidating the underlying relational architecture shaping collaboration in academia. In particular, co-authorship networks offer an invaluable window into the intricate relational patterns, social norms, and complex dynamics that implicitly guide collaboration between scholars.
 
-Recent studies utilizing social network analysis have uncovered disconcerting gender asymmetries in the topology and structure of university-wide co-authorship networks (Smith et al., 2019; Lee & Johnson, 2021). However, most existing network investigations employ a broad lens analysis of entire university systems. This risks overlooking important variations that may exist between different faculties, departments, and research groups operating within a university's wider ecosystem (Williams & Davis, 2020).
+Recent studies utilizing social network analysis have uncovered disconcerting gender asymmetries in the topology and structure of university-wide co-authorship networks. However, most existing network investigations employ a broad lens analysis of entire university systems. This risks overlooking important variations that may exist between different faculties, departments, and research groups operating within a university's wider ecosystem.
 
 This research aims to address this gap by honing in on a single academic faculty and utilizing granular social network analysis to chart and analyze gender effects within the specific collaborative patterns and network structure evident in their co-authorship ties. 
 
-Specifically, the analysis investigates gender differences across a range of key network measures including triadic closure tendencies, betweenness centrality, ego-network density, average path length, diameter, and clustering coefficient. Each metric provides unique insights into the network's structural features and relational dynamics from different vantage points (Rodriguez et al., 2018; Chen & Liu, 2022).
+Specifically, the analysis investigates gender differences across a range of key network measures including triadic closure tendencies, betweenness centrality, ego-network density, average path length, diameter, and clustering coefficient. Each metric provides unique insights into the network's structural features and relational dynamics from different vantage points.
 
-Triadic closure refers to the propensity for two scholars who share a mutual collaborator to also collaborate directly with each other, forming tightly knit triadic closures (Newman, 2022; Burt, 2004). Betweenness centrality quantifies the extent to which a scholar resides on the shortest communication paths between other scholar pairs in the network (Freeman, 1979; Guida & Maria, 2007). Ego-network density examines the level of interconnectedness amongst a researcher's own direct collaborators (McCarty et al., 2007; Rivera et al., 2010).
+Triadic closure refers to the propensity for two scholars who share a mutual collaborator to also collaborate directly with each other, forming tightly knit triadic closures. Betweenness centrality quantifies the extent to which a scholar resides on the shortest communication paths between other scholar pairs in the network. Ego-network density examines the level of interconnectedness amongst a researcher's own direct collaborators. 
 
-Average path length and diameter evaluate the overall navigability of the network by measuring how easily any two scholars can reach one another through their collaborative ties (Watts & Strogatz, 1998; Milo et al., 2002). Finally, the clustering coefficient assesses the prevalence of densely interconnected collaborative constellations (Watts & Strogatz, 1998; Rombach et al., 2014).
+Average path length and diameter evaluate the overall navigability of the network by measuring how easily any two scholars can reach one another through their collaborative ties. Finally, the clustering coefficient assesses the prevalence of densely interconnected collaborative constellations.
 
 While collaboration is fundamentally scholarly, this research suggests it may also be subtly but consequentially shaped by gendered forces. Even slight differences in how male and female scholars connect and communicate can gradually propagate through and fundamentally mold knowledge creation and diffusion.
 
@@ -32,7 +31,10 @@ Mapping out these disparities and explicating their multifaceted implications is
 
 The goal is to move beyond descriptive network mapping to uncover the underlying relational mechanisms guiding scholarly cooperation. Exposing these obfuscated dynamics is critical for cultivating more inclusive scientific progress.
 
+
+
 ## Research Questions
+
 - $RQ_1$: What is the role of gender in triadic closure within the co-authorship network of this faculty?
 
 Triadic closure refers to the tendency in social networks for two people who have a common acquaintance to become connected. This question seeks to uncover whether there are gender influences in this phenomenon.

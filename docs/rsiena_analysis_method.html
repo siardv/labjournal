@@ -12,7 +12,7 @@
 <meta name="author" content="by: Siard van den Bosch" />
 
 
-<title>Key Data Components for Social Network Analysis</title>
+<title>RSiena Analysis Method</title>
 
 <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -494,93 +494,83 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Key Data Components for Social Network
-Analysis</h1>
+<h1 class="title toc-ignore">RSiena Analysis Method</h1>
 <h4 class="author">by: Siard van den Bosch</h4>
 
 </div>
 
 
-<div id="key-data-components-for-social-network-analysis"
-class="section level1">
-<h1>Key Data Components for Social Network Analysis</h1>
-<div id="nodes" class="section level2">
-<h2>Nodes</h2>
-<p>The nodes refer to the individual researchers or authors that will
-form the basis of the co-authorship network analysis. It is important at
-this stage to gather the names and unique identifiers for each
-researcher that will be included in the network. Unique identifiers
-could include ORCID IDs, employee IDs, or other identifiers that can
-disambiguate researchers with common names.</p>
+<div id="rsiena-analysis-method" class="section level1">
+<h1>RSiena Analysis Method</h1>
+<p>The most suitable RSiena analysis method to test the hypotheses is
+<code>siena07</code>. The key reasons are:</p>
+<div id="single-network-longitudinal-analysis" class="section level3">
+<h3>Single network longitudinal analysis</h3>
+<p>The research involves analyzing the co-authorship network within a
+single faculty department over time. <code>siena07</code> is most
+suitable for modeling the dynamics of a single network
+longitudinally.</p>
 </div>
-<div id="node-attributes" class="section level2">
-<h2>Node Attributes</h2>
-<p>In addition to identifying the nodes, it is useful to collect
-attribute data for each node. For researcher nodes, this could include
-data on gender identity, academic rank or position, departmental or
-institutional affiliation, seniority, and any other attributes that may
-be relevant to the analysis. Gathering extensive attribute data for each
-node enables conducting more sophisticated analysis on how different
-researcher characteristics may influence the structure of the
-co-authorship network.</p>
+<div id="model-network-dynamics" class="section level3">
+<h3>Model network dynamics</h3>
+<p>A key goal is assessing network dynamics like triadic closure
+tendencies over time. <code>siena07</code> estimates parameters for
+actor-oriented models to analyze such longitudinal dynamics.</p>
 </div>
-<div id="ties" class="section level2">
-<h2>Ties</h2>
-<p>The ties represent the co-authorship relationships and connections
-between the researcher nodes. It is crucial to systematically capture
-every instance of co-authorship between the researchers that are
-included in the defined network boundary. This enables comprehensively
-mapping out the connections and relationships that exist between the
-nodes.</p>
+<div id="test-gender-differences" class="section level3">
+<h3>Test gender differences</h3>
+<p>The hypotheses focus on comparing network measures like closure,
+centrality, and density between male and female researchers.
+<code>siena07</code> allows specifying gender as an attribute variable
+and interacting it with structural effects to test for differences.</p>
 </div>
-<div id="tie-attributes" class="section level2">
-<h2>Tie Attributes</h2>
-<p>In addition to capturing the co-authorship ties, collecting attribute
-data on each tie can also provide valuable context. Tie attributes could
-include details like publication name, publication year, journal name,
-number of citations, or other attributes that describe the nature of
-that specific co-authorship tie. Capturing tie attributes allows for
-conducting more granular analysis.</p>
+<div id="assess-closure-centrality-density" class="section level3">
+<h3>Assess closure, centrality, density</h3>
+<p>The hypotheses focus on comparing network measures like closure,
+centrality, and density between male and female researchers.
+<code>siena07</code> allows specifying gender as an attribute variable
+and interacting it with structural effects to test for differences.</p>
 </div>
-<div id="network-boundary" class="section level2">
-<h2>Network Boundary</h2>
-<p>An important early step is to clearly define the criteria that will
-be used to delineate the boundary of the co-authorship network under
-study. This involves determining what specific researchers will be
-included versus excluded from the faculty network. Defining the network
-boundary also entails specifying what constitutes a tie - for instance,
-whether only co-authorship of journal articles is considered, or if
-other publication types are included.</p>
+<div id="estimate-parameters-for-actor-oriented-models"
+class="section level3">
+<h3>Estimate parameters for actor-oriented models</h3>
+<p>A key goal is assessing network dynamics like triadic closure
+tendencies over time. <code>siena07</code> estimates parameters for
+actor-oriented models to analyze such longitudinal dynamics.</p>
 </div>
-<div id="temporal-data" class="section level2">
-<h2>Temporal Data</h2>
-<p>In addition to static data on the network structure, capturing
-temporal data is also important for enabling analysis of how the network
-changes over time. Collecting information on the time periods when
-specific co-authorship ties were active can enable more sophisticated
-temporal network analysis and allow examining the evolution of the
-network.</p>
+<div id="analyze-network-mechanisms-like-transitivity-reciprocity"
+class="section level3">
+<h3>Analyze network mechanisms like transitivity, reciprocity</h3>
+<p>The theory highlights analyzing closure, bridges, redundancy etc.
+<code>siena07</code> enables including effects like transitivity,
+reciprocity, multiplexity to capture these mechanisms.</p>
 </div>
-<div id="missing-data" class="section level2">
-<h2>Missing Data</h2>
-<p>As with any research study, it is important to thoroughly document
-any issues with incomplete data on nodes, ties, attributes, or temporal
-data. Missing data can bias network metrics and analysis. Keeping track
-of missing data enables being aware of limitations and being cautious
-about over-interpreting the results.</p>
+<div id="model-global-network-effects" class="section level3">
+<h3>Model global network effects</h3>
+<p>Assessing shortest paths, diameter, clustering is also important.
+<code>siena07</code> can directly model and test such global network
+effects.</p>
 </div>
-<div id="data-structure" class="section level2">
-<h2>Data Structure</h2>
-<p>The data collected will need to be structured and formatted in a way
-that is compatible with the social network analysis tools that will be
-used. This may require converting and restructuring the raw data into
-edge lists, adjacency matrices, or other required formats. Data
-formatting is an essential step to ensure the information can be
-properly imported and analyzed.</p>
+<div id="customized-effects-for-hypotheses" class="section level3">
+<h3>Customized effects for hypotheses</h3>
+<p><code>siena07</code> allows specifying customized effects to test the
+specific hypotheses.</p>
+</div>
+<div id="longitudinal-capabilities" class="section level3">
+<h3>Longitudinal capabilities</h3>
+<p><code>siena07</code> is most suitable because it allows modeling
+longitudinal single network dynamics required for the research
+goals.</p>
+</div>
+<div id="single-network-focus" class="section level3">
+<h3>Single network focus</h3>
+<p>No meta-analysis across multiple groups or networks is needed here,
+so <code>siena07</code>’s single network capabilities suffice. siena08
+is more relevant for multi-network models.</p>
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiS2V5IERhdGEgQ29tcG9uZW50cyBmb3IgU29jaWFsIE5ldHdvcmsgQW5hbHlzaXMiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OiAKICAgIHRvYzogeWVzCiAgICBudW1iZXJfc2VjdGlvbnM6IGZhbHNlCiAgICB0b2NfY29sbGFwc2U6IHllcwogICAgdG9jX2Zsb2F0OiB5ZXMKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKLS0tCgojIEtleSBEYXRhIENvbXBvbmVudHMgZm9yIFNvY2lhbCBOZXR3b3JrIEFuYWx5c2lzCgojIyBOb2RlcwpUaGUgbm9kZXMgcmVmZXIgdG8gdGhlIGluZGl2aWR1YWwgcmVzZWFyY2hlcnMgb3IgYXV0aG9ycyB0aGF0IHdpbGwgZm9ybSB0aGUgYmFzaXMgb2YgdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yayBhbmFseXNpcy4gSXQgaXMgaW1wb3J0YW50IGF0IHRoaXMgc3RhZ2UgdG8gZ2F0aGVyIHRoZSBuYW1lcyBhbmQgdW5pcXVlIGlkZW50aWZpZXJzIGZvciBlYWNoIHJlc2VhcmNoZXIgdGhhdCB3aWxsIGJlIGluY2x1ZGVkIGluIHRoZSBuZXR3b3JrLiBVbmlxdWUgaWRlbnRpZmllcnMgY291bGQgaW5jbHVkZSBPUkNJRCBJRHMsIGVtcGxveWVlIElEcywgb3Igb3RoZXIgaWRlbnRpZmllcnMgdGhhdCBjYW4gZGlzYW1iaWd1YXRlIHJlc2VhcmNoZXJzIHdpdGggY29tbW9uIG5hbWVzLgoKIyMgTm9kZSBBdHRyaWJ1dGVzCkluIGFkZGl0aW9uIHRvIGlkZW50aWZ5aW5nIHRoZSBub2RlcywgaXQgaXMgdXNlZnVsIHRvIGNvbGxlY3QgYXR0cmlidXRlIGRhdGEgZm9yIGVhY2ggbm9kZS4gRm9yIHJlc2VhcmNoZXIgbm9kZXMsIHRoaXMgY291bGQgaW5jbHVkZSBkYXRhIG9uIGdlbmRlciBpZGVudGl0eSwgYWNhZGVtaWMgcmFuayBvciBwb3NpdGlvbiwgZGVwYXJ0bWVudGFsIG9yIGluc3RpdHV0aW9uYWwgYWZmaWxpYXRpb24sIHNlbmlvcml0eSwgYW5kIGFueSBvdGhlciBhdHRyaWJ1dGVzIHRoYXQgbWF5IGJlIHJlbGV2YW50IHRvIHRoZSBhbmFseXNpcy4gR2F0aGVyaW5nIGV4dGVuc2l2ZSBhdHRyaWJ1dGUgZGF0YSBmb3IgZWFjaCBub2RlIGVuYWJsZXMgY29uZHVjdGluZyBtb3JlIHNvcGhpc3RpY2F0ZWQgYW5hbHlzaXMgb24gaG93IGRpZmZlcmVudCByZXNlYXJjaGVyIGNoYXJhY3RlcmlzdGljcyBtYXkgaW5mbHVlbmNlIHRoZSBzdHJ1Y3R1cmUgb2YgdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yay4KCiMjIFRpZXMKVGhlIHRpZXMgcmVwcmVzZW50IHRoZSBjby1hdXRob3JzaGlwIHJlbGF0aW9uc2hpcHMgYW5kIGNvbm5lY3Rpb25zIGJldHdlZW4gdGhlIHJlc2VhcmNoZXIgbm9kZXMuIEl0IGlzIGNydWNpYWwgdG8gc3lzdGVtYXRpY2FsbHkgY2FwdHVyZSBldmVyeSBpbnN0YW5jZSBvZiBjby1hdXRob3JzaGlwIGJldHdlZW4gdGhlIHJlc2VhcmNoZXJzIHRoYXQgYXJlIGluY2x1ZGVkIGluIHRoZSBkZWZpbmVkIG5ldHdvcmsgYm91bmRhcnkuIFRoaXMgZW5hYmxlcyBjb21wcmVoZW5zaXZlbHkgbWFwcGluZyBvdXQgdGhlIGNvbm5lY3Rpb25zIGFuZCByZWxhdGlvbnNoaXBzIHRoYXQgZXhpc3QgYmV0d2VlbiB0aGUgbm9kZXMuCgojIyBUaWUgQXR0cmlidXRlcwpJbiBhZGRpdGlvbiB0byBjYXB0dXJpbmcgdGhlIGNvLWF1dGhvcnNoaXAgdGllcywgY29sbGVjdGluZyBhdHRyaWJ1dGUgZGF0YSBvbiBlYWNoIHRpZSBjYW4gYWxzbyBwcm92aWRlIHZhbHVhYmxlIGNvbnRleHQuIFRpZSBhdHRyaWJ1dGVzIGNvdWxkIGluY2x1ZGUgZGV0YWlscyBsaWtlIHB1YmxpY2F0aW9uIG5hbWUsIHB1YmxpY2F0aW9uIHllYXIsIGpvdXJuYWwgbmFtZSwgbnVtYmVyIG9mIGNpdGF0aW9ucywgb3Igb3RoZXIgYXR0cmlidXRlcyB0aGF0IGRlc2NyaWJlIHRoZSBuYXR1cmUgb2YgdGhhdCBzcGVjaWZpYyBjby1hdXRob3JzaGlwIHRpZS4gQ2FwdHVyaW5nIHRpZSBhdHRyaWJ1dGVzIGFsbG93cyBmb3IgY29uZHVjdGluZyBtb3JlIGdyYW51bGFyIGFuYWx5c2lzLgoKIyMgTmV0d29yayBCb3VuZGFyeQpBbiBpbXBvcnRhbnQgZWFybHkgc3RlcCBpcyB0byBjbGVhcmx5IGRlZmluZSB0aGUgY3JpdGVyaWEgdGhhdCB3aWxsIGJlIHVzZWQgdG8gZGVsaW5lYXRlIHRoZSBib3VuZGFyeSBvZiB0aGUgY28tYXV0aG9yc2hpcCBuZXR3b3JrIHVuZGVyIHN0dWR5LiBUaGlzIGludm9sdmVzIGRldGVybWluaW5nIHdoYXQgc3BlY2lmaWMgcmVzZWFyY2hlcnMgd2lsbCBiZSBpbmNsdWRlZCB2ZXJzdXMgZXhjbHVkZWQgZnJvbSB0aGUgZmFjdWx0eSBuZXR3b3JrLiBEZWZpbmluZyB0aGUgbmV0d29yayBib3VuZGFyeSBhbHNvIGVudGFpbHMgc3BlY2lmeWluZyB3aGF0IGNvbnN0aXR1dGVzIGEgdGllIC0gZm9yIGluc3RhbmNlLCB3aGV0aGVyIG9ubHkgY28tYXV0aG9yc2hpcCBvZiBqb3VybmFsIGFydGljbGVzIGlzIGNvbnNpZGVyZWQsIG9yIGlmIG90aGVyIHB1YmxpY2F0aW9uIHR5cGVzIGFyZSBpbmNsdWRlZC4KCiMjIFRlbXBvcmFsIERhdGEKSW4gYWRkaXRpb24gdG8gc3RhdGljIGRhdGEgb24gdGhlIG5ldHdvcmsgc3RydWN0dXJlLCBjYXB0dXJpbmcgdGVtcG9yYWwgZGF0YSBpcyBhbHNvIGltcG9ydGFudCBmb3IgZW5hYmxpbmcgYW5hbHlzaXMgb2YgaG93IHRoZSBuZXR3b3JrIGNoYW5nZXMgb3ZlciB0aW1lLiBDb2xsZWN0aW5nIGluZm9ybWF0aW9uIG9uIHRoZSB0aW1lIHBlcmlvZHMgd2hlbiBzcGVjaWZpYyBjby1hdXRob3JzaGlwIHRpZXMgd2VyZSBhY3RpdmUgY2FuIGVuYWJsZSBtb3JlIHNvcGhpc3RpY2F0ZWQgdGVtcG9yYWwgbmV0d29yayBhbmFseXNpcyBhbmQgYWxsb3cgZXhhbWluaW5nIHRoZSBldm9sdXRpb24gb2YgdGhlIG5ldHdvcmsuCgojIyBNaXNzaW5nIERhdGEKQXMgd2l0aCBhbnkgcmVzZWFyY2ggc3R1ZHksIGl0IGlzIGltcG9ydGFudCB0byB0aG9yb3VnaGx5IGRvY3VtZW50IGFueSBpc3N1ZXMgd2l0aCBpbmNvbXBsZXRlIGRhdGEgb24gbm9kZXMsIHRpZXMsIGF0dHJpYnV0ZXMsIG9yIHRlbXBvcmFsIGRhdGEuIE1pc3NpbmcgZGF0YSBjYW4gYmlhcyBuZXR3b3JrIG1ldHJpY3MgYW5kIGFuYWx5c2lzLiBLZWVwaW5nIHRyYWNrIG9mIG1pc3NpbmcgZGF0YSBlbmFibGVzIGJlaW5nIGF3YXJlIG9mIGxpbWl0YXRpb25zIGFuZCBiZWluZyBjYXV0aW91cyBhYm91dCBvdmVyLWludGVycHJldGluZyB0aGUgcmVzdWx0cy4KCiMjIERhdGEgU3RydWN0dXJlClRoZSBkYXRhIGNvbGxlY3RlZCB3aWxsIG5lZWQgdG8gYmUgc3RydWN0dXJlZCBhbmQgZm9ybWF0dGVkIGluIGEgd2F5IHRoYXQgaXMgY29tcGF0aWJsZSB3aXRoIHRoZSBzb2NpYWwgbmV0d29yayBhbmFseXNpcyB0b29scyB0aGF0IHdpbGwgYmUgdXNlZC4gVGhpcyBtYXkgcmVxdWlyZSBjb252ZXJ0aW5nIGFuZCByZXN0cnVjdHVyaW5nIHRoZSByYXcgZGF0YSBpbnRvIGVkZ2UgbGlzdHMsIGFkamFjZW5jeSBtYXRyaWNlcywgb3Igb3RoZXIgcmVxdWlyZWQgZm9ybWF0cy4gRGF0YSBmb3JtYXR0aW5nIGlzIGFuIGVzc2VudGlhbCBzdGVwIHRvIGVuc3VyZSB0aGUgaW5mb3JtYXRpb24gY2FuIGJlIHByb3Blcmx5IGltcG9ydGVkIGFuZCBhbmFseXplZC4K</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiUlNpZW5hIEFuYWx5c2lzIE1ldGhvZCIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6IAogICAgdG9jOiB5ZXMKICAgIG51bWJlcl9zZWN0aW9uczogZmFsc2UKICAgIHRvY19jb2xsYXBzZTogeWVzCiAgICB0b2NfZmxvYXQ6IHllcwphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCiMgUlNpZW5hIEFuYWx5c2lzIE1ldGhvZApUaGUgbW9zdCBzdWl0YWJsZSBSU2llbmEgYW5hbHlzaXMgbWV0aG9kIHRvIHRlc3QgdGhlIGh5cG90aGVzZXMgaXMgYHNpZW5hMDdgLiBUaGUga2V5IHJlYXNvbnMgYXJlOgoKIyMjIFNpbmdsZSBuZXR3b3JrIGxvbmdpdHVkaW5hbCBhbmFseXNpcyAgClRoZSByZXNlYXJjaCBpbnZvbHZlcyBhbmFseXppbmcgdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yayB3aXRoaW4gYSBzaW5nbGUgZmFjdWx0eSBkZXBhcnRtZW50IG92ZXIgdGltZS4gYHNpZW5hMDdgIGlzIG1vc3Qgc3VpdGFibGUgZm9yIG1vZGVsaW5nIHRoZSBkeW5hbWljcyBvZiBhIHNpbmdsZSBuZXR3b3JrIGxvbmdpdHVkaW5hbGx5LgoKIyMjIE1vZGVsIG5ldHdvcmsgZHluYW1pY3MKQSBrZXkgZ29hbCBpcyBhc3Nlc3NpbmcgbmV0d29yayBkeW5hbWljcyBsaWtlIHRyaWFkaWMgY2xvc3VyZSB0ZW5kZW5jaWVzIG92ZXIgdGltZS4gYHNpZW5hMDdgIGVzdGltYXRlcyBwYXJhbWV0ZXJzIGZvciBhY3Rvci1vcmllbnRlZCBtb2RlbHMgdG8gYW5hbHl6ZSBzdWNoIGxvbmdpdHVkaW5hbCBkeW5hbWljcy4KCiMjIyBUZXN0IGdlbmRlciBkaWZmZXJlbmNlcyAKVGhlIGh5cG90aGVzZXMgZm9jdXMgb24gY29tcGFyaW5nIG5ldHdvcmsgbWVhc3VyZXMgbGlrZSBjbG9zdXJlLCBjZW50cmFsaXR5LCBhbmQgZGVuc2l0eSBiZXR3ZWVuIG1hbGUgYW5kIGZlbWFsZSByZXNlYXJjaGVycy4gYHNpZW5hMDdgIGFsbG93cyBzcGVjaWZ5aW5nIGdlbmRlciBhcyBhbiBhdHRyaWJ1dGUgdmFyaWFibGUgYW5kIGludGVyYWN0aW5nIGl0IHdpdGggc3RydWN0dXJhbCBlZmZlY3RzIHRvIHRlc3QgZm9yIGRpZmZlcmVuY2VzLgoKIyMjIEFzc2VzcyBjbG9zdXJlLCBjZW50cmFsaXR5LCBkZW5zaXR5ClRoZSBoeXBvdGhlc2VzIGZvY3VzIG9uIGNvbXBhcmluZyBuZXR3b3JrIG1lYXN1cmVzIGxpa2UgY2xvc3VyZSwgY2VudHJhbGl0eSwgYW5kIGRlbnNpdHkgYmV0d2VlbiBtYWxlIGFuZCBmZW1hbGUgcmVzZWFyY2hlcnMuIGBzaWVuYTA3YCBhbGxvd3Mgc3BlY2lmeWluZyBnZW5kZXIgYXMgYW4gYXR0cmlidXRlIHZhcmlhYmxlIGFuZCBpbnRlcmFjdGluZyBpdCB3aXRoIHN0cnVjdHVyYWwgZWZmZWN0cyB0byB0ZXN0IGZvciBkaWZmZXJlbmNlcy4KCiMjIyBFc3RpbWF0ZSBwYXJhbWV0ZXJzIGZvciBhY3Rvci1vcmllbnRlZCBtb2RlbHMKQSBrZXkgZ29hbCBpcyBhc3Nlc3NpbmcgbmV0d29yayBkeW5hbWljcyBsaWtlIHRyaWFkaWMgY2xvc3VyZSB0ZW5kZW5jaWVzIG92ZXIgdGltZS4gYHNpZW5hMDdgIGVzdGltYXRlcyBwYXJhbWV0ZXJzIGZvciBhY3Rvci1vcmllbnRlZCBtb2RlbHMgdG8gYW5hbHl6ZSBzdWNoIGxvbmdpdHVkaW5hbCBkeW5hbWljcy4KCiMjIyBBbmFseXplIG5ldHdvcmsgbWVjaGFuaXNtcyBsaWtlIHRyYW5zaXRpdml0eSwgcmVjaXByb2NpdHkKVGhlIHRoZW9yeSBoaWdobGlnaHRzIGFuYWx5emluZyBjbG9zdXJlLCBicmlkZ2VzLCByZWR1bmRhbmN5IGV0Yy4gYHNpZW5hMDdgIGVuYWJsZXMgaW5jbHVkaW5nIGVmZmVjdHMgbGlrZSB0cmFuc2l0aXZpdHksIHJlY2lwcm9jaXR5LCBtdWx0aXBsZXhpdHkgdG8gY2FwdHVyZSB0aGVzZSBtZWNoYW5pc21zLgoKIyMjIE1vZGVsIGdsb2JhbCBuZXR3b3JrIGVmZmVjdHMKQXNzZXNzaW5nIHNob3J0ZXN0IHBhdGhzLCBkaWFtZXRlciwgY2x1c3RlcmluZyBpcyBhbHNvIGltcG9ydGFudC4gYHNpZW5hMDdgIGNhbiBkaXJlY3RseSBtb2RlbCBhbmQgdGVzdCBzdWNoIGdsb2JhbCBuZXR3b3JrIGVmZmVjdHMuCgojIyMgQ3VzdG9taXplZCBlZmZlY3RzIGZvciBoeXBvdGhlc2VzCmBzaWVuYTA3YCBhbGxvd3Mgc3BlY2lmeWluZyBjdXN0b21pemVkIGVmZmVjdHMgdG8gdGVzdCB0aGUgc3BlY2lmaWMgaHlwb3RoZXNlcy4KCiMjIyBMb25naXR1ZGluYWwgY2FwYWJpbGl0aWVzCmBzaWVuYTA3YCBpcyBtb3N0IHN1aXRhYmxlIGJlY2F1c2UgaXQgYWxsb3dzIG1vZGVsaW5nIGxvbmdpdHVkaW5hbCBzaW5nbGUgbmV0d29yayBkeW5hbWljcyByZXF1aXJlZCBmb3IgdGhlIHJlc2VhcmNoIGdvYWxzLgoKIyMjIFNpbmdsZSBuZXR3b3JrIGZvY3VzCk5vIG1ldGEtYW5hbHlzaXMgYWNyb3NzIG11bHRpcGxlIGdyb3VwcyBvciBuZXR3b3JrcyBpcyBuZWVkZWQgaGVyZSwgc28gYHNpZW5hMDdgJ3Mgc2luZ2xlIG5ldHdvcmsgY2FwYWJpbGl0aWVzIHN1ZmZpY2UuIHNpZW5hMDggaXMgbW9yZSByZWxldmFudCBmb3IgbXVsdGktbmV0d29yayBtb2RlbHMuCiAgICAKYGBge3IgZXZhbD1GQUxTRSwgaW5jbHVkZT1GQUxTRX0KIyAtIFRoZSByZXNlYXJjaCBpbnZvbHZlcyBhbmFseXppbmcgYSBzaW5nbGUgZmFjdWx0eSdzIGNvLWF1dGhvcnNoaXAgbmV0d29yaywgc28gYHNpZW5hMDdgIGZvciBhbmFseXppbmcgb25lIG5ldHdvcmsgKG9yIG5ldHdvcmstYmVoYXZpb3IgY29ldm9sdXRpb24pIGlzIGFwcHJvcHJpYXRlLiBzaWVuYTA4IGlzIGJldHRlciBzdWl0ZWQgZm9yIG1ldGEtYW5hbHlzaXMgYWNyb3NzIG11bHRpcGxlIG5ldHdvcmtzLgojIC0gVGhlIGh5cG90aGVzZXMgZm9jdXMgb24gY29tcGFyaW5nIHZhcmlvdXMgbmV0d29yayBtZWFzdXJlcyAoZS5nLiBjbG9zdXJlLCBjZW50cmFsaXR5LCBkZW5zaXR5KSBiZXR3ZWVuIG1hbGUgYW5kIGZlbWFsZSByZXNlYXJjaGVycyBpbiB0aGUgZmFjdWx0eS4gYHNpZW5hMDdgIGFsbG93cyBzcGVjaWZpY2F0aW9uIG9mIGVmZmVjdHMgbGlrZSBnZW5kZXIgYXR0cmlidXRlIHZhcmlhYmxlcyBhbmQgdGhlaXIgaW50ZXJhY3Rpb24gd2l0aCBuZXR3b3JrIGVmZmVjdHMgdG8gdGVzdCBzdWNoIGRpZmZlcmVuY2VzLgojIC0gVGhlIGdvYWwgaXMgdG8gbW9kZWwgdGhlIG5ldHdvcmsgZHluYW1pY3MgYW5kIHRlc3QgZWZmZWN0cyBsaWtlIHRyaWFkaWMgY2xvc3VyZSB0ZW5kZW5jaWVzLiBgc2llbmEwN2AgZXN0aW1hdGVzIHBhcmFtZXRlcnMgZm9yIHN0b2NoYXN0aWMgYWN0b3Itb3JpZW50ZWQgbW9kZWxzIHRvIGFuYWx5emUgc3VjaCBsb25naXR1ZGluYWwgbmV0d29yayBkeW5hbWljcy4KIyAtIE5vIG1vZGVsIGFnZ3JlZ2F0aW9uIG9yIG1ldGEtYW5hbHlzaXMgYWNyb3NzIG11bHRpcGxlIGdyb3VwcyBpcyBuZWVkZWQsIHNvIHRoZSBzaW5nbGUtbmV0d29yayBjYXBhYmlsaXRpZXMgb2YgYHNpZW5hMDdgIHN1ZmZpY2UuIHNpZW5hMDggaXMgbW9yZSByZWxldmFudCB3aGVuIGNvbWJpbmluZyBtb2RlbHMgYWNyb3NzIGRpZmZlcmVudCBuZXR3b3Jrcy4KIyAtIFRoZSB0aGVvcnkgc2VjdGlvbiBoaWdobGlnaHRzIHRoZSBpbXBvcnRhbmNlIG9mIGFuYWx5emluZyBjbG9zdXJlLCBicmlkZ2VzLCByZWR1bmRhbmN5IGV0Yy4gYHNpZW5hMDdgIGFsbG93cyBpbmNsdXNpb24gb2YgZWZmZWN0cyBsaWtlIHRyYW5zaXRpdml0eSwgcmVjaXByb2NhdGlvbiwgbXVsdGlwbGV4aXR5IHRoYXQgY2FwdHVyZSBzdWNoIG1lY2hhbmlzbXMuCiMgLSBUaGUgaHlwb3RoZXNlcyBhbHNvIG1lbnRpb24gYXNzZXNzaW5nIHNob3J0ZXN0IHBhdGhzLCBkaWFtZXRlciwgY2x1c3RlcmluZyBldGMuIGBzaWVuYTA3YCBjYW4gZGlyZWN0bHkgbW9kZWwgYW5kIHRlc3Qgc3VjaCBnbG9iYWwgbmV0d29yayBzdHJ1Y3R1cmUgZWZmZWN0cy4KIyAKIyBJbiBzdW1tYXJ5LCBgc2llbmEwN2AgaXMgdGhlIG1vc3QgYXBwcm9wcmlhdGUgUlNpZW5hIG1ldGhvZCBiZWNhdXNlIGl0IGFsbG93cyBzcGVjaWZpY2F0aW9uIG9mIGN1c3RvbWl6ZWQgZWZmZWN0cyB0byB0ZXN0IGRpZmZlcmVuY2VzIGJ5IGdlbmRlciwgY2FuIG1vZGVsIGFuZCBhbmFseXplIGxvbmdpdHVkaW5hbCBuZXR3b3JrIGR5bmFtaWNzLCBhbmQgZW5hYmxlcyBhc3Nlc3NpbmcgdGhlIHZhcmlvdXMgbmV0d29yayBwcm9wZXJ0aWVzIGRpc2N1c3NlZCwgYWxsIGZvciBhIHNpbmdsZSBuZXR3b3JrLiBUaGUgY2FwYWJpbGl0aWVzIG1hdGNoIHRoZSByZXNlYXJjaCBnb2FscyBiZXR0ZXIgdGhhbiBtZXRhLWFuYWx5dGljIGFwcHJvYWNoZXMgbGlrZSBzaWVuYTA4LgpgYA==</div>
 
 
 </div>
@@ -618,7 +608,7 @@ $(document).ready(function () {
 <!-- code folding -->
 <script>
 $(document).ready(function () {
-  window.initializeSourceEmbed("assembling.Rmd");
+  window.initializeSourceEmbed("rsiena_analysis_method.Rmd");
   window.initializeCodeFolding("show" === "show");
 });
 </script>

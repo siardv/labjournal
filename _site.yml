@@ -50,6 +50,8 @@ navbar:
           menu:
             - text: "Network Visualization"
               href: visualization.html
+            - text: "Using igraph"
+              href: igraph_demo.html
 
         - text: "Week 5"
           menu:
@@ -58,8 +60,8 @@ navbar:
 
         - text: "Week 6"
           menu:
-            - text: "Summary of Chapter 7 Methods"
-              href: chapter7.html
+            - text: "SNA in Practice"
+              href:
 
         - text: "Week 7"
           menu:
@@ -74,6 +76,12 @@ navbar:
 
         - text: "Theory"
           href: theory.html
+          menu:
+            - text: "Last version"
+              href: theory.html
+            - text: "Older version"
+              href: theory.html
+
 
         - text: "Methods"
           menu:
@@ -81,24 +89,26 @@ navbar:
               href: predicting_gender.html
             - text: "Data Collection and Preparation"
               href: assembling.html
-            - text: "Research Design, Data, and Measures"
-              href: design_data_measures.html
-            - text: "Examining Longitudinal Network Data"
-              href: longitudinal_waves.html
-
+            - text: "RSiena Analysis Method"
+              href: rsiena_analysis_method.html
 
         - text: "Analysis"
           menu:
-            - text: "Descriptive"
+            - text: "Descriptive (draft)"
               href: descriptive.html
-            - text: "RSiena"
+            - text: "RSiena (example)"
               href: rsiena_example.html
+            - text: "Analysis (draft)"
+              href: analysis_draft.html
 
         - text: "Results"
           href:
 
         - text: "Discussion"
           href:
+
+        - text: "To-Do List"
+        - href: to_do_list.html
 
     - text: "Final Paper"
       menu:
