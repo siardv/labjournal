@@ -96,6 +96,8 @@ navbar:
           menu:
             - text: "Descriptive (draft)"
               href: descriptive.html
+            - text: "Calculate Metrics Report"
+              href: calculate_metrics_report.html
             - text: "RSiena (example)"
               href: rsiena_example.html
             - text: "Analysis (draft)"

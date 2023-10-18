@@ -84,7 +84,18 @@ Last compiled on `r format(Sys.time(), '%B, %Y')`
     - Overall, major enhancements to literature review, structure, data preparation in latest version compared to previous draft. Still need to finalize analyses, results and discussion.
     - Next steps are completing network models using prepared data, and interpreting results. Also expanding limitations, future directions in discussion section.
     - Despite challenges, revisions have greatly improved paper organization, flow and contextual framing. The work has progressed significantly.
-
+  
+  - Week 7
+- Updated Introduction.Rmd file: 
+    - Changed output format
+    - Added more specifics on social network analysis and the value of examining co-authorship networks
+    - Expanded on gender disparities found in recent studies
+    - Added 2 additional research questions on gender differences in betweenness centrality and ego-network density
+- Updated site YAML file:
+    - Added new menu items linking to theory and methods pages
+    - Linked new pages like gender prediction and RSiena analysis method
+    - Updated titles and order of existing pages
+- Added new draft analysis page demonstrating sample RSiena network model code and interpretation
 <br>
 
 ------------------------------------------------------------------------
