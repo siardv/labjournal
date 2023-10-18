@@ -1,18 +1,15 @@
 ---
 title: "Lab journal"
-output:
-  html_document:
-    toc: false
-    number_sections: true
 author: "by: Siard van den Bosch"
 bibliography: references.bib
 csl: apa.csl
 ---
 
-```{r, echo=FALSE, warning=FALSE, results='hide'}
-# install.packages("remotes")
-# remotes::install_github("rlesur/klippy")
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
 ```
+
 
 ```{r, echo=FALSE, warning=FALSE, results='hide'}
 library(knitr)
