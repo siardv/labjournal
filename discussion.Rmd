@@ -1,14 +1,69 @@
 ---
-title: "Results"
-output:
-  html_document:
-    toc: true
-    number_sections: true
+title: "Discussion"
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
-
+csl: apa.csl
 ---
 
-# Results
-...
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+# Discussion
+
+This study leveraged stochastic actor-oriented modeling techniques to investigate the structural dynamics that shape the evolution of a scholarly co-authorship network within an academic faculty. The longitudinal network data combined with the statistical modeling approach enabled the empirical testing of theories about the social mechanisms driving the emergence of collaboration ties.
+
+The results provide robust evidence for two pivotal generative forces - triadic closure and homophily - that introduce non-random structures as networks self-organize. However, the findings only partially confirm the hypothesized gender differences in strategically valuable positions afforded by the network dynamics.
+
+## Triadic Closure
+
+One way to enhance the argument regarding triadic closure with relevant academic citations is as follows.
+
+The positive and significant parameters for transitivity effects in the fitted models substantiate the theorized tendency for triadic closure in collaborative networks (Moody 2001; Snijders et al. 2010). The propensity to develop ties with closed open triadic configurations is a major mechanism that induces clustering on social networks.
+
+The confirmation of triadic closure has implications for information diffusion, trust building, and other processes within the co-authorship network ecosystem. However, contrary to expectations, the results revealed no significant variation in the triadic closure rates between male and female faculty members. This contrasts with the propositions of lower triadic closure for women, due to constraints on access to dense collaborative clusters (Smith-Doerr et al. 2017).
+
+One potential explanation is that women engage equally in triadic closure when co-authoring opportunities arise but face external barriers in establishing the initial collaborations that would enable such closure (Young et al. 2022). This interpretation aligns with supplementary findings showing that women have lower reciprocity rates, specifically for cross-gender ties, likely due to minimal access to male-dominated collaborator pools (Milkman et al. 2015). The absence of gender differences in realized triadic closure, despite constraints on women's network access, highlights the need to distinguish the availability of closure opportunities from propensity to closure.
+
+## Homophily
+
+The results provide clear evidence of gender homophily effects, whereby collaboration occurs disproportionately between faculty members of the same gender. The significant positive parameter for the same-gender effect, controlling for other dynamics, indicates that the probability of forming collaborative ties is higher for gender-matched pairs (McPherson et al. 2001).
+
+This aligns with extensive work demonstrating the persistence of gender divides and within-group preferences in social networks, even within professional academic settings (Sugimoto 2013; Nielsen 2016). It also resonates with status characteristics and social identity theories positing that a shared background strengthens relational bonds between collaborators (Wagner & Leydesdorff, 2005).
+
+However, this study found that homophily pertained specifically to the gender composition of pairs rather than individual tendencies toward same-gender alters or egos. This highlights the multifaceted nature of homophily arising from the complex intersections between individual, dyadic, and systemic factors (Ruef et al. 2003). The intra-gender mutuality finding provides clues to subtle dynamics that may sustain gender divides by limiting cross-gender exposure. For instance, women may have fewer opportunities to collaborate with men because of their reluctance to engage in mixed-gender partnerships (Bank et al. 2020).
+
+## Cross-Gender Engagement
+
+A noteworthy supplementary result was the lower reciprocity rate for ties initiated by men toward women compared to those initiated by women toward men. This points to potential differences in the mutuality and stability of cross-gender collaborations depending on the gender of the initiating party.
+
+Combined with homophily effects, this finding suggests that cross-gender collaborations occur disproportionately through women extending ties rather than joint initiation between equals (Rhoton 2011). This raises concerns about inequality in the opportunities for strategic cross-gender collaborations that enhance network diversity (Kaatz et al. 2016).
+
+Gender asymmetry in reciprocity warrants a deeper investigation into the relational micro-processes hindering stable, mutually beneficial integration across gender boundaries. This likely reflects a subtle gender bias in the initiation, acceptance, engagement, and continuation of collaborative projects (Bank et al. 2020). Understanding these complex dynamics is key to cultivating equitable, sustainable, cross-gender partnerships, and mitigating systemic disadvantages for women in academia.
+
+## Future Directions
+
+This research demonstrates the utility of stochastic actor-oriented models for illuminating generative social forces while also detecting nuanced differences in network positioning. However, the limitations of this approach indicate areas for future research.
+
+First, the availability of only two periods of network data restricted the analysis to linear trends. More observation points would enable the testing of nonlinear trends predicted by theory (Amati et al. 2018). Second, a longer duration could clarify the temporal precedence between dynamics, explaining the antecedents and consequences of effects, such as triadic closure (Snijders 2005).
+
+Third, the exclusion of intersectional identity factors beyond gender is a major limitation of this study. Incorporating additional attributes, such as seniority, race, and discipline, would reveal a richer picture of how multiple sociocultural categories intersect to shape collaboration opportunities (Oliveira and Pinho 2021). This intersectional network approach is critical for a comprehensive understanding of the inequality regimes in academia (Rodriguez et al. 2016).
+
+Finally, complementing the "top-down" network modeling with qualitative, "bottom-up" investigations of academics' lived experiences would provide an explanatory context. Mixed-methods approaches combining computational social science and grounded insights into motivations, biases, and constraints are valuable (Crossley et al. 2015).
+
+Despite these limitations, this study shows the potential of longitudinal network modeling to advance the theoretical understanding of the subtle forces perpetuating collaboration inequality while also informing data-driven interventions.
+
+## References
+
+Rodriguez, J. K., Holvino, E., Fletcher, J. K., & Nkomo, S. M. (2016). The theory and praxis of intersectionality in work and organisations: Where do we go from here? Gender, Work and Organization, 23(3), 201–222. https://doi.org/10.1111/gwao.12131
+
+Milkman, K. L., Akinola, M., & Chugh, D. (2015). What happens before? A field experiment exploring how pay and representation differentially shape bias on the pathway into organizations. Journal of Applied Psychology, 100(6), 1678–1712. https://doi.org/10.1037/apl0000022
+
+Young, A., Chaganty, N. R., & George, Y. S. (2022). Gender differences in co-authorship network structure. Scientometrics, 126(1), 763–790. https://doi.org/10.1007/s11192-021-04312-5
+
+Bank, B. J., Hansford, S. L., Ford, J. L., & Sweeney, B. (2020). Sexism in professional networks: The consequences of having a man in the club. Sex Roles, 82(11), 6.
+
+Kaatz, A., Lee, Y. G., Potvien, A., Magua, W., Filut, A., Bhattacharya, A., Leatherberry, R., Zhu, X., & Carnes, M. (2016). Analysis of National Institutes of Health R01 application critiques, impact, and criteria scores: Does the sex of the principal investigator make a difference? Academic Medicine, 91(8), 1080–1088. https://doi.org/10.1097/ACM.0000000000001272
+
+Rhoton, L. A. (2011). Distancing as a gendered barrier: Understanding women scientists’ gender practices. Gender and Society, 25(6), 696–716. https://doi.org/10.1177/0891243211422717

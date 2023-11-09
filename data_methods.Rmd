@@ -1,0 +1,156 @@
+---
+title: "Data and Methods"
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+# Data and Methods
+
+## Data Collection
+
+The objective of this study was to analyze the collaboration dynamics within an academic social network. The population of interest comprised faculty members from the sociology department of Radboud University in the Netherlands. Publicly available data on these faculty members and their scholarly publications were collected using web-scraping methods.
+
+R was used to scrape the names, academic profiles, and areas of expertise of 47 sociology faculty members from the Radboud Department website. Next, the `scholar` package was used to gather data on each faculty member's Google Scholar presence. For those with public profiles, data were obtained from their unique Google Scholar ID, total citations, $h$index, list of publications, and co-author connections.
+
+An additional web-scraping step was undertaken to construct a full co-author network. A custom R function was written to further traverse the network by collecting data on the co-authors of each identified initial co-author.
+
+In total, this iterative web scraping procedure produced a comprehensive dataset encompassing 47 Radboud sociology faculty, their 2956 associated publications, and a co-author network spanning 2690 authors when indirect co-authors were accounted for.
+
+## Network Construction
+
+The objective of the analysis was to model the longitudinal co-evolution of co-authorship ties and faculty attributes using Stochastic Actor-Oriented Models (SAOMs). Therefore, scraped web data were used to construct two waves of an academic collaboration network among the Radboud faculty.
+
+Each wave corresponded to a 3-year publishing period - Wave 1 from 2018 to 2020 and Wave 2 from 2021 to 2023. Two faculty members were connected in the network if they co-authored at least one paper during the study period. Self-loops were removed and ties were dichotomized.
+
+## Stochastic Actor-Oriented Modeling
+
+The The The constructed longitudinal co-authorship networks were analyzed using Simulation Investigation for Empirical Network Analysis (SIENA) in R. SIENA models provide a framework for studying network evolution as an interdependent process between ties and individual characteristics.
+
+The dependent variable in the model was the observed co-authorship network. Independent variables were specified to account for structural network effects and node-level attributes. Structural effects include reciprocity, reflecting a tendency for collaborative ties to be mutually initiated, and transitivity, which captures the propensity for triadic closure in the network. Node attributes encompass a gender homophily effect to model same-gender collaboration preferences.
+
+The initial SAOMs were estimated using a stochastic approximation algorithm to obtain coefficient estimates that reflect the influence of each effect. To check for convergence, subsequent models were run with parameter estimates from previous iterations that were used as the starting values.
+
+Model fit was assessed using the Mahalanobis distance (MHD) test for in-degree and out-degree distributions. MHD measures the deviation between the degree distributions of the observed network and those simulated by the model. Smaller values indicated a better fit.
+
+Supplementary analyses further examined gender differences in collaboration patterns. Reciprocity and co-authorship rates within and between the sexes were calculated.
+
+In summary, this study demonstrated the application of SIENA modeling to empirically investigate the dynamics of social networks and individual attributes. Web scraping provides data for constructing a longitudinal network that captures scholarly collaboration. The combination of stochastic actor-oriented models and web-scraped data has enabled in-depth examination of the generative processes underlying academic co-authorship networks.
+
+```{r include=FALSE}
+fpackage.check <- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+fload <- function(filename) {
+  load(filename)
+  get(ls()[ls() != "filename"])
+}
+```
+
+```{r}
+f_pubnets <- function(
+    df_scholars = df, list_publications = publications, discip = "sociology", affiliation = "RU",
+    waves = list(wave1 = c(2018, 2019, 2020), wave2 = c(2021, 2022, 2023))) {
+  #' Binds publication rows and de-duplicates
+  publications <- list_publications %>%
+    bind_rows() %>%
+    distinct(title, .keep_all = TRUE)
+
+
+  #' Filters scholars by affiliation and discipline
+  df_scholars %>%
+    filter(affil1 == affiliation | affil2 == affiliation) %>%
+    filter(discipline == discip) -> df_sel
+
+
+  #' Initializes empty network matrices
+  networklist <- list()
+  for (wave in 1:length(waves)) {
+    #' Matrix of 0s for co-authorship network
+    networklist[[wave]] <- matrix(0, nrow = nrow(df_sel), ncol = nrow(df_sel))
+  }
+
+
+  publicationlist <- list()
+  for (wave in 1:length(waves)) {
+    #' Filters pubs by scholar and year
+    publicationlist[[wave]] <- publications %>%
+      filter(gs_id %in% df_sel$gs_id) %>%
+      filter(year %in% waves[[wave]]) %>%
+      #' Gets author names
+      select(author) %>%
+      #' Splits author names
+      lapply(str_split, pattern = ",")
+  }
+
+
+  publicationlist2 <- list()
+  for (wave in 1:length(waves)) {
+    #' Cleans author names
+    publicationlist2[[wave]] <- publicationlist[[wave]]$author %>%
+      lapply(tolower) %>%
+      lapply(stri_trans_general, id = "latin-ascii") %>%
+      lapply(word, start = -1, sep = " ") %>%
+      lapply(word, start = -1, sep = "-")
+  }
+
+
+  for (wave in 1:length(waves)) {
+    #' Removes single author pubs
+    remove <- which(sapply(publicationlist2[[wave]],
+      FUN = function(x) length(x) == 1
+    ) == TRUE)
+    publicationlist2[[wave]] <- publicationlist2[[wave]][-remove]
+  }
+
+
+  for (wave in 1:length(waves)) {
+    pubs <- publicationlist2[[wave]]
+
+
+    for (ego in 1:nrow(df_sel)) {
+      #' Get ego's last name
+      lastname_ego <- df_sel$lastname[ego]
+
+
+      for (pub in 1:length(pubs)) {
+        #' Check if ego authored pub
+        if (lastname_ego %in% pubs[[pub]]) {
+          #' Get ego's author position
+          aut_pot <- which.max(pubs[[pub]] %in% lastname_ego)
+
+
+          #' Check if ego is first author
+          if (aut_pot == 1) {
+            for (alter in 1:nrow(df_sel)) {
+              #' Get alter's last name
+              lastname_alter <- df_sel$lastname[alter]
+
+
+              #' Check if alter coauthored
+              if (lastname_alter %in% pubs[[pub]]) {
+                #' Increment network tie
+                networklist[[wave]][ego, alter] <- networklist[[wave]][ego, alter] + 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  #' Return scholar data and networks
+  return(list(df = df_sel, network = networklist))
+}
+```

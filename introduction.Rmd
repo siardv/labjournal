@@ -10,20 +10,17 @@ knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(comment = NA)
 ```
 
-
-
 # Introduction
+
 The landscape of contemporary academic research has been indelibly transformed by an inexorable shift toward collaboration and co-authorship. As complex societal challenges become increasingly multifaceted and interdisciplinary, academics are compelled to coalesce their expertise by working jointly across departmental and institutional boundaries (Jones et al. 2019). Consequently, connective tissue provided by collaborative co-authorship has become a fundamental substrate for the generation and diffusion of novel insights (Smith et al., 2022).
 
-Within this milieu, a scholar's location and connections in emergent co-authorship networks confer differential access to vital resources, such as funding, data, and student talent. According to seminal social network theories, the topological features of collaboration networks create asymmetric opportunities to accrue career benefits (Granovetter 1973; Burt 2004). However, persistent gender disparities permeate the relational architecture of academia, potentially constraining women's capacity to capitalize on strategically advantageous network positions (Sugimoto et al., 2013; Wang et al., 2019). 
+Within this milieu, a scholar's location and connections in emergent co-authorship networks confer differential access to vital resources, such as funding, data, and student talent. According to seminal social network theories, the topological features of collaboration networks create asymmetric opportunities to accrue career benefits (Granovetter 1973; Burt 2004). However, persistent gender disparities permeate the relational architecture of academia, potentially constraining women's capacity to capitalize on strategically advantageous network positions (Sugimoto et al., 2013; Wang et al., 2019).
 
 This study investigates four research questions aligned with hypothesized network mechanisms driving gender inequality: (1) Do female scholars exhibit higher isolation levels, reflecting constraints on collaboration opportunities (Lee & Bozeman, 2005)? (2) Do women display lower preferential attachment to high-status collaborators (van Rijnsoever & Hessels, 2011)? (3) Do men have higher outdegree activities that potentially exacerbate inequality (Khramtsova and Sastry 2021)? (4) Is there heightened homophily and triadic closure within gender groups (McPherson et al., 2001)?
 
-To address these questions, we utilized an array of social network analysis techniques to systematically delineate potential gender asymmetries within the multiple structural facets of a faculty co-authorship network. Both descriptive metrics and sophisticated stochastic actor-oriented modeling elucidate differences between male and female scholars across key dimensions, such as triadic closure, brokerage roles, ego network density, and clustering patterns (Snijders et al., 2010). 
+To address these questions, we utilized an array of social network analysis techniques to systematically delineate potential gender asymmetries within the multiple structural facets of a faculty co-authorship network. Both descriptive metrics and sophisticated stochastic actor-oriented modeling elucidate differences between male and female scholars across key dimensions, such as triadic closure, brokerage roles, ego network density, and clustering patterns (Snijders et al., 2010).
 
 The results provide new insights into the nature of gender disparities in access to collaborative social capital and the network configurations that shape knowledge creation and diffusion. This novel application of social network perspectives and computational techniques can thus advance the theoretical and practical understanding of the subtle forces allowing gender inequities to persist within scholarly networks (Larivière et al., 2013).
-
-
 
 ## References
 
@@ -44,4 +41,3 @@ Sugimoto, C. R., Ni, C., West, J. D., & Larivière, V. (2015). The academic adva
 Van Rijnsoever, F. J., & Hessels, L. K. (2011). Factors associated with disciplinary and interdisciplinary research collaboration. Research Policy, 40(3), 463–472. https://doi.org/10.1016/j.respol.2010.11.001
 
 Wang, L., Mei, D., Li, W., Rousseau, R., Zhang, Y., Yang, J., . . . & Yue, W. (2019). Gender diversity statement and code of conduct help increase gender diversity in astronomer collaborations. Nature Astronomy, 3(10), 1018–1025. https://doi.org/10.1038/s41550-019-0879-1
-

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="by: Siard van den Bosch" />
+    
+    
+    <title>Conclusion</title>
+
+        <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <script src="site_libs/navigation-1.1/codefolding.js"></script>
+        <script src="site_libs/navigation-1.1/FileSaver.min.js"></script>
+        <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/clean-0.1/clean.css" rel="stylesheet" />
+        <script src="site_libs/clean-0.1/clean.js"></script>
+        <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+        <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+        <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+        <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+        <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+    
+    
+    
+        <link rel="stylesheet" href="tweaks.css" type="text/css" />
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+        <script>
+      $(document).ready(function () {
+	  	  window.initializeSourceEmbed("conclusion.Rmd");
+	  	  	  window.initializeCodeFolding("show" === "show");
+	        });
+    </script>
+    
+    <!-- code download -->
+        <style>
+      #rmd-source-code {
+	  display: none;
+      }
+    </style>
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+      <!-- html_clean start -->
+   <div class="container-fluid main-container">
+     <div class="row">
+       <div class="col-md-10">
+   	
+            
+      <div class="btn-group pull-right">
+     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+     <ul class="dropdown-menu" style="min-width: 50px;">
+	    	    <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+	    <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+	    	    <li role="separator" class="divider"></li>
+	    	    	    	    <li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+	         </ul>
+   </div>
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">
+          <span class="fa fa-home"></span>
+           
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Journal
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="question.html">Research Question</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="zacharys.html">Descriptive Statistics</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="webscraping.html">Web Scraping</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="visualization.html">Network Visualization</a>
+              </li>
+              <li>
+                <a href="igraph_demo.html">Using igraph</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="rsiena_example.html">RSiena models</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 6</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">SNA in Practice</li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 7</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">RSiena Advanced</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction_v1.html">Introduction</a>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Theory</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="theory_v2.html">Last version</a>
+              </li>
+              <li>
+                <a href="theory_v1.html">Older version</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Methods</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="predicting_gender.html">Gender From Names</a>
+              </li>
+              <li>
+                <a href="assembling.html">Data Collection and Preparation</a>
+              </li>
+              <li>
+                <a href="rsiena_analysis_method.html">RSiena Analysis Method</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="descriptive.html">Descriptive (draft)</a>
+              </li>
+              <li>
+                <a href="calculate_metrics_report.html">Calculate Metrics Report</a>
+              </li>
+              <li>
+                <a href="rsiena_example.html">RSiena (example)</a>
+              </li>
+              <li>
+                <a href="analysis_draft.html">Analysis (draft)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-header">Results</li>
+          <li class="dropdown-header">Discussion</li>
+          <li>
+            <a href="to_do_list.html">To-Do List</a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li>
+            <a href="theory.html">Theory</a>
+          </li>
+          <li>
+            <a href="data_methods.html">Data &amp; Methods</a>
+          </li>
+          <li>
+            <a href="descriptives.html">Descriptives</a>
+          </li>
+          <li>
+            <a href="analysis.html">Analysis</a>
+          </li>
+          <li>
+            <a href="results.html">Results</a>
+          </li>
+          <li>
+            <a href="discussion.html">Discussion</a>
+          </li>
+          <li>
+            <a href="conclusion.html">Conclusion</a>
+          </li>
+          <li>
+            <a href="appendix.html">Appendix</a>
+          </li>
+        </ul>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+        <a href="https://github.com/siardv/labjournal">
+          <span class="fab fa-github"></span>
+           
+        </a>
+      </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Conclusion</h1>
+      
+        
+
+      <!-- html_clean authors -->
+         <h4 class="author"><em>by: Siard van den Bosch</em></h4>
+            
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="content">
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>This study leveraged stochastic actor-oriented modeling of a
+longitudinal faculty co-authorship network to empirically test
+assumptions about gender differences in collaborative <span
+class="math inline">\(IsolateNet\)</span>, preferential attachment,
+out-degree activity, homophily, and triadic closure. Modeling revealed
+several significant micro-level mechanisms that shape the network
+topology and evolution. These include positive reciprocity,
+transitivity, same-gender homophily, and weak preferential attachment
+effects. However, contrary to the initial hypotheses, supplementary
+analyses revealed no significant gender asymmetries in the operation of
+these mechanisms.</p>
+<p>Specifically, <span class="math inline">\(t\)</span>-tests show no
+difference between male and female faculty members in the <span
+class="math inline">\(IsolateNet\)</span> parameter measuring
+disconnectedness (<span class="math inline">\(p = 0.812\)</span>). This
+finding challenges the assumption that women necessarily experience
+greater isolation or exclusion from collaboration. Additionally,
+in-degree popularity testing found no evidence that women had less
+access to high-status collaborators than men (<span
+class="math inline">\(p = 0.692\)</span>). Out-degree activity levels
+also did not significantly differ by sex (<span class="math inline">\(p
+= 0.544\)</span>), indicating no exacerbation of inequality from initial
+activity differences.</p>
+<p>The model did not reveal significant same-gender homophily effects.
+However, collaboration rates broken down by gender revealed similar
+relative preferences for within-gender ties among both male and female
+faculty. While same-gender collaboration was empirically detected, it
+did not differ significantly across genders.</p>
+<p>In summary, this study demonstrates the value of stochastic
+actor-oriented models for disentangling dynamic social processes, giving
+rise to network topologies. The presence of mechanisms, such as triadic
+closure and homophily, was validated. However, these findings
+problematize assumptions about gender asymmetry in collaborative
+engagement. The lack of significant differences challenges the notion
+that women face greater barriers and constraints in accessing
+co-authorship opportunities. Further research across institutional
+contexts is warranted to understand why the hypothesized gender
+inequalities did not emerge within this faculty network. Longitudinal
+network models can shed light on the complex social forces shaping and
+equalizing access to critical collaborative resources.</p>
+</div>
+</div>
+
+   
+      <div id="rmd-source-code">LS0tCnRpdGxlOiAiQ29uY2x1c2lvbiIKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKY3NsOiBhcGEuY3NsCi0tLQoKYGBge3Igc2V0dXAsIGluY2x1ZGU9RkFMU0V9CmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKa25pdHI6Om9wdHNfY2h1bmskc2V0KGNvbW1lbnQgPSBOQSkKYGBgCgojIENvbmNsdXNpb24KClRoaXMgc3R1ZHkgbGV2ZXJhZ2VkIHN0b2NoYXN0aWMgYWN0b3Itb3JpZW50ZWQgbW9kZWxpbmcgb2YgYSBsb25naXR1ZGluYWwgZmFjdWx0eSBjby1hdXRob3JzaGlwIG5ldHdvcmsgdG8gZW1waXJpY2FsbHkgdGVzdCBhc3N1bXB0aW9ucyBhYm91dCBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gY29sbGFib3JhdGl2ZSAkSXNvbGF0ZU5ldCQsIHByZWZlcmVudGlhbCBhdHRhY2htZW50LCBvdXQtZGVncmVlIGFjdGl2aXR5LCBob21vcGhpbHksIGFuZCB0cmlhZGljIGNsb3N1cmUuIE1vZGVsaW5nIHJldmVhbGVkIHNldmVyYWwgc2lnbmlmaWNhbnQgbWljcm8tbGV2ZWwgbWVjaGFuaXNtcyB0aGF0IHNoYXBlIHRoZSBuZXR3b3JrIHRvcG9sb2d5IGFuZCBldm9sdXRpb24uIFRoZXNlIGluY2x1ZGUgcG9zaXRpdmUgcmVjaXByb2NpdHksIHRyYW5zaXRpdml0eSwgc2FtZS1nZW5kZXIgaG9tb3BoaWx5LCBhbmQgd2VhayBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBlZmZlY3RzLiBIb3dldmVyLCBjb250cmFyeSB0byB0aGUgaW5pdGlhbCBoeXBvdGhlc2VzLCBzdXBwbGVtZW50YXJ5IGFuYWx5c2VzIHJldmVhbGVkIG5vIHNpZ25pZmljYW50IGdlbmRlciBhc3ltbWV0cmllcyBpbiB0aGUgb3BlcmF0aW9uIG9mIHRoZXNlIG1lY2hhbmlzbXMuCgpTcGVjaWZpY2FsbHksICR0JC10ZXN0cyBzaG93IG5vIGRpZmZlcmVuY2UgYmV0d2VlbiBtYWxlIGFuZCBmZW1hbGUgZmFjdWx0eSBtZW1iZXJzIGluIHRoZSAkSXNvbGF0ZU5ldCQgcGFyYW1ldGVyIG1lYXN1cmluZyBkaXNjb25uZWN0ZWRuZXNzICgkcCA9IDAuODEyJCkuIFRoaXMgZmluZGluZyBjaGFsbGVuZ2VzIHRoZSBhc3N1bXB0aW9uIHRoYXQgd29tZW4gbmVjZXNzYXJpbHkgZXhwZXJpZW5jZSBncmVhdGVyIGlzb2xhdGlvbiBvciBleGNsdXNpb24gZnJvbSBjb2xsYWJvcmF0aW9uLiBBZGRpdGlvbmFsbHksIGluLWRlZ3JlZSBwb3B1bGFyaXR5IHRlc3RpbmcgZm91bmQgbm8gZXZpZGVuY2UgdGhhdCB3b21lbiBoYWQgbGVzcyBhY2Nlc3MgdG8gaGlnaC1zdGF0dXMgY29sbGFib3JhdG9ycyB0aGFuIG1lbiAoJHAgPSAwLjY5MiQpLiBPdXQtZGVncmVlIGFjdGl2aXR5IGxldmVscyBhbHNvIGRpZCBub3Qgc2lnbmlmaWNhbnRseSBkaWZmZXIgYnkgc2V4ICgkcCA9IDAuNTQ0JCksIGluZGljYXRpbmcgbm8gZXhhY2VyYmF0aW9uIG9mIGluZXF1YWxpdHkgZnJvbSBpbml0aWFsIGFjdGl2aXR5IGRpZmZlcmVuY2VzLgoKVGhlIG1vZGVsIGRpZCBub3QgcmV2ZWFsIHNpZ25pZmljYW50IHNhbWUtZ2VuZGVyIGhvbW9waGlseSBlZmZlY3RzLiBIb3dldmVyLCBjb2xsYWJvcmF0aW9uIHJhdGVzIGJyb2tlbiBkb3duIGJ5IGdlbmRlciByZXZlYWxlZCBzaW1pbGFyIHJlbGF0aXZlIHByZWZlcmVuY2VzIGZvciB3aXRoaW4tZ2VuZGVyIHRpZXMgYW1vbmcgYm90aCBtYWxlIGFuZCBmZW1hbGUgZmFjdWx0eS4gV2hpbGUgc2FtZS1nZW5kZXIgY29sbGFib3JhdGlvbiB3YXMgZW1waXJpY2FsbHkgZGV0ZWN0ZWQsIGl0IGRpZCBub3QgZGlmZmVyIHNpZ25pZmljYW50bHkgYWNyb3NzIGdlbmRlcnMuCgpJbiBzdW1tYXJ5LCB0aGlzIHN0dWR5IGRlbW9uc3RyYXRlcyB0aGUgdmFsdWUgb2Ygc3RvY2hhc3RpYyBhY3Rvci1vcmllbnRlZCBtb2RlbHMgZm9yIGRpc2VudGFuZ2xpbmcgZHluYW1pYyBzb2NpYWwgcHJvY2Vzc2VzLCBnaXZpbmcgcmlzZSB0byBuZXR3b3JrIHRvcG9sb2dpZXMuIFRoZSBwcmVzZW5jZSBvZiBtZWNoYW5pc21zLCBzdWNoIGFzIHRyaWFkaWMgY2xvc3VyZSBhbmQgaG9tb3BoaWx5LCB3YXMgdmFsaWRhdGVkLiBIb3dldmVyLCB0aGVzZSBmaW5kaW5ncyBwcm9ibGVtYXRpemUgYXNzdW1wdGlvbnMgYWJvdXQgZ2VuZGVyIGFzeW1tZXRyeSBpbiBjb2xsYWJvcmF0aXZlIGVuZ2FnZW1lbnQuIFRoZSBsYWNrIG9mIHNpZ25pZmljYW50IGRpZmZlcmVuY2VzIGNoYWxsZW5nZXMgdGhlIG5vdGlvbiB0aGF0IHdvbWVuIGZhY2UgZ3JlYXRlciBiYXJyaWVycyBhbmQgY29uc3RyYWludHMgaW4gYWNjZXNzaW5nIGNvLWF1dGhvcnNoaXAgb3Bwb3J0dW5pdGllcy4gRnVydGhlciByZXNlYXJjaCBhY3Jvc3MgaW5zdGl0dXRpb25hbCBjb250ZXh0cyBpcyB3YXJyYW50ZWQgdG8gdW5kZXJzdGFuZCB3aHkgdGhlIGh5cG90aGVzaXplZCBnZW5kZXIgaW5lcXVhbGl0aWVzIGRpZCBub3QgZW1lcmdlIHdpdGhpbiB0aGlzIGZhY3VsdHkgbmV0d29yay4gTG9uZ2l0dWRpbmFsIG5ldHdvcmsgbW9kZWxzIGNhbiBzaGVkIGxpZ2h0IG9uIHRoZSBjb21wbGV4IHNvY2lhbCBmb3JjZXMgc2hhcGluZyBhbmQgZXF1YWxpemluZyBhY2Nlc3MgdG8gY3JpdGljYWwgY29sbGFib3JhdGl2ZSByZXNvdXJjZXMuCg==</div>
+   
+      </div>
+   <div class="col-md-2">
+          <div id="toc">
+       <button type="button" class="close">×</button>
+       <ul>
+       <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+       </ul>
+     </div>
+        </div>
+   </div>
+   </div>
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 	 	$('#content img').addClass("image-thumb");
+		
+		$('#content img:not(.no-lightbox)').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: '.image-lb',
+	    gallery: {enabled: false },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

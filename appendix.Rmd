@@ -1,0 +1,18 @@
+---
+title: "Appendix"
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+# Appendix
+
+# RSiena Output
+```{r echo=FALSE}
+cat(paste0(readLines("~/soc_init_new.txt"), collapse = "\n"))
+```

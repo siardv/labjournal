@@ -5,12 +5,10 @@ bibliography: references.bib
 csl: apa.csl
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(comment = NA)
 ```
-
 
 ```{r include=FALSE}
 fpackage.check <- function(packages) {
@@ -26,7 +24,6 @@ get_path <- function(x) {
 }
 ```
 
-
 ```{r message=FALSE, include=FALSE}
 library(igraph)
 library(ggplot2)
@@ -39,36 +36,29 @@ df_soc <- readRDS(get_path("df_soc_final.rds"))
 df_network <- readRDS(get_path("df_network_new.rds"))
 ```
 
-
 # Descriptives Network Statistics
-
 
 This descriptive network analysis aimed to elucidate the underlying structure and connectivity patterns within the faculty collaboration dataset. Key insights revealed the presence of densely connected hubs and increasing density over the two periods.
 
-
 ```{r}
-#' Creating object snet1 and snet2, each containing the adjacency matrix for wave 1 
-#' of the network. The diagonal of snet1 was set to zero to remove self-loops. 
+#' Creating object snet1 and snet2, each containing the adjacency matrix for wave 1
+#' of the network. The diagonal of snet1 was set to zero to remove self-loops.
 #'  Converting the snet1/snet2 adjacency matrix to an igraph graph object called snet2_g/snet1_g
 snet1 <- df_network[[1]]
 diag(snet1) <- 0
 snet1_g <- igraph::graph_from_adjacency_matrix(snet1, mode = c("undirected"))
 
 
-snet2 <- df_network[[2]]  
+snet2 <- df_network[[2]]
 diag(snet2) <- 0
 snet2_g <- igraph::graph_from_adjacency_matrix(snet2, mode = c("undirected"))
 ```
 
-
 ## Network Visualization
-
 
 Mapping node size to degree centrality highlights well-connected members, whereas node color based on betweenness centrality spotlights potential brokers occupying strategically advantageous bridging positions.
 
-
 These visualizations provide an intuitive overview of network topology and dynamics. We see increased connectivity from Wave 1 to Wave 2, reflected in more nodes, edges, and higher density in the later time period. Node size and color also reveal specific members occupying topologically important positions.
-
 
 ```{r}
 #' Plot the Waves 1 and 2 networks with default vertex size 10 and color skyblue/salmon. Sizing nodes by degree centrality and coloring nodes by betweenness centrality in each network. Density labels are added and snet1_g and snet2_g are plotted with labels.
@@ -96,26 +86,21 @@ snet1_label <- paste("Density:", round(edge_density(snet1_g), 2))
 snet2_label <- paste("Density:", round(edge_density(snet2_g), 2))
 ```
 
-
-*Figure 1. Wave 1 network visualization*
-
+_Figure 1. Wave 1 network visualization_
 
 ```{r}
 plot(snet1_g, main = snet1_label)
 ```
 
-
-*Figure 2. Wave 2 network visualization*
-
+_Figure 2. Wave 2 network visualization_
 
 ```{r}
 plot(snet2_g, main = snet2_label)
 ```
 
-
 ## Centrality Metrics
-While visual inspection provides intuitive insights, quantitative network metrics allow for a more rigorous characterization of the importance of individual nodes. Key centrality measures were calculated using the following igraph functions.
 
+While visual inspection provides intuitive insights, quantitative network metrics allow for a more rigorous characterization of the importance of individual nodes. Key centrality measures were calculated using the following igraph functions.
 
 Degree: Number of neighbors
 Strength: Summed tie weights
@@ -123,10 +108,8 @@ Betweenness: Frequency in shortest paths
 Closeness: Inverse of farness to others
 Eigenvector: Connections to other central nodes
 
-
 Each metric provides a complementary perspective on the structural prominence of the nodes.
-The distributions of the centrality values are shown through histograms for waves 1 and 2 (Figures 3 and 4). The degree and strength exhibited the most skewed, heavy-tailed distributions, indicative of a few hubs alongside many peripheral nodes. The other metrics followed a uniform distribution. 
-
+The distributions of the centrality values are shown through histograms for waves 1 and 2 (Figures 3 and 4). The degree and strength exhibited the most skewed, heavy-tailed distributions, indicative of a few hubs alongside many peripheral nodes. The other metrics followed a uniform distribution.
 
 ```{r}
 #' Calculation of degree, strength, betweenness, closeness, and eigenvector centrality for snet1_g and snet2_g. Centrality measures are combined into data frames df1 and df2 for snet1_g and snet2_g. Removing nonfinite values from df1 and df2. Melt df1 and df2 into a long format as df1_m and df2_m.
@@ -158,48 +141,33 @@ df1_m <- reshape2::melt(df1, measure.vars = names(df1))
 df2_m <- reshape2::melt(df2, measure.vars = names(df2))
 ```
 
-
 The degree and strength show highly skewed distributions, with most nodes having low values and a few hubs having very high values. This indicates inequality in the direct connections.
-
 
 Betweenness also exhibited some skewness, with a few critical bridging nodes. Most nodes fall infrequently on the shortest paths.
 
-
 Closeness and eigenvectors follow more uniform distributions, suggesting less inequality in reach and influence propagation.
-
 
 The higher maximum degree and strength in `snet2_g` shows the emergence of better connected hubs over time.
 
-
 Eigenvector centrality deemphasizes connections to peripheral nodes, highlighting connections between influential nodes.
 
-
 In summary, the centrality distributions provide complementary metrics to assess node importance. Degree/strength captures direct connections, betweenness evaluates positional values, and eigenvector incorporates indirect influence. The inequality observed in degree and strength is typical in social networks. Centrality provides a rigorous quantification of node prominence.
-
-
-
-
-
 
 ```{r}
 ggplot(df1_m, aes(x = value, fill = variable)) +
   geom_histogram(alpha = 0.5, position = "identity", bins = 30)
 ```
 
-*Figure 3. Wave 1 centrality metric distributions.*
-
+_Figure 3. Wave 1 centrality metric distributions._
 
 ```{r}
 ggplot(df2_m, aes(x = value, fill = variable)) +
   geom_histogram(alpha = 0.5, position = "identity", bins = 30)
 ```
 
-*Figure 4. Wave 2 centrality metric distributions.*
+_Figure 4. Wave 2 centrality metric distributions._
 
 Nodes with a high degree of strength had abundant direct collaborators. High betweenness nodes bridge otherwise disconnected groups. Closeness signifies the reach and efficiency of the information diffusion. Finally, the eigenvector centrality accounts for a node's connections with other influential members.
-
-
-
 
 ```{r}
 #' Create faceted histogram plots for centrality measures
@@ -208,22 +176,17 @@ ggplot(df1_m, aes(x = value)) +
   facet_wrap(~variable, scales = "free")
 
 
-ggplot(df2_m, aes(x = value)) + 
+ggplot(df2_m, aes(x = value)) +
   geom_histogram(alpha = 0.5, bins = 30) +
   facet_wrap(~variable, scales = "free")
 ```
 
-
-
-
 ## Degree Distribution
-
 
 The degree distribution provides the probability of nodes having a certain number of connections.
 
-
 ```{r}
-#' Calculating the degree distributions for snet1_g and snet2_g. Creating data frames df1 and df2 from degree distributions. Histograms of df1 and df2 degree distributions. 
+#' Calculating the degree distributions for snet1_g and snet2_g. Creating data frames df1 and df2 from degree distributions. Histograms of df1 and df2 degree distributions.
 
 
 (sdegree <- igraph::degree(snet1_g))
@@ -234,34 +197,21 @@ df1 <- data.frame(degree = sdegree)
 df2 <- data.frame(degree = sdegree2)
 ```
 
-
-
-
 The degree distributions show the probability of nodes having a certain number of connections in the `snet1_g` and `snet2_g` networks. Some key points:
-
 
 - Degree distributions have long right-skewed tails. This indicates the presence of high-degree hub nodes with many connections.
 
-
-However, most nodes had low degree values near the start of the distributions. This indicates that most nodes have only a few connections. 
-
+However, most nodes had low degree values near the start of the distributions. This indicates that most nodes have only a few connections.
 
 - Comparing the two distributions, `snet2_g` has more nodes with higher degree values than `snet1_g.` This aligns with it being a more dense network.
 
-
 - The maximum degree is 17 in `snet1_g` and 18 in `snet2_g,’ indicating the hub nodes gained more connections between the two networks.
 
-
-In summary, heavy-tailed degree distributions are typical for real-world networks. The coexistence of hubs and peripheral nodes implies inequality in connectedness. `Snet2_g` shows greater connectivity of hubs over time. 
-
+In summary, heavy-tailed degree distributions are typical for real-world networks. The coexistence of hubs and peripheral nodes implies inequality in connectedness. `Snet2_g` shows greater connectivity of hubs over time.
 
 The degree distributions provide a probabilistic summary of node connectivity and evidence for the emergence of well-connected hubs as networks evolve. They complemented the visualizations and metrics used to analyze the topology.
 
-
-
-
-*Figure 5. Wave 1 degree distribution*
-
+_Figure 5. Wave 1 degree distribution_
 
 ```{r}
 ggplot(df1, aes(x = degree)) +
@@ -269,11 +219,7 @@ ggplot(df1, aes(x = degree)) +
   ggtitle("Degree Distribution of Network 1")
 ```
 
-
-
-
-*Figure 6. Wave 2 degree distribution*
-
+_Figure 6. Wave 2 degree distribution_
 
 ```{r}
 ggplot(df2, aes(x = degree)) +
@@ -281,100 +227,67 @@ ggplot(df2, aes(x = degree)) +
   ggtitle("Degree Distribution of Network 2")
 ```
 
-
-
-
 The long tails indicate the presence of well-connected hubs along with a majority of nodes with a low degree. A comparison of the distributions shows an increase in high-degree nodes from Wave 1 to Wave 2, reflecting the growth in connectivity over time.
-
-
-
 
 ## Local Structure
 
-
 The triad census revealed signature local clustering patterns. The predominance of open and closed triads indicated a strong collaborative closure impulse within the network.
-
 
 A greater frequency of closed triads in Wave 2 signifies increased clustering arising from a higher density over time.
 
-
 ```{r warning=FALSE}
 #' Calculating dyad census, triad census, edge density and transitivity
-igraph::dyad.census(snet1_g)  
+igraph::dyad.census(snet1_g)
 igraph::triad.census(snet1_g)
 igraph::edge_density(snet1_g)
 igraph::dyad.census(snet2_g)
-igraph::triad.census(snet2_g) 
+igraph::triad.census(snet2_g)
 igraph::edge_density(snet2_g)
 ```
 
-
 Comparing `snet1_g` and `snet2_g`:
-
 
 - `snet2_g` has more mutual dyads than `snet1_g` (53 vs 33) indicating it is more dense.
 
-
 - `snet2_g` has more closed triads than `snet1_g` (1150 vs 358) indicating more clustering.
-
 
 - `snet2_g` has a higher edge density than `snet1_g` (0.107 vs 0.077) also indicating it is more dense overall.
 
-
 So `snet2_g` appears to be a more interconnected, dense network with more clustering than `snet1_g.` The triad and dyad census provide quantitative evidence to complement visual analysis. The code calculates key metrics to characterize network topologies.
-
-
-
-
-
 
 #### Transitivity
 
-
-The transitivity values quantify the level of clustering in the two network objects, snet1_g and snet2_g. 
-
+The transitivity values quantify the level of clustering in the two network objects, snet1_g and snet2_g.
 
 ```{r}
 igraph::transitivity(snet1_g)
 igraph::transitivity(snet2_g)
 ```
 
-
 Specifically:
 
-
-- `snet1_g` has a transitivity score of 0.062. This is considered moderate transitivity. It means that if node A is connected to node B, and node B is connected node C, then there is a 0.062 probability that node A is also connected to node C. 
-
+- `snet1_g` has a transitivity score of 0.062. This is considered moderate transitivity. It means that if node A is connected to node B, and node B is connected node C, then there is a 0.062 probability that node A is also connected to node C.
 
 - `snet2_g` has a higher transitivity score of 0.132. This indicates nodes are more likely to form clustered triadic closures compared to `snet1_g.` There is a 0.132 probability that two neighbors of a node are connected.
 
-
-The higher transitivity in `snet2_g` aligns with the triad census results, which show more closed triads. This reflects the greater clustering and interconnectedness between neighbors in the `snet2_g` network. 
-
+The higher transitivity in `snet2_g` aligns with the triad census results, which show more closed triads. This reflects the greater clustering and interconnectedness between neighbors in the `snet2_g` network.
 
 In summary, the transitivity metric quantitatively demonstrates the increased clustering from `snet1_g` to `snet2_g,’ complementing the visual analysis and triad census. These values reflect the tendency to form tightly knit groups and a triadic closure. Transitivity is a key metric for characterizing the network cohesion.
 
-
-
-
-
-
 ### Gender differences in h-index
 
-
 ```{r}
-#' Tabulating position variable, creating binary PhD indicator, 
-# tabulating indicator and converting to a factor in df_soc. 
+#' Tabulating position variable, creating binary PhD indicator,
+# tabulating indicator and converting to a factor in df_soc.
 table(df_soc$position)
 df_soc$is_phd <- as.numeric(df_soc$position == "phd")
 table(df_soc$is_phd)
 df_soc$is_phd <- as.factor(df_soc$is_phd)
 ```
 
-
 ```{r}
-#' Estimating regression of h-index on citations, 
-#' with PhD and gender predictors, 
+#' Estimating regression of h-index on citations,
+#' with PhD and gender predictors,
 #, and interaction effects.
 fit1 <- lm(gs_h_index ~ gs_total_cites, data = df_soc)
 fit2 <- lm(gs_h_index ~ gs_total_cites + is_phd + gender, data = df_soc)
@@ -382,84 +295,57 @@ fit3 <- lm(gs_h_index ~ (gs_total_cites + is_phd) * gender, data = df_soc)
 fits <- list(fit1, fit2, fit3)
 ```
 
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 lm_table <- stargazer::stargazer(fits, type = "text")
 #cat(paste0(capture.output(lm_table), collapse = "\n"))
 ```
 
-
-
-
 The regression analysis output shows the results of fitting the three regression models to predict the h-index based on different predictors. The key elements are:
 
+Model 1:
 
-Model 1: 
 - Only uses total citations to predict h-index
 - Total citations is highly statistically significant (p<0.001)
 - R-squared of 0.895 indicates total citations explains 89.5% of variance in h-index
 
+Model 2:
 
-Model 2: 
-- Adds PhD status and gender as additional predictors 
+- Adds PhD status and gender as additional predictors
 - Total citations remains highly significant
-- Being a PhD is associated with lower h-index 
+- Being a PhD is associated with lower h-index
 - Being male is associated with higher h-index
 - R-squared increases to 0.937, indicating additional 9.2% of variance explained by PhD status and gender
 
-
 Model 3:
+
 - Tests interaction effects between total citations, PhD status, and gender
-- Main effect of total citations now depends on gender 
+- Main effect of total citations now depends on gender
 - Decrease in h-index for PhDs now depends on gender
 - Interaction effects are statistically significant
 - R-squared further increases to 0.953, additional variance explained by interactions
 
-
 Here, we can conclude from the regression analysis that:
 
-
-The analysis uses data on faculty in a sociology department, including their h-index, total citations, PhD status, gender, and position. 
-
+The analysis uses data on faculty in a sociology department, including their h-index, total citations, PhD status, gender, and position.
 
 - The very high R-squared values indicate that the h-index is strongly predicted by the factors in the models: citations, gender, and PhD status. This makes sense given that the h-index aims to measure academic impact and citations are directly related.
 
+- The negative main effect of PhD status may indicate that junior non-tenure-track faculty (e.g., postdocs) in this department tend to have a lower h-index than tenured/tenure-track faculty.
 
-- The negative main effect of PhD status may indicate that junior non-tenure-track faculty (e.g., postdocs) in this department tend to have a lower h-index than tenured/tenure-track faculty. 
-
-
-However, the negative interaction effect between PhD status and gender suggests that this PhD effect is stronger for women than men; thus, female postdocs/non-TT faculty tend to have particularly low h-indices compared to male colleagues. 
-
+However, the negative interaction effect between PhD status and gender suggests that this PhD effect is stronger for women than men; thus, female postdocs/non-TT faculty tend to have particularly low h-indices compared to male colleagues.
 
 - The positive main effect for being male and negative interaction with citations indicates that gender differences in the h-index persist even when accounting for citations. Males had a higher h-index than females with similar citations.
 
-
 In summary, the regression reinforces the descriptive findings that gender inequalities exist in the h-index and the academic impact of sociology faculty, even after controlling for other factors such as citations. The interaction effects highlight that these gender inequalities may be particularly pronounced for junior PhD women.
 
-
-
-
-
-
-
-
 This boxplot shows the distribution of h-index values segmented by sex. The plot reveals that males have higher median and upper quartile h-index values than females in the dataset. This finding suggests potential gender differences in the h-index.
-
-
-
 
 ```{r}
 #' Create boxplot of h-index by gender using base R graphics
 boxplot(gs_h_index ~ gender, data = df_soc, main = "H-Index by Gender")
 ```
 
-
-
-
-
-
 The scatterplot shows the relationship between the h-index and total citations for each individual. There is a clear positive correlation, with the h-index increasing as the total citations increase. This is expected because the h-index reflects citations. Points are colored by sex, revealing the cluster of higher h-index males compared to females.
-
 
 ```{r}
 #' Scatterplot of h-index vs total citations
@@ -469,15 +355,7 @@ plot(df_soc$gs_h_index, df_soc$gs_total_cites,
 )
 ```
 
-
-
-
-
-
 Another view of the h-index distribution by sex was created using ggplot2. The boxplot is color-filled by gender category, again showing the tendency for a higher h-index among males compared to females in the dataset. The minimal theme provides a clearer visualization than the base R boxplot.
-
-
-
 
 ```{r}
 #' Create boxplot of h-index by gender using ggplot2
@@ -488,12 +366,8 @@ ggplot(df_soc, aes(x = gender, y = gs_h_index, fill = gender)) +
   theme_minimal()
 ```
 
-
 # Appendix
-
 
 ```{r}
 lapply(fits, summary)
 ```
-
-

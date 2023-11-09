@@ -1,0 +1,126 @@
+name: "Assignment 1"
+author: "me van den Bosch"
+output_dir: "docs"
+exclude:
+  - "data"
+  - "_test"
+  - "*.rdata"
+  - "*.r"
+  - "*.rds"
+  - "*.rda"
+  - ".Rhistory"
+  - ".Rapp.history"
+  - ".Ruserdata"
+  - "*-Ex.R"
+  - "/*.tar.gz"
+  - "/*.Rcheck/"
+  - ".Rproj.user/"
+  - ".httr-oauth"
+  - "*_cache/"
+  - "/cache/"
+  - "*.utf8.md"
+  - "*.knit.md"
+  - ".Renviron"
+  - "/local/"
+bibliography: references.bib
+navbar:
+  left:
+    - icon: fa-home
+      href: index.html
+    - text: "Journal"
+      menu:
+        - text: "Week 1"
+          menu:
+            - text: "Research Question"
+              href: question.html
+        - text: "Week 2"
+          menu:
+            - text: "Descriptive Statistics"
+              href: zacharys.html
+        - text: "Week 3"
+          menu:
+            - text: "Web Scraping"
+              href: webscraping.html
+        - text: "Week 4"
+          menu:
+            - text: "Network Visualization"
+              href: visualization.html
+            - text: "Using igraph"
+              href: igraph_demo.html
+        - text: "Week 5"
+          menu:
+            - text: "RSiena models"
+              href: rsiena_example.html
+        - text: "Week 6"
+          menu:
+            - text: "SNA in Practice"
+              href:
+        - text: "Week 7"
+          menu:
+            - text: "RSiena Advanced"
+              href:
+    - text: "Research Paper"
+      menu:
+        - text: "Introduction"
+          href: introduction_v1.html
+        - text: "Theory"
+          menu:
+            - text: "Last version"
+              href: theory_v2.html
+            - text: "Older version"
+              href: theory_v1.html
+        - text: "Methods"
+          menu:
+            - text: "Gender From Names"
+              href: predicting_gender.html
+            - text: "Data Collection and Preparation"
+              href: assembling.html
+            - text: "RSiena Analysis Method"
+              href: rsiena_analysis_method.html
+        - text: "Analysis"
+          menu:
+            - text: "Descriptive (draft)"
+              href: descriptive.html
+            - text: "Calculate Metrics Report"
+              href: calculate_metrics_report.html
+            - text: "RSiena (example)"
+              href: rsiena_example.html
+            - text: "Analysis (draft)"
+              href: analysis_draft.html
+        - text: "Results"
+          href:
+        - text: "Discussion"
+          href:
+        - text: "To-Do List"
+          href: to_do_list.html
+    - text: "Research Paper"
+      menu:
+        - text: "Introduction"
+          href: introduction.html
+        - text: "Theory"
+          href: theory.html
+        - text: "Data & Methods"
+          href: data_methods.html
+        - text: "Descriptives"
+          href: descriptives.html
+        - text: "Analysis"
+          href: analysis.html
+        - text: "Results"
+          href: results.html
+        - text: "Discussion"
+          href: discussion.html
+        - text: "Conclusion"
+          href: conclusion.html
+        - text: "Appendix"
+          href: appendix.html
+  right:
+    - icon: fab fa-github
+      href: https://github.com/siardv/labjournal
+output:
+  rmdformats::html_clean:
+    highlight: default
+    toc: true
+    toc_float: true
+    code_folding: show
+    code_download: yes
+    css: tweaks.css

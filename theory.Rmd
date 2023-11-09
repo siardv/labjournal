@@ -1,0 +1,63 @@
+---
+title: "Theoretical Framework"
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+# Theoretical Framework
+
+Extensive scholarship has documented systemic gender inequalities within academia, including biases in hiring, compensation, promotion, tenure, service obligations and leadership opportunities (Fox 2005; Terosky et al. 2008; Misra et al. 2011). Looking beyond individual-level explanations, a growing body of work applies network perspectives to argue that normalized relational dynamics disproportionately isolate and marginalize women within emergent scholarly ecosystems (Rhoten & Pfirman, 2007; Cech & Blair-Loy, 2019; Nielsen, 2016).
+
+Several generative mechanisms have been theorized to introduce systemic biases in women within academic networks. First, homophily concentrates connectivity within same-gender components, rather than bridging across groups (McPherson et al., 2001). Owing to men's overrepresentation in many fields, this disproportionately limits the diversity of women's collaborations (Smith-Doerr et al., 2017; Sugimoto, 2013). Second, preferential attachment and cumulative advantage allow for the accrual of links, recognition, and resources among well-connected scholars (Abbasi et al. 2012; Merton 1968). If men have a higher initial productivity and status, this self-reinforcing process can perpetuate inequality (Larivière et al. 2013). Third, triadic closure dynamics embed segregation, as connections preferentially form in same-gender triads versus spanning groups (Moody, 2001). Together, these forces can prevent women from accessing brokerage positions, while encapsulating men in high-status cores (Burt 2004; Wang et al. 2019).
+
+This study leverages stochastic actor-oriented modeling (Snijders et al., 2010) to systematically evaluate the hypotheses grounded in these pivotal mechanisms. While focusing only on gender is an acknowledged limitation, the constraints necessitated this targeted analysis. Future studies should adopt intersectional approaches that incorporate additional identity factors (Oliveira & Pinho, 2021). Despite this limitation, investigating the network inequalities faced specifically by women represents an important first step in addressing endemic biases (Maliniak et al., 2013).
+
+Based on this framework, the following hypotheses are proposed:
+
+Hypothesis 1 - Network Isolation
+The first hypothesis predicts that women will exhibit higher levels of network isolation, as indicated by the isolateNet effect. This effect models the tendency toward disconnection by counting actors with zero incoming and zero outgoing ties. A significant positive isolateNet effect for women provides compelling evidence of exclusion from the collaborative ecosystem, representing a fundamental inequality within the relational dynamics of academia.
+
+Hypothesis 2 - Preferential Attachment
+The second hypothesis proposes that women display lower preferential attachment rates, as evidenced by a weaker inPop effect. This models the tendency of nodes to accumulate connections according to the current popularity operationalized through in-degree. A weaker inPop effect signifies that women lack access to collaboration with high-status scholars, restricting the accumulation of social capital.
+
+Hypothesis 3 - Outdegree Activity
+The third hypothesis theorizes that men will exhibit higher outdegree activity rates, as shown by a stronger outact effect. This models the tendency of active initiators of collaborations to gain additional ties over time. Higher outdegree activities accelerate the advantages for men, further concentrating on opportunities.
+
+Hypothesis 4 - Homophily and Triadic Closure  
+The fourth hypothesis expects heightened homophily and within-gender triadic closure for women, as evidenced by the significant sameX and sameXTransTrip effects. These effects model collaboration tendencies between same-gender alters and within same-gender triads. Stronger significance for women would provide evidence of segregating forces that isolate them from diverse collaborations.
+
+The results provide data-driven insights into subtle systemic asymmetries that constrain women’s network positions and processes. By elucidating the complex mechanisms allowing gender biases to arise and persist within emergent scholarly ecosystems, this research aims to inform thoughtful interventions that promote equity, inclusion, and advancement for all scholars.
+
+## References
+
+Abbasi, A., Hossain, L., & Leydesdorff, L. (2012). Betweenness centrality as a driver of preferential attachment in the evolution of research collaboration networks. Journal of Informetrics, 6(3), 403–412. https://doi.org/10.1016/j.joi.2012.01.002
+
+Burt, R. S. (2004). Structural holes and good ideas. American Journal of Sociology, 110(2), 349–399. https://doi.org/10.1086/421787
+
+Larivière, V., Ni, C., Gingras, Y., Cronin, B., & Sugimoto, C. R. (2013). Bibliometrics: Global gender disparities in science. Nature, 504(7479), 211–213. https://doi.org/10.1038/504211a
+
+Maliniak, D., Powers, R., & Walter, B. F. (2013). The gender citation gap in international relations. International Organization, 67(4), 889–922. https://doi.org/10.1017/S0020818313000209
+
+McPherson, M., Smith-Lovin, L., & Cook, J. M. (2001). Birds of a feather: Homophily in social networks. Annual Review of Sociology, 27(1), 415–444. https://doi.org/10.1146/annurev.soc.27.1.415
+
+Merton, R. K. (1968). The Matthew effect in science. The reward and communication systems of science are considered. Science, 159(3810), 56–63. https://doi.org/10.1126/science.159.3810.56
+
+Moody, J. (2001). Race, school integration, and friendship segregation in America. American Journal of Sociology, 107(3), 679–716. https://doi.org/10.1086/338954
+
+Nielsen, M. W. (2016). Gender inequality and research performance: Moving beyond individual-meritocratic explanations of academic advancement. Studies in Higher Education, 41(11), 2044–2060. https://doi.org/10.1080/03075079.2015.1007945
+
+Rhoten, D., & Pfirman, S. (2007). Women in interdisciplinary science: Exploring preferences and consequences. Research Policy, 36(1), 56–75. https://doi.org/10.1016/j.respol.2006.08.001
+
+Smith-Doerr, L., Alegria, S. N., & Sacco, T. (2017). How diversity matters in the US science and engineering workforce: A critical review considering integration in teams, fields, and organizational contexts. Engaging Science, Technology, and Society, 3, 139–153. https://doi.org/10.17351/ests2017.142
+
+Snijders, T. A. B., Van de Bunt, G. G., & Steglich, C. E. G. (2010). Introduction to stochastic actor-based models for network dynamics. Social Networks, 32(1), 44–60. https://doi.org/10.1016/j.socnet.2009.02.004
+
+Sugimoto, C. R. (2013). Global gender disparities in science. Nature, 504(7479), 211–213. https://doi.org/10.1038/504211a
+
+Wang, L., Mei, D., Li, W., Rousseau, R., Zhang, Y., Yang, J., .?.?. & Yue, W. (2019). Gender diversity statement and code of conduct help increase gender diversity in astronomer collaborations. Nature Astronomy, 3(10), 1018–1025. https://doi.org/10.1038/s41550-019-0879-1

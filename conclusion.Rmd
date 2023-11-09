@@ -1,14 +1,21 @@
 ---
-title: "Results"
-output:
-  html_document:
-    toc: true
-    number_sections: true
+title: "Conclusion"
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
-
+csl: apa.csl
 ---
 
-# Results
-...
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+# Conclusion
+
+This study leveraged stochastic actor-oriented modeling of a longitudinal faculty co-authorship network to empirically test assumptions about gender differences in collaborative $IsolateNet$, preferential attachment, out-degree activity, homophily, and triadic closure. Modeling revealed several significant micro-level mechanisms that shape the network topology and evolution. These include positive reciprocity, transitivity, same-gender homophily, and weak preferential attachment effects. However, contrary to the initial hypotheses, supplementary analyses revealed no significant gender asymmetries in the operation of these mechanisms.
+
+Specifically, $t$-tests show no difference between male and female faculty members in the $IsolateNet$ parameter measuring disconnectedness ($p = 0.812$). This finding challenges the assumption that women necessarily experience greater isolation or exclusion from collaboration. Additionally, in-degree popularity testing found no evidence that women had less access to high-status collaborators than men ($p = 0.692$). Out-degree activity levels also did not significantly differ by sex ($p = 0.544$), indicating no exacerbation of inequality from initial activity differences.
+
+The model did not reveal significant same-gender homophily effects. However, collaboration rates broken down by gender revealed similar relative preferences for within-gender ties among both male and female faculty. While same-gender collaboration was empirically detected, it did not differ significantly across genders.
+
+In summary, this study demonstrates the value of stochastic actor-oriented models for disentangling dynamic social processes, giving rise to network topologies. The presence of mechanisms, such as triadic closure and homophily, was validated. However, these findings problematize assumptions about gender asymmetry in collaborative engagement. The lack of significant differences challenges the notion that women face greater barriers and constraints in accessing co-authorship opportunities. Further research across institutional contexts is warranted to understand why the hypothesized gender inequalities did not emerge within this faculty network. Longitudinal network models can shed light on the complex social forces shaping and equalizing access to critical collaborative resources.

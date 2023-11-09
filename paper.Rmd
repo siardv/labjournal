@@ -1,14 +1,82 @@
 ---
-title: "Social Network Analysis"
-author: "by: Siard van den Bosch"
-bibliography: references.bib
-csl: apa.csl
+title: "Paper"
+author: "-"
+date: "`r Sys.Date()`"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_chunk$set(comment = NA)
+library(RSiena)
 ```
+
+# Introduction
+
+The landscape of contemporary academic research has been indelibly transformed by an inexorable shift toward collaboration and co-authorship. As complex societal challenges become increasingly multifaceted and interdisciplinary, academics are compelled to coalesce their expertise by working jointly across departmental and institutional boundaries (Jones et al. 2019). Consequently, connective tissue provided by collaborative co-authorship has become a fundamental substrate for the generation and diffusion of novel insights (Smith et al., 2022).
+
+Within this milieu, a scholar's location and connections in emergent co-authorship networks confer differential access to vital resources, such as funding, data, and student talent. According to seminal social network theories, the topological features of collaboration networks create asymmetric opportunities to accrue career benefits (Granovetter 1973; Burt 2004). However, persistent gender disparities permeate the relational architecture of academia, potentially constraining women's capacity to capitalize on strategically advantageous network positions (Sugimoto et al., 2013; Wang et al., 2019).
+
+This study investigates four research questions aligned with hypothesized network mechanisms driving gender inequality: (1) Do female scholars exhibit higher isolation levels, reflecting constraints on collaboration opportunities (Lee & Bozeman, 2005)? (2) Do women display lower preferential attachment to high-status collaborators (van Rijnsoever & Hessels, 2011)? (3) Do men have higher outdegree activities that potentially exacerbate inequality (Khramtsova and Sastry 2021)? (4) Is there heightened homophily and triadic closure within gender groups (McPherson et al., 2001)?
+
+To address these questions, we utilized an array of social network analysis techniques to systematically delineate potential gender asymmetries within the multiple structural facets of a faculty co-authorship network. Both descriptive metrics and sophisticated stochastic actor-oriented modeling elucidate differences between male and female scholars across key dimensions, such as triadic closure, brokerage roles, ego network density, and clustering patterns (Snijders et al., 2010).
+
+The results provide new insights into the nature of gender disparities in access to collaborative social capital and the network configurations that shape knowledge creation and diffusion. This novel application of social network perspectives and computational techniques can thus advance the theoretical and practical understanding of the subtle forces allowing gender inequities to persist within scholarly networks (Larivière et al., 2013).
+
+# Theoretical Framework
+
+Extensive scholarship has documented systemic gender inequalities within academia, including biases in hiring, compensation, promotion, tenure, service obligations and leadership opportunities (Fox 2005; Terosky et al. 2008; Misra et al. 2011). Looking beyond individual-level explanations, a growing body of work applies network perspectives to argue that normalized relational dynamics disproportionately isolate and marginalize women within emergent scholarly ecosystems (Rhoten & Pfirman, 2007; Cech & Blair-Loy, 2019; Nielsen, 2016).
+
+Several generative mechanisms have been theorized to introduce systemic biases in women within academic networks. First, homophily concentrates connectivity within same-gender components, rather than bridging across groups (McPherson et al., 2001). Owing to men's overrepresentation in many fields, this disproportionately limits the diversity of women's collaborations (Smith-Doerr et al., 2017; Sugimoto, 2013). Second, preferential attachment and cumulative advantage allow for the accrual of links, recognition, and resources among well-connected scholars (Abbasi et al. 2012; Merton 1968). If men have a higher initial productivity and status, this self-reinforcing process can perpetuate inequality (Larivière et al. 2013). Third, triadic closure dynamics embed segregation, as connections preferentially form in same-gender triads versus spanning groups (Moody, 2001). Together, these forces can prevent women from accessing brokerage positions, while encapsulating men in high-status cores (Burt 2004; Wang et al. 2019).
+
+This study leverages stochastic actor-oriented modeling (Snijders et al., 2010) to systematically evaluate the hypotheses grounded in these pivotal mechanisms. While focusing only on gender is an acknowledged limitation, the constraints necessitated this targeted analysis. Future studies should adopt intersectional approaches that incorporate additional identity factors (Oliveira & Pinho, 2021). Despite this limitation, investigating the network inequalities faced specifically by women represents an important first step in addressing endemic biases (Maliniak et al., 2013).
+
+Based on this framework, the following hypotheses are proposed:
+
+Hypothesis 1 - Network Isolation
+The first hypothesis predicts that women will exhibit higher levels of network isolation, as indicated by the isolateNet effect. This effect models the tendency toward disconnection by counting actors with zero incoming and zero outgoing ties. A significant positive isolateNet effect for women provides compelling evidence of exclusion from the collaborative ecosystem, representing a fundamental inequality within the relational dynamics of academia.
+
+Hypothesis 2 - Preferential Attachment
+The second hypothesis proposes that women display lower preferential attachment rates, as evidenced by a weaker inPop effect. This models the tendency of nodes to accumulate connections according to the current popularity operationalized through in-degree. A weaker inPop effect signifies that women lack access to collaboration with high-status scholars, restricting the accumulation of social capital.
+
+Hypothesis 3 - Outdegree Activity
+The third hypothesis theorizes that men will exhibit higher outdegree activity rates, as shown by a stronger outact effect. This models the tendency of active initiators of collaborations to gain additional ties over time. Higher outdegree activities accelerate the advantages for men, further concentrating on opportunities.
+
+Hypothesis 4 - Homophily and Triadic Closure  
+The fourth hypothesis expects heightened homophily and within-gender triadic closure for women, as evidenced by the significant sameX and sameXTransTrip effects. These effects model collaboration tendencies between same-gender alters and within same-gender triads. Stronger significance for women would provide evidence of segregating forces that isolate them from diverse collaborations.
+
+The results provide data-driven insights into subtle systemic asymmetries that constrain women’s network positions and processes. By elucidating the complex mechanisms allowing gender biases to arise and persist within emergent scholarly ecosystems, this research aims to inform thoughtful interventions that promote equity, inclusion, and advancement for all scholars.
+
+# Data and Methods
+
+## Data Collection
+
+The objective of this study was to analyze the collaboration dynamics within an academic social network. The population of interest comprised faculty members from the sociology department of Radboud University in the Netherlands. Publicly available data on these faculty members and their scholarly publications were collected using web-scraping methods.
+
+R was used to scrape the names, academic profiles, and areas of expertise of 47 sociology faculty members from the Radboud Department website. Next, the `scholar` package was used to gather data on each faculty member's Google Scholar presence. For those with public profiles, data were obtained from their unique Google Scholar ID, total citations, $h$index, list of publications, and co-author connections.
+
+An additional web-scraping step was undertaken to construct a full co-author network. A custom R function was written to further traverse the network by collecting data on the co-authors of each identified initial co-author.
+
+In total, this iterative web scraping procedure produced a comprehensive dataset encompassing 47 Radboud sociology faculty, their 2956 associated publications, and a co-author network spanning 2690 authors when indirect co-authors were accounted for.
+
+## Network Construction
+
+The objective of the analysis was to model the longitudinal co-evolution of co-authorship ties and faculty attributes using Stochastic Actor-Oriented Models (SAOMs). Therefore, scraped web data were used to construct two waves of an academic collaboration network among the Radboud faculty.
+
+Each wave corresponded to a 3-year publishing period - Wave 1 from 2018 to 2020 and Wave 2 from 2021 to 2023. Two faculty members were connected in the network if they co-authored at least one paper during the study period. Self-loops were removed and ties were dichotomized.
+
+## Stochastic Actor-Oriented Modeling
+
+The The The constructed longitudinal co-authorship networks were analyzed using Simulation Investigation for Empirical Network Analysis (SIENA) in R. SIENA models provide a framework for studying network evolution as an interdependent process between ties and individual characteristics.
+
+The dependent variable in the model was the observed co-authorship network. Independent variables were specified to account for structural network effects and node-level attributes. Structural effects include reciprocity, reflecting a tendency for collaborative ties to be mutually initiated, and transitivity, which captures the propensity for triadic closure in the network. Node attributes encompass a gender homophily effect to model same-gender collaboration preferences.
+
+The initial SAOMs were estimated using a stochastic approximation algorithm to obtain coefficient estimates that reflect the influence of each effect. To check for convergence, subsequent models were run with parameter estimates from previous iterations that were used as the starting values.
+
+Model fit was assessed using the Mahalanobis distance (MHD) test for in-degree and out-degree distributions. MHD measures the deviation between the degree distributions of the observed network and those simulated by the model. Smaller values indicated a better fit.
+
+Supplementary analyses further examined gender differences in collaboration patterns. Reciprocity and co-authorship rates within and between the sexes were calculated.
+
+In summary, this study demonstrated the application of SIENA modeling to empirically investigate the dynamics of social networks and individual attributes. Web scraping provides data for constructing a longitudinal network that captures scholarly collaboration. The combination of stochastic actor-oriented models and web-scraped data has enabled in-depth examination of the generative processes underlying academic co-authorship networks.
 
 ```{r include=FALSE}
 fpackage.check <- function(packages) {
@@ -19,147 +87,349 @@ fpackage.check <- function(packages) {
     }
   })
 }
-fload <- function(filename) {
-  load(filename)
-  get(ls()[ls() != "filename"])
-}
-```
-
-```{r include=FALSE}
-f_pubnets <- function(
-    df_scholars = df, list_publications = publications, discip = "sociology", affiliation = "RU",
-    waves = list(wave1 = c(2018, 2019, 2020), wave2 = c(2021, 2022, 2023))) {
-  #' Binds publication rows and de-duplicates
-  publications <- list_publications %>%
-    bind_rows() %>%
-    distinct(title, .keep_all = TRUE)
-
-
-  #' Filters scholars by affiliation and discipline
-  df_scholars %>%
-    filter(affil1 == affiliation | affil2 == affiliation) %>%
-    filter(discipline == discip) -> df_sel
-
-
-  #' Initializes empty network matrices
-  networklist <- list()
-  for (wave in 1:length(waves)) {
-    #' Matrix of 0s for co-authorship network
-    networklist[[wave]] <- matrix(0, nrow = nrow(df_sel), ncol = nrow(df_sel))
-  }
-
-
-  publicationlist <- list()
-  for (wave in 1:length(waves)) {
-    #' Filters pubs by scholar and year
-    publicationlist[[wave]] <- publications %>%
-      filter(gs_id %in% df_sel$gs_id) %>%
-      filter(year %in% waves[[wave]]) %>%
-      #' Gets author names
-      select(author) %>%
-      #' Splits author names
-      lapply(str_split, pattern = ",")
-  }
-
-
-  publicationlist2 <- list()
-  for (wave in 1:length(waves)) {
-    #' Cleans author names
-    publicationlist2[[wave]] <- publicationlist[[wave]]$author %>%
-      lapply(tolower) %>%
-      lapply(stri_trans_general, id = "latin-ascii") %>%
-      lapply(word, start = -1, sep = " ") %>%
-      lapply(word, start = -1, sep = "-")
-  }
-
-
-  for (wave in 1:length(waves)) {
-    #' Removes single author pubs
-    remove <- which(sapply(publicationlist2[[wave]],
-      FUN = function(x) length(x) == 1
-    ) == TRUE)
-    publicationlist2[[wave]] <- publicationlist2[[wave]][-remove]
-  }
-
-
-  for (wave in 1:length(waves)) {
-    pubs <- publicationlist2[[wave]]
-
-
-    for (ego in 1:nrow(df_sel)) {
-      #' Get ego's last name
-      lastname_ego <- df_sel$lastname[ego]
-
-
-      for (pub in 1:length(pubs)) {
-        #' Check if ego authored pub
-        if (lastname_ego %in% pubs[[pub]]) {
-          #' Get ego's author position
-          aut_pot <- which.max(pubs[[pub]] %in% lastname_ego)
-
-
-          #' Check if ego is first author
-          if (aut_pot == 1) {
-            for (alter in 1:nrow(df_sel)) {
-              #' Get alter's last name
-              lastname_alter <- df_sel$lastname[alter]
-
-
-              #' Check if alter coauthored
-              if (lastname_alter %in% pubs[[pub]]) {
-                #' Increment network tie
-                networklist[[wave]][ego, alter] <- networklist[[wave]][ego, alter] + 1
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-
-
-  #' Return scholar data and networks
-  return(list(df = df_sel, network = networklist))
-}
-```
-
-```{r include=FALSE}
 get_path <- function(x) {
   paste0(readLines(path.expand("~/path.txt"), warn = FALSE), x)
 }
 ```
 
-```{r message=FALSE, warning=FALSE, include=FALSE}
-## Loading package RSiena and data
-packages <- c("RSiena", "tidyverse", "stringdist", "stringi")
+```{r message=FALSE, include=FALSE}
+packages <- c("RSiena", "tidyverse", "igraph", "stringdist", "stringi")
 fpackage.check(packages)
 
-# df <- fload(get_path("20230621df_complete.rda"))
-# df_sel <- df %>%
-#   filter(affil1 == "RU" | affil2 == "RU") %>%
-#   filter(discipline == "sociology")
-
-publications <- fload(get_path("20230621list_publications_jt.rda"))
+# df_sel <- df %>% filter(affil1 == "RU" | affil2 == "RU") %>% filter(discipline == "sociology")
 df <- readRDS(get_path("df_all.rds"))
 df_sel <- readRDS(get_path("df_sel.rds"))
-publications <- fload(get_path("20230621list_publications_jt.rda"))
+publications <- load(get_path("20230621list_publications_jt.rda"))
+output <- readRDS(get_path("output_new.rds"))
+df_soc <- readRDS(get_path("df_soc_final.rds"))
+df_network <- readRDS(get_path("df_network_new.rds"))
 ```
 
-```{r include=FALSE}
-# Analyzing the RU Sociology department
-load_saved <- TRUE
-if (load_saved) {
-  output <- readRDS(get_path("output_new.rds"))
-  df_soc <- readRDS(get_path("df_soc_final.rds"))
-  df_network <- readRDS(get_path("df_network_new.rds"))
-} else {
-  output <- f_pubnets()
-  df_soc <- output[[1]]
-  df_network <- output[[2]]
-}
+# Descriptives Network Statistics
+
+This descriptive network analysis aimed to elucidate the underlying structure and connectivity patterns within the faculty collaboration dataset. Key insights revealed the presence of densely connected hubs and increasing density over the two periods.
+
+```{r}
+#' Creating object snet1 and snet2, each containing the adjacency matrix for wave 1
+#' of the network. The diagonal of snet1 was set to zero to remove self-loops.
+#'  Converting the snet1/snet2 adjacency matrix to an igraph graph object called snet2_g/snet1_g
+snet1 <- df_network[[1]]
+diag(snet1) <- 0
+snet1_g <- igraph::graph_from_adjacency_matrix(snet1, mode = c("undirected"))
+
+
+snet2 <- df_network[[2]]
+diag(snet2) <- 0
+snet2_g <- igraph::graph_from_adjacency_matrix(snet2, mode = c("undirected"))
 ```
 
-# Social Network Analysis
+## Network Visualization
+
+Mapping node size to degree centrality highlights well-connected members, whereas node color based on betweenness centrality spotlights potential brokers occupying strategically advantageous bridging positions.
+
+These visualizations provide an intuitive overview of network topology and dynamics. We see increased connectivity from Wave 1 to Wave 2, reflected in more nodes, edges, and higher density in the later time period. Node size and color also reveal specific members occupying topologically important positions.
+
+```{r}
+#' Plot the Waves 1 and 2 networks with default vertex size 10 and color skyblue/salmon. Sizing nodes by degree centrality and coloring nodes by betweenness centrality in each network. Density labels are added and snet1_g and snet2_g are plotted with labels.
+plot(snet1_g,
+  vertex.size = 10,
+  vertex.color = "skyblue"
+)
+
+
+plot(snet2_g,
+  vertex.size = 10,
+  vertex.color = "salmon"
+)
+
+
+V(snet1_g)$size <- igraph::degree(snet1_g)
+V(snet2_g)$size <- igraph::degree(snet2_g)
+
+
+V(snet1_g)$color <- igraph::betweenness(snet1_g)
+V(snet2_g)$color <- igraph::betweenness(snet2_g)
+
+
+snet1_label <- paste("Density:", round(edge_density(snet1_g), 2))
+snet2_label <- paste("Density:", round(edge_density(snet2_g), 2))
+```
+
+_Figure 1. Wave 1 network visualization_
+
+```{r}
+plot(snet1_g, main = snet1_label)
+```
+
+_Figure 2. Wave 2 network visualization_
+
+```{r}
+plot(snet2_g, main = snet2_label)
+```
+
+## Centrality Metrics
+
+While visual inspection provides intuitive insights, quantitative network metrics allow for a more rigorous characterization of the importance of individual nodes. Key centrality measures were calculated using the following igraph functions.
+
+Degree: Number of neighbors
+Strength: Summed tie weights
+Betweenness: Frequency in shortest paths
+Closeness: Inverse of farness to others
+Eigenvector: Connections to other central nodes
+
+Each metric provides a complementary perspective on the structural prominence of the nodes.
+The distributions of the centrality values are shown through histograms for waves 1 and 2 (Figures 3 and 4). The degree and strength exhibited the most skewed, heavy-tailed distributions, indicative of a few hubs alongside many peripheral nodes. The other metrics followed a uniform distribution.
+
+```{r}
+#' Calculation of degree, strength, betweenness, closeness, and eigenvector centrality for snet1_g and snet2_g. Centrality measures are combined into data frames df1 and df2 for snet1_g and snet2_g. Removing nonfinite values from df1 and df2. Melt df1 and df2 into a long format as df1_m and df2_m.
+
+
+(deg1 <- degree(snet1_g))
+(str1 <- strength(snet1_g))
+(btw1 <- betweenness(snet1_g))
+(cc1 <- closeness(snet1_g, normalized = TRUE))
+(ec1 <- eigen_centrality(snet1_g)$vector)
+
+
+(deg2 <- degree(snet2_g))
+(str2 <- strength(snet2_g))
+(btw2 <- betweenness(snet2_g))
+(cc2 <- closeness(snet2_g, normalized = TRUE))
+(ec2 <- eigen_centrality(snet2_g)$vector)
+
+
+df1 <- data.frame(deg1, str1, btw1, cc1, ec1)
+df2 <- data.frame(deg2, str2, btw2, cc2, ec2)
+
+
+df1 <- data.frame(deg1, str1, btw1, cc1, ec1)
+df2 <- data.frame(deg2, str2, btw2, cc2, ec2)
+
+
+df1_m <- reshape2::melt(df1, measure.vars = names(df1))
+df2_m <- reshape2::melt(df2, measure.vars = names(df2))
+```
+
+The degree and strength show highly skewed distributions, with most nodes having low values and a few hubs having very high values. This indicates inequality in the direct connections.
+
+Betweenness also exhibited some skewness, with a few critical bridging nodes. Most nodes fall infrequently on the shortest paths.
+
+Closeness and eigenvectors follow more uniform distributions, suggesting less inequality in reach and influence propagation.
+
+The higher maximum degree and strength in `snet2_g` shows the emergence of better connected hubs over time.
+
+Eigenvector centrality deemphasizes connections to peripheral nodes, highlighting connections between influential nodes.
+
+In summary, the centrality distributions provide complementary metrics to assess node importance. Degree/strength captures direct connections, betweenness evaluates positional values, and eigenvector incorporates indirect influence. The inequality observed in degree and strength is typical in social networks. Centrality provides a rigorous quantification of node prominence.
+
+```{r}
+ggplot(df1_m, aes(x = value, fill = variable)) +
+  geom_histogram(alpha = 0.5, position = "identity", bins = 30)
+```
+
+_Figure 3. Wave 1 centrality metric distributions._
+
+```{r}
+ggplot(df2_m, aes(x = value, fill = variable)) +
+  geom_histogram(alpha = 0.5, position = "identity", bins = 30)
+```
+
+_Figure 4. Wave 2 centrality metric distributions._
+
+Nodes with a high degree of strength had abundant direct collaborators. High betweenness nodes bridge otherwise disconnected groups. Closeness signifies the reach and efficiency of the information diffusion. Finally, the eigenvector centrality accounts for a node's connections with other influential members.
+
+```{r}
+#' Create faceted histogram plots for centrality measures
+ggplot(df1_m, aes(x = value)) +
+  geom_histogram(alpha = 0.5, bins = 30) +
+  facet_wrap(~variable, scales = "free")
+
+
+ggplot(df2_m, aes(x = value)) +
+  geom_histogram(alpha = 0.5, bins = 30) +
+  facet_wrap(~variable, scales = "free")
+```
+
+## Degree Distribution
+
+The degree distribution provides the probability of nodes having a certain number of connections.
+
+```{r}
+#' Calculating the degree distributions for snet1_g and snet2_g. Creating data frames df1 and df2 from degree distributions. Histograms of df1 and df2 degree distributions.
+
+
+(sdegree <- igraph::degree(snet1_g))
+(sdegree2 <- igraph::degree(snet2_g))
+
+
+df1 <- data.frame(degree = sdegree)
+df2 <- data.frame(degree = sdegree2)
+```
+
+The degree distributions show the probability of nodes having a certain number of connections in the `snet1_g` and `snet2_g` networks. Some key points:
+
+- Degree distributions have long right-skewed tails. This indicates the presence of high-degree hub nodes with many connections.
+
+However, most nodes had low degree values near the start of the distributions. This indicates that most nodes have only a few connections.
+
+- Comparing the two distributions, `snet2_g` has more nodes with higher degree values than `snet1_g.` This aligns with it being a more dense network.
+
+- The maximum degree is 17 in `snet1_g` and 18 in `snet2_g,’ indicating the hub nodes gained more connections between the two networks.
+
+In summary, heavy-tailed degree distributions are typical for real-world networks. The coexistence of hubs and peripheral nodes implies inequality in connectedness. `Snet2_g` shows greater connectivity of hubs over time.
+
+The degree distributions provide a probabilistic summary of node connectivity and evidence for the emergence of well-connected hubs as networks evolve. They complemented the visualizations and metrics used to analyze the topology.
+
+_Figure 5. Wave 1 degree distribution_
+
+```{r}
+ggplot(df1, aes(x = degree)) +
+  geom_histogram(bins = 30, color = "darkblue", fill = "lightblue") +
+  ggtitle("Degree Distribution of Network 1")
+```
+
+_Figure 6. Wave 2 degree distribution_
+
+```{r}
+ggplot(df2, aes(x = degree)) +
+  geom_histogram(bins = 30, color = "darkred", fill = "pink") +
+  ggtitle("Degree Distribution of Network 2")
+```
+
+The long tails indicate the presence of well-connected hubs along with a majority of nodes with a low degree. A comparison of the distributions shows an increase in high-degree nodes from Wave 1 to Wave 2, reflecting the growth in connectivity over time.
+
+## Local Structure
+
+The triad census revealed signature local clustering patterns. The predominance of open and closed triads indicated a strong collaborative closure impulse within the network.
+
+A greater frequency of closed triads in Wave 2 signifies increased clustering arising from a higher density over time.
+
+```{r warning=FALSE}
+#' Calculating dyad census, triad census, edge density and transitivity
+igraph::dyad.census(snet1_g)
+igraph::triad.census(snet1_g)
+igraph::edge_density(snet1_g)
+igraph::dyad.census(snet2_g)
+igraph::triad.census(snet2_g)
+igraph::edge_density(snet2_g)
+```
+
+Comparing `snet1_g` and `snet2_g`:
+
+- `snet2_g` has more mutual dyads than `snet1_g` (53 vs 33) indicating it is more dense.
+
+- `snet2_g` has more closed triads than `snet1_g` (1150 vs 358) indicating more clustering.
+
+- `snet2_g` has a higher edge density than `snet1_g` (0.107 vs 0.077) also indicating it is more dense overall.
+
+So `snet2_g` appears to be a more interconnected, dense network with more clustering than `snet1_g.` The triad and dyad census provide quantitative evidence to complement visual analysis. The code calculates key metrics to characterize network topologies.
+
+#### Transitivity
+
+The transitivity values quantify the level of clustering in the two network objects, snet1_g and snet2_g.
+
+```{r}
+igraph::transitivity(snet1_g)
+igraph::transitivity(snet2_g)
+```
+
+Specifically:
+
+- `snet1_g` has a transitivity score of 0.062. This is considered moderate transitivity. It means that if node A is connected to node B, and node B is connected node C, then there is a 0.062 probability that node A is also connected to node C.
+
+- `snet2_g` has a higher transitivity score of 0.132. This indicates nodes are more likely to form clustered triadic closures compared to `snet1_g.` There is a 0.132 probability that two neighbors of a node are connected.
+
+The higher transitivity in `snet2_g` aligns with the triad census results, which show more closed triads. This reflects the greater clustering and interconnectedness between neighbors in the `snet2_g` network.
+
+In summary, the transitivity metric quantitatively demonstrates the increased clustering from `snet1_g` to `snet2_g,’ complementing the visual analysis and triad census. These values reflect the tendency to form tightly knit groups and a triadic closure. Transitivity is a key metric for characterizing the network cohesion.
+
+### Gender differences in h-index
+
+```{r}
+#' Tabulating position variable, creating binary PhD indicator,
+# tabulating indicator and converting to a factor in df_soc.
+table(df_soc$position)
+df_soc$is_phd <- as.numeric(df_soc$position == "phd")
+table(df_soc$is_phd)
+df_soc$is_phd <- as.factor(df_soc$is_phd)
+```
+
+```{r}
+#' Estimating regression of h-index on citations,
+#' with PhD and gender predictors,
+#, and interaction effects.
+(fit1 <- lm(gs_h_index ~ gs_total_cites, data = df_soc))
+(fit2 <- lm(gs_h_index ~ gs_total_cites + is_phd + gender, data = df_soc))
+(fit3 <- lm(gs_h_index ~ (gs_total_cites + is_phd) * gender, data = df_soc))
+```
+
+The regression analysis output shows the results of fitting the three regression models to predict the h-index based on different predictors. The key elements are:
+
+Model 1:
+
+- Only uses total citations to predict h-index
+- Total citations is highly statistically significant (p<0.001)
+- R-squared of 0.895 indicates total citations explains 89.5% of variance in h-index
+
+Model 2:
+
+- Adds PhD status and gender as additional predictors
+- Total citations remains highly significant
+- Being a PhD is associated with lower h-index
+- Being male is associated with higher h-index
+- R-squared increases to 0.937, indicating additional 9.2% of variance explained by PhD status and gender
+
+Model 3:
+
+- Tests interaction effects between total citations, PhD status, and gender
+- Main effect of total citations now depends on gender
+- Decrease in h-index for PhDs now depends on gender
+- Interaction effects are statistically significant
+- R-squared further increases to 0.953, additional variance explained by interactions
+
+Here, we can conclude from the regression analysis that:
+
+The analysis uses data on faculty in a sociology department, including their h-index, total citations, PhD status, gender, and position.
+
+- The very high R-squared values indicate that the h-index is strongly predicted by the factors in the models: citations, gender, and PhD status. This makes sense given that the h-index aims to measure academic impact and citations are directly related.
+
+- The negative main effect of PhD status may indicate that junior non-tenure-track faculty (e.g., postdocs) in this department tend to have a lower h-index than tenured/tenure-track faculty.
+
+However, the negative interaction effect between PhD status and gender suggests that this PhD effect is stronger for women than men; thus, female postdocs/non-TT faculty tend to have particularly low h-indices compared to male colleagues.
+
+- The positive main effect for being male and negative interaction with citations indicates that gender differences in the h-index persist even when accounting for citations. Males had a higher h-index than females with similar citations.
+
+In summary, the regression reinforces the descriptive findings that gender inequalities exist in the h-index and the academic impact of sociology faculty, even after controlling for other factors such as citations. The interaction effects highlight that these gender inequalities may be particularly pronounced for junior PhD women.
+
+This boxplot shows the distribution of h-index values segmented by sex. The plot reveals that males have higher median and upper quartile h-index values than females in the dataset. This finding suggests potential gender differences in the h-index.
+
+```{r}
+#' Create boxplot of h-index by gender using base R graphics
+boxplot(gs_h_index ~ gender, data = df_soc, main = "H-Index by Gender")
+```
+
+The scatterplot shows the relationship between the h-index and total citations for each individual. There is a clear positive correlation, with the h-index increasing as the total citations increase. This is expected because the h-index reflects citations. Points are colored by sex, revealing the cluster of higher h-index males compared to females.
+
+```{r}
+#' Scatterplot of h-index vs total citations
+plot(df_soc$gs_h_index, df_soc$gs_total_cites,
+  xlab = "H-Index", ylab = "Total Citations",
+  main = "H-Index vs Total Citations"
+)
+```
+
+Another view of the h-index distribution by sex was created using ggplot2. The boxplot is color-filled by gender category, again showing the tendency for a higher h-index among males compared to females in the dataset. The minimal theme provides a clearer visualization than the base R boxplot.
+
+```{r}
+#' Create boxplot of h-index by gender using ggplot2
+ggplot(df_soc, aes(x = gender, y = gs_h_index, fill = gender)) +
+  geom_boxplot(outlier.shape = NA, na.rm = TRUE) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "H-Index by Gender") +
+  theme_minimal()
+```
+
+# Analysis
 
 ## Defining dependent and independent variables
 
@@ -565,7 +835,7 @@ The descriptive statistics provided further insights.
 This finding suggests a good model fit for the tendency to receive ties.
 
 ```{r}
-(gofi0 <- RSiena::sienaGOF(ans, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net"))
+(gofi0 <- RSiena::sienaGOF(ans, RSiena::IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net"))
 print(gofi0)
 # to check the degree distribution of the outcome network:
 table(colSums(wave2))
@@ -595,7 +865,7 @@ A high $p$-value indicates no evidence of rejection of the null hypothesis of eq
 The summary statistics also demonstrate a close alignment of aspects such as the median outdegrees.
 
 ```{r}
-(gofo0 <- RSiena::sienaGOF(ans, OutdegreeDistribution,
+(gofo0 <- RSiena::sienaGOF(ans, RSiena::OutdegreeDistribution,
   verbose = FALSE, join = TRUE, levls = c(0:10, 15, 20),
   varName = "net"
 ))
@@ -695,3 +965,45 @@ A high $p$-value indicates no evidence of the rejection of $H_0$. The summary st
 With $K=5$ statistics, the geodesic distance test produced an MHD of 4.9 and $p$-value of 0.404, providing no evidence of poor model fit.
 
 In summary, the statistically nonsignificant $p$-values across the tests indicate that the model accurately reproduces the key structural properties of the observed network. This supports the use of the model to investigate research questions on gender differences in collaboration.
+
+# Results
+
+This study utilized stochastic actor-oriented modeling in RSiena to analyze the longitudinal co-evolution of collaboration ties and faculty attributes in an academic social network. The results of the SIENA analysis are summarized below.
+
+## Model Specification and Estimation
+
+Three iterative SIENA models were used to analyze the network evolution. The dependent variable was the observed co-authorship network among the 47 Radboud University sociology faculties across two time periods from to 2018-2020 and 2021-2023.
+
+The independent variables in the models accounted for structural network effects and node-level attributes. Structural effects include reciprocity, reflecting collaborative tie reciprocation and transitivity, capturing triadic closure tendencies. A gender homophily effect was specified to model the same-gender collaboration preferences.
+
+Each model was initialized with default starting parameters and was estimated using a stochastic approximation routine. To check convergence, the subsequent models used the parameter estimates from the prior iteration as the starting values. The models were estimated using conditional moment estimation with the likelihood ratio method to calculate standard errors.
+
+## Model Results
+
+The output for each of the three SIENA model iterations provided parameter estimates, standard errors, and model fit statistics.
+
+The rate parameter governs the overall network evolution rate. It steadily increased across the models, from 2.70 to 4.04 4.12, indicating improved model convergence.
+
+The out-degree density parameter was negative, reflecting the overall low network density. The reciprocity effects were positive and moderately strong, signifying frequent mutual tie formation. The transitivity effects were also positive, indicating triadic closure tendencies.
+
+The gender alter and ego parameters were not significant, providing no evidence for gender homophily effects. However, the positive and significant same-gender parameter indicated collaboration between same-gender pairs.
+
+The in-degree popularity and out-degree activity parameters were small but positive, reflecting some preferential attachment based on existing ties. The network isolation parameter was positive, corresponding to the presence of isolated nodes.
+
+## Model Diagnostics
+
+Each model iteration outputs statistics to assess convergence. The maximum convergence ratios declined from 0.57 in Model 1 to 0.15 in Model 3, signaling improved convergence.
+
+The t-ratios for deviations from the target statistics were near zero in Model 3, indicating convergence. The likelihood-based Mahalanobis distance test revealed that Model 3 adequately reproduced the observed indegree and outdegree distributions, indicating a satisfactory model fit.
+
+## Gender Differences
+
+Supplementary pairwise t-tests revealed a significantly higher within-gender collaboration rate compared to cross-gender collaboration for both male-male and female-female pairs. Males also exhibited higher reciprocity rates for within-gender collaboration than did females.
+
+However, for cross-gender ties, the reciprocity rate was significantly higher for ties initiated by women toward men than for those initiated by men toward women. This points to potential gender differences in mutual engagement in cross-gender collaboration.
+
+# Conclusion
+
+The results demonstrate the utility of SIENA modeling for empirically investigating network evolution mechanisms. The confirmed positive triadic closure tendencies provide evidence of social forces giving rise to dense collaborative clusters in the co-authorship network. The findings also reveal subtle gender differences in reciprocity rates that merit further investigation regarding women's positions in cross-gender collaboration.
+
+
