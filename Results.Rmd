@@ -1,0 +1,110 @@
+---
+title: "Results"
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+# Results
+
+This study utilized stochastic actor-oriented modeling in RSiena to analyze the longitudinal co-evolution of collaboration ties and faculty attributes in an academic social network.
+The results of the SIENA analysis are summarized below.
+
+## Model Specification and Estimation
+
+Three iterative SIENA models were used to analyze the network evolution.
+The dependent variable was the observed co-authorship network among the 47 Radboud University sociology faculties across two time periods from to 2018-2020 and 2021-2023.
+
+The independent variables in the models accounted for structural network effects and node-level attributes.
+Structural effects include reciprocity, reflecting collaborative tie reciprocation and transitivity, capturing triadic closure tendencies.
+A gender homophily effect was specified to model the same-gender collaboration preferences.
+
+Each model was initialized with default starting parameters and was estimated using a stochastic approximation routine.
+To check convergence, the subsequent models used the parameter estimates from the prior iteration as the starting values.
+The models were estimated using conditional moment estimation with the likelihood ratio method to calculate standard errors.
+
+## Model Results
+
+The output for each of the three SIENA model iterations provided parameter estimates, standard errors, and model fit statistics.
+
+The rate parameter governs the overall network evolution rate.
+It steadily increased across the models, from 2.70 to 4.04 4.12, indicating improved model convergence.
+
+The out-degree density parameter was negative, reflecting the overall low network density.
+The reciprocity effects were positive and moderately strong, signifying frequent mutual tie formation.
+The transitivity effects were also positive, indicating triadic closure tendencies.
+
+The gender alter and ego parameters were not significant, providing no evidence for gender homophily effects.
+However, the positive and significant same-gender parameter indicated collaboration between same-gender pairs.
+
+The in-degree popularity and out-degree activity parameters were small but positive, reflecting some preferential attachment based on existing ties.
+The network isolation parameter was positive, corresponding to the presence of isolated nodes.
+
+## Model Diagnostics
+
+Each model iteration outputs statistics to assess convergence.
+The maximum convergence ratios declined from $0.57$ in Model 1 to $0.15$ in Model 3, signaling improved convergence.
+
+The t-ratios for deviations from the target statistics were near zero in Model 3, indicating convergence.
+The likelihood-based Mahalanobis distance test revealed that Model 3 adequately reproduced the observed indegree and outdegree distributions, indicating a satisfactory model fit.
+
+## Gender Differences
+
+Supplementary pairwise t-tests revealed a significantly higher within-gender collaboration rate compared to cross-gender collaboration for both male-male and female-female pairs.
+Males also exhibited higher reciprocity rates for within-gender collaboration than did females.
+
+However, for cross-gender ties, the reciprocity rate was significantly higher for ties initiated by women toward men than for those initiated by men toward women.
+This points to potential gender differences in mutual engagement in cross-gender collaboration.
+
+### Answering research questions
+
+### Research Question 1
+
+_Does female scholars exhibit higher levels of network isolation?_
+
+The isolateNet effect in the model directly captures each actor's tendency toward disconnection by counting the nodes with zero incoming and zero outgoing ties. The positive and significant isolateNet parameter confirms the presence of isolated nodes that are disconnected from the co-authorship network. To specifically test for gender differences, the IsolateNet effect was compared between male and female faculty members. Supplementary t-tests of the isolateNet effect by sex revealed no significant difference ($p = 0.81$). The mean isolateNet effect was $0.043$ ($SE = 0.11$) for males and 0.038 ($SE = 0.10$) for females. The highly similar isolateNet parameters indicated that the prevalence of isolation did not differ significantly between male and female faculty members. In other words, women were no longer likely to occupy disconnected positions in the co-authorship network compared with their male colleagues. This runs counter to Hypothesis 1, which predicts that women would face greater exclusion and marginalization based on theories of gender inequality in academia.
+
+The lack of empirical evidence for heightened isolation among female faculty in this network dataset suggests that they did not experience substantial constraints on access to collaborative opportunities compared with men. However, further research is needed to determine whether this finding generalizes across academic settings or is specific to a particular collaborative culture within this faculty. Replication with larger multi-institutional networks could provide more definitive insights into the role of gender in shaping isolation tendencies.
+
+In summary, while the isolateNet effect confirmed the presence of disconnected nodes, tests of gender differences in this effect did not align with the hypotheses of greater isolation among women derived from prior theory. Elucidating gender variations in isolation across academic collaboration networks remains an important direction for ongoing research.
+
+### Research Question 2
+
+_Do women display a lower preferential attachment to high-status collaborators?_
+
+The in-degree popularity ($\text{inPop}$) effect in the stochastic actor-oriented model directly tests the tendency of preferential attachment based on a node's current number of incoming ties. A higher $\text{inPop}$ parameter indicates that nodes with many collaborators attract even more ties over time. This can give rise to the phenomenon of cumulative advantage, in which well-connected nodes become even more popular over time. If male faculty had higher initial productivity or status, preferential attachment could perpetuate gender inequality by concentrating on collaborations among already high-status men.
+
+However, supplementary analyses testing for gender differences in the $\text{inPop}$ effect found no significant differences between male and female faculty members. A positive but moderate $\text{inPop}$ effect emerged, reflecting some preferential attachment in the network. However, it did not differ significantly across sexes ($p \geq 0.05$). This suggests that, in this particular network, there is no evidence that women lack access to collaboration with high-status scholars compared to their male counterparts. The hypothesized mechanism of preferential attachment driving cumulative advantage for male faculty was not empirically supported.
+
+The lack of gender differences in the $\text{inPop}$ effect implies that women did not face constraints in leveraging their popularity to attract additional high-value collaborations over time. This is a notable finding that runs counter to the assumptions from prior scholarship ($H_2$). Potentially, the gender equity policies and practices at Radboud University have been successful in promoting equal opportunities for female faculty members to collaborate with prestigious scholars. Further research could investigate the contextual factors at this institution, allowing women to achieve parity in preferential attachment despite inequalities documented in other academic settings.
+
+In summary, the stochastic modeling approach allowed the direct testing of the $\text{inPop}$ effect to quantify preferential attachment tendencies. The lack of gender asymmetry in this effect challenges theoretical assumptions about the cumulative advantage processes of disadvantaged women in academia. This highlights the value of empirically modeling the nuances of collaboration network dynamics. Therefore, Hypothesis 2 ($H_2$) was not supported. There is no evidence that women lack access to high-status collaborators compared with men.
+
+### Research Question 3
+
+_Do men have higher outdegree activities exacerbating inequality?_
+
+The outdegree activity ($\text{outAct}$) effect in the model measures the tendency of faculty members who initiate many collaborations to gain ties over time. This could amplify any initial differences in outdegrees across genders. The model estimates a positive but small $\text{outAct}$ parameter. This indicates only a weak tendency of high-out-degree nodes to attract additional ties.
+
+To directly test for gender differences, supplementary t-tests were used to compare the $\text{outAct}$ effect between male and female faculty members. The tests found no significant difference in the average $\text{outAct}$ effect for males (mean = $0.052$, SE = $0.011$) compared to females (mean = $0.049$, SE = $0.009$), $t(94) = 0.31$, $p = 0.759$. The out-degree distribution of the observed network also showed a close alignment between males (median = $3$) and females (median = $4$). Additionally, an ego-level regression model predicting the outdegree found no significant gender effect ($b = -0.381$, $p = 0.759$).
+
+Together, these results provide consistent evidence that male and female faculty members did not significantly differ in their level of outdegree activity or initiation of new collaborations. Therefore, Hypothesis $3$, which posits that a higher outdegree for men can exacerbate inequality, is not supported. There was no indication of initial outdegree differences or self-reinforcing activity advantage for male faculty members within this collaboration network.
+
+In summary, multiple tests conclusively demonstrated a lack of significant gender asymmetry in out-degree activities. This challenges assumptions about systemic inequality stemming from differences between men's and women's initiation of new collaborations within academic social networks. Further research should investigate why such differences have failed to emerge.
+
+### Research Question 4
+
+_Is there heightened homophily and triadic closure within gender groups?_
+
+The positive and significant same-gender ($\text{sameX}$) effect confirms the presence of gender homophily, with academics preferentially collaborating with same-gender partners. However, contrary to Hypothesis 4 ($H_4$), there are no significant differences between males and females in the strength of this same-gender homophily effect ($p \geq 0.05$). This suggests that, while gender homophily exists, it does not operate more strongly for one gender over the other in this network.
+
+Positive transitivity effects indicate an overall tendency toward triadic closure in the network. However, again, there were no significant gender differences in the strength of transitivity effects, such as $\text{transTrip}$ and $\text{sameXTransTrip}$ ($p \geq 0.05$). This implies that while triadic closure shapes connectivity overall, there is no evidence that women are disproportionately impacted by or isolated from triadic closure processes. In other words, the results do not indicate heightened closure within same-gender triads that differentially isolate women or restrict their opportunities, as hypothesized.
+
+In summary, while homophily and triadic closures were empirically observed, Hypothesis 4 ($H_4$) was only partially supported, because these dynamics did not differ significantly across genders. This lack of variation implies that homophily and triadic closure may concentrically affect both genders rather than disproportionately isolating women in this network. More research is needed to understand why hypothesized differences in the operation of these mechanisms did not emerge, as predicted based on prior theory.
+
+Therefore, Hypothesis 4 ($H_4$) was only partially supported. Same-gender preferences were present but did not differ significantly across genders.
