@@ -107,4 +107,4 @@ Positive transitivity effects indicate an overall tendency toward triadic closur
 
 In summary, while homophily and triadic closures were empirically observed, Hypothesis 4 ($H_4$) was only partially supported, because these dynamics did not differ significantly across genders. This lack of variation implies that homophily and triadic closure may concentrically affect both genders rather than disproportionately isolating women in this network. More research is needed to understand why hypothesized differences in the operation of these mechanisms did not emerge, as predicted based on prior theory.
 
-Does this help provide more elaboration and clarity on the findings of Research Questions 4 and 4? Please let me know if you would like me to expand on any other aspects of the results and their relationship with the original research questions. Therefore, Hypothesis 4 ($H_4$) was only partially supported. Same-gender preferences were present but did not differ significantly across genders.
+Therefore, Hypothesis 4 ($H_4$) was only partially supported. Same-gender preferences were present but did not differ significantly across genders.
