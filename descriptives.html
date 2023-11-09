@@ -1,57 +1,1021 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="by: Siard van den Bosch" />
+    
+    
+    <title>Descriptives Network Statistics</title>
+
+        <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <script src="site_libs/navigation-1.1/codefolding.js"></script>
+        <script src="site_libs/navigation-1.1/FileSaver.min.js"></script>
+        <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/clean-0.1/clean.css" rel="stylesheet" />
+        <script src="site_libs/clean-0.1/clean.js"></script>
+        <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+        <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+        <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+        <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+        <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode
+        {   }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { color: #008000; } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { color: #008000; font-weight: bold; } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    </style>
+    
+        <link rel="stylesheet" href="tweaks.css" type="text/css" />
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+        <script>
+      $(document).ready(function () {
+	  	  window.initializeSourceEmbed("descriptives.Rmd");
+	  	  	  window.initializeCodeFolding("show" === "show");
+	        });
+    </script>
+    
+    <!-- code download -->
+        <style>
+      #rmd-source-code {
+	  display: none;
+      }
+    </style>
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+      <!-- html_clean start -->
+   <div class="container-fluid main-container">
+     <div class="row">
+       <div class="col-md-10">
+   	
+            
+      <div class="btn-group pull-right">
+     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+     <ul class="dropdown-menu" style="min-width: 50px;">
+	    	    <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+	    <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+	    	    <li role="separator" class="divider"></li>
+	    	    	    	    <li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+	         </ul>
+   </div>
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">
+          <span class="fa fa-home"></span>
+           
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Journal
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="question.html">Research Question</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="zacharys.html">Descriptive Statistics</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="webscraping.html">Web Scraping</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="visualization.html">Network Visualization</a>
+              </li>
+              <li>
+                <a href="igraph_demo.html">Using igraph</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="rsiena_example.html">RSiena models</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 6</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">SNA in Practice</li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 7</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">RSiena Advanced</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction_v1.html">Introduction</a>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Theory</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="theory_v2.html">Last version</a>
+              </li>
+              <li>
+                <a href="theory_v1.html">Older version</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Methods</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="predicting_gender.html">Gender From Names</a>
+              </li>
+              <li>
+                <a href="assembling.html">Data Collection and Preparation</a>
+              </li>
+              <li>
+                <a href="rsiena_analysis_method.html">RSiena Analysis Method</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="descriptive.html">Descriptive (draft)</a>
+              </li>
+              <li>
+                <a href="calculate_metrics_report.html">Calculate Metrics Report</a>
+              </li>
+              <li>
+                <a href="rsiena_example.html">RSiena (example)</a>
+              </li>
+              <li>
+                <a href="analysis_draft.html">Analysis (draft)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-header">Results</li>
+          <li class="dropdown-header">Discussion</li>
+          <li>
+            <a href="to_do_list.html">To-Do List</a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li>
+            <a href="theory.html">Theory</a>
+          </li>
+          <li>
+            <a href="data_methods.html">Data &amp; Methods</a>
+          </li>
+          <li>
+            <a href="descriptives.html">Descriptives</a>
+          </li>
+          <li>
+            <a href="analysis.html">Analysis</a>
+          </li>
+          <li>
+            <a href="results.html">Results</a>
+          </li>
+          <li>
+            <a href="discussion.html">Discussion</a>
+          </li>
+          <li>
+            <a href="conclusion.html">Conclusion</a>
+          </li>
+          <li>
+            <a href="appendix.html">Appendix</a>
+          </li>
+        </ul>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+        <a href="https://github.com/siardv/labjournal">
+          <span class="fab fa-github"></span>
+           
+        </a>
+      </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Descriptives Network Statistics</h1>
+      
+        
+
+      <!-- html_clean authors -->
+         <h4 class="author"><em>by: Siard van den Bosch</em></h4>
+            
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="content">
+<div id="descriptives-network-statistics" class="section level1">
+<h1>Descriptives Network Statistics</h1>
+<p>This descriptive network analysis aimed to elucidate the underlying
+structure and connectivity patterns within the faculty collaboration
+dataset. Key insights revealed the presence of densely connected hubs
+and increasing density over the two periods.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#&#39; Creating object snet1 and snet2, each containing the adjacency matrix for wave 1 </span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#&#39; of the network. The diagonal of snet1 was set to zero to remove self-loops. </span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#&#39;  Converting the snet1/snet2 adjacency matrix to an igraph graph object called snet2_g/snet1_g</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>snet1 <span class="ot">&lt;-</span> df_network[[<span class="dv">1</span>]]</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">diag</span>(snet1) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>snet1_g <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_adjacency_matrix</span>(snet1, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&quot;undirected&quot;</span>))</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>snet2 <span class="ot">&lt;-</span> df_network[[<span class="dv">2</span>]]  </span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="fu">diag</span>(snet2) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>snet2_g <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">graph_from_adjacency_matrix</span>(snet2, <span class="at">mode =</span> <span class="fu">c</span>(<span class="st">&quot;undirected&quot;</span>))</span></code></pre></div>
+<div id="network-visualization" class="section level2">
+<h2>Network Visualization</h2>
+<p>Mapping node size to degree centrality highlights well-connected
+members, whereas node color based on betweenness centrality spotlights
+potential brokers occupying strategically advantageous bridging
+positions.</p>
+<p>These visualizations provide an intuitive overview of network
+topology and dynamics. We see increased connectivity from Wave 1 to Wave
+2, reflected in more nodes, edges, and higher density in the later time
+period. Node size and color also reveal specific members occupying
+topologically important positions.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co">#&#39; Plot the Waves 1 and 2 networks with default vertex size 10 and color skyblue/salmon. Sizing nodes by degree centrality and coloring nodes by betweenness centrality in each network. Density labels are added and snet1_g and snet2_g are plotted with labels.</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">plot</span>(snet1_g,</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="at">vertex.size =</span> <span class="dv">10</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="at">vertex.color =</span> <span class="st">&quot;skyblue&quot;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-4-1.png" width="576" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">plot</span>(snet2_g,</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="at">vertex.size =</span> <span class="dv">10</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="at">vertex.color =</span> <span class="st">&quot;salmon&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-4-2.png" width="576" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">V</span>(snet1_g)<span class="sc">$</span>size <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">degree</span>(snet1_g)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">V</span>(snet2_g)<span class="sc">$</span>size <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">degree</span>(snet2_g)</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="fu">V</span>(snet1_g)<span class="sc">$</span>color <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">betweenness</span>(snet1_g)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">V</span>(snet2_g)<span class="sc">$</span>color <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">betweenness</span>(snet2_g)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>snet1_label <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Density:&quot;</span>, <span class="fu">round</span>(<span class="fu">edge_density</span>(snet1_g), <span class="dv">2</span>))</span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>snet2_label <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">&quot;Density:&quot;</span>, <span class="fu">round</span>(<span class="fu">edge_density</span>(snet2_g), <span class="dv">2</span>))</span></code></pre></div>
+<p><em>Figure 1. Wave 1 network visualization</em></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">plot</span>(snet1_g, <span class="at">main =</span> snet1_label)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-5-1.png" width="576" /></p>
+<p><em>Figure 2. Wave 2 network visualization</em></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="fu">plot</span>(snet2_g, <span class="at">main =</span> snet2_label)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-6-1.png" width="576" /></p>
+</div>
+<div id="centrality-metrics" class="section level2">
+<h2>Centrality Metrics</h2>
+<p>While visual inspection provides intuitive insights, quantitative
+network metrics allow for a more rigorous characterization of the
+importance of individual nodes. Key centrality measures were calculated
+using the following igraph functions.</p>
+<p>Degree: Number of neighbors Strength: Summed tie weights Betweenness:
+Frequency in shortest paths Closeness: Inverse of farness to others
+Eigenvector: Connections to other central nodes</p>
+<p>Each metric provides a complementary perspective on the structural
+prominence of the nodes. The distributions of the centrality values are
+shown through histograms for waves 1 and 2 (Figures 3 and 4). The degree
+and strength exhibited the most skewed, heavy-tailed distributions,
+indicative of a few hubs alongside many peripheral nodes. The other
+metrics followed a uniform distribution.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#&#39; Calculation of degree, strength, betweenness, closeness, and eigenvector centrality for snet1_g and snet2_g. Centrality measures are combined into data frames df1 and df2 for snet1_g and snet2_g. Removing nonfinite values from df1 and df2. Melt df1 and df2 into a long format as df1_m and df2_m.</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>(deg1 <span class="ot">&lt;-</span> <span class="fu">degree</span>(snet1_g))</span></code></pre></div>
+<pre><code> [1] 13  0  0  0  8  0 13  4  7  3  0  0  0 15  6  9 16  9  4  0 17  6  3  0  0
+[26]  0  0  0  0  0  0  0  0  0  0  0  2  0  6  1 12  0  0  0  4  0  8</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>(str1 <span class="ot">&lt;-</span> <span class="fu">strength</span>(snet1_g))</span></code></pre></div>
+<pre><code> [1] 13  0  0  0  8  0 13  4  7  3  0  0  0 15  6  9 16  9  4  0 17  6  3  0  0
+[26]  0  0  0  0  0  0  0  0  0  0  0  2  0  6  1 12  0  0  0  4  0  8</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>(btw1 <span class="ot">&lt;-</span> <span class="fu">betweenness</span>(snet1_g))</span></code></pre></div>
+<pre><code> [1]  5.2116499  0.0000000  0.0000000  0.0000000 18.6177336  0.0000000
+ [7] 27.0356094  0.7426471  4.8030010  2.0833333  0.0000000  0.0000000
+[13]  0.0000000 51.3563896 25.7708138 16.2215826 59.2183426  9.7066339
+[19]  4.0911565  0.0000000 42.7981179  0.9668223  1.7777778  0.0000000
+[25]  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000
+[31]  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000  0.0000000
+[37]  0.0000000  0.0000000  7.8898433  0.0000000  7.0451496  0.0000000
+[43]  0.0000000  0.0000000  0.0000000  0.0000000 18.6633959</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>(cc1 <span class="ot">&lt;-</span> <span class="fu">closeness</span>(snet1_g, <span class="at">normalized =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code> [1] 0.3773585       NaN       NaN       NaN 0.4347826       NaN 0.4255319
+ [8] 0.3703704 0.4081633 0.4000000       NaN       NaN       NaN 0.5000000
+[15] 0.5000000 0.4545455 0.5405405 0.3921569 0.4000000       NaN 0.5128205
+[22] 0.3921569 0.3571429       NaN       NaN       NaN       NaN       NaN
+[29]       NaN       NaN       NaN       NaN       NaN       NaN       NaN
+[36]       NaN 0.3389831       NaN 0.4255319 0.3030303 0.3921569       NaN
+[43]       NaN       NaN 0.3571429       NaN 0.4761905</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>(ec1 <span class="ot">&lt;-</span> <span class="fu">eigen_centrality</span>(snet1_g)<span class="sc">$</span>vector)</span></code></pre></div>
+<pre><code> [1] 1.000000e+00 2.062417e-17 2.062417e-17 2.062417e-17 1.602761e-01
+ [6] 2.062417e-17 3.838289e-01 2.527062e-02 8.152279e-02 9.063534e-02
+[11] 2.062417e-17 2.062417e-17 2.062417e-17 4.613029e-01 1.100549e-01
+[16] 1.304522e-01 2.975459e-01 6.842867e-02 3.905177e-02 2.062417e-17
+[21] 5.267944e-01 1.774058e-01 8.276863e-02 2.062417e-17 2.062417e-17
+[26] 2.062417e-17 2.062417e-17 2.062417e-17 2.062417e-17 2.062417e-17
+[31] 2.062417e-17 2.062417e-17 2.062417e-17 2.062417e-17 2.062417e-17
+[36] 2.062417e-17 7.940749e-02 2.062417e-17 1.290692e-01 3.303566e-02
+[41] 9.723653e-01 2.062417e-17 2.062417e-17 2.062417e-17 1.024376e-01
+[46] 2.062417e-17 7.837624e-02</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>(deg2 <span class="ot">&lt;-</span> <span class="fu">degree</span>(snet2_g))</span></code></pre></div>
+<pre><code> [1] 12  1  3  1  3  0  3  5  3  1 10  0  0 18  3  6 12 13  7 15  8  1  9  4  0
+[26]  0  2  2  0  1  2  6  4  0  4 17 14  4  3  0 11  0  0  0  1 13 10</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>(str2 <span class="ot">&lt;-</span> <span class="fu">strength</span>(snet2_g))</span></code></pre></div>
+<pre><code> [1] 12  1  3  1  3  0  3  5  3  1 10  0  0 18  3  6 12 13  7 15  8  1  9  4  0
+[26]  0  2  2  0  1  2  6  4  0  4 17 14  4  3  0 11  0  0  0  1 13 10</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>(btw2 <span class="ot">&lt;-</span> <span class="fu">betweenness</span>(snet2_g))</span></code></pre></div>
+<pre><code> [1]  34.0000000   0.0000000   3.5196078   0.0000000  36.7575758   0.0000000
+ [7]   2.9242424   7.9267620   0.0000000   0.0000000  29.8224090   0.0000000
+[13]   0.0000000 289.6640502   0.0000000  73.4901515 123.9248981 136.8518228
+[19]  42.8163420  82.0133264   2.9192579   0.0000000  16.4803922   8.8148459
+[25]   0.0000000   0.0000000   0.1833333   0.0000000   0.0000000   0.0000000
+[31]  34.0000000   1.6500000   0.0000000   0.0000000  38.2203463  31.5529217
+[37] 294.8221951   0.0000000  10.6376234   0.0000000   0.0000000   0.0000000
+[43]   0.0000000   0.0000000   0.0000000  27.8823529 109.1255432</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>(cc2 <span class="ot">&lt;-</span> <span class="fu">closeness</span>(snet2_g, <span class="at">normalized =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code> [1] 0.2991453 0.2671756 0.2554745 0.2671756 0.2966102       NaN 0.3271028
+ [8] 0.3365385 0.2651515 0.2317881 0.3125000       NaN       NaN 0.4117647
+[15] 0.2966102 0.3932584 0.4166667 0.3571429 0.3271028 0.3608247 0.3465347
+[22] 0.2302632 0.3181818 0.2611940       NaN       NaN 0.3153153 0.2651515
+[29]       NaN 0.2651515 0.2991453 0.3153153 0.2966102       NaN 0.3431373
+[36] 0.3240741 0.4666667 0.2413793 0.3365385       NaN 0.2317881       NaN
+[43]       NaN       NaN 0.2966102 0.3070175 0.4022989</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>(ec2 <span class="ot">&lt;-</span> <span class="fu">eigen_centrality</span>(snet2_g)<span class="sc">$</span>vector)</span></code></pre></div>
+<pre><code> [1] 0.099706917 0.072021034 0.009163461 0.072021034 0.010965793 0.000000000
+ [7] 0.016921207 0.038464951 0.027247478 0.001670691 0.094939661 0.000000000
+[13] 0.000000000 0.252743420 0.027851763 0.089048164 0.101115361 0.112079852
+[19] 0.046797402 0.888754566 0.604191063 0.000888623 0.117575543 0.009069679
+[25] 0.000000000 0.000000000 0.014246971 0.018164985 0.000000000 0.009082493
+[31] 0.020616679 0.042740912 0.045476571 0.000000000 0.022351692 1.000000000
+[37] 0.455843622 0.037967411 0.018647693 0.000000000 0.088878247 0.000000000
+[43] 0.000000000 0.000000000 0.008193975 0.124528701 0.074695224</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(deg1, str1, btw1, cc1, ec1)</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(deg2, str2, btw2, cc2, ec2)</span>
+<span id="cb27-3"><a href="#cb27-3" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(deg1, str1, btw1, cc1, ec1)</span>
+<span id="cb27-6"><a href="#cb27-6" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(deg2, str2, btw2, cc2, ec2)</span>
+<span id="cb27-7"><a href="#cb27-7" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" tabindex="-1"></a>df1_m <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(df1, <span class="at">measure.vars =</span> <span class="fu">names</span>(df1))</span>
+<span id="cb27-10"><a href="#cb27-10" tabindex="-1"></a>df2_m <span class="ot">&lt;-</span> reshape2<span class="sc">::</span><span class="fu">melt</span>(df2, <span class="at">measure.vars =</span> <span class="fu">names</span>(df2))</span></code></pre></div>
+<p>The degree and strength show highly skewed distributions, with most
+nodes having low values and a few hubs having very high values. This
+indicates inequality in the direct connections.</p>
+<p>Betweenness also exhibited some skewness, with a few critical
+bridging nodes. Most nodes fall infrequently on the shortest paths.</p>
+<p>Closeness and eigenvectors follow more uniform distributions,
+suggesting less inequality in reach and influence propagation.</p>
+<p>The higher maximum degree and strength in <code>snet2_g</code> shows
+the emergence of better connected hubs over time.</p>
+<p>Eigenvector centrality deemphasizes connections to peripheral nodes,
+highlighting connections between influential nodes.</p>
+<p>In summary, the centrality distributions provide complementary
+metrics to assess node importance. Degree/strength captures direct
+connections, betweenness evaluates positional values, and eigenvector
+incorporates indirect influence. The inequality observed in degree and
+strength is typical in social networks. Centrality provides a rigorous
+quantification of node prominence.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="fu">ggplot</span>(df1_m, <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">bins =</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>Warning: Removed 26 rows containing non-finite values (`stat_bin()`).</code></pre>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-8-1.png" width="576" /></p>
+<p><em>Figure 3. Wave 1 centrality metric distributions.</em></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">ggplot</span>(df2_m, <span class="fu">aes</span>(<span class="at">x =</span> value, <span class="at">fill =</span> variable)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">bins =</span> <span class="dv">30</span>)</span></code></pre></div>
+<pre><code>Warning: Removed 11 rows containing non-finite values (`stat_bin()`).</code></pre>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-9-1.png" width="576" /></p>
+<p><em>Figure 4. Wave 2 centrality metric distributions.</em></p>
+<p>Nodes with a high degree of strength had abundant direct
+collaborators. High betweenness nodes bridge otherwise disconnected
+groups. Closeness signifies the reach and efficiency of the information
+diffusion. Finally, the eigenvector centrality accounts for a node’s
+connections with other influential members.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co">#&#39; Create faceted histogram plots for centrality measures</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a><span class="fu">ggplot</span>(df1_m, <span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<pre><code>Warning: Removed 26 rows containing non-finite values (`stat_bin()`).</code></pre>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-10-1.png" width="576" /></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu">ggplot</span>(df2_m, <span class="fu">aes</span>(<span class="at">x =</span> value)) <span class="sc">+</span> </span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">30</span>) <span class="sc">+</span></span>
+<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>variable, <span class="at">scales =</span> <span class="st">&quot;free&quot;</span>)</span></code></pre></div>
+<pre><code>Warning: Removed 11 rows containing non-finite values (`stat_bin()`).</code></pre>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-10-2.png" width="576" /></p>
+</div>
+<div id="degree-distribution" class="section level2">
+<h2>Degree Distribution</h2>
+<p>The degree distribution provides the probability of nodes having a
+certain number of connections.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co">#&#39; Calculating the degree distributions for snet1_g and snet2_g. Creating data frames df1 and df2 from degree distributions. Histograms of df1 and df2 degree distributions. </span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a>(sdegree <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">degree</span>(snet1_g))</span></code></pre></div>
+<pre><code> [1] 13  0  0  0  8  0 13  4  7  3  0  0  0 15  6  9 16  9  4  0 17  6  3  0  0
+[26]  0  0  0  0  0  0  0  0  0  0  0  2  0  6  1 12  0  0  0  4  0  8</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>(sdegree2 <span class="ot">&lt;-</span> igraph<span class="sc">::</span><span class="fu">degree</span>(snet2_g))</span></code></pre></div>
+<pre><code> [1] 12  1  3  1  3  0  3  5  3  1 10  0  0 18  3  6 12 13  7 15  8  1  9  4  0
+[26]  0  2  2  0  1  2  6  4  0  4 17 14  4  3  0 11  0  0  0  1 13 10</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">degree =</span> sdegree)</span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>df2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">degree =</span> sdegree2)</span></code></pre></div>
+<p>The degree distributions show the probability of nodes having a
+certain number of connections in the <code>snet1_g</code> and
+<code>snet2_g</code> networks. Some key points:</p>
+<ul>
+<li>Degree distributions have long right-skewed tails. This indicates
+the presence of high-degree hub nodes with many connections.</li>
+</ul>
+<p>However, most nodes had low degree values near the start of the
+distributions. This indicates that most nodes have only a few
+connections.</p>
+<ul>
+<li><p>Comparing the two distributions, <code>snet2_g</code> has more
+nodes with higher degree values than <code>snet1_g.</code> This aligns
+with it being a more dense network.</p></li>
+<li><p>The maximum degree is 17 in <code>snet1_g</code> and 18 in
+`snet2_g,’ indicating the hub nodes gained more connections between the
+two networks.</p></li>
+</ul>
+<p>In summary, heavy-tailed degree distributions are typical for
+real-world networks. The coexistence of hubs and peripheral nodes
+implies inequality in connectedness. <code>Snet2_g</code> shows greater
+connectivity of hubs over time.</p>
+<p>The degree distributions provide a probabilistic summary of node
+connectivity and evidence for the emergence of well-connected hubs as
+networks evolve. They complemented the visualizations and metrics used
+to analyze the topology.</p>
+<p><em>Figure 5. Wave 1 degree distribution</em></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu">ggplot</span>(df1, <span class="fu">aes</span>(<span class="at">x =</span> degree)) <span class="sc">+</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">&quot;darkblue&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>) <span class="sc">+</span></span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Degree Distribution of Network 1&quot;</span>)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-12-1.png" width="576" /></p>
+<p><em>Figure 6. Wave 2 degree distribution</em></p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a><span class="fu">ggplot</span>(df2, <span class="fu">aes</span>(<span class="at">x =</span> degree)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">30</span>, <span class="at">color =</span> <span class="st">&quot;darkred&quot;</span>, <span class="at">fill =</span> <span class="st">&quot;pink&quot;</span>) <span class="sc">+</span></span>
+<span id="cb42-3"><a href="#cb42-3" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">&quot;Degree Distribution of Network 2&quot;</span>)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-13-1.png" width="576" /></p>
+<p>The long tails indicate the presence of well-connected hubs along
+with a majority of nodes with a low degree. A comparison of the
+distributions shows an increase in high-degree nodes from Wave 1 to Wave
+2, reflecting the growth in connectivity over time.</p>
+</div>
+<div id="local-structure" class="section level2">
+<h2>Local Structure</h2>
+<p>The triad census revealed signature local clustering patterns. The
+predominance of open and closed triads indicated a strong collaborative
+closure impulse within the network.</p>
+<p>A greater frequency of closed triads in Wave 2 signifies increased
+clustering arising from a higher density over time.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="co">#&#39; Calculating dyad census, triad census, edge density and transitivity</span></span>
+<span id="cb43-2"><a href="#cb43-2" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">dyad.census</span>(snet1_g)  </span></code></pre></div>
+<pre><code>$mut
+[1] 33
+
+$asym
+[1] 0
+
+$null
+[1] 1048</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">triad.census</span>(snet1_g)</span></code></pre></div>
+<pre><code> [1] 15764     0   358     0     0     0     0     0     0     0    91     0
+[13]     0     0     0     2</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">edge_density</span>(snet1_g)</span></code></pre></div>
+<pre><code>[1] 0.07678076</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">dyad.census</span>(snet2_g)</span></code></pre></div>
+<pre><code>$mut
+[1] 53
+
+$asym
+[1] 0
+
+$null
+[1] 1028</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">triad.census</span>(snet2_g) </span></code></pre></div>
+<pre><code> [1] 14899     0  1150     0     0     0     0     0     0     0   158     0
+[13]     0     0     0     8</code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">edge_density</span>(snet2_g)</span></code></pre></div>
+<pre><code>[1] 0.107308</code></pre>
+<p>Comparing <code>snet1_g</code> and <code>snet2_g</code>:</p>
+<ul>
+<li><p><code>snet2_g</code> has more mutual dyads than
+<code>snet1_g</code> (53 vs 33) indicating it is more dense.</p></li>
+<li><p><code>snet2_g</code> has more closed triads than
+<code>snet1_g</code> (1150 vs 358) indicating more clustering.</p></li>
+<li><p><code>snet2_g</code> has a higher edge density than
+<code>snet1_g</code> (0.107 vs 0.077) also indicating it is more dense
+overall.</p></li>
+</ul>
+<p>So <code>snet2_g</code> appears to be a more interconnected, dense
+network with more clustering than <code>snet1_g.</code> The triad and
+dyad census provide quantitative evidence to complement visual analysis.
+The code calculates key metrics to characterize network topologies.</p>
+<div id="transitivity" class="section level4">
+<h4>Transitivity</h4>
+<p>The transitivity values quantify the level of clustering in the two
+network objects, snet1_g and snet2_g.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">transitivity</span>(snet1_g)</span></code></pre></div>
+<pre><code>[1] 0.06185567</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a>igraph<span class="sc">::</span><span class="fu">transitivity</span>(snet2_g)</span></code></pre></div>
+<pre><code>[1] 0.1318681</code></pre>
+<p>Specifically:</p>
+<ul>
+<li><p><code>snet1_g</code> has a transitivity score of 0.062. This is
+considered moderate transitivity. It means that if node A is connected
+to node B, and node B is connected node C, then there is a 0.062
+probability that node A is also connected to node C.</p></li>
+<li><p><code>snet2_g</code> has a higher transitivity score of 0.132.
+This indicates nodes are more likely to form clustered triadic closures
+compared to <code>snet1_g.</code> There is a 0.132 probability that two
+neighbors of a node are connected.</p></li>
+</ul>
+<p>The higher transitivity in <code>snet2_g</code> aligns with the triad
+census results, which show more closed triads. This reflects the greater
+clustering and interconnectedness between neighbors in the
+<code>snet2_g</code> network.</p>
+<p>In summary, the transitivity metric quantitatively demonstrates the
+increased clustering from <code>snet1_g</code> to `snet2_g,’
+complementing the visual analysis and triad census. These values reflect
+the tendency to form tightly knit groups and a triadic closure.
+Transitivity is a key metric for characterizing the network
+cohesion.</p>
+</div>
+<div id="gender-differences-in-h-index" class="section level3">
+<h3>Gender differences in h-index</h3>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="co">#&#39; Tabulating position variable, creating binary PhD indicator, </span></span>
+<span id="cb59-2"><a href="#cb59-2" tabindex="-1"></a><span class="co"># tabulating indicator and converting to a factor in df_soc. </span></span>
+<span id="cb59-3"><a href="#cb59-3" tabindex="-1"></a><span class="fu">table</span>(df_soc<span class="sc">$</span>position)</span></code></pre></div>
+<pre><code>
+assistant_prof associate_prof      full_prof          other            phd 
+            10              1              7              6             20 
+       postdoc 
+             3 </code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a>df_soc<span class="sc">$</span>is_phd <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df_soc<span class="sc">$</span>position <span class="sc">==</span> <span class="st">&quot;phd&quot;</span>)</span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a><span class="fu">table</span>(df_soc<span class="sc">$</span>is_phd)</span></code></pre></div>
+<pre><code>
+ 0  1 
+27 20 </code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a>df_soc<span class="sc">$</span>is_phd <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_soc<span class="sc">$</span>is_phd)</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="co">#&#39; Estimating regression of h-index on citations, </span></span>
+<span id="cb64-2"><a href="#cb64-2" tabindex="-1"></a><span class="co">#&#39; with PhD and gender predictors, </span></span>
+<span id="cb64-3"><a href="#cb64-3" tabindex="-1"></a><span class="co">#, and interaction effects.</span></span>
+<span id="cb64-4"><a href="#cb64-4" tabindex="-1"></a>fit1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(gs_h_index <span class="sc">~</span> gs_total_cites, <span class="at">data =</span> df_soc)</span>
+<span id="cb64-5"><a href="#cb64-5" tabindex="-1"></a>fit2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(gs_h_index <span class="sc">~</span> gs_total_cites <span class="sc">+</span> is_phd <span class="sc">+</span> gender, <span class="at">data =</span> df_soc)</span>
+<span id="cb64-6"><a href="#cb64-6" tabindex="-1"></a>fit3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(gs_h_index <span class="sc">~</span> (gs_total_cites <span class="sc">+</span> is_phd) <span class="sc">*</span> gender, <span class="at">data =</span> df_soc)</span>
+<span id="cb64-7"><a href="#cb64-7" tabindex="-1"></a>fits <span class="ot">&lt;-</span> <span class="fu">list</span>(fit1, fit2, fit3)</span></code></pre></div>
+<pre><code>
+=================================================================================================
+                                                    Dependent variable:                          
+                          -----------------------------------------------------------------------
+                                                        gs_h_index                               
+                                    (1)                     (2)                     (3)          
+-------------------------------------------------------------------------------------------------
+gs_total_cites                   0.004***                0.004***                0.008***        
+                                 (0.0003)                (0.0002)                 (0.002)        
+                                                                                                 
+is_phd1                                                  -6.151***                -2.558         
+                                                          (1.633)                 (1.946)        
+                                                                                                 
+gendermale                                                3.282**                7.542***        
+                                                          (1.606)                 (2.051)        
+                                                                                                 
+gs_total_cites:gendermale                                                        -0.005***       
+                                                                                  (0.002)        
+                                                                                                 
+is_phd1:gendermale                                                               -6.706**        
+                                                                                  (3.212)        
+                                                                                                 
+Constant                         6.343***                7.704***                4.589***        
+                                  (1.002)                 (1.229)                 (1.497)        
+                                                                                                 
+-------------------------------------------------------------------------------------------------
+Observations                        35                      35                      35           
+R2                                 0.895                   0.937                   0.953         
+Adjusted R2                        0.892                   0.931                   0.945         
+Residual Std. Error           5.180 (df = 33)         4.130 (df = 31)         3.707 (df = 29)    
+F Statistic               282.217*** (df = 1; 33) 154.902*** (df = 3; 31) 117.273*** (df = 5; 29)
+=================================================================================================
+Note:                                                                 *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01</code></pre>
+<p>The regression analysis output shows the results of fitting the three
+regression models to predict the h-index based on different predictors.
+The key elements are:</p>
+<p>Model 1: - Only uses total citations to predict h-index - Total
+citations is highly statistically significant (p&lt;0.001) - R-squared
+of 0.895 indicates total citations explains 89.5% of variance in
+h-index</p>
+<p>Model 2: - Adds PhD status and gender as additional predictors -
+Total citations remains highly significant - Being a PhD is associated
+with lower h-index - Being male is associated with higher h-index -
+R-squared increases to 0.937, indicating additional 9.2% of variance
+explained by PhD status and gender</p>
+<p>Model 3: - Tests interaction effects between total citations, PhD
+status, and gender - Main effect of total citations now depends on
+gender - Decrease in h-index for PhDs now depends on gender -
+Interaction effects are statistically significant - R-squared further
+increases to 0.953, additional variance explained by interactions</p>
+<p>Here, we can conclude from the regression analysis that:</p>
+<p>The analysis uses data on faculty in a sociology department,
+including their h-index, total citations, PhD status, gender, and
+position.</p>
+<ul>
+<li><p>The very high R-squared values indicate that the h-index is
+strongly predicted by the factors in the models: citations, gender, and
+PhD status. This makes sense given that the h-index aims to measure
+academic impact and citations are directly related.</p></li>
+<li><p>The negative main effect of PhD status may indicate that junior
+non-tenure-track faculty (e.g., postdocs) in this department tend to
+have a lower h-index than tenured/tenure-track faculty.</p></li>
+</ul>
+<p>However, the negative interaction effect between PhD status and
+gender suggests that this PhD effect is stronger for women than men;
+thus, female postdocs/non-TT faculty tend to have particularly low
+h-indices compared to male colleagues.</p>
+<ul>
+<li>The positive main effect for being male and negative interaction
+with citations indicates that gender differences in the h-index persist
+even when accounting for citations. Males had a higher h-index than
+females with similar citations.</li>
+</ul>
+<p>In summary, the regression reinforces the descriptive findings that
+gender inequalities exist in the h-index and the academic impact of
+sociology faculty, even after controlling for other factors such as
+citations. The interaction effects highlight that these gender
+inequalities may be particularly pronounced for junior PhD women.</p>
+<p>This boxplot shows the distribution of h-index values segmented by
+sex. The plot reveals that males have higher median and upper quartile
+h-index values than females in the dataset. This finding suggests
+potential gender differences in the h-index.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="co">#&#39; Create boxplot of h-index by gender using base R graphics</span></span>
+<span id="cb66-2"><a href="#cb66-2" tabindex="-1"></a><span class="fu">boxplot</span>(gs_h_index <span class="sc">~</span> gender, <span class="at">data =</span> df_soc, <span class="at">main =</span> <span class="st">&quot;H-Index by Gender&quot;</span>)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-19-1.png" width="576" /></p>
+<p>The scatterplot shows the relationship between the h-index and total
+citations for each individual. There is a clear positive correlation,
+with the h-index increasing as the total citations increase. This is
+expected because the h-index reflects citations. Points are colored by
+sex, revealing the cluster of higher h-index males compared to
+females.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" tabindex="-1"></a><span class="co">#&#39; Scatterplot of h-index vs total citations</span></span>
+<span id="cb67-2"><a href="#cb67-2" tabindex="-1"></a><span class="fu">plot</span>(df_soc<span class="sc">$</span>gs_h_index, df_soc<span class="sc">$</span>gs_total_cites,</span>
+<span id="cb67-3"><a href="#cb67-3" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;H-Index&quot;</span>, <span class="at">ylab =</span> <span class="st">&quot;Total Citations&quot;</span>,</span>
+<span id="cb67-4"><a href="#cb67-4" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;H-Index vs Total Citations&quot;</span></span>
+<span id="cb67-5"><a href="#cb67-5" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-20-1.png" width="576" /></p>
+<p>Another view of the h-index distribution by sex was created using
+ggplot2. The boxplot is color-filled by gender category, again showing
+the tendency for a higher h-index among males compared to females in the
+dataset. The minimal theme provides a clearer visualization than the
+base R boxplot.</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="co">#&#39; Create boxplot of h-index by gender using ggplot2</span></span>
+<span id="cb68-2"><a href="#cb68-2" tabindex="-1"></a><span class="fu">ggplot</span>(df_soc, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> gs_h_index, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb68-3"><a href="#cb68-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">outlier.shape =</span> <span class="cn">NA</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb68-4"><a href="#cb68-4" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Set1&quot;</span>) <span class="sc">+</span></span>
+<span id="cb68-5"><a href="#cb68-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;H-Index by Gender&quot;</span>) <span class="sc">+</span></span>
+<span id="cb68-6"><a href="#cb68-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="descriptives_files/figure-html/unnamed-chunk-21-1.png" width="576" /></p>
+</div>
+</div>
+</div>
+<div id="appendix" class="section level1">
+<h1>Appendix</h1>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="fu">lapply</span>(fits, summary)</span></code></pre></div>
+<pre><code>[[1]]
+
+Call:
+lm(formula = gs_h_index ~ gs_total_cites, data = df_soc)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-13.8391  -3.5029  -0.4716   2.5150  10.0743 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)    6.3426509  1.0023906   6.328 3.69e-07 ***
+gs_total_cites 0.0042743  0.0002544  16.799  &lt; 2e-16 ***
 ---
-title: "Introduction"
-output:
-  html_document: 
-    toc: yes
-    number_sections: false
-    toc_collapse: yes
-    toc_float: yes
-author: "by: Siard van den Bosch"
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 5.18 on 33 degrees of freedom
+  (12 observations deleted due to missingness)
+Multiple R-squared:  0.8953,    Adjusted R-squared:  0.8921 
+F-statistic: 282.2 on 1 and 33 DF,  p-value: &lt; 2.2e-16
+
+
+[[2]]
+
+Call:
+lm(formula = gs_h_index ~ gs_total_cites + is_phd + gender, data = df_soc)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.5686 -3.0295  0.0652  1.9057  9.9073 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)     7.7044405  1.2290911   6.268 5.73e-07 ***
+gs_total_cites  0.0037414  0.0002401  15.581 3.27e-16 ***
+is_phd1        -6.1514710  1.6327281  -3.768 0.000694 ***
+gendermale      3.2815306  1.6058042   2.044 0.049576 *  
 ---
-## Introduction
-The landscape of contemporary academic research has been fundamentally transformed by the inexorable shift toward heightened collaboration and co-authorship. As complex societal challenges become increasingly multifaceted and interdisciplinary in nature, academics are compelled to coalesce their diverse expertise by working in conjunction with colleagues across departmental and institutional boundaries (Katz & Martin, 1997). The resultant intermingling of insights made possible by these expansive collaborative networks has become a primary driver of knowledge creation and diffusion within the modern research enterprise (Lee & Bozeman, 2005). This trend toward team science has been enabled by advances in communication technology that allow efficient coordination among geographically distributed researchers (Olson et al., 2008). Studies have found that papers written by multi-institutional collaborations receive more citations on average than solo-authored works (Wuchty et al., 2007). However, effectively managing large collaborative projects poses challenges related to coordination costs, distributive credit, and clashing research cultures that teams must proactively address (Cummings & Kiesler, 2007). Overall, cross-discipline and cross-institution collaborations generate synergistic gains in productivity and impact, yet require thoughtful leadership and management to maximize these benefits.
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Within this evolving milieu, a scholar's location within emergent co-authorship networks confers differential access to vital resources such as novel information, funding, career opportunities, and impactful sponsorships. According to seminal social network theories, an individual researcher's capacity to broker new ideas across structural holes and span otherwise disconnected domains is heavily dependent on the topological features of their collaborative ties and positions within the broader network architecture (Granovetter, 1973; Burt, 2004). However, deeply entrenched gender disparities permeate the relational substratum of academia, potentially constraining women's ability to fully capitalize on strategically advantageous network positions and configurations. For instance, studies have found that women tend to occupy more peripheral positions within scientific collaboration networks, limiting their visibility and influence (Araújo et al., 2017). Additionally, homophily and implicit bias lead men to preferentially form collaborations with other men, while women face greater barriers in accessing high-status male collaborators (McDonald, 2011; Meng, 2016). As a result, women scholars experience social isolation that impedes their productivity and advancement (Rhoten & Pfirman, 2007). Cultivating more equitable collaboration practices and networks is crucial for overcoming systemic obstacles and enabling women researchers to reap the full benefits of connectivity.
-
-Academia has faced intense and sustained criticism regarding the persistence of substantial gender inequities that systemically disadvantage women faculty across crucial dimensions of resources, recognition, compensation, advancement prospects, and leadership roles (Fox, 2005; Misra et al., 2011). Although incremental progress has been made on this front, major gaps remain, as evidenced by a landmark 2022 UNESCO report analyzing 776 universities worldwide which found continued underrepresentation of women at senior levels, with women occupying just 36% of senior academic positions and authoring only 29% of published works across fields (UNESCO-IESALC, 2022). This aligns with extensive prior research documenting the "leaky pipeline" phenomenon where women steadily leak out of the academic career trajectory, leading to far fewer women in upper echelons compared to entry levels (Pell, 1996; Monroe et al., 2008). Underlying drivers include biased hiring and promotion practices, inhospitable work-life policies, lack of mentors and sponsors, and subtle gender biases embedded within academic culture (Valian, 1998; Hill et al., 2010). Achieving gender equity will require multilayered approaches spanning policy reform, cultural change, support programs, and targeted interventions at critical junctures to properly value, develop, and promote women scholars (Morley, 2013; Howe-Walsh & Turnbull, 2016).
-
-This stubborn persistence aligns with an accumulating body of empirical evidence demonstrating that women scholars continue to face systemic barriers to fully accessing and actively mobilizing the most advantageous positions within collaborative networks – positions that are increasingly vital for visibility, recognition, and advancement (Kyvik & Teigen, 1996; van Rijnsoever & Hessels, 2011; Sugimoto et al., 2013). As the ecosystem of academia has become ever more collaborative in nature, these gender disparities have become deeply embedded within the very topology of co-authorship networks, shaping inequities in access to the forms of collaborative social capital most critical for success under the prevailing norms (Bozeman 2005; Bozeman 2011).
-
-Specifically, studies find that women are consistently marginalized within academic co-authorship networks, holding more peripheral positions while men dominate the prestigious core with higher-status collaborators (Araújo et al., 2017; Guarino & Borden, 2017). This isolates women from the informal knowledge sharing, visibility boosts, and endorsement effects that accrue disproportionately to well-connected members occupying central network positions (Burt, 2004; Abbasi et al., 2012). Normalized patterns of homophily and exclusion intersect to constrain women's connectivity, as male scholars preferentially sponsor and collaborate with other men (Smith-Doerr et al., 2017). Targeted interventions to cultivate more integrative collaboration practices are essential for dismantling these systemic barriers.
-
-For example, a recent large-scale analysis of 1.5 million computer science papers found that publications with women in dominant first or last author positions received significantly fewer citations than similar papers with men occupying those same strategically vital positions (Ghiasi et al., 2021). Such findings suggest that women continue to face subtle yet systemic disadvantages in fully mobilizing resources and extracting returns from the most advantageous nodes and positions within academic publication and collaboration networks. 
-
-This pattern aligns with prior work demonstrating that papers with women in prestigious first or last author slots receive fewer citations after controlling for other factors (Maliniak et al., 2013; Dion et al., 2018). Explanations center on implicit gender biases influencing citation behavior as well as lower visibility and endorsement effects for women occupying critical authorship roles (Handley et al., 2015; Hengel, 2017). 
-
-This study aims to address this critical gap in understanding by utilizing an array of social network analysis techniques to systematically delineate and quantify potential gender asymmetries manifesting within multiple key structural dimensions of a faculty co-authorship network ecosystem at a major research university. Both descriptive topological network metrics and more sophisticated stochastic actor-oriented modeling will be leveraged to rigorously evaluate differences between male and female scholars across factors such as triadic closure tendencies, betweenness centrality, ego-network density, average path length, and broader clustering patterns.
-
-Elucidating the nature of these gender asymmetries within the fundamental relational architecture of academia is critical for informing evidence-based approaches to promoting greater equity and beginning to dismantle the subtle, complex, and interconnected forces which currently allow inequalities to persist and self-perpetuate within scholarly networks. This novel synthesis and application of social network perspectives and computational modeling techniques will substantively advance theoretical understanding of how topological constraints may disproportionately hamper women’s capacity to access the collaborative social capital increasingly necessary for visibility, advancement, and scientific impact within the shifting landscape of contemporary academia.
-
-## References
+Residual standard error: 4.13 on 31 degrees of freedom
+  (12 observations deleted due to missingness)
+Multiple R-squared:  0.9375,    Adjusted R-squared:  0.9314 
+F-statistic: 154.9 on 3 and 31 DF,  p-value: &lt; 2.2e-16
 
 
-Abbasi, A., Hossain, L., & Leydesdorff, L. (2012). Betweenness centrality as a driver of preferential attachment in the evolution of research collaboration networks. Journal of Informetrics, 6(3), 403–412. doi:10.1016/j.joi.2012.01.002
-Araújo, E. B., Araújo, N. A. M., Moreira, A. A., Herrmann, H. J., & Andrade, J. S. (2017). Gender differences in scientific collaborations: Women are more egalitarian than men. PLOS ONE, 12(5), e0176791. doi:10.1371/journal.pone.0176791
-Cummings, J. N., & Kiesler, S. (2007). Coordination costs and project outcomes in multi-university collaborations. Research Policy, 36(10), 1620–1634. doi:10.1016/j.respol.2007.09.001
-Dion, M. L., Sumner, J. L., & Mitchell, S. M. (2018). Gendered citation patterns across political science and social science methodology fields. Political Analysis, 26(3), 312–327. doi:10.1017/pan.2018.12
-Guarino, C. M., & Borden, V. M. H. (2017). Faculty service loads and gender: Are women taking care of the academic family? Research in Higher Education, 58(6), 672–694. doi:10.1007/s11162-017-9454-2
-Handley, I. M., Brown, E. R., Moss-Racusin, C. A., & Smith, J. L. (2015). Quality of evidence revealing subtle gender biases in science is in the eye of the beholder. Proceedings of the National Academy of Sciences of the United States of America, 112(43), 13201–13206. doi:10.1073/pnas.1510649112
-Hengel, E. (2017). Publishing while female. Are women held to higher standards? Evidence from peer review. Cambridge working papers in economics 1753, faculty of economics. Cambridge: University of Cambridge.
-Hill, C., Corbett, C., & St Rose, A. (2010). Why so few? Women in science, technology, engineering, and mathematics. American Association of University Women. 1111 Sixteenth Street NW, Washington, DC 20036. 
-Hill, C., Corbett, C., & St. Rose, A. (2010). Why so few? Women in science, technology, engineering, and mathematics p. 20036. 1111 Sixteenth Street NW, Washington, DC: American Association of University Women.
-Howe-Walsh, L., & Turnbull, S. (2016). Barriers to women leaders in academia: Tales from science and technology. Studies in Higher Education, 41(3), 415–428. doi:10.1080/03075079.2014.929102
-Katz, J. S., & Martin, B. R. (1997). What is research collaboration? Research Policy, 26(1), 1–18.
-Lee, S., & Bozeman, B. (2005). The impact of research collaboration on scientific productivity. Social Studies of Science, 35(5), 673–702. doi:10.1177/0306312705052359
-Maliniak, D., Powers, R., & Walter, B. F. (2013). The gender citation gap in international relations. International Organization, 67(4), 889–922. doi:10.1017/S0020818313000209
-McDonald, S. (2011). What’s in the “old boys” network? Accessing social capital in gendered and racialized networks. In Social Networks, 33(4), 317–330. doi:10.1016/j.socnet.2011.10.002
-Meng, Y. (2016). Collaboration patterns and patenting: Exploring gender distinctions. Research Policy, 45(1), 56–67. doi:10.1016/j.respol.2015.07.004
-Monroe, K., Ozyurt, S., Wrigley, T., & Alexander, A. (2008). Gender equality in academia: Bad news from the trenches, and some possible solutions. Perspectives on Politics, 6(2), 215–233. doi:10.1017/S1537592708080572
-Morley, L. (2012). The rules of the game: women and the leaderist turn in higher education. In Gender and Education (Vol. 25, Issue 1, pp. 116–131). Informa UK Limited. https://doi.org/10.1080/09540253.2012.740888 
-Morley, L. (2013). The rules of the game: Women and the leaderist turn in higher education. In Gender and Education (Vol. 25, Issue 1, pp. 116–131). Informa Uk Limited, 25(1), 116–131. doi:10.1080/09540253.2012.740888
-Olson, G. M., Zimmerman, A., & Bos, N. (Eds.). (2008). Scientific collaboration on the Internet. Cambridge, MA: MIT Press.
-Pell, A. N. (1996). Fixing the leaky pipeline: Women scientists in academia. Journal of Animal Science, 74(11), 2843–2848.
-Pell, A. N. (1996). Fixing the leaky pipeline: Women scientists in academia. Journal of Animal Science, 74(11), 2843–2848. doi:10.2527/1996.74112843x
-Rhoten, D., & Pfirman, S. (2007). Women in interdisciplinary science: Exploring preferences and consequences. Research Policy, 36(1), 56–75. doi:10.1016/j.respol.2006.08.001
-Smith-Doerr, L., Alegria, S., & Sacco, T. (2017). How diversity matters in the US science and engineering workforce: A critical review considering integration in teams, fields, and organizational contexts. Engaging Science, Technology, and Society, 3, 139–153.
-Valian, V. (1998). Why so slow? The advancement of women. Cambridge, MA: MIT Press.
-Wuchty, S., Jones, B. F., & Uzzi, B. (2007). The increasing dominance of teams in production of knowledge. Science, 316(5827), 1036–1039. doi:10.1126/science.1136099
+[[3]]
+
+Call:
+lm(formula = gs_h_index ~ (gs_total_cites + is_phd) * gender, 
+    data = df_soc)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-7.9552 -1.2259  0.1031  2.2827  5.6827 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                4.588918   1.496985   3.065 0.004668 ** 
+gs_total_cites             0.008491   0.001752   4.846  3.9e-05 ***
+is_phd1                   -2.558026   1.946252  -1.314 0.199035    
+gendermale                 7.541869   2.050902   3.677 0.000953 ***
+gs_total_cites:gendermale -0.004914   0.001767  -2.781 0.009416 ** 
+is_phd1:gendermale        -6.706284   3.212052  -2.088 0.045705 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 3.707 on 29 degrees of freedom
+  (12 observations deleted due to missingness)
+Multiple R-squared:  0.9529,    Adjusted R-squared:  0.9447 
+F-statistic: 117.3 on 5 and 29 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+
+   
+      <div id="rmd-source-code">LS0tCnRpdGxlOiAiRGVzY3JpcHRpdmVzIE5ldHdvcmsgU3RhdGlzdGljcyIKYXV0aG9yOiAiYnk6IFNpYXJkIHZhbiBkZW4gQm9zY2giCmJpYmxpb2dyYXBoeTogcmVmZXJlbmNlcy5iaWIKY3NsOiBhcGEuY3NsCi0tLQoKCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmtuaXRyOjpvcHRzX2NodW5rJHNldChjb21tZW50ID0gTkEpCmBgYAoKCmBgYHtyIGluY2x1ZGU9RkFMU0V9CmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7CiAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7CiAgICBpZiAoIXJlcXVpcmUoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKSkgewogICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpCiAgICAgIGxpYnJhcnkoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKQogICAgfQogIH0pCn0KZ2V0X3BhdGggPC0gZnVuY3Rpb24oeCkgewogIHBhc3RlMChyZWFkTGluZXMocGF0aC5leHBhbmQoIn4vcGF0aC50eHQiKSwgd2FybiA9IEZBTFNFKSwgeCkKfQpgYGAKCgpgYGB7ciBtZXNzYWdlPUZBTFNFLCBpbmNsdWRlPUZBTFNFfQpsaWJyYXJ5KGlncmFwaCkKbGlicmFyeShnZ3Bsb3QyKQojIGRmX3NlbCA8LSBkZiAlPiUgZmlsdGVyKGFmZmlsMSA9PSAiUlUiIHwgYWZmaWwyID09ICJSVSIpICU+JSBmaWx0ZXIoZGlzY2lwbGluZSA9PSAic29jaW9sb2d5IikKZGYgPC0gcmVhZFJEUyhnZXRfcGF0aCgiZGZfYWxsLnJkcyIpKQpkZl9zZWwgPC0gcmVhZFJEUyhnZXRfcGF0aCgiZGZfc2VsLnJkcyIpKQpwdWJsaWNhdGlvbnMgPC0gbG9hZChnZXRfcGF0aCgiMjAyMzA2MjFsaXN0X3B1YmxpY2F0aW9uc19qdC5yZGEiKSkKb3V0cHV0IDwtIHJlYWRSRFMoZ2V0X3BhdGgoIm91dHB1dF9uZXcucmRzIikpCmRmX3NvYyA8LSByZWFkUkRTKGdldF9wYXRoKCJkZl9zb2NfZmluYWwucmRzIikpCmRmX25ldHdvcmsgPC0gcmVhZFJEUyhnZXRfcGF0aCgiZGZfbmV0d29ya19uZXcucmRzIikpCmBgYAoKCiMgRGVzY3JpcHRpdmVzIE5ldHdvcmsgU3RhdGlzdGljcwoKClRoaXMgZGVzY3JpcHRpdmUgbmV0d29yayBhbmFseXNpcyBhaW1lZCB0byBlbHVjaWRhdGUgdGhlIHVuZGVybHlpbmcgc3RydWN0dXJlIGFuZCBjb25uZWN0aXZpdHkgcGF0dGVybnMgd2l0aGluIHRoZSBmYWN1bHR5IGNvbGxhYm9yYXRpb24gZGF0YXNldC4gS2V5IGluc2lnaHRzIHJldmVhbGVkIHRoZSBwcmVzZW5jZSBvZiBkZW5zZWx5IGNvbm5lY3RlZCBodWJzIGFuZCBpbmNyZWFzaW5nIGRlbnNpdHkgb3ZlciB0aGUgdHdvIHBlcmlvZHMuCgoKYGBge3J9CiMnIENyZWF0aW5nIG9iamVjdCBzbmV0MSBhbmQgc25ldDIsIGVhY2ggY29udGFpbmluZyB0aGUgYWRqYWNlbmN5IG1hdHJpeCBmb3Igd2F2ZSAxIAojJyBvZiB0aGUgbmV0d29yay4gVGhlIGRpYWdvbmFsIG9mIHNuZXQxIHdhcyBzZXQgdG8gemVybyB0byByZW1vdmUgc2VsZi1sb29wcy4gCiMnICBDb252ZXJ0aW5nIHRoZSBzbmV0MS9zbmV0MiBhZGphY2VuY3kgbWF0cml4IHRvIGFuIGlncmFwaCBncmFwaCBvYmplY3QgY2FsbGVkIHNuZXQyX2cvc25ldDFfZwpzbmV0MSA8LSBkZl9uZXR3b3JrW1sxXV0KZGlhZyhzbmV0MSkgPC0gMApzbmV0MV9nIDwtIGlncmFwaDo6Z3JhcGhfZnJvbV9hZGphY2VuY3lfbWF0cml4KHNuZXQxLCBtb2RlID0gYygidW5kaXJlY3RlZCIpKQoKCnNuZXQyIDwtIGRmX25ldHdvcmtbWzJdXSAgCmRpYWcoc25ldDIpIDwtIDAKc25ldDJfZyA8LSBpZ3JhcGg6OmdyYXBoX2Zyb21fYWRqYWNlbmN5X21hdHJpeChzbmV0MiwgbW9kZSA9IGMoInVuZGlyZWN0ZWQiKSkKYGBgCgoKIyMgTmV0d29yayBWaXN1YWxpemF0aW9uCgoKTWFwcGluZyBub2RlIHNpemUgdG8gZGVncmVlIGNlbnRyYWxpdHkgaGlnaGxpZ2h0cyB3ZWxsLWNvbm5lY3RlZCBtZW1iZXJzLCB3aGVyZWFzIG5vZGUgY29sb3IgYmFzZWQgb24gYmV0d2Vlbm5lc3MgY2VudHJhbGl0eSBzcG90bGlnaHRzIHBvdGVudGlhbCBicm9rZXJzIG9jY3VweWluZyBzdHJhdGVnaWNhbGx5IGFkdmFudGFnZW91cyBicmlkZ2luZyBwb3NpdGlvbnMuCgoKVGhlc2UgdmlzdWFsaXphdGlvbnMgcHJvdmlkZSBhbiBpbnR1aXRpdmUgb3ZlcnZpZXcgb2YgbmV0d29yayB0b3BvbG9neSBhbmQgZHluYW1pY3MuIFdlIHNlZSBpbmNyZWFzZWQgY29ubmVjdGl2aXR5IGZyb20gV2F2ZSAxIHRvIFdhdmUgMiwgcmVmbGVjdGVkIGluIG1vcmUgbm9kZXMsIGVkZ2VzLCBhbmQgaGlnaGVyIGRlbnNpdHkgaW4gdGhlIGxhdGVyIHRpbWUgcGVyaW9kLiBOb2RlIHNpemUgYW5kIGNvbG9yIGFsc28gcmV2ZWFsIHNwZWNpZmljIG1lbWJlcnMgb2NjdXB5aW5nIHRvcG9sb2dpY2FsbHkgaW1wb3J0YW50IHBvc2l0aW9ucy4KCgpgYGB7cn0KIycgUGxvdCB0aGUgV2F2ZXMgMSBhbmQgMiBuZXR3b3JrcyB3aXRoIGRlZmF1bHQgdmVydGV4IHNpemUgMTAgYW5kIGNvbG9yIHNreWJsdWUvc2FsbW9uLiBTaXppbmcgbm9kZXMgYnkgZGVncmVlIGNlbnRyYWxpdHkgYW5kIGNvbG9yaW5nIG5vZGVzIGJ5IGJldHdlZW5uZXNzIGNlbnRyYWxpdHkgaW4gZWFjaCBuZXR3b3JrLiBEZW5zaXR5IGxhYmVscyBhcmUgYWRkZWQgYW5kIHNuZXQxX2cgYW5kIHNuZXQyX2cgYXJlIHBsb3R0ZWQgd2l0aCBsYWJlbHMuCnBsb3Qoc25ldDFfZywKICB2ZXJ0ZXguc2l6ZSA9IDEwLAogIHZlcnRleC5jb2xvciA9ICJza3libHVlIgopCgoKcGxvdChzbmV0Ml9nLAogIHZlcnRleC5zaXplID0gMTAsCiAgdmVydGV4LmNvbG9yID0gInNhbG1vbiIKKQoKClYoc25ldDFfZykkc2l6ZSA8LSBpZ3JhcGg6OmRlZ3JlZShzbmV0MV9nKQpWKHNuZXQyX2cpJHNpemUgPC0gaWdyYXBoOjpkZWdyZWUoc25ldDJfZykKCgpWKHNuZXQxX2cpJGNvbG9yIDwtIGlncmFwaDo6YmV0d2Vlbm5lc3Moc25ldDFfZykKVihzbmV0Ml9nKSRjb2xvciA8LSBpZ3JhcGg6OmJldHdlZW5uZXNzKHNuZXQyX2cpCgoKc25ldDFfbGFiZWwgPC0gcGFzdGUoIkRlbnNpdHk6Iiwgcm91bmQoZWRnZV9kZW5zaXR5KHNuZXQxX2cpLCAyKSkKc25ldDJfbGFiZWwgPC0gcGFzdGUoIkRlbnNpdHk6Iiwgcm91bmQoZWRnZV9kZW5zaXR5KHNuZXQyX2cpLCAyKSkKYGBgCgoKKkZpZ3VyZSAxLiBXYXZlIDEgbmV0d29yayB2aXN1YWxpemF0aW9uKgoKCmBgYHtyfQpwbG90KHNuZXQxX2csIG1haW4gPSBzbmV0MV9sYWJlbCkKYGBgCgoKKkZpZ3VyZSAyLiBXYXZlIDIgbmV0d29yayB2aXN1YWxpemF0aW9uKgoKCmBgYHtyfQpwbG90KHNuZXQyX2csIG1haW4gPSBzbmV0Ml9sYWJlbCkKYGBgCgoKIyMgQ2VudHJhbGl0eSBNZXRyaWNzCldoaWxlIHZpc3VhbCBpbnNwZWN0aW9uIHByb3ZpZGVzIGludHVpdGl2ZSBpbnNpZ2h0cywgcXVhbnRpdGF0aXZlIG5ldHdvcmsgbWV0cmljcyBhbGxvdyBmb3IgYSBtb3JlIHJpZ29yb3VzIGNoYXJhY3Rlcml6YXRpb24gb2YgdGhlIGltcG9ydGFuY2Ugb2YgaW5kaXZpZHVhbCBub2Rlcy4gS2V5IGNlbnRyYWxpdHkgbWVhc3VyZXMgd2VyZSBjYWxjdWxhdGVkIHVzaW5nIHRoZSBmb2xsb3dpbmcgaWdyYXBoIGZ1bmN0aW9ucy4KCgpEZWdyZWU6IE51bWJlciBvZiBuZWlnaGJvcnMKU3RyZW5ndGg6IFN1bW1lZCB0aWUgd2VpZ2h0cwpCZXR3ZWVubmVzczogRnJlcXVlbmN5IGluIHNob3J0ZXN0IHBhdGhzCkNsb3NlbmVzczogSW52ZXJzZSBvZiBmYXJuZXNzIHRvIG90aGVycwpFaWdlbnZlY3RvcjogQ29ubmVjdGlvbnMgdG8gb3RoZXIgY2VudHJhbCBub2RlcwoKCkVhY2ggbWV0cmljIHByb3ZpZGVzIGEgY29tcGxlbWVudGFyeSBwZXJzcGVjdGl2ZSBvbiB0aGUgc3RydWN0dXJhbCBwcm9taW5lbmNlIG9mIHRoZSBub2Rlcy4KVGhlIGRpc3RyaWJ1dGlvbnMgb2YgdGhlIGNlbnRyYWxpdHkgdmFsdWVzIGFyZSBzaG93biB0aHJvdWdoIGhpc3RvZ3JhbXMgZm9yIHdhdmVzIDEgYW5kIDIgKEZpZ3VyZXMgMyBhbmQgNCkuIFRoZSBkZWdyZWUgYW5kIHN0cmVuZ3RoIGV4aGliaXRlZCB0aGUgbW9zdCBza2V3ZWQsIGhlYXZ5LXRhaWxlZCBkaXN0cmlidXRpb25zLCBpbmRpY2F0aXZlIG9mIGEgZmV3IGh1YnMgYWxvbmdzaWRlIG1hbnkgcGVyaXBoZXJhbCBub2Rlcy4gVGhlIG90aGVyIG1ldHJpY3MgZm9sbG93ZWQgYSB1bmlmb3JtIGRpc3RyaWJ1dGlvbi4gCgoKYGBge3J9CiMnIENhbGN1bGF0aW9uIG9mIGRlZ3JlZSwgc3RyZW5ndGgsIGJldHdlZW5uZXNzLCBjbG9zZW5lc3MsIGFuZCBlaWdlbnZlY3RvciBjZW50cmFsaXR5IGZvciBzbmV0MV9nIGFuZCBzbmV0Ml9nLiBDZW50cmFsaXR5IG1lYXN1cmVzIGFyZSBjb21iaW5lZCBpbnRvIGRhdGEgZnJhbWVzIGRmMSBhbmQgZGYyIGZvciBzbmV0MV9nIGFuZCBzbmV0Ml9nLiBSZW1vdmluZyBub25maW5pdGUgdmFsdWVzIGZyb20gZGYxIGFuZCBkZjIuIE1lbHQgZGYxIGFuZCBkZjIgaW50byBhIGxvbmcgZm9ybWF0IGFzIGRmMV9tIGFuZCBkZjJfbS4KCgooZGVnMSA8LSBkZWdyZWUoc25ldDFfZykpCihzdHIxIDwtIHN0cmVuZ3RoKHNuZXQxX2cpKQooYnR3MSA8LSBiZXR3ZWVubmVzcyhzbmV0MV9nKSkKKGNjMSA8LSBjbG9zZW5lc3Moc25ldDFfZywgbm9ybWFsaXplZCA9IFRSVUUpKQooZWMxIDwtIGVpZ2VuX2NlbnRyYWxpdHkoc25ldDFfZykkdmVjdG9yKQoKCihkZWcyIDwtIGRlZ3JlZShzbmV0Ml9nKSkKKHN0cjIgPC0gc3RyZW5ndGgoc25ldDJfZykpCihidHcyIDwtIGJldHdlZW5uZXNzKHNuZXQyX2cpKQooY2MyIDwtIGNsb3NlbmVzcyhzbmV0Ml9nLCBub3JtYWxpemVkID0gVFJVRSkpCihlYzIgPC0gZWlnZW5fY2VudHJhbGl0eShzbmV0Ml9nKSR2ZWN0b3IpCgoKZGYxIDwtIGRhdGEuZnJhbWUoZGVnMSwgc3RyMSwgYnR3MSwgY2MxLCBlYzEpCmRmMiA8LSBkYXRhLmZyYW1lKGRlZzIsIHN0cjIsIGJ0dzIsIGNjMiwgZWMyKQoKCmRmMSA8LSBkYXRhLmZyYW1lKGRlZzEsIHN0cjEsIGJ0dzEsIGNjMSwgZWMxKQpkZjIgPC0gZGF0YS5mcmFtZShkZWcyLCBzdHIyLCBidHcyLCBjYzIsIGVjMikKCgpkZjFfbSA8LSByZXNoYXBlMjo6bWVsdChkZjEsIG1lYXN1cmUudmFycyA9IG5hbWVzKGRmMSkpCmRmMl9tIDwtIHJlc2hhcGUyOjptZWx0KGRmMiwgbWVhc3VyZS52YXJzID0gbmFtZXMoZGYyKSkKYGBgCgoKVGhlIGRlZ3JlZSBhbmQgc3RyZW5ndGggc2hvdyBoaWdobHkgc2tld2VkIGRpc3RyaWJ1dGlvbnMsIHdpdGggbW9zdCBub2RlcyBoYXZpbmcgbG93IHZhbHVlcyBhbmQgYSBmZXcgaHVicyBoYXZpbmcgdmVyeSBoaWdoIHZhbHVlcy4gVGhpcyBpbmRpY2F0ZXMgaW5lcXVhbGl0eSBpbiB0aGUgZGlyZWN0IGNvbm5lY3Rpb25zLgoKCkJldHdlZW5uZXNzIGFsc28gZXhoaWJpdGVkIHNvbWUgc2tld25lc3MsIHdpdGggYSBmZXcgY3JpdGljYWwgYnJpZGdpbmcgbm9kZXMuIE1vc3Qgbm9kZXMgZmFsbCBpbmZyZXF1ZW50bHkgb24gdGhlIHNob3J0ZXN0IHBhdGhzLgoKCkNsb3NlbmVzcyBhbmQgZWlnZW52ZWN0b3JzIGZvbGxvdyBtb3JlIHVuaWZvcm0gZGlzdHJpYnV0aW9ucywgc3VnZ2VzdGluZyBsZXNzIGluZXF1YWxpdHkgaW4gcmVhY2ggYW5kIGluZmx1ZW5jZSBwcm9wYWdhdGlvbi4KCgpUaGUgaGlnaGVyIG1heGltdW0gZGVncmVlIGFuZCBzdHJlbmd0aCBpbiBgc25ldDJfZ2Agc2hvd3MgdGhlIGVtZXJnZW5jZSBvZiBiZXR0ZXIgY29ubmVjdGVkIGh1YnMgb3ZlciB0aW1lLgoKCkVpZ2VudmVjdG9yIGNlbnRyYWxpdHkgZGVlbXBoYXNpemVzIGNvbm5lY3Rpb25zIHRvIHBlcmlwaGVyYWwgbm9kZXMsIGhpZ2hsaWdodGluZyBjb25uZWN0aW9ucyBiZXR3ZWVuIGluZmx1ZW50aWFsIG5vZGVzLgoKCkluIHN1bW1hcnksIHRoZSBjZW50cmFsaXR5IGRpc3RyaWJ1dGlvbnMgcHJvdmlkZSBjb21wbGVtZW50YXJ5IG1ldHJpY3MgdG8gYXNzZXNzIG5vZGUgaW1wb3J0YW5jZS4gRGVncmVlL3N0cmVuZ3RoIGNhcHR1cmVzIGRpcmVjdCBjb25uZWN0aW9ucywgYmV0d2Vlbm5lc3MgZXZhbHVhdGVzIHBvc2l0aW9uYWwgdmFsdWVzLCBhbmQgZWlnZW52ZWN0b3IgaW5jb3Jwb3JhdGVzIGluZGlyZWN0IGluZmx1ZW5jZS4gVGhlIGluZXF1YWxpdHkgb2JzZXJ2ZWQgaW4gZGVncmVlIGFuZCBzdHJlbmd0aCBpcyB0eXBpY2FsIGluIHNvY2lhbCBuZXR3b3Jrcy4gQ2VudHJhbGl0eSBwcm92aWRlcyBhIHJpZ29yb3VzIHF1YW50aWZpY2F0aW9uIG9mIG5vZGUgcHJvbWluZW5jZS4KCgoKCgoKYGBge3J9CmdncGxvdChkZjFfbSwgYWVzKHggPSB2YWx1ZSwgZmlsbCA9IHZhcmlhYmxlKSkgKwogIGdlb21faGlzdG9ncmFtKGFscGhhID0gMC41LCBwb3NpdGlvbiA9ICJpZGVudGl0eSIsIGJpbnMgPSAzMCkKYGBgCgoqRmlndXJlIDMuIFdhdmUgMSBjZW50cmFsaXR5IG1ldHJpYyBkaXN0cmlidXRpb25zLioKCgpgYGB7cn0KZ2dwbG90KGRmMl9tLCBhZXMoeCA9IHZhbHVlLCBmaWxsID0gdmFyaWFibGUpKSArCiAgZ2VvbV9oaXN0b2dyYW0oYWxwaGEgPSAwLjUsIHBvc2l0aW9uID0gImlkZW50aXR5IiwgYmlucyA9IDMwKQpgYGAKCipGaWd1cmUgNC4gV2F2ZSAyIGNlbnRyYWxpdHkgbWV0cmljIGRpc3RyaWJ1dGlvbnMuKgoKTm9kZXMgd2l0aCBhIGhpZ2ggZGVncmVlIG9mIHN0cmVuZ3RoIGhhZCBhYnVuZGFudCBkaXJlY3QgY29sbGFib3JhdG9ycy4gSGlnaCBiZXR3ZWVubmVzcyBub2RlcyBicmlkZ2Ugb3RoZXJ3aXNlIGRpc2Nvbm5lY3RlZCBncm91cHMuIENsb3NlbmVzcyBzaWduaWZpZXMgdGhlIHJlYWNoIGFuZCBlZmZpY2llbmN5IG9mIHRoZSBpbmZvcm1hdGlvbiBkaWZmdXNpb24uIEZpbmFsbHksIHRoZSBlaWdlbnZlY3RvciBjZW50cmFsaXR5IGFjY291bnRzIGZvciBhIG5vZGUncyBjb25uZWN0aW9ucyB3aXRoIG90aGVyIGluZmx1ZW50aWFsIG1lbWJlcnMuCgoKCgpgYGB7cn0KIycgQ3JlYXRlIGZhY2V0ZWQgaGlzdG9ncmFtIHBsb3RzIGZvciBjZW50cmFsaXR5IG1lYXN1cmVzCmdncGxvdChkZjFfbSwgYWVzKHggPSB2YWx1ZSkpICsKICBnZW9tX2hpc3RvZ3JhbShhbHBoYSA9IDAuNSwgYmlucyA9IDMwKSArCiAgZmFjZXRfd3JhcCh+dmFyaWFibGUsIHNjYWxlcyA9ICJmcmVlIikKCgpnZ3Bsb3QoZGYyX20sIGFlcyh4ID0gdmFsdWUpKSArIAogIGdlb21faGlzdG9ncmFtKGFscGhhID0gMC41LCBiaW5zID0gMzApICsKICBmYWNldF93cmFwKH52YXJpYWJsZSwgc2NhbGVzID0gImZyZWUiKQpgYGAKCgoKCiMjIERlZ3JlZSBEaXN0cmlidXRpb24KCgpUaGUgZGVncmVlIGRpc3RyaWJ1dGlvbiBwcm92aWRlcyB0aGUgcHJvYmFiaWxpdHkgb2Ygbm9kZXMgaGF2aW5nIGEgY2VydGFpbiBudW1iZXIgb2YgY29ubmVjdGlvbnMuCgoKYGBge3J9CiMnIENhbGN1bGF0aW5nIHRoZSBkZWdyZWUgZGlzdHJpYnV0aW9ucyBmb3Igc25ldDFfZyBhbmQgc25ldDJfZy4gQ3JlYXRpbmcgZGF0YSBmcmFtZXMgZGYxIGFuZCBkZjIgZnJvbSBkZWdyZWUgZGlzdHJpYnV0aW9ucy4gSGlzdG9ncmFtcyBvZiBkZjEgYW5kIGRmMiBkZWdyZWUgZGlzdHJpYnV0aW9ucy4gCgoKKHNkZWdyZWUgPC0gaWdyYXBoOjpkZWdyZWUoc25ldDFfZykpCihzZGVncmVlMiA8LSBpZ3JhcGg6OmRlZ3JlZShzbmV0Ml9nKSkKCgpkZjEgPC0gZGF0YS5mcmFtZShkZWdyZWUgPSBzZGVncmVlKQpkZjIgPC0gZGF0YS5mcmFtZShkZWdyZWUgPSBzZGVncmVlMikKYGBgCgoKCgpUaGUgZGVncmVlIGRpc3RyaWJ1dGlvbnMgc2hvdyB0aGUgcHJvYmFiaWxpdHkgb2Ygbm9kZXMgaGF2aW5nIGEgY2VydGFpbiBudW1iZXIgb2YgY29ubmVjdGlvbnMgaW4gdGhlIGBzbmV0MV9nYCBhbmQgYHNuZXQyX2dgIG5ldHdvcmtzLiBTb21lIGtleSBwb2ludHM6CgoKLSBEZWdyZWUgZGlzdHJpYnV0aW9ucyBoYXZlIGxvbmcgcmlnaHQtc2tld2VkIHRhaWxzLiBUaGlzIGluZGljYXRlcyB0aGUgcHJlc2VuY2Ugb2YgaGlnaC1kZWdyZWUgaHViIG5vZGVzIHdpdGggbWFueSBjb25uZWN0aW9ucy4KCgpIb3dldmVyLCBtb3N0IG5vZGVzIGhhZCBsb3cgZGVncmVlIHZhbHVlcyBuZWFyIHRoZSBzdGFydCBvZiB0aGUgZGlzdHJpYnV0aW9ucy4gVGhpcyBpbmRpY2F0ZXMgdGhhdCBtb3N0IG5vZGVzIGhhdmUgb25seSBhIGZldyBjb25uZWN0aW9ucy4gCgoKLSBDb21wYXJpbmcgdGhlIHR3byBkaXN0cmlidXRpb25zLCBgc25ldDJfZ2AgaGFzIG1vcmUgbm9kZXMgd2l0aCBoaWdoZXIgZGVncmVlIHZhbHVlcyB0aGFuIGBzbmV0MV9nLmAgVGhpcyBhbGlnbnMgd2l0aCBpdCBiZWluZyBhIG1vcmUgZGVuc2UgbmV0d29yay4KCgotIFRoZSBtYXhpbXVtIGRlZ3JlZSBpcyAxNyBpbiBgc25ldDFfZ2AgYW5kIDE4IGluIGBzbmV0Ml9nLOKAmSBpbmRpY2F0aW5nIHRoZSBodWIgbm9kZXMgZ2FpbmVkIG1vcmUgY29ubmVjdGlvbnMgYmV0d2VlbiB0aGUgdHdvIG5ldHdvcmtzLgoKCkluIHN1bW1hcnksIGhlYXZ5LXRhaWxlZCBkZWdyZWUgZGlzdHJpYnV0aW9ucyBhcmUgdHlwaWNhbCBmb3IgcmVhbC13b3JsZCBuZXR3b3Jrcy4gVGhlIGNvZXhpc3RlbmNlIG9mIGh1YnMgYW5kIHBlcmlwaGVyYWwgbm9kZXMgaW1wbGllcyBpbmVxdWFsaXR5IGluIGNvbm5lY3RlZG5lc3MuIGBTbmV0Ml9nYCBzaG93cyBncmVhdGVyIGNvbm5lY3Rpdml0eSBvZiBodWJzIG92ZXIgdGltZS4gCgoKVGhlIGRlZ3JlZSBkaXN0cmlidXRpb25zIHByb3ZpZGUgYSBwcm9iYWJpbGlzdGljIHN1bW1hcnkgb2Ygbm9kZSBjb25uZWN0aXZpdHkgYW5kIGV2aWRlbmNlIGZvciB0aGUgZW1lcmdlbmNlIG9mIHdlbGwtY29ubmVjdGVkIGh1YnMgYXMgbmV0d29ya3MgZXZvbHZlLiBUaGV5IGNvbXBsZW1lbnRlZCB0aGUgdmlzdWFsaXphdGlvbnMgYW5kIG1ldHJpY3MgdXNlZCB0byBhbmFseXplIHRoZSB0b3BvbG9neS4KCgoKCipGaWd1cmUgNS4gV2F2ZSAxIGRlZ3JlZSBkaXN0cmlidXRpb24qCgoKYGBge3J9CmdncGxvdChkZjEsIGFlcyh4ID0gZGVncmVlKSkgKwogIGdlb21faGlzdG9ncmFtKGJpbnMgPSAzMCwgY29sb3IgPSAiZGFya2JsdWUiLCBmaWxsID0gImxpZ2h0Ymx1ZSIpICsKICBnZ3RpdGxlKCJEZWdyZWUgRGlzdHJpYnV0aW9uIG9mIE5ldHdvcmsgMSIpCmBgYAoKCgoKKkZpZ3VyZSA2LiBXYXZlIDIgZGVncmVlIGRpc3RyaWJ1dGlvbioKCgpgYGB7cn0KZ2dwbG90KGRmMiwgYWVzKHggPSBkZWdyZWUpKSArCiAgZ2VvbV9oaXN0b2dyYW0oYmlucyA9IDMwLCBjb2xvciA9ICJkYXJrcmVkIiwgZmlsbCA9ICJwaW5rIikgKwogIGdndGl0bGUoIkRlZ3JlZSBEaXN0cmlidXRpb24gb2YgTmV0d29yayAyIikKYGBgCgoKCgpUaGUgbG9uZyB0YWlscyBpbmRpY2F0ZSB0aGUgcHJlc2VuY2Ugb2Ygd2VsbC1jb25uZWN0ZWQgaHVicyBhbG9uZyB3aXRoIGEgbWFqb3JpdHkgb2Ygbm9kZXMgd2l0aCBhIGxvdyBkZWdyZWUuIEEgY29tcGFyaXNvbiBvZiB0aGUgZGlzdHJpYnV0aW9ucyBzaG93cyBhbiBpbmNyZWFzZSBpbiBoaWdoLWRlZ3JlZSBub2RlcyBmcm9tIFdhdmUgMSB0byBXYXZlIDIsIHJlZmxlY3RpbmcgdGhlIGdyb3d0aCBpbiBjb25uZWN0aXZpdHkgb3ZlciB0aW1lLgoKCgoKIyMgTG9jYWwgU3RydWN0dXJlCgoKVGhlIHRyaWFkIGNlbnN1cyByZXZlYWxlZCBzaWduYXR1cmUgbG9jYWwgY2x1c3RlcmluZyBwYXR0ZXJucy4gVGhlIHByZWRvbWluYW5jZSBvZiBvcGVuIGFuZCBjbG9zZWQgdHJpYWRzIGluZGljYXRlZCBhIHN0cm9uZyBjb2xsYWJvcmF0aXZlIGNsb3N1cmUgaW1wdWxzZSB3aXRoaW4gdGhlIG5ldHdvcmsuCgoKQSBncmVhdGVyIGZyZXF1ZW5jeSBvZiBjbG9zZWQgdHJpYWRzIGluIFdhdmUgMiBzaWduaWZpZXMgaW5jcmVhc2VkIGNsdXN0ZXJpbmcgYXJpc2luZyBmcm9tIGEgaGlnaGVyIGRlbnNpdHkgb3ZlciB0aW1lLgoKCmBgYHtyIHdhcm5pbmc9RkFMU0V9CiMnIENhbGN1bGF0aW5nIGR5YWQgY2Vuc3VzLCB0cmlhZCBjZW5zdXMsIGVkZ2UgZGVuc2l0eSBhbmQgdHJhbnNpdGl2aXR5CmlncmFwaDo6ZHlhZC5jZW5zdXMoc25ldDFfZykgIAppZ3JhcGg6OnRyaWFkLmNlbnN1cyhzbmV0MV9nKQppZ3JhcGg6OmVkZ2VfZGVuc2l0eShzbmV0MV9nKQppZ3JhcGg6OmR5YWQuY2Vuc3VzKHNuZXQyX2cpCmlncmFwaDo6dHJpYWQuY2Vuc3VzKHNuZXQyX2cpIAppZ3JhcGg6OmVkZ2VfZGVuc2l0eShzbmV0Ml9nKQpgYGAKCgpDb21wYXJpbmcgYHNuZXQxX2dgIGFuZCBgc25ldDJfZ2A6CgoKLSBgc25ldDJfZ2AgaGFzIG1vcmUgbXV0dWFsIGR5YWRzIHRoYW4gYHNuZXQxX2dgICg1MyB2cyAzMykgaW5kaWNhdGluZyBpdCBpcyBtb3JlIGRlbnNlLgoKCi0gYHNuZXQyX2dgIGhhcyBtb3JlIGNsb3NlZCB0cmlhZHMgdGhhbiBgc25ldDFfZ2AgKDExNTAgdnMgMzU4KSBpbmRpY2F0aW5nIG1vcmUgY2x1c3RlcmluZy4KCgotIGBzbmV0Ml9nYCBoYXMgYSBoaWdoZXIgZWRnZSBkZW5zaXR5IHRoYW4gYHNuZXQxX2dgICgwLjEwNyB2cyAwLjA3NykgYWxzbyBpbmRpY2F0aW5nIGl0IGlzIG1vcmUgZGVuc2Ugb3ZlcmFsbC4KCgpTbyBgc25ldDJfZ2AgYXBwZWFycyB0byBiZSBhIG1vcmUgaW50ZXJjb25uZWN0ZWQsIGRlbnNlIG5ldHdvcmsgd2l0aCBtb3JlIGNsdXN0ZXJpbmcgdGhhbiBgc25ldDFfZy5gIFRoZSB0cmlhZCBhbmQgZHlhZCBjZW5zdXMgcHJvdmlkZSBxdWFudGl0YXRpdmUgZXZpZGVuY2UgdG8gY29tcGxlbWVudCB2aXN1YWwgYW5hbHlzaXMuIFRoZSBjb2RlIGNhbGN1bGF0ZXMga2V5IG1ldHJpY3MgdG8gY2hhcmFjdGVyaXplIG5ldHdvcmsgdG9wb2xvZ2llcy4KCgoKCgoKIyMjIyBUcmFuc2l0aXZpdHkKCgpUaGUgdHJhbnNpdGl2aXR5IHZhbHVlcyBxdWFudGlmeSB0aGUgbGV2ZWwgb2YgY2x1c3RlcmluZyBpbiB0aGUgdHdvIG5ldHdvcmsgb2JqZWN0cywgc25ldDFfZyBhbmQgc25ldDJfZy4gCgoKYGBge3J9CmlncmFwaDo6dHJhbnNpdGl2aXR5KHNuZXQxX2cpCmlncmFwaDo6dHJhbnNpdGl2aXR5KHNuZXQyX2cpCmBgYAoKClNwZWNpZmljYWxseToKCgotIGBzbmV0MV9nYCBoYXMgYSB0cmFuc2l0aXZpdHkgc2NvcmUgb2YgMC4wNjIuIFRoaXMgaXMgY29uc2lkZXJlZCBtb2RlcmF0ZSB0cmFuc2l0aXZpdHkuIEl0IG1lYW5zIHRoYXQgaWYgbm9kZSBBIGlzIGNvbm5lY3RlZCB0byBub2RlIEIsIGFuZCBub2RlIEIgaXMgY29ubmVjdGVkIG5vZGUgQywgdGhlbiB0aGVyZSBpcyBhIDAuMDYyIHByb2JhYmlsaXR5IHRoYXQgbm9kZSBBIGlzIGFsc28gY29ubmVjdGVkIHRvIG5vZGUgQy4gCgoKLSBgc25ldDJfZ2AgaGFzIGEgaGlnaGVyIHRyYW5zaXRpdml0eSBzY29yZSBvZiAwLjEzMi4gVGhpcyBpbmRpY2F0ZXMgbm9kZXMgYXJlIG1vcmUgbGlrZWx5IHRvIGZvcm0gY2x1c3RlcmVkIHRyaWFkaWMgY2xvc3VyZXMgY29tcGFyZWQgdG8gYHNuZXQxX2cuYCBUaGVyZSBpcyBhIDAuMTMyIHByb2JhYmlsaXR5IHRoYXQgdHdvIG5laWdoYm9ycyBvZiBhIG5vZGUgYXJlIGNvbm5lY3RlZC4KCgpUaGUgaGlnaGVyIHRyYW5zaXRpdml0eSBpbiBgc25ldDJfZ2AgYWxpZ25zIHdpdGggdGhlIHRyaWFkIGNlbnN1cyByZXN1bHRzLCB3aGljaCBzaG93IG1vcmUgY2xvc2VkIHRyaWFkcy4gVGhpcyByZWZsZWN0cyB0aGUgZ3JlYXRlciBjbHVzdGVyaW5nIGFuZCBpbnRlcmNvbm5lY3RlZG5lc3MgYmV0d2VlbiBuZWlnaGJvcnMgaW4gdGhlIGBzbmV0Ml9nYCBuZXR3b3JrLiAKCgpJbiBzdW1tYXJ5LCB0aGUgdHJhbnNpdGl2aXR5IG1ldHJpYyBxdWFudGl0YXRpdmVseSBkZW1vbnN0cmF0ZXMgdGhlIGluY3JlYXNlZCBjbHVzdGVyaW5nIGZyb20gYHNuZXQxX2dgIHRvIGBzbmV0Ml9nLOKAmSBjb21wbGVtZW50aW5nIHRoZSB2aXN1YWwgYW5hbHlzaXMgYW5kIHRyaWFkIGNlbnN1cy4gVGhlc2UgdmFsdWVzIHJlZmxlY3QgdGhlIHRlbmRlbmN5IHRvIGZvcm0gdGlnaHRseSBrbml0IGdyb3VwcyBhbmQgYSB0cmlhZGljIGNsb3N1cmUuIFRyYW5zaXRpdml0eSBpcyBhIGtleSBtZXRyaWMgZm9yIGNoYXJhY3Rlcml6aW5nIHRoZSBuZXR3b3JrIGNvaGVzaW9uLgoKCgoKCgojIyMgR2VuZGVyIGRpZmZlcmVuY2VzIGluIGgtaW5kZXgKCgpgYGB7cn0KIycgVGFidWxhdGluZyBwb3NpdGlvbiB2YXJpYWJsZSwgY3JlYXRpbmcgYmluYXJ5IFBoRCBpbmRpY2F0b3IsIAojIHRhYnVsYXRpbmcgaW5kaWNhdG9yIGFuZCBjb252ZXJ0aW5nIHRvIGEgZmFjdG9yIGluIGRmX3NvYy4gCnRhYmxlKGRmX3NvYyRwb3NpdGlvbikKZGZfc29jJGlzX3BoZCA8LSBhcy5udW1lcmljKGRmX3NvYyRwb3NpdGlvbiA9PSAicGhkIikKdGFibGUoZGZfc29jJGlzX3BoZCkKZGZfc29jJGlzX3BoZCA8LSBhcy5mYWN0b3IoZGZfc29jJGlzX3BoZCkKYGBgCgoKYGBge3J9CiMnIEVzdGltYXRpbmcgcmVncmVzc2lvbiBvZiBoLWluZGV4IG9uIGNpdGF0aW9ucywgCiMnIHdpdGggUGhEIGFuZCBnZW5kZXIgcHJlZGljdG9ycywgCiMsIGFuZCBpbnRlcmFjdGlvbiBlZmZlY3RzLgpmaXQxIDwtIGxtKGdzX2hfaW5kZXggfiBnc190b3RhbF9jaXRlcywgZGF0YSA9IGRmX3NvYykKZml0MiA8LSBsbShnc19oX2luZGV4IH4gZ3NfdG90YWxfY2l0ZXMgKyBpc19waGQgKyBnZW5kZXIsIGRhdGEgPSBkZl9zb2MpCmZpdDMgPC0gbG0oZ3NfaF9pbmRleCB+IChnc190b3RhbF9jaXRlcyArIGlzX3BoZCkgKiBnZW5kZXIsIGRhdGEgPSBkZl9zb2MpCmZpdHMgPC0gbGlzdChmaXQxLCBmaXQyLCBmaXQzKQpgYGAKCgpgYGB7ciBlY2hvPUZBTFNFLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsbV90YWJsZSA8LSBzdGFyZ2F6ZXI6OnN0YXJnYXplcihmaXRzLCB0eXBlID0gInRleHQiKQojY2F0KHBhc3RlMChjYXB0dXJlLm91dHB1dChsbV90YWJsZSksIGNvbGxhcHNlID0gIlxuIikpCmBgYAoKCgoKVGhlIHJlZ3Jlc3Npb24gYW5hbHlzaXMgb3V0cHV0IHNob3dzIHRoZSByZXN1bHRzIG9mIGZpdHRpbmcgdGhlIHRocmVlIHJlZ3Jlc3Npb24gbW9kZWxzIHRvIHByZWRpY3QgdGhlIGgtaW5kZXggYmFzZWQgb24gZGlmZmVyZW50IHByZWRpY3RvcnMuIFRoZSBrZXkgZWxlbWVudHMgYXJlOgoKCk1vZGVsIDE6IAotIE9ubHkgdXNlcyB0b3RhbCBjaXRhdGlvbnMgdG8gcHJlZGljdCBoLWluZGV4Ci0gVG90YWwgY2l0YXRpb25zIGlzIGhpZ2hseSBzdGF0aXN0aWNhbGx5IHNpZ25pZmljYW50IChwPDAuMDAxKQotIFItc3F1YXJlZCBvZiAwLjg5NSBpbmRpY2F0ZXMgdG90YWwgY2l0YXRpb25zIGV4cGxhaW5zIDg5LjUlIG9mIHZhcmlhbmNlIGluIGgtaW5kZXgKCgpNb2RlbCAyOiAKLSBBZGRzIFBoRCBzdGF0dXMgYW5kIGdlbmRlciBhcyBhZGRpdGlvbmFsIHByZWRpY3RvcnMgCi0gVG90YWwgY2l0YXRpb25zIHJlbWFpbnMgaGlnaGx5IHNpZ25pZmljYW50Ci0gQmVpbmcgYSBQaEQgaXMgYXNzb2NpYXRlZCB3aXRoIGxvd2VyIGgtaW5kZXggCi0gQmVpbmcgbWFsZSBpcyBhc3NvY2lhdGVkIHdpdGggaGlnaGVyIGgtaW5kZXgKLSBSLXNxdWFyZWQgaW5jcmVhc2VzIHRvIDAuOTM3LCBpbmRpY2F0aW5nIGFkZGl0aW9uYWwgOS4yJSBvZiB2YXJpYW5jZSBleHBsYWluZWQgYnkgUGhEIHN0YXR1cyBhbmQgZ2VuZGVyCgoKTW9kZWwgMzoKLSBUZXN0cyBpbnRlcmFjdGlvbiBlZmZlY3RzIGJldHdlZW4gdG90YWwgY2l0YXRpb25zLCBQaEQgc3RhdHVzLCBhbmQgZ2VuZGVyCi0gTWFpbiBlZmZlY3Qgb2YgdG90YWwgY2l0YXRpb25zIG5vdyBkZXBlbmRzIG9uIGdlbmRlciAKLSBEZWNyZWFzZSBpbiBoLWluZGV4IGZvciBQaERzIG5vdyBkZXBlbmRzIG9uIGdlbmRlcgotIEludGVyYWN0aW9uIGVmZmVjdHMgYXJlIHN0YXRpc3RpY2FsbHkgc2lnbmlmaWNhbnQKLSBSLXNxdWFyZWQgZnVydGhlciBpbmNyZWFzZXMgdG8gMC45NTMsIGFkZGl0aW9uYWwgdmFyaWFuY2UgZXhwbGFpbmVkIGJ5IGludGVyYWN0aW9ucwoKCkhlcmUsIHdlIGNhbiBjb25jbHVkZSBmcm9tIHRoZSByZWdyZXNzaW9uIGFuYWx5c2lzIHRoYXQ6CgoKVGhlIGFuYWx5c2lzIHVzZXMgZGF0YSBvbiBmYWN1bHR5IGluIGEgc29jaW9sb2d5IGRlcGFydG1lbnQsIGluY2x1ZGluZyB0aGVpciBoLWluZGV4LCB0b3RhbCBjaXRhdGlvbnMsIFBoRCBzdGF0dXMsIGdlbmRlciwgYW5kIHBvc2l0aW9uLiAKCgotIFRoZSB2ZXJ5IGhpZ2ggUi1zcXVhcmVkIHZhbHVlcyBpbmRpY2F0ZSB0aGF0IHRoZSBoLWluZGV4IGlzIHN0cm9uZ2x5IHByZWRpY3RlZCBieSB0aGUgZmFjdG9ycyBpbiB0aGUgbW9kZWxzOiBjaXRhdGlvbnMsIGdlbmRlciwgYW5kIFBoRCBzdGF0dXMuIFRoaXMgbWFrZXMgc2Vuc2UgZ2l2ZW4gdGhhdCB0aGUgaC1pbmRleCBhaW1zIHRvIG1lYXN1cmUgYWNhZGVtaWMgaW1wYWN0IGFuZCBjaXRhdGlvbnMgYXJlIGRpcmVjdGx5IHJlbGF0ZWQuCgoKLSBUaGUgbmVnYXRpdmUgbWFpbiBlZmZlY3Qgb2YgUGhEIHN0YXR1cyBtYXkgaW5kaWNhdGUgdGhhdCBqdW5pb3Igbm9uLXRlbnVyZS10cmFjayBmYWN1bHR5IChlLmcuLCBwb3N0ZG9jcykgaW4gdGhpcyBkZXBhcnRtZW50IHRlbmQgdG8gaGF2ZSBhIGxvd2VyIGgtaW5kZXggdGhhbiB0ZW51cmVkL3RlbnVyZS10cmFjayBmYWN1bHR5LiAKCgpIb3dldmVyLCB0aGUgbmVnYXRpdmUgaW50ZXJhY3Rpb24gZWZmZWN0IGJldHdlZW4gUGhEIHN0YXR1cyBhbmQgZ2VuZGVyIHN1Z2dlc3RzIHRoYXQgdGhpcyBQaEQgZWZmZWN0IGlzIHN0cm9uZ2VyIGZvciB3b21lbiB0aGFuIG1lbjsgdGh1cywgZmVtYWxlIHBvc3Rkb2NzL25vbi1UVCBmYWN1bHR5IHRlbmQgdG8gaGF2ZSBwYXJ0aWN1bGFybHkgbG93IGgtaW5kaWNlcyBjb21wYXJlZCB0byBtYWxlIGNvbGxlYWd1ZXMuIAoKCi0gVGhlIHBvc2l0aXZlIG1haW4gZWZmZWN0IGZvciBiZWluZyBtYWxlIGFuZCBuZWdhdGl2ZSBpbnRlcmFjdGlvbiB3aXRoIGNpdGF0aW9ucyBpbmRpY2F0ZXMgdGhhdCBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gdGhlIGgtaW5kZXggcGVyc2lzdCBldmVuIHdoZW4gYWNjb3VudGluZyBmb3IgY2l0YXRpb25zLiBNYWxlcyBoYWQgYSBoaWdoZXIgaC1pbmRleCB0aGFuIGZlbWFsZXMgd2l0aCBzaW1pbGFyIGNpdGF0aW9ucy4KCgpJbiBzdW1tYXJ5LCB0aGUgcmVncmVzc2lvbiByZWluZm9yY2VzIHRoZSBkZXNjcmlwdGl2ZSBmaW5kaW5ncyB0aGF0IGdlbmRlciBpbmVxdWFsaXRpZXMgZXhpc3QgaW4gdGhlIGgtaW5kZXggYW5kIHRoZSBhY2FkZW1pYyBpbXBhY3Qgb2Ygc29jaW9sb2d5IGZhY3VsdHksIGV2ZW4gYWZ0ZXIgY29udHJvbGxpbmcgZm9yIG90aGVyIGZhY3RvcnMgc3VjaCBhcyBjaXRhdGlvbnMuIFRoZSBpbnRlcmFjdGlvbiBlZmZlY3RzIGhpZ2hsaWdodCB0aGF0IHRoZXNlIGdlbmRlciBpbmVxdWFsaXRpZXMgbWF5IGJlIHBhcnRpY3VsYXJseSBwcm9ub3VuY2VkIGZvciBqdW5pb3IgUGhEIHdvbWVuLgoKCgoKCgoKClRoaXMgYm94cGxvdCBzaG93cyB0aGUgZGlzdHJpYnV0aW9uIG9mIGgtaW5kZXggdmFsdWVzIHNlZ21lbnRlZCBieSBzZXguIFRoZSBwbG90IHJldmVhbHMgdGhhdCBtYWxlcyBoYXZlIGhpZ2hlciBtZWRpYW4gYW5kIHVwcGVyIHF1YXJ0aWxlIGgtaW5kZXggdmFsdWVzIHRoYW4gZmVtYWxlcyBpbiB0aGUgZGF0YXNldC4gVGhpcyBmaW5kaW5nIHN1Z2dlc3RzIHBvdGVudGlhbCBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gdGhlIGgtaW5kZXguCgoKCgpgYGB7cn0KIycgQ3JlYXRlIGJveHBsb3Qgb2YgaC1pbmRleCBieSBnZW5kZXIgdXNpbmcgYmFzZSBSIGdyYXBoaWNzCmJveHBsb3QoZ3NfaF9pbmRleCB+IGdlbmRlciwgZGF0YSA9IGRmX3NvYywgbWFpbiA9ICJILUluZGV4IGJ5IEdlbmRlciIpCmBgYAoKCgoKCgpUaGUgc2NhdHRlcnBsb3Qgc2hvd3MgdGhlIHJlbGF0aW9uc2hpcCBiZXR3ZWVuIHRoZSBoLWluZGV4IGFuZCB0b3RhbCBjaXRhdGlvbnMgZm9yIGVhY2ggaW5kaXZpZHVhbC4gVGhlcmUgaXMgYSBjbGVhciBwb3NpdGl2ZSBjb3JyZWxhdGlvbiwgd2l0aCB0aGUgaC1pbmRleCBpbmNyZWFzaW5nIGFzIHRoZSB0b3RhbCBjaXRhdGlvbnMgaW5jcmVhc2UuIFRoaXMgaXMgZXhwZWN0ZWQgYmVjYXVzZSB0aGUgaC1pbmRleCByZWZsZWN0cyBjaXRhdGlvbnMuIFBvaW50cyBhcmUgY29sb3JlZCBieSBzZXgsIHJldmVhbGluZyB0aGUgY2x1c3RlciBvZiBoaWdoZXIgaC1pbmRleCBtYWxlcyBjb21wYXJlZCB0byBmZW1hbGVzLgoKCmBgYHtyfQojJyBTY2F0dGVycGxvdCBvZiBoLWluZGV4IHZzIHRvdGFsIGNpdGF0aW9ucwpwbG90KGRmX3NvYyRnc19oX2luZGV4LCBkZl9zb2MkZ3NfdG90YWxfY2l0ZXMsCiAgeGxhYiA9ICJILUluZGV4IiwgeWxhYiA9ICJUb3RhbCBDaXRhdGlvbnMiLAogIG1haW4gPSAiSC1JbmRleCB2cyBUb3RhbCBDaXRhdGlvbnMiCikKYGBgCgoKCgoKCkFub3RoZXIgdmlldyBvZiB0aGUgaC1pbmRleCBkaXN0cmlidXRpb24gYnkgc2V4IHdhcyBjcmVhdGVkIHVzaW5nIGdncGxvdDIuIFRoZSBib3hwbG90IGlzIGNvbG9yLWZpbGxlZCBieSBnZW5kZXIgY2F0ZWdvcnksIGFnYWluIHNob3dpbmcgdGhlIHRlbmRlbmN5IGZvciBhIGhpZ2hlciBoLWluZGV4IGFtb25nIG1hbGVzIGNvbXBhcmVkIHRvIGZlbWFsZXMgaW4gdGhlIGRhdGFzZXQuIFRoZSBtaW5pbWFsIHRoZW1lIHByb3ZpZGVzIGEgY2xlYXJlciB2aXN1YWxpemF0aW9uIHRoYW4gdGhlIGJhc2UgUiBib3hwbG90LgoKCgoKYGBge3J9CiMnIENyZWF0ZSBib3hwbG90IG9mIGgtaW5kZXggYnkgZ2VuZGVyIHVzaW5nIGdncGxvdDIKZ2dwbG90KGRmX3NvYywgYWVzKHggPSBnZW5kZXIsIHkgPSBnc19oX2luZGV4LCBmaWxsID0gZ2VuZGVyKSkgKwogIGdlb21fYm94cGxvdChvdXRsaWVyLnNoYXBlID0gTkEsIG5hLnJtID0gVFJVRSkgKwogIHNjYWxlX2ZpbGxfYnJld2VyKHBhbGV0dGUgPSAiU2V0MSIpICsKICBsYWJzKHRpdGxlID0gIkgtSW5kZXggYnkgR2VuZGVyIikgKwogIHRoZW1lX21pbmltYWwoKQpgYGAKCgojIEFwcGVuZGl4CgoKYGBge3J9CmxhcHBseShmaXRzLCBzdW1tYXJ5KQpgYGAKCgo=</div>
+   
+      </div>
+   <div class="col-md-2">
+          <div id="toc">
+       <button type="button" class="close">×</button>
+       <ul>
+       <li><a href="#descriptives-network-statistics"
+       id="toc-descriptives-network-statistics">Descriptives Network
+       Statistics</a>
+       <ul>
+       <li><a href="#network-visualization"
+       id="toc-network-visualization">Network Visualization</a></li>
+       <li><a href="#centrality-metrics"
+       id="toc-centrality-metrics">Centrality Metrics</a></li>
+       <li><a href="#degree-distribution"
+       id="toc-degree-distribution">Degree Distribution</a></li>
+       <li><a href="#local-structure" id="toc-local-structure">Local
+       Structure</a></li>
+       </ul></li>
+       <li><a href="#appendix" id="toc-appendix">Appendix</a></li>
+       </ul>
+     </div>
+        </div>
+   </div>
+   </div>
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 	 	$('#content img').addClass("image-thumb");
+		
+		$('#content img:not(.no-lightbox)').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: '.image-lb',
+	    gallery: {enabled: false },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

@@ -1,54 +1,537 @@
----
-title: "Introduction"
-output:
-  html_document: 
-    toc: yes
-    number_sections: false
-    toc_collapse: yes
-    toc_float: yes
-author: "by: Siard van den Bosch"
----
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
 
-# Introduction
-Academic research is predicated on collaboration, enabling scholars to collectively push the boundaries of knowledge in their respective fields. However, collaboration does not manifest in a social vacuum immune to external forces. Extensive prior research has revealed subtle but significant gender disparities that continue to permeate the critical pathways of scholarly production and diffusion. 
+        <meta name="author" content="by: Siard van den Bosch" />
+    
+    
+    <title>Theoretical Framework</title>
 
-While some studies have analyzed these gender differences through contextual lenses, social network analysis provides unique and powerful insights by directly elucidating the underlying relational architecture shaping collaboration in academia. In particular, co-authorship networks offer an invaluable window into the intricate relational patterns, social norms, and complex dynamics that implicitly guide collaboration between scholars.
+        <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <script src="site_libs/navigation-1.1/codefolding.js"></script>
+        <script src="site_libs/navigation-1.1/FileSaver.min.js"></script>
+        <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/clean-0.1/clean.css" rel="stylesheet" />
+        <script src="site_libs/clean-0.1/clean.js"></script>
+        <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+        <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+        <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+        <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+        <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+    
+    
+    
+        <link rel="stylesheet" href="tweaks.css" type="text/css" />
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
 
-Recent studies utilizing social network analysis have uncovered disconcerting gender asymmetries in the topology and structure of university-wide co-authorship networks (Smith et al., 2019; Lee & Johnson, 2021). However, most existing network investigations employ a broad lens analysis of entire university systems. This risks overlooking important variations that may exist between different faculties, departments, and research groups operating within a university's wider ecosystem (Williams & Davis, 2020).
+    <!-- code folding -->
+        <script>
+      $(document).ready(function () {
+	  	  window.initializeSourceEmbed("theory.Rmd");
+	  	  	  window.initializeCodeFolding("show" === "show");
+	        });
+    </script>
+    
+    <!-- code download -->
+        <style>
+      #rmd-source-code {
+	  display: none;
+      }
+    </style>
+    
+    <!-- tabsets dropdown -->
 
-This research aims to address this gap by honing in on a single academic faculty and utilizing granular social network analysis to chart and analyze gender effects within the specific collaborative patterns and network structure evident in their co-authorship ties. 
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
 
-Specifically, the analysis investigates gender differences across a range of key network measures including triadic closure tendencies, betweenness centrality, ego-network density, average path length, diameter, and clustering coefficient. Each metric provides unique insights into the network's structural features and relational dynamics from different vantage points (Rodriguez et al., 2018; Chen & Liu, 2022).
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
 
-Triadic closure refers to the propensity for two scholars who share a mutual collaborator to also collaborate directly with each other, forming tightly knit triadic closures (Newman, 2022; Burt, 2004). Betweenness centrality quantifies the extent to which a scholar resides on the shortest communication paths between other scholar pairs in the network (Freeman, 1979; Guida & Maria, 2007). Ego-network density examines the level of interconnectedness amongst a researcher's own direct collaborators (McCarty et al., 2007; Rivera et al., 2010).
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
 
-Average path length and diameter evaluate the overall navigability of the network by measuring how easily any two scholars can reach one another through their collaborative ties (Watts & Strogatz, 1998; Milo et al., 2002). Finally, the clustering coefficient assesses the prevalence of densely interconnected collaborative constellations (Watts & Strogatz, 1998; Rombach et al., 2014).
+<body class="preload">
 
-While collaboration is fundamentally scholarly, this research suggests it may also be subtly but consequentially shaped by gendered forces. Even slight differences in how male and female scholars connect and communicate can gradually propagate through and fundamentally mold knowledge creation and diffusion.
+      <!-- html_clean start -->
+   <div class="container-fluid main-container">
+     <div class="row">
+       <div class="col-md-10">
+   	
+            
+      <div class="btn-group pull-right">
+     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+     <ul class="dropdown-menu" style="min-width: 50px;">
+	    	    <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+	    <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+	    	    <li role="separator" class="divider"></li>
+	    	    	    	    <li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+	         </ul>
+   </div>
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">
+          <span class="fa fa-home"></span>
+           
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Journal
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="question.html">Research Question</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="zacharys.html">Descriptive Statistics</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="webscraping.html">Web Scraping</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="visualization.html">Network Visualization</a>
+              </li>
+              <li>
+                <a href="igraph_demo.html">Using igraph</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="rsiena_example.html">RSiena models</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 6</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">SNA in Practice</li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 7</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">RSiena Advanced</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction_v1.html">Introduction</a>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Theory</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="theory_v2.html">Last version</a>
+              </li>
+              <li>
+                <a href="theory_v1.html">Older version</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Methods</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="predicting_gender.html">Gender From Names</a>
+              </li>
+              <li>
+                <a href="assembling.html">Data Collection and Preparation</a>
+              </li>
+              <li>
+                <a href="rsiena_analysis_method.html">RSiena Analysis Method</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="descriptive.html">Descriptive (draft)</a>
+              </li>
+              <li>
+                <a href="calculate_metrics_report.html">Calculate Metrics Report</a>
+              </li>
+              <li>
+                <a href="rsiena_example.html">RSiena (example)</a>
+              </li>
+              <li>
+                <a href="analysis_draft.html">Analysis (draft)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-header">Results</li>
+          <li class="dropdown-header">Discussion</li>
+          <li>
+            <a href="to_do_list.html">To-Do List</a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li>
+            <a href="theory.html">Theory</a>
+          </li>
+          <li>
+            <a href="data_methods.html">Data &amp; Methods</a>
+          </li>
+          <li>
+            <a href="descriptives.html">Descriptives</a>
+          </li>
+          <li>
+            <a href="analysis.html">Analysis</a>
+          </li>
+          <li>
+            <a href="results.html">Results</a>
+          </li>
+          <li>
+            <a href="discussion.html">Discussion</a>
+          </li>
+          <li>
+            <a href="conclusion.html">Conclusion</a>
+          </li>
+          <li>
+            <a href="appendix.html">Appendix</a>
+          </li>
+        </ul>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+        <a href="https://github.com/siardv/labjournal">
+          <span class="fab fa-github"></span>
+           
+        </a>
+      </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Theoretical Framework</h1>
+      
+        
 
-Mapping out these disparities and explicating their multifaceted implications is therefore instrumental for working towards constructing more equitable pathways to innovation. By systematically elucidating gender effects along dimensions of closure, centrality, density, path length, and clustering, this study meaningfully advances understanding of the hidden social forces shaping this indispensable academic network. 
+      <!-- html_clean authors -->
+         <h4 class="author"><em>by: Siard van den Bosch</em></h4>
+            
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="content">
+<div id="theoretical-framework" class="section level1">
+<h1>Theoretical Framework</h1>
+<p>Extensive scholarship has documented systemic gender inequalities
+within academia, including biases in hiring, compensation, promotion,
+tenure, service obligations and leadership opportunities (Fox 2005;
+Terosky et al. 2008; Misra et al. 2011). Looking beyond individual-level
+explanations, a growing body of work applies network perspectives to
+argue that normalized relational dynamics disproportionately isolate and
+marginalize women within emergent scholarly ecosystems (Rhoten &amp;
+Pfirman, 2007; Cech &amp; Blair-Loy, 2019; Nielsen, 2016).</p>
+<p>Several generative mechanisms have been theorized to introduce
+systemic biases in women within academic networks. First, homophily
+concentrates connectivity within same-gender components, rather than
+bridging across groups (McPherson et al., 2001). Owing to men’s
+overrepresentation in many fields, this disproportionately limits the
+diversity of women’s collaborations (Smith-Doerr et al., 2017; Sugimoto,
+2013). Second, preferential attachment and cumulative advantage allow
+for the accrual of links, recognition, and resources among
+well-connected scholars (Abbasi et al. 2012; Merton 1968). If men have a
+higher initial productivity and status, this self-reinforcing process
+can perpetuate inequality (Larivière et al. 2013). Third, triadic
+closure dynamics embed segregation, as connections preferentially form
+in same-gender triads versus spanning groups (Moody, 2001). Together,
+these forces can prevent women from accessing brokerage positions, while
+encapsulating men in high-status cores (Burt 2004; Wang et
+al. 2019).</p>
+<p>This study leverages stochastic actor-oriented modeling (Snijders et
+al., 2010) to systematically evaluate the hypotheses grounded in these
+pivotal mechanisms. While focusing only on gender is an acknowledged
+limitation, the constraints necessitated this targeted analysis. Future
+studies should adopt intersectional approaches that incorporate
+additional identity factors (Oliveira &amp; Pinho, 2021). Despite this
+limitation, investigating the network inequalities faced specifically by
+women represents an important first step in addressing endemic biases
+(Maliniak et al., 2013).</p>
+<p>Based on this framework, the following hypotheses are proposed:</p>
+<p>Hypothesis 1 - Network Isolation The first hypothesis predicts that
+women will exhibit higher levels of network isolation, as indicated by
+the isolateNet effect. This effect models the tendency toward
+disconnection by counting actors with zero incoming and zero outgoing
+ties. A significant positive isolateNet effect for women provides
+compelling evidence of exclusion from the collaborative ecosystem,
+representing a fundamental inequality within the relational dynamics of
+academia.</p>
+<p>Hypothesis 2 - Preferential Attachment The second hypothesis proposes
+that women display lower preferential attachment rates, as evidenced by
+a weaker inPop effect. This models the tendency of nodes to accumulate
+connections according to the current popularity operationalized through
+in-degree. A weaker inPop effect signifies that women lack access to
+collaboration with high-status scholars, restricting the accumulation of
+social capital.</p>
+<p>Hypothesis 3 - Outdegree Activity The third hypothesis theorizes that
+men will exhibit higher outdegree activity rates, as shown by a stronger
+outact effect. This models the tendency of active initiators of
+collaborations to gain additional ties over time. Higher outdegree
+activities accelerate the advantages for men, further concentrating on
+opportunities.</p>
+<p>Hypothesis 4 - Homophily and Triadic Closure<br />
+The fourth hypothesis expects heightened homophily and within-gender
+triadic closure for women, as evidenced by the significant sameX and
+sameXTransTrip effects. These effects model collaboration tendencies
+between same-gender alters and within same-gender triads. Stronger
+significance for women would provide evidence of segregating forces that
+isolate them from diverse collaborations.</p>
+<p>The results provide data-driven insights into subtle systemic
+asymmetries that constrain women’s network positions and processes. By
+elucidating the complex mechanisms allowing gender biases to arise and
+persist within emergent scholarly ecosystems, this research aims to
+inform thoughtful interventions that promote equity, inclusion, and
+advancement for all scholars.</p>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p>Abbasi, A., Hossain, L., &amp; Leydesdorff, L. (2012). Betweenness
+centrality as a driver of preferential attachment in the evolution of
+research collaboration networks. Journal of Informetrics, 6(3), 403–412.
+<a href="https://doi.org/10.1016/j.joi.2012.01.002"
+class="uri">https://doi.org/10.1016/j.joi.2012.01.002</a></p>
+<p>Burt, R. S. (2004). Structural holes and good ideas. American Journal
+of Sociology, 110(2), 349–399. <a href="https://doi.org/10.1086/421787"
+class="uri">https://doi.org/10.1086/421787</a></p>
+<p>Larivière, V., Ni, C., Gingras, Y., Cronin, B., &amp; Sugimoto, C. R.
+(2013). Bibliometrics: Global gender disparities in science. Nature,
+504(7479), 211–213. <a href="https://doi.org/10.1038/504211a"
+class="uri">https://doi.org/10.1038/504211a</a></p>
+<p>Maliniak, D., Powers, R., &amp; Walter, B. F. (2013). The gender
+citation gap in international relations. International Organization,
+67(4), 889–922. <a href="https://doi.org/10.1017/S0020818313000209"
+class="uri">https://doi.org/10.1017/S0020818313000209</a></p>
+<p>McPherson, M., Smith-Lovin, L., &amp; Cook, J. M. (2001). Birds of a
+feather: Homophily in social networks. Annual Review of Sociology,
+27(1), 415–444. <a href="https://doi.org/10.1146/annurev.soc.27.1.415"
+class="uri">https://doi.org/10.1146/annurev.soc.27.1.415</a></p>
+<p>Merton, R. K. (1968). The Matthew effect in science. The reward and
+communication systems of science are considered. Science, 159(3810),
+56–63. <a href="https://doi.org/10.1126/science.159.3810.56"
+class="uri">https://doi.org/10.1126/science.159.3810.56</a></p>
+<p>Moody, J. (2001). Race, school integration, and friendship
+segregation in America. American Journal of Sociology, 107(3), 679–716.
+<a href="https://doi.org/10.1086/338954"
+class="uri">https://doi.org/10.1086/338954</a></p>
+<p>Nielsen, M. W. (2016). Gender inequality and research performance:
+Moving beyond individual-meritocratic explanations of academic
+advancement. Studies in Higher Education, 41(11), 2044–2060. <a
+href="https://doi.org/10.1080/03075079.2015.1007945"
+class="uri">https://doi.org/10.1080/03075079.2015.1007945</a></p>
+<p>Rhoten, D., &amp; Pfirman, S. (2007). Women in interdisciplinary
+science: Exploring preferences and consequences. Research Policy, 36(1),
+56–75. <a href="https://doi.org/10.1016/j.respol.2006.08.001"
+class="uri">https://doi.org/10.1016/j.respol.2006.08.001</a></p>
+<p>Smith-Doerr, L., Alegria, S. N., &amp; Sacco, T. (2017). How
+diversity matters in the US science and engineering workforce: A
+critical review considering integration in teams, fields, and
+organizational contexts. Engaging Science, Technology, and Society, 3,
+139–153. <a href="https://doi.org/10.17351/ests2017.142"
+class="uri">https://doi.org/10.17351/ests2017.142</a></p>
+<p>Snijders, T. A. B., Van de Bunt, G. G., &amp; Steglich, C. E. G.
+(2010). Introduction to stochastic actor-based models for network
+dynamics. Social Networks, 32(1), 44–60. <a
+href="https://doi.org/10.1016/j.socnet.2009.02.004"
+class="uri">https://doi.org/10.1016/j.socnet.2009.02.004</a></p>
+<p>Sugimoto, C. R. (2013). Global gender disparities in science. Nature,
+504(7479), 211–213. <a href="https://doi.org/10.1038/504211a"
+class="uri">https://doi.org/10.1038/504211a</a></p>
+<p>Wang, L., Mei, D., Li, W., Rousseau, R., Zhang, Y., Yang, J., .?.?.
+&amp; Yue, W. (2019). Gender diversity statement and code of conduct
+help increase gender diversity in astronomer collaborations. Nature
+Astronomy, 3(10), 1018–1025. <a
+href="https://doi.org/10.1038/s41550-019-0879-1"
+class="uri">https://doi.org/10.1038/s41550-019-0879-1</a></p>
+</div>
+</div>
+</div>
 
-The goal is to move beyond descriptive network mapping to uncover the underlying relational mechanisms guiding scholarly cooperation. Exposing these obfuscated dynamics is critical for cultivating more inclusive scientific progress.
+   
+      <div id="rmd-source-code">LS0tCnRpdGxlOiAiVGhlb3JldGljYWwgRnJhbWV3b3JrIgphdXRob3I6ICJieTogU2lhcmQgdmFuIGRlbiBCb3NjaCIKYmlibGlvZ3JhcGh5OiByZWZlcmVuY2VzLmJpYgpjc2w6IGFwYS5jc2wKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQprbml0cjo6b3B0c19jaHVuayRzZXQoY29tbWVudCA9IE5BKQpgYGAKCiMgVGhlb3JldGljYWwgRnJhbWV3b3JrCgpFeHRlbnNpdmUgc2Nob2xhcnNoaXAgaGFzIGRvY3VtZW50ZWQgc3lzdGVtaWMgZ2VuZGVyIGluZXF1YWxpdGllcyB3aXRoaW4gYWNhZGVtaWEsIGluY2x1ZGluZyBiaWFzZXMgaW4gaGlyaW5nLCBjb21wZW5zYXRpb24sIHByb21vdGlvbiwgdGVudXJlLCBzZXJ2aWNlIG9ibGlnYXRpb25zIGFuZCBsZWFkZXJzaGlwIG9wcG9ydHVuaXRpZXMgKEZveCAyMDA1OyBUZXJvc2t5IGV0IGFsLiAyMDA4OyBNaXNyYSBldCBhbC4gMjAxMSkuIExvb2tpbmcgYmV5b25kIGluZGl2aWR1YWwtbGV2ZWwgZXhwbGFuYXRpb25zLCBhIGdyb3dpbmcgYm9keSBvZiB3b3JrIGFwcGxpZXMgbmV0d29yayBwZXJzcGVjdGl2ZXMgdG8gYXJndWUgdGhhdCBub3JtYWxpemVkIHJlbGF0aW9uYWwgZHluYW1pY3MgZGlzcHJvcG9ydGlvbmF0ZWx5IGlzb2xhdGUgYW5kIG1hcmdpbmFsaXplIHdvbWVuIHdpdGhpbiBlbWVyZ2VudCBzY2hvbGFybHkgZWNvc3lzdGVtcyAoUmhvdGVuICYgUGZpcm1hbiwgMjAwNzsgQ2VjaCAmIEJsYWlyLUxveSwgMjAxOTsgTmllbHNlbiwgMjAxNikuIAoKClNldmVyYWwgZ2VuZXJhdGl2ZSBtZWNoYW5pc21zIGhhdmUgYmVlbiB0aGVvcml6ZWQgdG8gaW50cm9kdWNlIHN5c3RlbWljIGJpYXNlcyBpbiB3b21lbiB3aXRoaW4gYWNhZGVtaWMgbmV0d29ya3MuIEZpcnN0LCBob21vcGhpbHkgY29uY2VudHJhdGVzIGNvbm5lY3Rpdml0eSB3aXRoaW4gc2FtZS1nZW5kZXIgY29tcG9uZW50cywgcmF0aGVyIHRoYW4gYnJpZGdpbmcgYWNyb3NzIGdyb3VwcyAoTWNQaGVyc29uIGV0IGFsLiwgMjAwMSkuIE93aW5nIHRvIG1lbidzIG92ZXJyZXByZXNlbnRhdGlvbiBpbiBtYW55IGZpZWxkcywgdGhpcyBkaXNwcm9wb3J0aW9uYXRlbHkgbGltaXRzIHRoZSBkaXZlcnNpdHkgb2Ygd29tZW4ncyBjb2xsYWJvcmF0aW9ucyAoU21pdGgtRG9lcnIgZXQgYWwuLCAyMDE3OyBTdWdpbW90bywgMjAxMykuIFNlY29uZCwgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgYW5kIGN1bXVsYXRpdmUgYWR2YW50YWdlIGFsbG93IGZvciB0aGUgYWNjcnVhbCBvZiBsaW5rcywgcmVjb2duaXRpb24sIGFuZCByZXNvdXJjZXMgYW1vbmcgd2VsbC1jb25uZWN0ZWQgc2Nob2xhcnMgKEFiYmFzaSBldCBhbC4gMjAxMjsgTWVydG9uIDE5NjgpLiBJZiBtZW4gaGF2ZSBhIGhpZ2hlciBpbml0aWFsIHByb2R1Y3Rpdml0eSBhbmQgc3RhdHVzLCB0aGlzIHNlbGYtcmVpbmZvcmNpbmcgcHJvY2VzcyBjYW4gcGVycGV0dWF0ZSBpbmVxdWFsaXR5IChMYXJpdmnDqHJlIGV0IGFsLiAyMDEzKS4gVGhpcmQsIHRyaWFkaWMgY2xvc3VyZSBkeW5hbWljcyBlbWJlZCBzZWdyZWdhdGlvbiwgYXMgY29ubmVjdGlvbnMgcHJlZmVyZW50aWFsbHkgZm9ybSBpbiBzYW1lLWdlbmRlciB0cmlhZHMgdmVyc3VzIHNwYW5uaW5nIGdyb3VwcyAoTW9vZHksIDIwMDEpLiBUb2dldGhlciwgdGhlc2UgZm9yY2VzIGNhbiBwcmV2ZW50IHdvbWVuIGZyb20gYWNjZXNzaW5nIGJyb2tlcmFnZSBwb3NpdGlvbnMsIHdoaWxlIGVuY2Fwc3VsYXRpbmcgbWVuIGluIGhpZ2gtc3RhdHVzIGNvcmVzIChCdXJ0IDIwMDQ7IFdhbmcgZXQgYWwuIDIwMTkpLiAKCgpUaGlzIHN0dWR5IGxldmVyYWdlcyBzdG9jaGFzdGljIGFjdG9yLW9yaWVudGVkIG1vZGVsaW5nIChTbmlqZGVycyBldCBhbC4sIDIwMTApIHRvIHN5c3RlbWF0aWNhbGx5IGV2YWx1YXRlIHRoZSBoeXBvdGhlc2VzIGdyb3VuZGVkIGluIHRoZXNlIHBpdm90YWwgbWVjaGFuaXNtcy4gV2hpbGUgZm9jdXNpbmcgb25seSBvbiBnZW5kZXIgaXMgYW4gYWNrbm93bGVkZ2VkIGxpbWl0YXRpb24sIHRoZSBjb25zdHJhaW50cyBuZWNlc3NpdGF0ZWQgdGhpcyB0YXJnZXRlZCBhbmFseXNpcy4gRnV0dXJlIHN0dWRpZXMgc2hvdWxkIGFkb3B0IGludGVyc2VjdGlvbmFsIGFwcHJvYWNoZXMgdGhhdCBpbmNvcnBvcmF0ZSBhZGRpdGlvbmFsIGlkZW50aXR5IGZhY3RvcnMgKE9saXZlaXJhICYgUGluaG8sIDIwMjEpLiBEZXNwaXRlIHRoaXMgbGltaXRhdGlvbiwgaW52ZXN0aWdhdGluZyB0aGUgbmV0d29yayBpbmVxdWFsaXRpZXMgZmFjZWQgc3BlY2lmaWNhbGx5IGJ5IHdvbWVuIHJlcHJlc2VudHMgYW4gaW1wb3J0YW50IGZpcnN0IHN0ZXAgaW4gYWRkcmVzc2luZyBlbmRlbWljIGJpYXNlcyAoTWFsaW5pYWsgZXQgYWwuLCAyMDEzKS4KCgpCYXNlZCBvbiB0aGlzIGZyYW1ld29yaywgdGhlIGZvbGxvd2luZyBoeXBvdGhlc2VzIGFyZSBwcm9wb3NlZDoKCkh5cG90aGVzaXMgMSAtIE5ldHdvcmsgSXNvbGF0aW9uIApUaGUgZmlyc3QgaHlwb3RoZXNpcyBwcmVkaWN0cyB0aGF0IHdvbWVuIHdpbGwgZXhoaWJpdCBoaWdoZXIgbGV2ZWxzIG9mIG5ldHdvcmsgaXNvbGF0aW9uLCBhcyBpbmRpY2F0ZWQgYnkgdGhlIGlzb2xhdGVOZXQgZWZmZWN0LiBUaGlzIGVmZmVjdCBtb2RlbHMgdGhlIHRlbmRlbmN5IHRvd2FyZCBkaXNjb25uZWN0aW9uIGJ5IGNvdW50aW5nIGFjdG9ycyB3aXRoIHplcm8gaW5jb21pbmcgYW5kIHplcm8gb3V0Z29pbmcgdGllcy4gQSBzaWduaWZpY2FudCBwb3NpdGl2ZSBpc29sYXRlTmV0IGVmZmVjdCBmb3Igd29tZW4gcHJvdmlkZXMgY29tcGVsbGluZyBldmlkZW5jZSBvZiBleGNsdXNpb24gZnJvbSB0aGUgY29sbGFib3JhdGl2ZSBlY29zeXN0ZW0sIHJlcHJlc2VudGluZyBhIGZ1bmRhbWVudGFsIGluZXF1YWxpdHkgd2l0aGluIHRoZSByZWxhdGlvbmFsIGR5bmFtaWNzIG9mIGFjYWRlbWlhLgoKCkh5cG90aGVzaXMgMiAtIFByZWZlcmVudGlhbCBBdHRhY2htZW50ClRoZSBzZWNvbmQgaHlwb3RoZXNpcyBwcm9wb3NlcyB0aGF0IHdvbWVuIGRpc3BsYXkgbG93ZXIgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgcmF0ZXMsIGFzIGV2aWRlbmNlZCBieSBhIHdlYWtlciBpblBvcCBlZmZlY3QuIFRoaXMgbW9kZWxzIHRoZSB0ZW5kZW5jeSBvZiBub2RlcyB0byBhY2N1bXVsYXRlIGNvbm5lY3Rpb25zIGFjY29yZGluZyB0byB0aGUgY3VycmVudCBwb3B1bGFyaXR5IG9wZXJhdGlvbmFsaXplZCB0aHJvdWdoIGluLWRlZ3JlZS4gQSB3ZWFrZXIgaW5Qb3AgZWZmZWN0IHNpZ25pZmllcyB0aGF0IHdvbWVuIGxhY2sgYWNjZXNzIHRvIGNvbGxhYm9yYXRpb24gd2l0aCBoaWdoLXN0YXR1cyBzY2hvbGFycywgcmVzdHJpY3RpbmcgdGhlIGFjY3VtdWxhdGlvbiBvZiBzb2NpYWwgY2FwaXRhbC4KCgpIeXBvdGhlc2lzIDMgLSBPdXRkZWdyZWUgQWN0aXZpdHkKVGhlIHRoaXJkIGh5cG90aGVzaXMgdGhlb3JpemVzIHRoYXQgbWVuIHdpbGwgZXhoaWJpdCBoaWdoZXIgb3V0ZGVncmVlIGFjdGl2aXR5IHJhdGVzLCBhcyBzaG93biBieSBhIHN0cm9uZ2VyIG91dGFjdCBlZmZlY3QuIFRoaXMgbW9kZWxzIHRoZSB0ZW5kZW5jeSBvZiBhY3RpdmUgaW5pdGlhdG9ycyBvZiBjb2xsYWJvcmF0aW9ucyB0byBnYWluIGFkZGl0aW9uYWwgdGllcyBvdmVyIHRpbWUuIEhpZ2hlciBvdXRkZWdyZWUgYWN0aXZpdGllcyBhY2NlbGVyYXRlIHRoZSBhZHZhbnRhZ2VzIGZvciBtZW4sIGZ1cnRoZXIgY29uY2VudHJhdGluZyBvbiBvcHBvcnR1bml0aWVzLgoKCkh5cG90aGVzaXMgNCAtIEhvbW9waGlseSBhbmQgVHJpYWRpYyBDbG9zdXJlICAKVGhlIGZvdXJ0aCBoeXBvdGhlc2lzIGV4cGVjdHMgaGVpZ2h0ZW5lZCBob21vcGhpbHkgYW5kIHdpdGhpbi1nZW5kZXIgdHJpYWRpYyBjbG9zdXJlIGZvciB3b21lbiwgYXMgZXZpZGVuY2VkIGJ5IHRoZSBzaWduaWZpY2FudCBzYW1lWCBhbmQgc2FtZVhUcmFuc1RyaXAgZWZmZWN0cy4gVGhlc2UgZWZmZWN0cyBtb2RlbCBjb2xsYWJvcmF0aW9uIHRlbmRlbmNpZXMgYmV0d2VlbiBzYW1lLWdlbmRlciBhbHRlcnMgYW5kIHdpdGhpbiBzYW1lLWdlbmRlciB0cmlhZHMuIFN0cm9uZ2VyIHNpZ25pZmljYW5jZSBmb3Igd29tZW4gd291bGQgcHJvdmlkZSBldmlkZW5jZSBvZiBzZWdyZWdhdGluZyBmb3JjZXMgdGhhdCBpc29sYXRlIHRoZW0gZnJvbSBkaXZlcnNlIGNvbGxhYm9yYXRpb25zLgoKClRoZSByZXN1bHRzIHByb3ZpZGUgZGF0YS1kcml2ZW4gaW5zaWdodHMgaW50byBzdWJ0bGUgc3lzdGVtaWMgYXN5bW1ldHJpZXMgdGhhdCBjb25zdHJhaW4gd29tZW7igJlzIG5ldHdvcmsgcG9zaXRpb25zIGFuZCBwcm9jZXNzZXMuIEJ5IGVsdWNpZGF0aW5nIHRoZSBjb21wbGV4IG1lY2hhbmlzbXMgYWxsb3dpbmcgZ2VuZGVyIGJpYXNlcyB0byBhcmlzZSBhbmQgcGVyc2lzdCB3aXRoaW4gZW1lcmdlbnQgc2Nob2xhcmx5IGVjb3N5c3RlbXMsIHRoaXMgcmVzZWFyY2ggYWltcyB0byBpbmZvcm0gdGhvdWdodGZ1bCBpbnRlcnZlbnRpb25zIHRoYXQgcHJvbW90ZSBlcXVpdHksIGluY2x1c2lvbiwgYW5kIGFkdmFuY2VtZW50IGZvciBhbGwgc2Nob2xhcnMuCgoKIyMgUmVmZXJlbmNlcwoKQWJiYXNpLCBBLiwgSG9zc2FpbiwgTC4sICYgTGV5ZGVzZG9yZmYsIEwuICgyMDEyKS4gQmV0d2Vlbm5lc3MgY2VudHJhbGl0eSBhcyBhIGRyaXZlciBvZiBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBpbiB0aGUgZXZvbHV0aW9uIG9mIHJlc2VhcmNoIGNvbGxhYm9yYXRpb24gbmV0d29ya3MuIEpvdXJuYWwgb2YgSW5mb3JtZXRyaWNzLCA2KDMpLCA0MDPigJM0MTIuIGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouam9pLjIwMTIuMDEuMDAyCgoKQnVydCwgUi4gUy4gKDIwMDQpLiBTdHJ1Y3R1cmFsIGhvbGVzIGFuZCBnb29kIGlkZWFzLiBBbWVyaWNhbiBKb3VybmFsIG9mIFNvY2lvbG9neSwgMTEwKDIpLCAzNDnigJMzOTkuIGh0dHBzOi8vZG9pLm9yZy8xMC4xMDg2LzQyMTc4NyAgCgoKTGFyaXZpw6hyZSwgVi4sIE5pLCBDLiwgR2luZ3JhcywgWS4sIENyb25pbiwgQi4sICYgU3VnaW1vdG8sIEMuIFIuICgyMDEzKS4gQmlibGlvbWV0cmljczogR2xvYmFsIGdlbmRlciBkaXNwYXJpdGllcyBpbiBzY2llbmNlLiBOYXR1cmUsIDUwNCg3NDc5KSwgMjEx4oCTMjEzLiBodHRwczovL2RvaS5vcmcvMTAuMTAzOC81MDQyMTFhCgoKTWFsaW5pYWssIEQuLCBQb3dlcnMsIFIuLCAmIFdhbHRlciwgQi4gRi4gKDIwMTMpLiBUaGUgZ2VuZGVyIGNpdGF0aW9uIGdhcCBpbiBpbnRlcm5hdGlvbmFsIHJlbGF0aW9ucy4gSW50ZXJuYXRpb25hbCBPcmdhbml6YXRpb24sIDY3KDQpLCA4ODnigJM5MjIuIGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE3L1MwMDIwODE4MzEzMDAwMjA5CgoKTWNQaGVyc29uLCBNLiwgU21pdGgtTG92aW4sIEwuLCAmIENvb2ssIEouIE0uICgyMDAxKS4gQmlyZHMgb2YgYSBmZWF0aGVyOiBIb21vcGhpbHkgaW4gc29jaWFsIG5ldHdvcmtzLiBBbm51YWwgUmV2aWV3IG9mIFNvY2lvbG9neSwgMjcoMSksIDQxNeKAkzQ0NC4gaHR0cHM6Ly9kb2kub3JnLzEwLjExNDYvYW5udXJldi5zb2MuMjcuMS40MTUKCgpNZXJ0b24sIFIuIEsuICgxOTY4KS4gVGhlIE1hdHRoZXcgZWZmZWN0IGluIHNjaWVuY2UuIFRoZSByZXdhcmQgYW5kIGNvbW11bmljYXRpb24gc3lzdGVtcyBvZiBzY2llbmNlIGFyZSBjb25zaWRlcmVkLiBTY2llbmNlLCAxNTkoMzgxMCksIDU24oCTNjMuIGh0dHBzOi8vZG9pLm9yZy8xMC4xMTI2L3NjaWVuY2UuMTU5LjM4MTAuNTYKCgpNb29keSwgSi4gKDIwMDEpLiBSYWNlLCBzY2hvb2wgaW50ZWdyYXRpb24sIGFuZCBmcmllbmRzaGlwIHNlZ3JlZ2F0aW9uIGluIEFtZXJpY2EuIEFtZXJpY2FuIEpvdXJuYWwgb2YgU29jaW9sb2d5LCAxMDcoMyksIDY3OeKAkzcxNi4gaHR0cHM6Ly9kb2kub3JnLzEwLjEwODYvMzM4OTU0CgoKTmllbHNlbiwgTS4gVy4gKDIwMTYpLiBHZW5kZXIgaW5lcXVhbGl0eSBhbmQgcmVzZWFyY2ggcGVyZm9ybWFuY2U6IE1vdmluZyBiZXlvbmQgaW5kaXZpZHVhbC1tZXJpdG9jcmF0aWMgZXhwbGFuYXRpb25zIG9mIGFjYWRlbWljIGFkdmFuY2VtZW50LiBTdHVkaWVzIGluIEhpZ2hlciBFZHVjYXRpb24sIDQxKDExKSwgMjA0NOKAkzIwNjAuIGh0dHBzOi8vZG9pLm9yZy8xMC4xMDgwLzAzMDc1MDc5LjIwMTUuMTAwNzk0NQoKClJob3RlbiwgRC4sICYgUGZpcm1hbiwgUy4gKDIwMDcpLiBXb21lbiBpbiBpbnRlcmRpc2NpcGxpbmFyeSBzY2llbmNlOiBFeHBsb3JpbmcgcHJlZmVyZW5jZXMgYW5kIGNvbnNlcXVlbmNlcy4gUmVzZWFyY2ggUG9saWN5LCAzNigxKSwgNTbigJM3NS4gaHR0cHM6Ly9kb2kub3JnLzEwLjEwMTYvai5yZXNwb2wuMjAwNi4wOC4wMDEKCgpTbWl0aC1Eb2VyciwgTC4sIEFsZWdyaWEsIFMuIE4uLCAmIFNhY2NvLCBULiAoMjAxNykuIEhvdyBkaXZlcnNpdHkgbWF0dGVycyBpbiB0aGUgVVMgc2NpZW5jZSBhbmQgZW5naW5lZXJpbmcgd29ya2ZvcmNlOiBBIGNyaXRpY2FsIHJldmlldyBjb25zaWRlcmluZyBpbnRlZ3JhdGlvbiBpbiB0ZWFtcywgZmllbGRzLCBhbmQgb3JnYW5pemF0aW9uYWwgY29udGV4dHMuIEVuZ2FnaW5nIFNjaWVuY2UsIFRlY2hub2xvZ3ksIGFuZCBTb2NpZXR5LCAzLCAxMznigJMxNTMuIGh0dHBzOi8vZG9pLm9yZy8xMC4xNzM1MS9lc3RzMjAxNy4xNDIKCgpTbmlqZGVycywgVC4gQS4gQi4sIFZhbiBkZSBCdW50LCBHLiBHLiwgJiBTdGVnbGljaCwgQy4gRS4gRy4gKDIwMTApLiBJbnRyb2R1Y3Rpb24gdG8gc3RvY2hhc3RpYyBhY3Rvci1iYXNlZCBtb2RlbHMgZm9yIG5ldHdvcmsgZHluYW1pY3MuIFNvY2lhbCBOZXR3b3JrcywgMzIoMSksIDQ04oCTNjAuIGh0dHBzOi8vZG9pLm9yZy8xMC4xMDE2L2ouc29jbmV0LjIwMDkuMDIuMDA0IAoKClN1Z2ltb3RvLCBDLiBSLiAoMjAxMykuIEdsb2JhbCBnZW5kZXIgZGlzcGFyaXRpZXMgaW4gc2NpZW5jZS4gTmF0dXJlLCA1MDQoNzQ3OSksIDIxMeKAkzIxMy4gaHR0cHM6Ly9kb2kub3JnLzEwLjEwMzgvNTA0MjExYQoKCldhbmcsIEwuLCBNZWksIEQuLCBMaSwgVy4sIFJvdXNzZWF1LCBSLiwgWmhhbmcsIFkuLCBZYW5nLCBKLiwgLj8uPy4gJiBZdWUsIFcuICgyMDE5KS4gR2VuZGVyIGRpdmVyc2l0eSBzdGF0ZW1lbnQgYW5kIGNvZGUgb2YgY29uZHVjdCBoZWxwIGluY3JlYXNlIGdlbmRlciBkaXZlcnNpdHkgaW4gYXN0cm9ub21lciBjb2xsYWJvcmF0aW9ucy4gTmF0dXJlIEFzdHJvbm9teSwgMygxMCksIDEwMTjigJMxMDI1LiBodHRwczovL2RvaS5vcmcvMTAuMTAzOC9zNDE1NTAtMDE5LTA4NzktMQ==</div>
+   
+      </div>
+   <div class="col-md-2">
+          <div id="toc">
+       <button type="button" class="close">×</button>
+       <ul>
+       <li><a href="#theoretical-framework"
+       id="toc-theoretical-framework">Theoretical Framework</a>
+       <ul>
+       <li><a href="#references" id="toc-references">References</a></li>
+       </ul></li>
+       </ul>
+     </div>
+        </div>
+   </div>
+   </div>
+            
+      
 
-## Research Questions
-- $RQ_1$: What is the role of gender in triadic closure within the co-authorship network of this faculty?
+  <script>
+    $(document).ready(function () {
 
-Triadic closure refers to the tendency in social networks for two people who have a common acquaintance to become connected. This question seeks to uncover whether there are gender influences in this phenomenon.
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 	 	$('#content img').addClass("image-thumb");
+		
+		$('#content img:not(.no-lightbox)').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: '.image-lb',
+	    gallery: {enabled: false },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
 
-- $RQ_2$: Does gender impact the betweenness centrality of researchers in the co-authorship network within this faculty?
 
-Betweenness centrality is a measure of the extent to which a node appears on the shortest paths between other nodes. This question aims to understand whether gender plays a role in the researcher's position as bridge-makers or gatekeepers in the network.
 
-- $RQ_3$: Female researchers will demonstrate lower triadic closure in their co-authorship ties compared to Is there a difference in the ego-network density for male and female researchers within this faculty's co-authorship network?
-
-Ego-network density refers to the proportion of possible ties that exist between the contacts of a particular individual (the ego). This question aims to explore whether there are gender differences in the interconnectedness of collaborators.
-
-- $RQ_4$: Are there gender-based differences in the average path length or the diameter of the co-authorship network within this faculty?
-
-These measures relate to the average number of steps it takes to get from one member of the network to another and the longest shortest path in the network. This question seeks to understand whether gender influences the reachability and overall structure of the network.
-
-- $RQ_5$: Does gender impact the clustering coefficient of researchers within the co-authorship network of this faculty?
-
-The clustering coefficient measures the extent to which the collaborators of a researcher (the neighbors of a node) are collaborators with each other. This question can help understand whether there are gender differences in the tendency to form tightly knit clusters.
-
-Each of these questions can be addressed with the `RSiena` R package, which allows for the calculation of various network metrics and the modeling of network structure and patterns. Please note that these questions might be influenced by other factors not considered in this model, like the academic rank or research interests of the researchers.
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

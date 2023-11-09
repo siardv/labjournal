@@ -1,57 +1,499 @@
 ---
-title: "Introduction"
-output:
-  html_document: 
-    toc: yes
-    number_sections: false
-    toc_collapse: yes
-    toc_float: yes
+title: "Descriptives Network Statistics"
 author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
 ---
-## Introduction
-The landscape of contemporary academic research has been fundamentally transformed by the inexorable shift toward heightened collaboration and co-authorship. As complex societal challenges become increasingly multifaceted and interdisciplinary in nature, academics are compelled to coalesce their diverse expertise by working in conjunction with colleagues across departmental and institutional boundaries (Katz & Martin, 1997). The resultant intermingling of insights made possible by these expansive collaborative networks has become a primary driver of knowledge creation and diffusion within the modern research enterprise (Lee & Bozeman, 2005). This trend toward team science has been enabled by advances in communication technology that allow efficient coordination among geographically distributed researchers (Olson et al., 2008). Studies have found that papers written by multi-institutional collaborations receive more citations on average than solo-authored works (Wuchty et al., 2007). However, effectively managing large collaborative projects poses challenges related to coordination costs, distributive credit, and clashing research cultures that teams must proactively address (Cummings & Kiesler, 2007). Overall, cross-discipline and cross-institution collaborations generate synergistic gains in productivity and impact, yet require thoughtful leadership and management to maximize these benefits.
-
-Within this evolving milieu, a scholar's location within emergent co-authorship networks confers differential access to vital resources such as novel information, funding, career opportunities, and impactful sponsorships. According to seminal social network theories, an individual researcher's capacity to broker new ideas across structural holes and span otherwise disconnected domains is heavily dependent on the topological features of their collaborative ties and positions within the broader network architecture (Granovetter, 1973; Burt, 2004). However, deeply entrenched gender disparities permeate the relational substratum of academia, potentially constraining women's ability to fully capitalize on strategically advantageous network positions and configurations. For instance, studies have found that women tend to occupy more peripheral positions within scientific collaboration networks, limiting their visibility and influence (Araújo et al., 2017). Additionally, homophily and implicit bias lead men to preferentially form collaborations with other men, while women face greater barriers in accessing high-status male collaborators (McDonald, 2011; Meng, 2016). As a result, women scholars experience social isolation that impedes their productivity and advancement (Rhoten & Pfirman, 2007). Cultivating more equitable collaboration practices and networks is crucial for overcoming systemic obstacles and enabling women researchers to reap the full benefits of connectivity.
-
-Academia has faced intense and sustained criticism regarding the persistence of substantial gender inequities that systemically disadvantage women faculty across crucial dimensions of resources, recognition, compensation, advancement prospects, and leadership roles (Fox, 2005; Misra et al., 2011). Although incremental progress has been made on this front, major gaps remain, as evidenced by a landmark 2022 UNESCO report analyzing 776 universities worldwide which found continued underrepresentation of women at senior levels, with women occupying just 36% of senior academic positions and authoring only 29% of published works across fields (UNESCO-IESALC, 2022). This aligns with extensive prior research documenting the "leaky pipeline" phenomenon where women steadily leak out of the academic career trajectory, leading to far fewer women in upper echelons compared to entry levels (Pell, 1996; Monroe et al., 2008). Underlying drivers include biased hiring and promotion practices, inhospitable work-life policies, lack of mentors and sponsors, and subtle gender biases embedded within academic culture (Valian, 1998; Hill et al., 2010). Achieving gender equity will require multilayered approaches spanning policy reform, cultural change, support programs, and targeted interventions at critical junctures to properly value, develop, and promote women scholars (Morley, 2013; Howe-Walsh & Turnbull, 2016).
-
-This stubborn persistence aligns with an accumulating body of empirical evidence demonstrating that women scholars continue to face systemic barriers to fully accessing and actively mobilizing the most advantageous positions within collaborative networks – positions that are increasingly vital for visibility, recognition, and advancement (Kyvik & Teigen, 1996; van Rijnsoever & Hessels, 2011; Sugimoto et al., 2013). As the ecosystem of academia has become ever more collaborative in nature, these gender disparities have become deeply embedded within the very topology of co-authorship networks, shaping inequities in access to the forms of collaborative social capital most critical for success under the prevailing norms (Bozeman 2005; Bozeman 2011).
-
-Specifically, studies find that women are consistently marginalized within academic co-authorship networks, holding more peripheral positions while men dominate the prestigious core with higher-status collaborators (Araújo et al., 2017; Guarino & Borden, 2017). This isolates women from the informal knowledge sharing, visibility boosts, and endorsement effects that accrue disproportionately to well-connected members occupying central network positions (Burt, 2004; Abbasi et al., 2012). Normalized patterns of homophily and exclusion intersect to constrain women's connectivity, as male scholars preferentially sponsor and collaborate with other men (Smith-Doerr et al., 2017). Targeted interventions to cultivate more integrative collaboration practices are essential for dismantling these systemic barriers.
-
-For example, a recent large-scale analysis of 1.5 million computer science papers found that publications with women in dominant first or last author positions received significantly fewer citations than similar papers with men occupying those same strategically vital positions (Ghiasi et al., 2021). Such findings suggest that women continue to face subtle yet systemic disadvantages in fully mobilizing resources and extracting returns from the most advantageous nodes and positions within academic publication and collaboration networks. 
-
-This pattern aligns with prior work demonstrating that papers with women in prestigious first or last author slots receive fewer citations after controlling for other factors (Maliniak et al., 2013; Dion et al., 2018). Explanations center on implicit gender biases influencing citation behavior as well as lower visibility and endorsement effects for women occupying critical authorship roles (Handley et al., 2015; Hengel, 2017). 
-
-This study aims to address this critical gap in understanding by utilizing an array of social network analysis techniques to systematically delineate and quantify potential gender asymmetries manifesting within multiple key structural dimensions of a faculty co-authorship network ecosystem at a major research university. Both descriptive topological network metrics and more sophisticated stochastic actor-oriented modeling will be leveraged to rigorously evaluate differences between male and female scholars across factors such as triadic closure tendencies, betweenness centrality, ego-network density, average path length, and broader clustering patterns.
-
-Elucidating the nature of these gender asymmetries within the fundamental relational architecture of academia is critical for informing evidence-based approaches to promoting greater equity and beginning to dismantle the subtle, complex, and interconnected forces which currently allow inequalities to persist and self-perpetuate within scholarly networks. This novel synthesis and application of social network perspectives and computational modeling techniques will substantively advance theoretical understanding of how topological constraints may disproportionately hamper women’s capacity to access the collaborative social capital increasingly necessary for visibility, advancement, and scientific impact within the shifting landscape of contemporary academia.
-
-## References
 
 
-Abbasi, A., Hossain, L., & Leydesdorff, L. (2012). Betweenness centrality as a driver of preferential attachment in the evolution of research collaboration networks. Journal of Informetrics, 6(3), 403–412. doi:10.1016/j.joi.2012.01.002
-Araújo, E. B., Araújo, N. A. M., Moreira, A. A., Herrmann, H. J., & Andrade, J. S. (2017). Gender differences in scientific collaborations: Women are more egalitarian than men. PLOS ONE, 12(5), e0176791. doi:10.1371/journal.pone.0176791
-Cummings, J. N., & Kiesler, S. (2007). Coordination costs and project outcomes in multi-university collaborations. Research Policy, 36(10), 1620–1634. doi:10.1016/j.respol.2007.09.001
-Dion, M. L., Sumner, J. L., & Mitchell, S. M. (2018). Gendered citation patterns across political science and social science methodology fields. Political Analysis, 26(3), 312–327. doi:10.1017/pan.2018.12
-Guarino, C. M., & Borden, V. M. H. (2017). Faculty service loads and gender: Are women taking care of the academic family? Research in Higher Education, 58(6), 672–694. doi:10.1007/s11162-017-9454-2
-Handley, I. M., Brown, E. R., Moss-Racusin, C. A., & Smith, J. L. (2015). Quality of evidence revealing subtle gender biases in science is in the eye of the beholder. Proceedings of the National Academy of Sciences of the United States of America, 112(43), 13201–13206. doi:10.1073/pnas.1510649112
-Hengel, E. (2017). Publishing while female. Are women held to higher standards? Evidence from peer review. Cambridge working papers in economics 1753, faculty of economics. Cambridge: University of Cambridge.
-Hill, C., Corbett, C., & St Rose, A. (2010). Why so few? Women in science, technology, engineering, and mathematics. American Association of University Women. 1111 Sixteenth Street NW, Washington, DC 20036. 
-Hill, C., Corbett, C., & St. Rose, A. (2010). Why so few? Women in science, technology, engineering, and mathematics p. 20036. 1111 Sixteenth Street NW, Washington, DC: American Association of University Women.
-Howe-Walsh, L., & Turnbull, S. (2016). Barriers to women leaders in academia: Tales from science and technology. Studies in Higher Education, 41(3), 415–428. doi:10.1080/03075079.2014.929102
-Katz, J. S., & Martin, B. R. (1997). What is research collaboration? Research Policy, 26(1), 1–18.
-Lee, S., & Bozeman, B. (2005). The impact of research collaboration on scientific productivity. Social Studies of Science, 35(5), 673–702. doi:10.1177/0306312705052359
-Maliniak, D., Powers, R., & Walter, B. F. (2013). The gender citation gap in international relations. International Organization, 67(4), 889–922. doi:10.1017/S0020818313000209
-McDonald, S. (2011). What’s in the “old boys” network? Accessing social capital in gendered and racialized networks. In Social Networks, 33(4), 317–330. doi:10.1016/j.socnet.2011.10.002
-Meng, Y. (2016). Collaboration patterns and patenting: Exploring gender distinctions. Research Policy, 45(1), 56–67. doi:10.1016/j.respol.2015.07.004
-Monroe, K., Ozyurt, S., Wrigley, T., & Alexander, A. (2008). Gender equality in academia: Bad news from the trenches, and some possible solutions. Perspectives on Politics, 6(2), 215–233. doi:10.1017/S1537592708080572
-Morley, L. (2012). The rules of the game: women and the leaderist turn in higher education. In Gender and Education (Vol. 25, Issue 1, pp. 116–131). Informa UK Limited. https://doi.org/10.1080/09540253.2012.740888 
-Morley, L. (2013). The rules of the game: Women and the leaderist turn in higher education. In Gender and Education (Vol. 25, Issue 1, pp. 116–131). Informa Uk Limited, 25(1), 116–131. doi:10.1080/09540253.2012.740888
-Olson, G. M., Zimmerman, A., & Bos, N. (Eds.). (2008). Scientific collaboration on the Internet. Cambridge, MA: MIT Press.
-Pell, A. N. (1996). Fixing the leaky pipeline: Women scientists in academia. Journal of Animal Science, 74(11), 2843–2848.
-Pell, A. N. (1996). Fixing the leaky pipeline: Women scientists in academia. Journal of Animal Science, 74(11), 2843–2848. doi:10.2527/1996.74112843x
-Rhoten, D., & Pfirman, S. (2007). Women in interdisciplinary science: Exploring preferences and consequences. Research Policy, 36(1), 56–75. doi:10.1016/j.respol.2006.08.001
-Smith-Doerr, L., Alegria, S., & Sacco, T. (2017). How diversity matters in the US science and engineering workforce: A critical review considering integration in teams, fields, and organizational contexts. Engaging Science, Technology, and Society, 3, 139–153.
-Valian, V. (1998). Why so slow? The advancement of women. Cambridge, MA: MIT Press.
-Wuchty, S., Jones, B. F., & Uzzi, B. (2007). The increasing dominance of teams in production of knowledge. Science, 316(5827), 1036–1039. doi:10.1126/science.1136099
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+
+```{r include=FALSE}
+fpackage.check <- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+get_path <- function(x) {
+  paste0(readLines(path.expand("~/path.txt"), warn = FALSE), x)
+}
+```
+
+
+```{r message=FALSE, include=FALSE}
+library(igraph)
+library(ggplot2)
+# df_sel <- df %>% filter(affil1 == "RU" | affil2 == "RU") %>% filter(discipline == "sociology")
+df <- readRDS(get_path("df_all.rds"))
+df_sel <- readRDS(get_path("df_sel.rds"))
+publications <- load(get_path("20230621list_publications_jt.rda"))
+output <- readRDS(get_path("output_new.rds"))
+df_soc <- readRDS(get_path("df_soc_final.rds"))
+df_network <- readRDS(get_path("df_network_new.rds"))
+```
+
+
+# Descriptives Network Statistics
+
+
+This descriptive network analysis aimed to elucidate the underlying structure and connectivity patterns within the faculty collaboration dataset. Key insights revealed the presence of densely connected hubs and increasing density over the two periods.
+
+
+```{r}
+#' Creating object snet1 and snet2, each containing the adjacency matrix for wave 1 
+#' of the network. The diagonal of snet1 was set to zero to remove self-loops. 
+#'  Converting the snet1/snet2 adjacency matrix to an igraph graph object called snet2_g/snet1_g
+snet1 <- df_network[[1]]
+diag(snet1) <- 0
+snet1_g <- igraph::graph_from_adjacency_matrix(snet1, mode = c("undirected"))
+
+
+snet2 <- df_network[[2]]  
+diag(snet2) <- 0
+snet2_g <- igraph::graph_from_adjacency_matrix(snet2, mode = c("undirected"))
+```
+
+
+## Network Visualization
+
+
+Mapping node size to degree centrality highlights well-connected members, whereas node color based on betweenness centrality spotlights potential brokers occupying strategically advantageous bridging positions.
+
+
+These visualizations provide an intuitive overview of network topology and dynamics. We see increased connectivity from Wave 1 to Wave 2, reflected in more nodes, edges, and higher density in the later time period. Node size and color also reveal specific members occupying topologically important positions.
+
+
+```{r}
+#' Plot the Waves 1 and 2 networks with default vertex size 10 and color skyblue/salmon. Sizing nodes by degree centrality and coloring nodes by betweenness centrality in each network. Density labels are added and snet1_g and snet2_g are plotted with labels.
+plot(snet1_g,
+  vertex.size = 10,
+  vertex.color = "skyblue"
+)
+
+
+plot(snet2_g,
+  vertex.size = 10,
+  vertex.color = "salmon"
+)
+
+
+V(snet1_g)$size <- igraph::degree(snet1_g)
+V(snet2_g)$size <- igraph::degree(snet2_g)
+
+
+V(snet1_g)$color <- igraph::betweenness(snet1_g)
+V(snet2_g)$color <- igraph::betweenness(snet2_g)
+
+
+snet1_label <- paste("Density:", round(edge_density(snet1_g), 2))
+snet2_label <- paste("Density:", round(edge_density(snet2_g), 2))
+```
+
+
+*Figure 1. Wave 1 network visualization*
+
+
+```{r}
+plot(snet1_g, main = snet1_label)
+```
+
+
+*Figure 2. Wave 2 network visualization*
+
+
+```{r}
+plot(snet2_g, main = snet2_label)
+```
+
+
+## Centrality Metrics
+While visual inspection provides intuitive insights, quantitative network metrics allow for a more rigorous characterization of the importance of individual nodes. Key centrality measures were calculated using the following igraph functions.
+
+
+Degree: Number of neighbors
+Strength: Summed tie weights
+Betweenness: Frequency in shortest paths
+Closeness: Inverse of farness to others
+Eigenvector: Connections to other central nodes
+
+
+Each metric provides a complementary perspective on the structural prominence of the nodes.
+The distributions of the centrality values are shown through histograms for waves 1 and 2 (Figures 3 and 4). The degree and strength exhibited the most skewed, heavy-tailed distributions, indicative of a few hubs alongside many peripheral nodes. The other metrics followed a uniform distribution. 
+
+
+```{r}
+#' Calculation of degree, strength, betweenness, closeness, and eigenvector centrality for snet1_g and snet2_g. Centrality measures are combined into data frames df1 and df2 for snet1_g and snet2_g. Removing nonfinite values from df1 and df2. Melt df1 and df2 into a long format as df1_m and df2_m.
+
+
+(deg1 <- degree(snet1_g))
+(str1 <- strength(snet1_g))
+(btw1 <- betweenness(snet1_g))
+(cc1 <- closeness(snet1_g, normalized = TRUE))
+(ec1 <- eigen_centrality(snet1_g)$vector)
+
+
+(deg2 <- degree(snet2_g))
+(str2 <- strength(snet2_g))
+(btw2 <- betweenness(snet2_g))
+(cc2 <- closeness(snet2_g, normalized = TRUE))
+(ec2 <- eigen_centrality(snet2_g)$vector)
+
+
+df1 <- data.frame(deg1, str1, btw1, cc1, ec1)
+df2 <- data.frame(deg2, str2, btw2, cc2, ec2)
+
+
+df1 <- data.frame(deg1, str1, btw1, cc1, ec1)
+df2 <- data.frame(deg2, str2, btw2, cc2, ec2)
+
+
+df1_m <- reshape2::melt(df1, measure.vars = names(df1))
+df2_m <- reshape2::melt(df2, measure.vars = names(df2))
+```
+
+
+The degree and strength show highly skewed distributions, with most nodes having low values and a few hubs having very high values. This indicates inequality in the direct connections.
+
+
+Betweenness also exhibited some skewness, with a few critical bridging nodes. Most nodes fall infrequently on the shortest paths.
+
+
+Closeness and eigenvectors follow more uniform distributions, suggesting less inequality in reach and influence propagation.
+
+
+The higher maximum degree and strength in `snet2_g` shows the emergence of better connected hubs over time.
+
+
+Eigenvector centrality deemphasizes connections to peripheral nodes, highlighting connections between influential nodes.
+
+
+In summary, the centrality distributions provide complementary metrics to assess node importance. Degree/strength captures direct connections, betweenness evaluates positional values, and eigenvector incorporates indirect influence. The inequality observed in degree and strength is typical in social networks. Centrality provides a rigorous quantification of node prominence.
+
+
+
+
+
+
+```{r}
+ggplot(df1_m, aes(x = value, fill = variable)) +
+  geom_histogram(alpha = 0.5, position = "identity", bins = 30)
+```
+
+*Figure 3. Wave 1 centrality metric distributions.*
+
+
+```{r}
+ggplot(df2_m, aes(x = value, fill = variable)) +
+  geom_histogram(alpha = 0.5, position = "identity", bins = 30)
+```
+
+*Figure 4. Wave 2 centrality metric distributions.*
+
+Nodes with a high degree of strength had abundant direct collaborators. High betweenness nodes bridge otherwise disconnected groups. Closeness signifies the reach and efficiency of the information diffusion. Finally, the eigenvector centrality accounts for a node's connections with other influential members.
+
+
+
+
+```{r}
+#' Create faceted histogram plots for centrality measures
+ggplot(df1_m, aes(x = value)) +
+  geom_histogram(alpha = 0.5, bins = 30) +
+  facet_wrap(~variable, scales = "free")
+
+
+ggplot(df2_m, aes(x = value)) + 
+  geom_histogram(alpha = 0.5, bins = 30) +
+  facet_wrap(~variable, scales = "free")
+```
+
+
+
+
+## Degree Distribution
+
+
+The degree distribution provides the probability of nodes having a certain number of connections.
+
+
+```{r}
+#' Calculating the degree distributions for snet1_g and snet2_g. Creating data frames df1 and df2 from degree distributions. Histograms of df1 and df2 degree distributions. 
+
+
+(sdegree <- igraph::degree(snet1_g))
+(sdegree2 <- igraph::degree(snet2_g))
+
+
+df1 <- data.frame(degree = sdegree)
+df2 <- data.frame(degree = sdegree2)
+```
+
+
+
+
+The degree distributions show the probability of nodes having a certain number of connections in the `snet1_g` and `snet2_g` networks. Some key points:
+
+
+- Degree distributions have long right-skewed tails. This indicates the presence of high-degree hub nodes with many connections.
+
+
+However, most nodes had low degree values near the start of the distributions. This indicates that most nodes have only a few connections. 
+
+
+- Comparing the two distributions, `snet2_g` has more nodes with higher degree values than `snet1_g.` This aligns with it being a more dense network.
+
+
+- The maximum degree is 17 in `snet1_g` and 18 in `snet2_g,’ indicating the hub nodes gained more connections between the two networks.
+
+
+In summary, heavy-tailed degree distributions are typical for real-world networks. The coexistence of hubs and peripheral nodes implies inequality in connectedness. `Snet2_g` shows greater connectivity of hubs over time. 
+
+
+The degree distributions provide a probabilistic summary of node connectivity and evidence for the emergence of well-connected hubs as networks evolve. They complemented the visualizations and metrics used to analyze the topology.
+
+
+
+
+*Figure 5. Wave 1 degree distribution*
+
+
+```{r}
+ggplot(df1, aes(x = degree)) +
+  geom_histogram(bins = 30, color = "darkblue", fill = "lightblue") +
+  ggtitle("Degree Distribution of Network 1")
+```
+
+
+
+
+*Figure 6. Wave 2 degree distribution*
+
+
+```{r}
+ggplot(df2, aes(x = degree)) +
+  geom_histogram(bins = 30, color = "darkred", fill = "pink") +
+  ggtitle("Degree Distribution of Network 2")
+```
+
+
+
+
+The long tails indicate the presence of well-connected hubs along with a majority of nodes with a low degree. A comparison of the distributions shows an increase in high-degree nodes from Wave 1 to Wave 2, reflecting the growth in connectivity over time.
+
+
+
+
+## Local Structure
+
+
+The triad census revealed signature local clustering patterns. The predominance of open and closed triads indicated a strong collaborative closure impulse within the network.
+
+
+A greater frequency of closed triads in Wave 2 signifies increased clustering arising from a higher density over time.
+
+
+```{r warning=FALSE}
+#' Calculating dyad census, triad census, edge density and transitivity
+igraph::dyad.census(snet1_g)  
+igraph::triad.census(snet1_g)
+igraph::edge_density(snet1_g)
+igraph::dyad.census(snet2_g)
+igraph::triad.census(snet2_g) 
+igraph::edge_density(snet2_g)
+```
+
+
+Comparing `snet1_g` and `snet2_g`:
+
+
+- `snet2_g` has more mutual dyads than `snet1_g` (53 vs 33) indicating it is more dense.
+
+
+- `snet2_g` has more closed triads than `snet1_g` (1150 vs 358) indicating more clustering.
+
+
+- `snet2_g` has a higher edge density than `snet1_g` (0.107 vs 0.077) also indicating it is more dense overall.
+
+
+So `snet2_g` appears to be a more interconnected, dense network with more clustering than `snet1_g.` The triad and dyad census provide quantitative evidence to complement visual analysis. The code calculates key metrics to characterize network topologies.
+
+
+
+
+
+
+#### Transitivity
+
+
+The transitivity values quantify the level of clustering in the two network objects, snet1_g and snet2_g. 
+
+
+```{r}
+igraph::transitivity(snet1_g)
+igraph::transitivity(snet2_g)
+```
+
+
+Specifically:
+
+
+- `snet1_g` has a transitivity score of 0.062. This is considered moderate transitivity. It means that if node A is connected to node B, and node B is connected node C, then there is a 0.062 probability that node A is also connected to node C. 
+
+
+- `snet2_g` has a higher transitivity score of 0.132. This indicates nodes are more likely to form clustered triadic closures compared to `snet1_g.` There is a 0.132 probability that two neighbors of a node are connected.
+
+
+The higher transitivity in `snet2_g` aligns with the triad census results, which show more closed triads. This reflects the greater clustering and interconnectedness between neighbors in the `snet2_g` network. 
+
+
+In summary, the transitivity metric quantitatively demonstrates the increased clustering from `snet1_g` to `snet2_g,’ complementing the visual analysis and triad census. These values reflect the tendency to form tightly knit groups and a triadic closure. Transitivity is a key metric for characterizing the network cohesion.
+
+
+
+
+
+
+### Gender differences in h-index
+
+
+```{r}
+#' Tabulating position variable, creating binary PhD indicator, 
+# tabulating indicator and converting to a factor in df_soc. 
+table(df_soc$position)
+df_soc$is_phd <- as.numeric(df_soc$position == "phd")
+table(df_soc$is_phd)
+df_soc$is_phd <- as.factor(df_soc$is_phd)
+```
+
+
+```{r}
+#' Estimating regression of h-index on citations, 
+#' with PhD and gender predictors, 
+#, and interaction effects.
+fit1 <- lm(gs_h_index ~ gs_total_cites, data = df_soc)
+fit2 <- lm(gs_h_index ~ gs_total_cites + is_phd + gender, data = df_soc)
+fit3 <- lm(gs_h_index ~ (gs_total_cites + is_phd) * gender, data = df_soc)
+fits <- list(fit1, fit2, fit3)
+```
+
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+lm_table <- stargazer::stargazer(fits, type = "text")
+#cat(paste0(capture.output(lm_table), collapse = "\n"))
+```
+
+
+
+
+The regression analysis output shows the results of fitting the three regression models to predict the h-index based on different predictors. The key elements are:
+
+
+Model 1: 
+- Only uses total citations to predict h-index
+- Total citations is highly statistically significant (p<0.001)
+- R-squared of 0.895 indicates total citations explains 89.5% of variance in h-index
+
+
+Model 2: 
+- Adds PhD status and gender as additional predictors 
+- Total citations remains highly significant
+- Being a PhD is associated with lower h-index 
+- Being male is associated with higher h-index
+- R-squared increases to 0.937, indicating additional 9.2% of variance explained by PhD status and gender
+
+
+Model 3:
+- Tests interaction effects between total citations, PhD status, and gender
+- Main effect of total citations now depends on gender 
+- Decrease in h-index for PhDs now depends on gender
+- Interaction effects are statistically significant
+- R-squared further increases to 0.953, additional variance explained by interactions
+
+
+Here, we can conclude from the regression analysis that:
+
+
+The analysis uses data on faculty in a sociology department, including their h-index, total citations, PhD status, gender, and position. 
+
+
+- The very high R-squared values indicate that the h-index is strongly predicted by the factors in the models: citations, gender, and PhD status. This makes sense given that the h-index aims to measure academic impact and citations are directly related.
+
+
+- The negative main effect of PhD status may indicate that junior non-tenure-track faculty (e.g., postdocs) in this department tend to have a lower h-index than tenured/tenure-track faculty. 
+
+
+However, the negative interaction effect between PhD status and gender suggests that this PhD effect is stronger for women than men; thus, female postdocs/non-TT faculty tend to have particularly low h-indices compared to male colleagues. 
+
+
+- The positive main effect for being male and negative interaction with citations indicates that gender differences in the h-index persist even when accounting for citations. Males had a higher h-index than females with similar citations.
+
+
+In summary, the regression reinforces the descriptive findings that gender inequalities exist in the h-index and the academic impact of sociology faculty, even after controlling for other factors such as citations. The interaction effects highlight that these gender inequalities may be particularly pronounced for junior PhD women.
+
+
+
+
+
+
+
+
+This boxplot shows the distribution of h-index values segmented by sex. The plot reveals that males have higher median and upper quartile h-index values than females in the dataset. This finding suggests potential gender differences in the h-index.
+
+
+
+
+```{r}
+#' Create boxplot of h-index by gender using base R graphics
+boxplot(gs_h_index ~ gender, data = df_soc, main = "H-Index by Gender")
+```
+
+
+
+
+
+
+The scatterplot shows the relationship between the h-index and total citations for each individual. There is a clear positive correlation, with the h-index increasing as the total citations increase. This is expected because the h-index reflects citations. Points are colored by sex, revealing the cluster of higher h-index males compared to females.
+
+
+```{r}
+#' Scatterplot of h-index vs total citations
+plot(df_soc$gs_h_index, df_soc$gs_total_cites,
+  xlab = "H-Index", ylab = "Total Citations",
+  main = "H-Index vs Total Citations"
+)
+```
+
+
+
+
+
+
+Another view of the h-index distribution by sex was created using ggplot2. The boxplot is color-filled by gender category, again showing the tendency for a higher h-index among males compared to females in the dataset. The minimal theme provides a clearer visualization than the base R boxplot.
+
+
+
+
+```{r}
+#' Create boxplot of h-index by gender using ggplot2
+ggplot(df_soc, aes(x = gender, y = gs_h_index, fill = gender)) +
+  geom_boxplot(outlier.shape = NA, na.rm = TRUE) +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "H-Index by Gender") +
+  theme_minimal()
+```
+
+
+# Appendix
+
+
+```{r}
+lapply(fits, summary)
+```
+
+

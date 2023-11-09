@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
+
+        <meta name="author" content="by: Siard van den Bosch" />
+    
+    
+    <title>Lab journal</title>
+
+        <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <script src="site_libs/navigation-1.1/codefolding.js"></script>
+        <script src="site_libs/navigation-1.1/FileSaver.min.js"></script>
+        <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/clean-0.1/clean.css" rel="stylesheet" />
+        <script src="site_libs/clean-0.1/clean.js"></script>
+        <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+        <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+        <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+        <script src="site_libs/clipboard-1.7.1/clipboard.min.js"></script>
+        <link href="site_libs/primer-tooltips-1.4.0/build.css" rel="stylesheet" />
+        <link href="site_libs/klippy-0.0.0.9500/css/klippy.min.css" rel="stylesheet" />
+        <script src="site_libs/klippy-0.0.0.9500/js/klippy.min.js"></script>
+        <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+        <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+    
+    
+    
+        <link rel="stylesheet" href="tweaks.css" type="text/css" />
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
+
+    <!-- code folding -->
+        <script>
+      $(document).ready(function () {
+	  	  window.initializeSourceEmbed("index.Rmd");
+	  	  	  window.initializeCodeFolding("show" === "show");
+	        });
+    </script>
+    
+    <!-- code download -->
+        <style>
+      #rmd-source-code {
+	  display: none;
+      }
+    </style>
+    
+    <!-- tabsets dropdown -->
+
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
+
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
+
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
+
+<body class="preload">
+
+      <!-- html_clean start -->
+   <div class="container-fluid main-container">
+     <div class="row">
+       <div class="col-md-10">
+   	
+            
+      <div class="btn-group pull-right">
+     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+     <ul class="dropdown-menu" style="min-width: 50px;">
+	    	    <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+	    <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+	    	    <li role="separator" class="divider"></li>
+	    	    	    	    <li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+	         </ul>
+   </div>
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">
+          <span class="fa fa-home"></span>
+           
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Journal
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="question.html">Research Question</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="zacharys.html">Descriptive Statistics</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="webscraping.html">Web Scraping</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="visualization.html">Network Visualization</a>
+              </li>
+              <li>
+                <a href="igraph_demo.html">Using igraph</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="rsiena_example.html">RSiena models</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 6</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">SNA in Practice</li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 7</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">RSiena Advanced</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction_v1.html">Introduction</a>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Theory</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="theory_v2.html">Last version</a>
+              </li>
+              <li>
+                <a href="theory_v1.html">Older version</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Methods</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="predicting_gender.html">Gender From Names</a>
+              </li>
+              <li>
+                <a href="assembling.html">Data Collection and Preparation</a>
+              </li>
+              <li>
+                <a href="rsiena_analysis_method.html">RSiena Analysis Method</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="descriptive.html">Descriptive (draft)</a>
+              </li>
+              <li>
+                <a href="calculate_metrics_report.html">Calculate Metrics Report</a>
+              </li>
+              <li>
+                <a href="rsiena_example.html">RSiena (example)</a>
+              </li>
+              <li>
+                <a href="analysis_draft.html">Analysis (draft)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-header">Results</li>
+          <li class="dropdown-header">Discussion</li>
+          <li>
+            <a href="to_do_list.html">To-Do List</a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li>
+            <a href="theory.html">Theory</a>
+          </li>
+          <li>
+            <a href="data_methods.html">Data &amp; Methods</a>
+          </li>
+          <li>
+            <a href="descriptives.html">Descriptives</a>
+          </li>
+          <li>
+            <a href="analysis.html">Analysis</a>
+          </li>
+          <li>
+            <a href="results.html">Results</a>
+          </li>
+          <li>
+            <a href="discussion.html">Discussion</a>
+          </li>
+          <li>
+            <a href="conclusion.html">Conclusion</a>
+          </li>
+          <li>
+            <a href="appendix.html">Appendix</a>
+          </li>
+        </ul>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+        <a href="https://github.com/siardv/labjournal">
+          <span class="fab fa-github"></span>
+           
+        </a>
+      </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Lab journal</h1>
+      
+        
+
+      <!-- html_clean authors -->
+         <h4 class="author"><em>by: Siard van den Bosch</em></h4>
+            
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="content">
+<script>
+  addClassKlippyTo("pre.r, pre.markdown");
+  addKlippy('right', 'top', 'auto', '1', 'Copy code', 'Copied!');
+</script>
+<hr />
+<div class="columns">
+<div class="column" style="width:100%;">
+<div id="my-lab-journal" class="section level1">
+<h1>My Lab Journal</h1>
+<p>Last compiled on November, 2023</p>
+<ul>
+<li>Week 1
+<ul>
+<li>Formulated research question on how gender composition of academic
+departments relates to gender homophily in research collaborations</li>
+<li>Conducted literature review on homophily, gender inequality in
+academia, social networks</li>
+<li>Identified relevant theories such as tokenism that may explain
+greater gender divides in skewed settings</li>
+</ul></li>
+<li>Week 2
+<ul>
+<li>Collected data on faculty names, gender, titles, and contact info by
+webscraping department website<br />
+</li>
+<li>Queried Crossref API to retrieve metadata on faculty
+publications</li>
+<li>Parsed HTML table into dataframe and cleaned column names</li>
+<li>Standardized faculty names and predicted gender using R
+packages</li>
+<li>Difficulty handling API query errors for some author names</li>
+</ul></li>
+<li>Week 3
+<ul>
+<li>Filtered publications data to only journal articles</li>
+<li>Completed partial dates and formatted into standard structure</li>
+<li>Combined multiple affiliation columns into single column</li>
+<li>Removed missing data rows and columns</li>
+<li>Manipulated data into analysis format with author name, gender,
+affiliations etc.</li>
+<li>Challenges unnesting inconsistent author column lists</li>
+</ul></li>
+<li>Week 4
+<ul>
+<li>Generated node and edge data frames for the co-authorship
+network</li>
+<li>Calculated basic network metrics with igraph to explore
+topology</li>
+<li>Visualized network statically using igraph’s plot function</li>
+<li>Started dynamic network modeling with RSiena but faced specification
+issues</li>
+<li>Goal is to model network evolution incorporating structural effects
+and attributes</li>
+</ul></li>
+<li>Week 5
+<ul>
+<li>Refined RSiena model specifications based on previous
+diagnostics</li>
+<li>Included key structural effects and covariates like gender and
+rank</li>
+<li>Ran models across time periods until reaching convergence</li>
+<li>Assessed model fit using goodness-of-fit diagnostics, resulted in
+error: need to fix</li>
+<li>Will need to evaluate additional fit statistics before
+finalizing</li>
+<li>Began drafting results section but too early to share due to current
+model issues</li>
+<li>Next steps are finalizing model specification, assessing effects,
+and interpreting implications</li>
+</ul></li>
+<li>Week 6
+<ul>
+<li>Added new section summarizing key concepts from Chapter 7 on common
+SNA methods like exponential random graph models and stochastic
+actor-oriented models. This provides useful background on relevant
+techniques.</li>
+<li>Restructured paper layout into new sections - Introduction, Data
+Collection and Preparation, Research Design, Data, and Measures,
+Analysis Strategy, and Conclusion. This improves flow and
+organization.</li>
+<li>Formatting the collaboration network data was an unexpected
+challenge. The RDS file format required custom code to convert into edge
+lists and adjacency matrices compatible with RSiena and ergm.
+Significant troubleshooting needed for proper data import.</li>
+<li>Literature review expanded with more context on selecting
+appropriate SNA methods for research questions. However, balancing depth
+versus brevity remains tricky.</li>
+<li>New section outlining analysis strategy provides clearer explanation
+of planned modeling approach using RSiena and ergm methods.</li>
+<li>Added placeholder content to results and discussion sections for
+expanding later.</li>
+<li>Numerous small text edits and rewording throughout for clarity and
+consistency. Careful proofreading is essential.</li>
+<li>Overall, major enhancements to literature review, structure, data
+preparation in latest version compared to previous draft. Still need to
+finalize analyses, results and discussion.</li>
+<li>Next steps are completing network models using prepared data, and
+interpreting results. Also expanding limitations, future directions in
+discussion section.</li>
+<li>Despite challenges, revisions have greatly improved paper
+organization, flow and contextual framing. The work has progressed
+significantly.</li>
+</ul></li>
+<li>Week 7</li>
+<li>Updated Introduction.Rmd file:
+<ul>
+<li>Changed output format</li>
+<li>Added more specifics on social network analysis and the value of
+examining co-authorship networks</li>
+<li>Expanded on gender disparities found in recent studies</li>
+<li>Added 2 additional research questions on gender differences in
+betweenness centrality and ego-network density</li>
+</ul></li>
+<li>Updated site YAML file:
+<ul>
+<li>Added new menu items linking to theory and methods pages</li>
+<li>Linked new pages like gender prediction and RSiena analysis
+method</li>
+<li>Updated titles and order of existing pages</li>
+</ul></li>
+<li>Added new draft analysis page demonstrating sample RSiena network
+model code and interpretation <br></li>
+</ul>
+<hr />
+</div>
+</div><div class="column" style="width:10%;">
+
+</div>
+</div>
+<hr />
+</div>
+
+   
+      <div id="rmd-source-code">LS0tCnRpdGxlOiAiTGFiIGpvdXJuYWwiCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmNzbDogYXBhLmNzbAotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmtuaXRyOjpvcHRzX2NodW5rJHNldChjb21tZW50ID0gTkEpCmBgYAoKCmBgYHtyLCBlY2hvPUZBTFNFLCB3YXJuaW5nPUZBTFNFLCByZXN1bHRzPSdoaWRlJ30KbGlicmFyeShrbml0cikKCmtuaXRyOjpvcHRzX2NodW5rJHNldChlY2hvID0gVFJVRSkKb3B0c19jaHVuayRzZXQodGlkeS5vcHRzPWxpc3Qod2lkdGguY3V0b2ZmPTEwMCksdGlkeT1UUlVFLCB3YXJuaW5nID0gRkFMU0UsIG1lc3NhZ2UgPSBGQUxTRSxjb21tZW50ID0gIiM+IiwgY2FjaGU9VFJVRSwgY2xhc3Muc291cmNlPWMoIlJlc2VhcmNoIHF1ZXN0aW9uIiksIGNsYXNzLm91dHB1dD1jKCJ0ZXN0MiIpKQpvcHRpb25zKHdpZHRoID0gMTAwKQpyZ2w6OnNldHVwS25pdHIoKQoKCgpjb2xvcml6ZSA8LSBmdW5jdGlvbih4LCBjb2xvcikge3NwcmludGYoIjxzcGFuIHN0eWxlPSdjb2xvcjogJXM7Jz4lczwvc3Bhbj4iLCBjb2xvciwgeCkgfQoKYGBgCgpgYGB7ciAsIGVjaG89RkFMU0UsIGluY2x1ZGU9VFJVRX0Ka2xpcHB5OjprbGlwcHkocG9zaXRpb24gPSBjKCd0b3AnLCAncmlnaHQnKSkKI2tsaXBweTo6a2xpcHB5KGNvbG9yID0gJ2RhcmtyZWQnKQoja2xpcHB5OjprbGlwcHkodG9vbHRpcF9tZXNzYWdlID0gJ0NsaWNrIHRvIGNvcHknLCB0b29sdGlwX3N1Y2Nlc3MgPSAnRG9uZScpCmBgYAoKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgo6OjogY29sdW1ucwo6Ojogey5jb2x1bW4gd2lkdGg9IjEwMCUifQojIE15IExhYiBKb3VybmFsCgpMYXN0IGNvbXBpbGVkIG9uIGByIGZvcm1hdChTeXMudGltZSgpLCAnJUIsICVZJylgCgotICAgV2VlayAxCiAgICAtICAgRm9ybXVsYXRlZCByZXNlYXJjaCBxdWVzdGlvbiBvbiBob3cgZ2VuZGVyIGNvbXBvc2l0aW9uIG9mIGFjYWRlbWljIGRlcGFydG1lbnRzIHJlbGF0ZXMgdG8gZ2VuZGVyIGhvbW9waGlseSBpbiByZXNlYXJjaCBjb2xsYWJvcmF0aW9ucwogICAgLSAgIENvbmR1Y3RlZCBsaXRlcmF0dXJlIHJldmlldyBvbiBob21vcGhpbHksIGdlbmRlciBpbmVxdWFsaXR5IGluIGFjYWRlbWlhLCBzb2NpYWwgbmV0d29ya3MKICAgIC0gICBJZGVudGlmaWVkIHJlbGV2YW50IHRoZW9yaWVzIHN1Y2ggYXMgdG9rZW5pc20gdGhhdCBtYXkgZXhwbGFpbiBncmVhdGVyIGdlbmRlciBkaXZpZGVzIGluIHNrZXdlZCBzZXR0aW5ncwotICAgV2VlayAyCiAgICAtICAgQ29sbGVjdGVkIGRhdGEgb24gZmFjdWx0eSBuYW1lcywgZ2VuZGVyLCB0aXRsZXMsIGFuZCBjb250YWN0IGluZm8gYnkgd2Vic2NyYXBpbmcgZGVwYXJ0bWVudCB3ZWJzaXRlXAogICAgLSAgIFF1ZXJpZWQgQ3Jvc3NyZWYgQVBJIHRvIHJldHJpZXZlIG1ldGFkYXRhIG9uIGZhY3VsdHkgcHVibGljYXRpb25zCiAgICAtICAgUGFyc2VkIEhUTUwgdGFibGUgaW50byBkYXRhZnJhbWUgYW5kIGNsZWFuZWQgY29sdW1uIG5hbWVzCiAgICAtICAgU3RhbmRhcmRpemVkIGZhY3VsdHkgbmFtZXMgYW5kIHByZWRpY3RlZCBnZW5kZXIgdXNpbmcgUiBwYWNrYWdlcwogICAgLSAgIERpZmZpY3VsdHkgaGFuZGxpbmcgQVBJIHF1ZXJ5IGVycm9ycyBmb3Igc29tZSBhdXRob3IgbmFtZXMKLSAgIFdlZWsgMwogICAgLSAgIEZpbHRlcmVkIHB1YmxpY2F0aW9ucyBkYXRhIHRvIG9ubHkgam91cm5hbCBhcnRpY2xlcwogICAgLSAgIENvbXBsZXRlZCBwYXJ0aWFsIGRhdGVzIGFuZCBmb3JtYXR0ZWQgaW50byBzdGFuZGFyZCBzdHJ1Y3R1cmUKICAgIC0gICBDb21iaW5lZCBtdWx0aXBsZSBhZmZpbGlhdGlvbiBjb2x1bW5zIGludG8gc2luZ2xlIGNvbHVtbgogICAgLSAgIFJlbW92ZWQgbWlzc2luZyBkYXRhIHJvd3MgYW5kIGNvbHVtbnMKICAgIC0gICBNYW5pcHVsYXRlZCBkYXRhIGludG8gYW5hbHlzaXMgZm9ybWF0IHdpdGggYXV0aG9yIG5hbWUsIGdlbmRlciwgYWZmaWxpYXRpb25zIGV0Yy4KICAgIC0gICBDaGFsbGVuZ2VzIHVubmVzdGluZyBpbmNvbnNpc3RlbnQgYXV0aG9yIGNvbHVtbiBsaXN0cwotICAgV2VlayA0CiAgICAtICAgR2VuZXJhdGVkIG5vZGUgYW5kIGVkZ2UgZGF0YSBmcmFtZXMgZm9yIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsKICAgIC0gICBDYWxjdWxhdGVkIGJhc2ljIG5ldHdvcmsgbWV0cmljcyB3aXRoIGlncmFwaCB0byBleHBsb3JlIHRvcG9sb2d5CiAgICAtICAgVmlzdWFsaXplZCBuZXR3b3JrIHN0YXRpY2FsbHkgdXNpbmcgaWdyYXBoJ3MgcGxvdCBmdW5jdGlvbgogICAgLSAgIFN0YXJ0ZWQgZHluYW1pYyBuZXR3b3JrIG1vZGVsaW5nIHdpdGggUlNpZW5hIGJ1dCBmYWNlZCBzcGVjaWZpY2F0aW9uIGlzc3VlcwogICAgLSAgIEdvYWwgaXMgdG8gbW9kZWwgbmV0d29yayBldm9sdXRpb24gaW5jb3Jwb3JhdGluZyBzdHJ1Y3R1cmFsIGVmZmVjdHMgYW5kIGF0dHJpYnV0ZXMKLSAgIFdlZWsgNQogICAgLSAgIFJlZmluZWQgUlNpZW5hIG1vZGVsIHNwZWNpZmljYXRpb25zIGJhc2VkIG9uIHByZXZpb3VzIGRpYWdub3N0aWNzCiAgICAtICAgSW5jbHVkZWQga2V5IHN0cnVjdHVyYWwgZWZmZWN0cyBhbmQgY292YXJpYXRlcyBsaWtlIGdlbmRlciBhbmQgcmFuawogICAgLSAgIFJhbiBtb2RlbHMgYWNyb3NzIHRpbWUgcGVyaW9kcyB1bnRpbCByZWFjaGluZyBjb252ZXJnZW5jZQogICAgLSAgIEFzc2Vzc2VkIG1vZGVsIGZpdCB1c2luZyBnb29kbmVzcy1vZi1maXQgZGlhZ25vc3RpY3MsIHJlc3VsdGVkIGluIGVycm9yOiBuZWVkIHRvIGZpeAogICAgLSAgIFdpbGwgbmVlZCB0byBldmFsdWF0ZSBhZGRpdGlvbmFsIGZpdCBzdGF0aXN0aWNzIGJlZm9yZSBmaW5hbGl6aW5nCiAgICAtICAgQmVnYW4gZHJhZnRpbmcgcmVzdWx0cyBzZWN0aW9uIGJ1dCB0b28gZWFybHkgdG8gc2hhcmUgZHVlIHRvIGN1cnJlbnQgbW9kZWwgaXNzdWVzCiAgICAtICAgTmV4dCBzdGVwcyBhcmUgZmluYWxpemluZyBtb2RlbCBzcGVjaWZpY2F0aW9uLCBhc3Nlc3NpbmcgZWZmZWN0cywgYW5kIGludGVycHJldGluZyBpbXBsaWNhdGlvbnMKLSAgIFdlZWsgNgogICAgLSAgIEFkZGVkIG5ldyBzZWN0aW9uIHN1bW1hcml6aW5nIGtleSBjb25jZXB0cyBmcm9tIENoYXB0ZXIgNyBvbiBjb21tb24gU05BIG1ldGhvZHMgbGlrZSBleHBvbmVudGlhbCByYW5kb20gZ3JhcGggbW9kZWxzIGFuZCBzdG9jaGFzdGljIGFjdG9yLW9yaWVudGVkIG1vZGVscy4gVGhpcyBwcm92aWRlcyB1c2VmdWwgYmFja2dyb3VuZCBvbiByZWxldmFudCB0ZWNobmlxdWVzLgogICAgLSBSZXN0cnVjdHVyZWQgcGFwZXIgbGF5b3V0IGludG8gbmV3IHNlY3Rpb25zIC0gSW50cm9kdWN0aW9uLCBEYXRhIENvbGxlY3Rpb24gYW5kIFByZXBhcmF0aW9uLCBSZXNlYXJjaCBEZXNpZ24sIERhdGEsIGFuZCBNZWFzdXJlcywgQW5hbHlzaXMgU3RyYXRlZ3ksIGFuZCBDb25jbHVzaW9uLiBUaGlzIGltcHJvdmVzIGZsb3cgYW5kIG9yZ2FuaXphdGlvbi4KICAgIC0gRm9ybWF0dGluZyB0aGUgY29sbGFib3JhdGlvbiBuZXR3b3JrIGRhdGEgd2FzIGFuIHVuZXhwZWN0ZWQgY2hhbGxlbmdlLiBUaGUgUkRTIGZpbGUgZm9ybWF0IHJlcXVpcmVkIGN1c3RvbSBjb2RlIHRvIGNvbnZlcnQgaW50byBlZGdlIGxpc3RzIGFuZCBhZGphY2VuY3kgbWF0cmljZXMgY29tcGF0aWJsZSB3aXRoIFJTaWVuYSBhbmQgZXJnbS4gU2lnbmlmaWNhbnQgdHJvdWJsZXNob290aW5nIG5lZWRlZCBmb3IgcHJvcGVyIGRhdGEgaW1wb3J0LgogICAgLSBMaXRlcmF0dXJlIHJldmlldyBleHBhbmRlZCB3aXRoIG1vcmUgY29udGV4dCBvbiBzZWxlY3RpbmcgYXBwcm9wcmlhdGUgU05BIG1ldGhvZHMgZm9yIHJlc2VhcmNoIHF1ZXN0aW9ucy4gSG93ZXZlciwgYmFsYW5jaW5nIGRlcHRoIHZlcnN1cyBicmV2aXR5IHJlbWFpbnMgdHJpY2t5LgogICAgLSBOZXcgc2VjdGlvbiBvdXRsaW5pbmcgYW5hbHlzaXMgc3RyYXRlZ3kgcHJvdmlkZXMgY2xlYXJlciBleHBsYW5hdGlvbiBvZiBwbGFubmVkIG1vZGVsaW5nIGFwcHJvYWNoIHVzaW5nIFJTaWVuYSBhbmQgZXJnbSBtZXRob2RzLgogICAgLSBBZGRlZCBwbGFjZWhvbGRlciBjb250ZW50IHRvIHJlc3VsdHMgYW5kIGRpc2N1c3Npb24gc2VjdGlvbnMgZm9yIGV4cGFuZGluZyBsYXRlci4KICAgIC0gTnVtZXJvdXMgc21hbGwgdGV4dCBlZGl0cyBhbmQgcmV3b3JkaW5nIHRocm91Z2hvdXQgZm9yIGNsYXJpdHkgYW5kIGNvbnNpc3RlbmN5LiBDYXJlZnVsIHByb29mcmVhZGluZyBpcyBlc3NlbnRpYWwuCiAgICAtIE92ZXJhbGwsIG1ham9yIGVuaGFuY2VtZW50cyB0byBsaXRlcmF0dXJlIHJldmlldywgc3RydWN0dXJlLCBkYXRhIHByZXBhcmF0aW9uIGluIGxhdGVzdCB2ZXJzaW9uIGNvbXBhcmVkIHRvIHByZXZpb3VzIGRyYWZ0LiBTdGlsbCBuZWVkIHRvIGZpbmFsaXplIGFuYWx5c2VzLCByZXN1bHRzIGFuZCBkaXNjdXNzaW9uLgogICAgLSBOZXh0IHN0ZXBzIGFyZSBjb21wbGV0aW5nIG5ldHdvcmsgbW9kZWxzIHVzaW5nIHByZXBhcmVkIGRhdGEsIGFuZCBpbnRlcnByZXRpbmcgcmVzdWx0cy4gQWxzbyBleHBhbmRpbmcgbGltaXRhdGlvbnMsIGZ1dHVyZSBkaXJlY3Rpb25zIGluIGRpc2N1c3Npb24gc2VjdGlvbi4KICAgIC0gRGVzcGl0ZSBjaGFsbGVuZ2VzLCByZXZpc2lvbnMgaGF2ZSBncmVhdGx5IGltcHJvdmVkIHBhcGVyIG9yZ2FuaXphdGlvbiwgZmxvdyBhbmQgY29udGV4dHVhbCBmcmFtaW5nLiBUaGUgd29yayBoYXMgcHJvZ3Jlc3NlZCBzaWduaWZpY2FudGx5LgogIAogIC0gV2VlayA3Ci0gVXBkYXRlZCBJbnRyb2R1Y3Rpb24uUm1kIGZpbGU6IAogICAgLSBDaGFuZ2VkIG91dHB1dCBmb3JtYXQKICAgIC0gQWRkZWQgbW9yZSBzcGVjaWZpY3Mgb24gc29jaWFsIG5ldHdvcmsgYW5hbHlzaXMgYW5kIHRoZSB2YWx1ZSBvZiBleGFtaW5pbmcgY28tYXV0aG9yc2hpcCBuZXR3b3JrcwogICAgLSBFeHBhbmRlZCBvbiBnZW5kZXIgZGlzcGFyaXRpZXMgZm91bmQgaW4gcmVjZW50IHN0dWRpZXMKICAgIC0gQWRkZWQgMiBhZGRpdGlvbmFsIHJlc2VhcmNoIHF1ZXN0aW9ucyBvbiBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gYmV0d2Vlbm5lc3MgY2VudHJhbGl0eSBhbmQgZWdvLW5ldHdvcmsgZGVuc2l0eQotIFVwZGF0ZWQgc2l0ZSBZQU1MIGZpbGU6CiAgICAtIEFkZGVkIG5ldyBtZW51IGl0ZW1zIGxpbmtpbmcgdG8gdGhlb3J5IGFuZCBtZXRob2RzIHBhZ2VzCiAgICAtIExpbmtlZCBuZXcgcGFnZXMgbGlrZSBnZW5kZXIgcHJlZGljdGlvbiBhbmQgUlNpZW5hIGFuYWx5c2lzIG1ldGhvZAogICAgLSBVcGRhdGVkIHRpdGxlcyBhbmQgb3JkZXIgb2YgZXhpc3RpbmcgcGFnZXMKLSBBZGRlZCBuZXcgZHJhZnQgYW5hbHlzaXMgcGFnZSBkZW1vbnN0cmF0aW5nIHNhbXBsZSBSU2llbmEgbmV0d29yayBtb2RlbCBjb2RlIGFuZCBpbnRlcnByZXRhdGlvbgo8YnI+CgotLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KOjo6Cgo6Ojogey5jb2x1bW4gd2lkdGg9IjEwJSJ9Cjo6Ogo6OjoKCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQo=</div>
+   
+      </div>
+   <div class="col-md-2">
+        </div>
+   </div>
+   </div>
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 	 	$('#content img').addClass("image-thumb");
+		
+		$('#content img:not(.no-lightbox)').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: '.image-lb',
+	    gallery: {enabled: false },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

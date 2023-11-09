@@ -1,54 +1,1822 @@
----
-title: "Introduction"
-output:
-  html_document: 
-    toc: yes
-    number_sections: false
-    toc_collapse: yes
-    toc_float: yes
-author: "by: Siard van den Bosch"
----
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="generator" content="pandoc" />
 
-# Introduction
-Academic research is predicated on collaboration, enabling scholars to collectively push the boundaries of knowledge in their respective fields. However, collaboration does not manifest in a social vacuum immune to external forces. Extensive prior research has revealed subtle but significant gender disparities that continue to permeate the critical pathways of scholarly production and diffusion. 
+        <meta name="author" content="by: Siard van den Bosch" />
+    
+    
+    <title>Social Network Analysis</title>
 
-While some studies have analyzed these gender differences through contextual lenses, social network analysis provides unique and powerful insights by directly elucidating the underlying relational architecture shaping collaboration in academia. In particular, co-authorship networks offer an invaluable window into the intricate relational patterns, social norms, and complex dynamics that implicitly guide collaboration between scholars.
+        <script src="site_libs/header-attrs-2.25/header-attrs.js"></script>
+        <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="site_libs/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="site_libs/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+        <script src="site_libs/navigation-1.1/tabsets.js"></script>
+        <script src="site_libs/navigation-1.1/codefolding.js"></script>
+        <script src="site_libs/navigation-1.1/FileSaver.min.js"></script>
+        <script src="site_libs/navigation-1.1/sourceembed.js"></script>
+        <link href="site_libs/magnific-popup-1.1.0/magnific-popup.css" rel="stylesheet" />
+        <script src="site_libs/magnific-popup-1.1.0/jquery.magnific-popup.min.js"></script>
+        <link href="site_libs/clean-0.1/clean.css" rel="stylesheet" />
+        <script src="site_libs/clean-0.1/clean.js"></script>
+        <script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+        <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+        <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+        <link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+        <link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+    
+    
+        <style type="text/css">code{white-space: pre;}</style>
+    <style type="text/css">
+      pre > code.sourceCode { white-space: pre; position: relative; }
+      pre > code.sourceCode > span { line-height: 1.25; }
+      pre > code.sourceCode > span:empty { height: 1.2em; }
+      .sourceCode { overflow: visible; }
+      code.sourceCode > span { color: inherit; text-decoration: inherit; }
+      div.sourceCode { margin: 1em 0; }
+      pre.sourceCode { margin: 0; }
+      @media screen {
+      div.sourceCode { overflow: auto; }
+      }
+      @media print {
+      pre > code.sourceCode { white-space: pre-wrap; }
+      pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+      }
+      pre.numberSource code
+        { counter-reset: source-line 0; }
+      pre.numberSource code > span
+        { position: relative; left: -4em; counter-increment: source-line; }
+      pre.numberSource code > span > a:first-child::before
+        { content: counter(source-line);
+          position: relative; left: -1em; text-align: right; vertical-align: baseline;
+          border: none; display: inline-block;
+          -webkit-touch-callout: none; -webkit-user-select: none;
+          -khtml-user-select: none; -moz-user-select: none;
+          -ms-user-select: none; user-select: none;
+          padding: 0 4px; width: 4em;
+          color: #aaaaaa;
+        }
+      pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+      div.sourceCode
+        {   }
+      @media screen {
+      pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+      }
+      code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+      code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+      code span.at { color: #7d9029; } /* Attribute */
+      code span.bn { color: #40a070; } /* BaseN */
+      code span.bu { color: #008000; } /* BuiltIn */
+      code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+      code span.ch { color: #4070a0; } /* Char */
+      code span.cn { color: #880000; } /* Constant */
+      code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+      code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+      code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+      code span.dt { color: #902000; } /* DataType */
+      code span.dv { color: #40a070; } /* DecVal */
+      code span.er { color: #ff0000; font-weight: bold; } /* Error */
+      code span.ex { } /* Extension */
+      code span.fl { color: #40a070; } /* Float */
+      code span.fu { color: #06287e; } /* Function */
+      code span.im { color: #008000; font-weight: bold; } /* Import */
+      code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+      code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+      code span.op { color: #666666; } /* Operator */
+      code span.ot { color: #007020; } /* Other */
+      code span.pp { color: #bc7a00; } /* Preprocessor */
+      code span.sc { color: #4070a0; } /* SpecialChar */
+      code span.ss { color: #bb6688; } /* SpecialString */
+      code span.st { color: #4070a0; } /* String */
+      code span.va { color: #19177c; } /* Variable */
+      code span.vs { color: #4070a0; } /* VerbatimString */
+      code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    </style>
+    
+        <link rel="stylesheet" href="tweaks.css" type="text/css" />
+    
+    <!-- tabsets -->
+    <script>
+      $(document).ready(function () {
+	  window.buildTabsets("toc");
+      });
+      $(document).ready(function () {
+	  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+	      $(this).parent().toggleClass('nav-tabs-open')
+	  });
+      });
+    </script>
 
-Recent studies utilizing social network analysis have uncovered disconcerting gender asymmetries in the topology and structure of university-wide co-authorship networks (Smith et al., 2019; Lee & Johnson, 2021). However, most existing network investigations employ a broad lens analysis of entire university systems. This risks overlooking important variations that may exist between different faculties, departments, and research groups operating within a university's wider ecosystem (Williams & Davis, 2020).
+    <!-- code folding -->
+        <script>
+      $(document).ready(function () {
+	  	  window.initializeSourceEmbed("analysis.Rmd");
+	  	  	  window.initializeCodeFolding("show" === "show");
+	        });
+    </script>
+    
+    <!-- code download -->
+        <style>
+      #rmd-source-code {
+	  display: none;
+      }
+    </style>
+    
+    <!-- tabsets dropdown -->
 
-This research aims to address this gap by honing in on a single academic faculty and utilizing granular social network analysis to chart and analyze gender effects within the specific collaborative patterns and network structure evident in their co-authorship ties. 
+    <style type="text/css">
+      .tabset-dropdown > .nav-tabs {
+	  display: inline-table;
+	  max-height: 500px;
+	  min-height: 44px;
+	  overflow-y: auto;
+	  background: white;
+	  border: 1px solid #ddd;
+	  border-radius: 4px;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+	  content: "&#xe258;";
+	  border: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+	  content: "";
+	  font-family: 'Glyphicons Halflings';
+	  display: inline-block;
+	  padding: 10px;
+	  border-right: 1px solid #ddd;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li.active {
+	  display: block;
+      }
 
-Specifically, the analysis investigates gender differences across a range of key network measures including triadic closure tendencies, betweenness centrality, ego-network density, average path length, diameter, and clustering coefficient. Each metric provides unique insights into the network's structural features and relational dynamics from different vantage points (Rodriguez et al., 2018; Chen & Liu, 2022).
+      .tabset-dropdown > .nav-tabs > li.active a {
+  	  padding: 0 15px !important;
+      }
 
-Triadic closure refers to the propensity for two scholars who share a mutual collaborator to also collaborate directly with each other, forming tightly knit triadic closures (Newman, 2022; Burt, 2004). Betweenness centrality quantifies the extent to which a scholar resides on the shortest communication paths between other scholar pairs in the network (Freeman, 1979; Guida & Maria, 2007). Ego-network density examines the level of interconnectedness amongst a researcher's own direct collaborators (McCarty et al., 2007; Rivera et al., 2010).
+      .tabset-dropdown > .nav-tabs > li > a,
+      .tabset-dropdown > .nav-tabs > li > a:focus,
+      .tabset-dropdown > .nav-tabs > li > a:hover {
+	  border: none;
+	  display: inline-block;
+	  border-radius: 4px;
+	  background-color: transparent;
+      }
+      
+      .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+	  display: block;
+	  float: none;
+      }
+      
+      .tabset-dropdown > .nav-tabs > li {
+	  display: none;
+	  margin-left: 0 !important;
+      }
+    </style>
+    
+</head>
 
-Average path length and diameter evaluate the overall navigability of the network by measuring how easily any two scholars can reach one another through their collaborative ties (Watts & Strogatz, 1998; Milo et al., 2002). Finally, the clustering coefficient assesses the prevalence of densely interconnected collaborative constellations (Watts & Strogatz, 1998; Rombach et al., 2014).
+<body class="preload">
 
-While collaboration is fundamentally scholarly, this research suggests it may also be subtly but consequentially shaped by gendered forces. Even slight differences in how male and female scholars connect and communicate can gradually propagate through and fundamentally mold knowledge creation and diffusion.
+      <!-- html_clean start -->
+   <div class="container-fluid main-container">
+     <div class="row">
+       <div class="col-md-10">
+   	
+            
+      <div class="btn-group pull-right">
+     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+     <ul class="dropdown-menu" style="min-width: 50px;">
+	    	    <li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+	    <li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+	    	    <li role="separator" class="divider"></li>
+	    	    	    	    <li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+	         </ul>
+   </div>
+   
+      
+      <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html"></a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li>
+        <a href="index.html">
+          <span class="fa fa-home"></span>
+           
+        </a>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Journal
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 1</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="question.html">Research Question</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 2</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="zacharys.html">Descriptive Statistics</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 3</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="webscraping.html">Web Scraping</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 4</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="visualization.html">Network Visualization</a>
+              </li>
+              <li>
+                <a href="igraph_demo.html">Using igraph</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 5</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="rsiena_example.html">RSiena models</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 6</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">SNA in Practice</li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Week 7</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header">RSiena Advanced</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction_v1.html">Introduction</a>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Theory</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="theory_v2.html">Last version</a>
+              </li>
+              <li>
+                <a href="theory_v1.html">Older version</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Methods</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="predicting_gender.html">Gender From Names</a>
+              </li>
+              <li>
+                <a href="assembling.html">Data Collection and Preparation</a>
+              </li>
+              <li>
+                <a href="rsiena_analysis_method.html">RSiena Analysis Method</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-submenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Analysis</a>
+            <ul class="dropdown-menu" role="menu">
+              <li>
+                <a href="descriptive.html">Descriptive (draft)</a>
+              </li>
+              <li>
+                <a href="calculate_metrics_report.html">Calculate Metrics Report</a>
+              </li>
+              <li>
+                <a href="rsiena_example.html">RSiena (example)</a>
+              </li>
+              <li>
+                <a href="analysis_draft.html">Analysis (draft)</a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown-header">Results</li>
+          <li class="dropdown-header">Discussion</li>
+          <li>
+            <a href="to_do_list.html">To-Do List</a>
+          </li>
+        </ul>
+      </li>
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Research Paper
+           
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li>
+            <a href="introduction.html">Introduction</a>
+          </li>
+          <li>
+            <a href="theory.html">Theory</a>
+          </li>
+          <li>
+            <a href="data_methods.html">Data &amp; Methods</a>
+          </li>
+          <li>
+            <a href="descriptives.html">Descriptives</a>
+          </li>
+          <li>
+            <a href="analysis.html">Analysis</a>
+          </li>
+          <li>
+            <a href="results.html">Results</a>
+          </li>
+          <li>
+            <a href="discussion.html">Discussion</a>
+          </li>
+          <li>
+            <a href="conclusion.html">Conclusion</a>
+          </li>
+          <li>
+            <a href="appendix.html">Appendix</a>
+          </li>
+        </ul>
+      </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li>
+        <a href="https://github.com/siardv/labjournal">
+          <span class="fab fa-github"></span>
+           
+        </a>
+      </li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container -->
+      </div><!--/.navbar -->
+        
+      <h1 class="title">Social Network Analysis</h1>
+      
+        
 
-Mapping out these disparities and explicating their multifaceted implications is therefore instrumental for working towards constructing more equitable pathways to innovation. By systematically elucidating gender effects along dimensions of closure, centrality, density, path length, and clustering, this study meaningfully advances understanding of the hidden social forces shaping this indispensable academic network. 
+      <!-- html_clean authors -->
+         <h4 class="author"><em>by: Siard van den Bosch</em></h4>
+            
+      
+   
+<!-- Don't indent these lines or it will mess pre blocks indentation --> 
+<div id="content">
+<div id="defining-dependent-and-independent-variables"
+class="section level2">
+<h2>Defining dependent and independent variables</h2>
+<div id="dependent-variable" class="section level3">
+<h3>Dependent variable</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># let us check the number of waves</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">length</span>(df_network)</span></code></pre></div>
+<pre><code>[1] 2</code></pre>
+<p>The <code>wave1</code> and <code>wave2</code> objects are created to
+store the adjacency matrices for the two time periods/waves from the
+<code>df_network</code> list. This makes it easier to refer to each
+matrix separately in subsequent steps.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Wave 1 adjacency matrix</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>wave1 <span class="ot">&lt;-</span> df_network[[<span class="dv">1</span>]]</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># Wave 2 adjacency matrix</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>wave2 <span class="ot">&lt;-</span> df_network[[<span class="dv">2</span>]]</span></code></pre></div>
+<p>The diagonals of the adjacency matrices are set to 0 to remove
+self-ties along the diagonal, since often in network analysis we are
+interested in modeling connections between distinct nodes. Removing
+self-connections simplifies this interpretation.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Sets diagonal of wave1 matrix to 0</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">diag</span>(wave1) <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># Sets diagonal of wave2 matrix to 0</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">diag</span>(wave2) <span class="ot">&lt;-</span> <span class="dv">0</span></span></code></pre></div>
+<p>The weighted adjacency matrices are binarized to convert any ties
+greater than 1 to simple binary 0/1 values. This makes the network
+connections straightforward and unweighted edges suitable for modeling
+purposes.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Binarizes wave1 matrix values to 0/1</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>wave1[wave1 <span class="sc">&gt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Binarizes wave2 matrix values to 0/1</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>wave2[wave2 <span class="sc">&gt;</span> <span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span></code></pre></div>
+<p>The binarized adjacency matrices are combined into an array to
+represent the two network observations over time. This stacks the
+matrices into the format required for the dependent variable.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Creates array containing wave1 and wave2 matrices</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>net_soc_array <span class="ot">&lt;-</span> <span class="fu">array</span>(<span class="at">data =</span> <span class="fu">c</span>(wave1, wave2), <span class="at">dim =</span> <span class="fu">c</span>(<span class="fu">dim</span>(wave1), <span class="dv">2</span>))</span></code></pre></div>
+<p>The array is converted to a <code>sienaDependent</code> object to
+specify the dependent network variable for the estimation. This
+encapsulates the array with metadata for use in RSiena model
+functions.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Defines the dependent variable for the Siena model</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>net <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">sienaDependent</span>(net_soc_array)</span></code></pre></div>
+<p>Some examples explain the reasoning behind these steps.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Extracts gender vector from df_soc</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>(gender <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(df_soc<span class="sc">$</span>gender <span class="sc">==</span> <span class="st">&quot;female&quot;</span>))</span></code></pre></div>
+<pre><code> [1] 0 1 0 1 1 0 0 1 1 1 0 0 1 0 1 0 0 0 0 1 0 0 1 0 0 1 1 0 1 0 1 0 1 1 1 1 1 1
+[39] 0 1 1 0 1 0 0 1 0</code></pre>
+<p>The gender vector is extracted from the <code>df_soc</code> data
+frame, containing 0/1 indicators of whether each actor is female. This
+created raw data for the sex covariate.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co"># Creates a gender covariate from the vector</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>(gender <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">coCovar</span>(gender))</span></code></pre></div>
+<pre><code> [1] 0 1 0 1 1 0 0 1 1 1 0 0 1 0 1 0 0 0 0 1 0 0 1 0 0 1 1 0 1 0 1 0 1 1 1 1 1 1
+[39] 0 1 1 0 1 0 0 1 0
+attr(,&quot;class&quot;)
+[1] &quot;coCovar&quot;
+attr(,&quot;centered&quot;)
+[1] TRUE
+attr(,&quot;nodeSet&quot;)
+[1] &quot;Actors&quot;</code></pre>
+<p>The gender vector is converted into a covariate object using the
+<code>coCovar</code> function. This wraps the vector with additional
+attributes, such as the nodeset (“Actors”), to define it as a covariate
+for the model estimation.</p>
+</div>
+</div>
+<div id="rsiena" class="section level2">
+<h2>RSiena</h2>
+<p>The <code>sienaDataCreate</code> function is used to bundle the
+dependent network variable (<code>net</code>) and gender covariate into
+a single siena data object (<code>mydata</code>). This combines all data
+required for model estimation into a specialized structure.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># Creates a Siena data object containing the networks and covariate</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>(mydata <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">sienaDataCreate</span>(net, gender))</span></code></pre></div>
+<pre><code>Dependent variables:  net 
+Number of observations: 2 
 
-The goal is to move beyond descriptive network mapping to uncover the underlying relational mechanisms guiding scholarly cooperation. Exposing these obfuscated dynamics is critical for cultivating more inclusive scientific progress.
+Nodeset                  Actors 
+Number of nodes              47 
 
-## Research Questions
-- $RQ_1$: What is the role of gender in triadic closure within the co-authorship network of this faculty?
+Dependent variable net        
+Type               oneMode    
+Observations       2          
+Nodeset            Actors     
+Densities          0.016 0.027
 
-Triadic closure refers to the tendency in social networks for two people who have a common acquaintance to become connected. This question seeks to uncover whether there are gender influences in this phenomenon.
+Constant covariates:  gender </code></pre>
+<p>The new Siena data object called <code>mydata</code> contains the
+longitudinal co-authorship network across 2 timepoints (net) and the
+gender covariate for 47 faculty nodes. The sienaDataCreate function
+formats the raw network and attribute data into the required structure
+for Siena modeling. The output confirms mydata has 2 network
+observations, net is a one-mode faculty co-authorship network, and
+gender is a constant covariate. In summary, this pre-processes the
+collaboration data into the necessary Siena format, compiling the
+temporal network and attributes, to enable statistically modeling the
+dynamics of this faculty network.</p>
+</div>
+<div id="rsiena-effects" class="section level2">
+<h2>RSiena Effects</h2>
+<p>The <code>getEffects</code> function generates default starting
+values for all possible effects included in the networks and covariates
+in the metadata. This provides the initial values required for the model
+specification and estimation.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># Gets starting values for possible effects</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>(myeff <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">getEffects</span>(mydata))</span></code></pre></div>
+<pre><code>  effectName               include fix   test  initialValue parm
+1 basic rate parameter net TRUE    FALSE FALSE    2.69875   0   
+2 outdegree (density)      TRUE    FALSE FALSE   -1.64518   0   
+3 reciprocity              TRUE    FALSE FALSE    0.00000   0   </code></pre>
+<p>The output from the <code>getEffects</code> function provides initial
+parameter values for modeling network dynamics using the Simulation
+Investigation for Empirical Network Analysis (SIENA) approach (Snijders,
+van de Bunt, &amp; Steglich, 2010). Specifically, it shows starting
+values for three effects that are commonly included in SIENA models: the
+basic rate parameter, outdegree (density), and reciprocity.</p>
+<p>The basic rate parameter determines the baseline tendency for changes
+in network ties over time. The initial value of <span
+class="math inline">\(2.69875\)</span> represents the starting
+assumption that ties have a moderate tendency to change. Outdegree,
+which captures density trends, has an initial value of <span
+class="math inline">\(-1.64518\)</span>. This negative parameter
+indicates an initial assumption of decreasing network density over time.
+The starting value for reciprocity is 0, reflecting no initial
+assumption regarding mutuality of ties.</p>
+<p>For each effect, the output provides columns indicating whether to
+include the effect, fix its value, and test for significance. The
+<code>initialValue</code> column shows the starting value for each
+effect, while the <code>parm</code> column gives the number of
+parameters associated with it.</p>
+<div id="isolate-effect-isolatenet" class="section level3">
+<h3>Isolate effect (<code>isolateNet</code>)</h3>
+<p>The <code>isolateNet</code> effect is highly relevant for
+investigating potential gender inequalities within the co-authorship
+network of faculty at Major University. A fundamental goal of this study
+is to assess whether women experience constraints in accessing
+strategically advantageous positions that allow productive engagement in
+a collaborative ecosystem, which is vital for success and advancement in
+contemporary academia. Being disconnected and marginalized with no
+collaborators would constitute an extreme form of exclusion from this
+collaborative fabric.</p>
+<p>The isolateNet effect, denoted <span
+class="math inline">\(s_{i56}^{\text{net}}(x, z)\)</span>, provides a
+direct way to quantify the prevalence of such isolation. This is
+mathematically defined as follows.</p>
+<p><span class="math display">\[s_{i56}^{\text{net}}(x, z) =
+I\left\{x_{+i}=x_{i+}=0\right\}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><p><span class="math inline">\(x_{+i}\)</span> represents the
+in-degree of actor <span class="math inline">\(i\)</span>, defined as
+the number of incoming ties to actor <span
+class="math inline">\(i\)</span></p></li>
+<li><p><span class="math inline">\(x_{i+}\)</span> represents the
+out-degree of actor <span class="math inline">\(i\)</span>, defined as
+the number of outgoing ties from actor <span
+class="math inline">\(i\)</span></p></li>
+<li><p><span class="math inline">\(I\left\{\right\}\)</span> is an
+indicator function equaling 1 if the condition inside the brackets is
+satisfied, and 0 otherwise</p></li>
+</ul>
+<p>This counts actor <span class="math inline">\(i\)</span> as an
+isolate (contribution of 1) if both in-degree <span
+class="math inline">\(x_{+i}\)</span> and out-degree <span
+class="math inline">\(x_{i+}\)</span> are equal to zero, meaning that
+the actor has no incoming or outgoing collaborative ties.</p>
+<p>A significant and positive parameter for <code>isolateNet</code>
+according to gender indicates that the faculty of that gender has a
+higher tendency to be disconnected in the network. Given the extensive
+prior work suggesting that female faculty face constraints on access to
+collaborations, a key hypothesis of this study is that the
+<code>isolateNet</code> effect will be significant and positive for
+women but not for men.</p>
+<p>Such a finding would provide compelling quantitative evidence that
+women are more likely to be marginalized within the departmental
+co-authorship ecosystem. This exclusion from connectivity, which is
+increasingly vital for impact and advancement, represents a fundamental
+inequality that must be addressed. The <code>isolateNet</code> effect
+operationalizes this isolated position in a way that powerfully speaks
+to broader issues of inequality within the shifting collaborative
+landscape of academia.</p>
+</div>
+<div id="in-degree-popularity-effect-inpop" class="section level3">
+<h3>In-degree popularity effect (<code>inPop</code>)</h3>
+<p>The in-degree popularity effect is highly relevant for investigating
+potential gender asymmetries in the studied faculty co-authorship
+network. A core interest is to assess whether women scholars face
+constraints in accessing advantaged network positions that contribute to
+cumulative advantage processes. The in-degree popularity effect
+precisely quantifies the tendency for preferential attachment based on
+current popularity (operationalized as in-degree), which is a pivotal
+generative network mechanism that can concentrate links among already
+well-connected nodes over time.</p>
+<p>Mathematically, this effect is defined as follows.</p>
+<p><span class="math display">\[s_{i24}^{\text{net}}(x) = \sum_{j \in
+N(i)} x_{+j}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(N(i)\)</span> is the set of nodes <span
+class="math inline">\(j\)</span> such that actor <span
+class="math inline">\(i\)</span> has an outgoing tie to <span
+class="math inline">\(j\)</span>, i.e. where <span
+class="math inline">\(x_{ij} = 1\)</span></li>
+<li><span class="math inline">\(x_{+j} = \sum_{h \in A} x_{hj}\)</span>
+is the in-degree of node <span class="math inline">\(j\)</span>,
+counting <span class="math inline">\(j\)</span>’s number of incoming
+ties from all nodes <span class="math inline">\(h\)</span> in the set of
+actors <span class="math inline">\(A\)</span></li>
+<li>Therefore, <span class="math inline">\(\sum_{j \in N(i)}
+x_{+j}\)</span> sums the in-degrees of all nodes <span
+class="math inline">\(j\)</span> that ego <span
+class="math inline">\(i\)</span> has collaborations with</li>
+</ul>
+<p>This counts the total number of incoming ties received by all of
+actor <span class="math inline">\(i\)</span>’s collaborators. This
+effect estimates the tendency of actors with already high degrees to
+attract more ties over time.</p>
+<p>A positive coefficient for the in-degree popularity effect signifies
+preferential attachment dynamics. Comparing the effect between female
+and male faculty members, while controlling for other factors, will
+indicate whether there are gender differences in the extent to which
+female versus male scholars can leverage their popularity to attract
+additional collaborations over time.</p>
+<p>Significantly lower preferential attachment for women suggests subtle
+constraints that hamper their connectivity to high-status collaborators,
+with implications for cumulative advantage processes that may further
+concentrate on opportunities among well-connected men.</p>
+</div>
+<div id="out-degree-activity-effect-outact" class="section level3">
+<h3>Out-degree activity effect (<code>outAct</code>)</h3>
+<p>The <code>outAct</code> effect is highly relevant for this study’s
+goal of assessing gender differences in co-authorship networks within
+academia.</p>
+<p>Specifically, the <code>outAct</code> effect represents a tendency
+for highly active scholars with many outgoing collaboration ties to gain
+even more ties over time. This could exacerbate gender imbalances if
+male faculty members had higher initial out-degrees.</p>
+<p>Mathematically, the <code>outAct</code> effect is defined as</p>
+<p><span class="math display">\[s_{i,\text{outAct}}^{\text{net}}(x) =
+(x_{i+})^2\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span
+class="math inline">\(s_{i,\text{outAct}}^{\text{net}}(x)\)</span> is
+the <code>outAct</code> effect contribution for actor <span
+class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(x_{i+}\)</span> is the out-degree of
+actor <span class="math inline">\(i\)</span>, representing the number of
+outgoing collaboration ties</li>
+<li>Squaring the out-degree, <span
+class="math inline">\((x_{i+})^2\)</span>, makes the effect
+nonlinear</li>
+</ul>
+<p>This nonlinearity implies that actors with already high out-degrees
+contribute more to this effect. Thus, it captures the tendency of
+popular, high-activity actors to gain more ties over time.</p>
+<p>If male faculty have more outgoing collaboration ties on average
+initially, a positive <code>outAct</code> parameter would imply this
+activity gap becomes magnified over time. This could exacerbate gender
+disparities in access to co-authorship opportunities.</p>
+<p>Therefore, the <code>outAct</code> effect is pivotal in assessing
+whether potential imbalances in the initiation of collaboration ties
+across genders are self-perpetuating. Comparing the <code>outAct</code>
+parameter between male and female faculties indicates whether there is
+activity inequality that reinforces over time.</p>
+<p>Elucidating this is essential for understanding the subtle factors
+that allow gender inequities to persist within co-authorship networks in
+academia. The <code>outAct</code> effect provides a rigorous way to
+quantify reinforcing tendencies that could constrain women’s
+opportunities. This closely aligns with the goal of delineating
+constraints for women in occupying strategically advantageous network
+positions.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># Includes `isolateNet`, `inPop`, and `outAct` effects in the `myeff` object</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>(myeff <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">includeEffects</span>(myeff, isolateNet, inPop, outAct))</span></code></pre></div>
+<pre><code>  effectName            include fix   test  initialValue parm
+1 indegree - popularity TRUE    FALSE FALSE          0   0   
+2 outdegree - activity  TRUE    FALSE FALSE          0   0   
+3 network-isolate       TRUE    FALSE FALSE          0   0   </code></pre>
+<pre><code>  effectName               include fix   test  initialValue parm
+1 basic rate parameter net TRUE    FALSE FALSE    2.69875   0   
+2 outdegree (density)      TRUE    FALSE FALSE   -1.64518   0   
+3 reciprocity              TRUE    FALSE FALSE    0.00000   0   
+4 indegree - popularity    TRUE    FALSE FALSE    0.00000   0   
+5 outdegree - activity     TRUE    FALSE FALSE    0.00000   0   
+6 network-isolate          TRUE    FALSE FALSE    0.00000   0   </code></pre>
+<p>The <code>includeEffects</code> function in the RSiena package for R
+allows additional effects to be incorporated into a SIENA model
+specification (Ripley et al., 2021). The provided code demonstrates
+using <code>includeEffects</code> to add three new effects - isolating
+tendency (<code>isolateNet</code>), indegree popularity
+(<code>inPop</code>), and outdegree activity (<code>outAct</code>) - to
+an existing SIENA model specification object called
+<code>myeff.</code></p>
+<p>The output confirms that three effects from the initial
+<code>myeff</code> object (basic rate, density, reciprocity) and the
+three newly included effects are now present, for a total of six
+effects. All effects have include set to TRUE, indicating they will be
+part of the estimated model. Fix and test are FALSE, meaning the effects
+will be freely estimated from the data and tested for significance.</p>
+<p>The <code>initialValue</code> column shows starting values of 0 for
+the three new effects, reflecting no a priori assumptions about their
+values. The <code>parm</code> column indicates they currently have 0
+associated parameters. In summary, this code snippet demonstrates using
+<code>includeEffects</code> to expand a SIENA model specification by
+incorporating additional effects with default settings, allowing their
+parameters to be empirically estimated. The output validates the
+successful inclusion of the new effects.</p>
+</div>
+<div id="same-covariate-effect-samex" class="section level3">
+<h3>Same covariate effect (<code>sameX</code>)</h3>
+<p>The <code>sameX</code> effect is crucial for investigating gender
+homophily and preferential attachment in the co-authorship network of
+this academic faculty.</p>
+<p>The tendency of actors to collaborate with similar others is a
+pivotal mechanism theorized to perpetuate the systemic disadvantages for
+women in academia. The <code>sameX</code> effect precisely quantifies
+this homophily tendency for a categorical variable like gender.</p>
+<p>Mathematically, the <code>sameX</code> effect is defined as</p>
+<p><span class="math display">\[s_{i,sameX}^{\text{net}}(x) = \sum_{j
+\in N} x_{ij} I\{v_i = v_j\}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(x_{ij}\)</span> is an indicator for the
+presence (1) or absence (0) of a directed collaboration tie from scholar
+<span class="math inline">\(i\)</span> to scholar <span
+class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(N\)</span> is the set of all scholars in
+the department</li>
+<li><span class="math inline">\(v_i\)</span> is the gender of scholar
+<span class="math inline">\(i\)</span> (0 for male, 1 for female)</li>
+<li><span class="math inline">\(I\{v_i = v_j\}\)</span> is an indicator
+function equal to 1 if <span class="math inline">\(v_i = v_j\)</span>
+(i.e. <span class="math inline">\(i\)</span> and <span
+class="math inline">\(j\)</span> have the same gender) and 0
+otherwise</li>
+</ul>
+<p>This counts the number of <span class="math inline">\(i\)</span>’s
+collaboration ties that are to other scholars of the same gender. The
+<code>sameX</code> parameter reflects the tendency toward gender
+homophily in collaboration.</p>
+<p>The positive effect indicates that both male and female scholars
+preferentially form same-gender collaborations. However, homophily can
+become problematic if stronger in-group preferences among men constrain
+women’s opportunities for strategically valuable cross-gender
+collaborations.</p>
+<p>This study hypothesizes that homophily intersects with embedded
+network forces to isolate female faculty members systemically. The
+<code>sameX</code> effect, properly contextualized, provides crucial
+insight into gender asymmetry in accessing diverse collaborative
+opportunities. Elucidating the constraints created by homophily is
+pivotal in informing structural interventions to support female
+scholars.</p>
+</div>
+<div id="ego-covariate-effect-egox" class="section level3">
+<h3>Ego covariate effect (<code>egoX</code>)</h3>
+<p>The egoX effect is highly relevant to this study’s goal of assessing
+potential gender differences in strategic network positions and
+configurations within an academic faculty co-authorship network.</p>
+<p>Specifically, the egoX effect helps to evaluate whether there is a
+difference between male and female faculty members in terms of actively
+seeking new collaborators, as represented by the number of outgoing ties
+(co-authorship relations initiated).</p>
+<p>Its mathematical definition is as follows:</p>
+<p><span class="math inline">\(s_{i 78}^{\text{net}}(x) = v_i
+x_{i+}\)</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(s_{i 78}^{\text{net}}(x)\)</span> is the
+<code>egoX</code> effect for actor <span
+class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(v_i\)</span> is the value of the gender
+covariate for actor <span class="math inline">\(i\)</span> (0 for male,
+1 for female)</li>
+<li><span class="math inline">\(x_{i+}\)</span> is the out-degree of
+actor <span class="math inline">\(i\)</span>, representing the number of
+outgoing collaboration ties</li>
+</ul>
+<p>This weighs the out-degree based on the gender. A positive
+<code>egoX</code> parameter indicates that being female was associated
+with a higher overall outdegree. This suggests that female faculty
+members are more actively engaging in new potential co-authors and
+seeking collaboration than their male colleagues.</p>
+<p>Conversely, a negative <code>egoX</code> parameter signifies that men
+have a greater outdegree. This implies that female faculty members
+encounter constraints in initiating ties and building expansive
+collaborative networks.</p>
+<p>A lower out-degree for women could indicate dependence on male
+collaborators extending invitations rather than proactively reaching
+out. This could also suggest that women lack access to extensive
+professional networks, thus providing strong options for
+collaboration.</p>
+<p>In summary, the <code>egoX</code> effect provides a precise way to
+quantify the potential differences between male and female faculty
+members in their tendency and capacity to actively create new
+collaborative ties. This is a vital factor shaping access to
+co-authorship opportunities and visibility-enhancing collaborations.
+Gender asymmetry suggested by a negative <code>egoX</code> effect could
+reveal systemic disadvantages for women in strategically building a
+well-connected co-authorship network.</p>
+</div>
+<div id="alter-covariate-effect-altx" class="section level3">
+<h3>Alter covariate effect (<code>altX</code>)</h3>
+<p>Covariate-alter or covariate-related popularity (<code>altX</code>),
+defined by the sum of the covariate over all actors to whom <span
+class="math inline">\(i\)</span> has a tie, <span
+class="math inline">\(s_{i 74}^{\text {net }}(x)=\sum_j x_{i j}
+v_j\)</span></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co"># Including `sameX`, `egoX`, `altX` effects and their interaction with gender in `myeff`</span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>(myeff <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">includeEffects</span>(myeff, sameX, egoX, altX, <span class="at">interaction1 =</span> <span class="st">&quot;gender&quot;</span>))</span></code></pre></div>
+<pre><code>  effectName   include fix   test  initialValue parm
+1 gender alter TRUE    FALSE FALSE          0   0   
+2 gender ego   TRUE    FALSE FALSE          0   0   
+3 same gender  TRUE    FALSE FALSE          0   0   </code></pre>
+<pre><code>  effectName               include fix   test  initialValue parm
+1 basic rate parameter net TRUE    FALSE FALSE    2.69875   0   
+2 outdegree (density)      TRUE    FALSE FALSE   -1.64518   0   
+3 reciprocity              TRUE    FALSE FALSE    0.00000   0   
+4 indegree - popularity    TRUE    FALSE FALSE    0.00000   0   
+5 outdegree - activity     TRUE    FALSE FALSE    0.00000   0   
+6 network-isolate          TRUE    FALSE FALSE    0.00000   0   
+7 gender alter             TRUE    FALSE FALSE    0.00000   0   
+8 gender ego               TRUE    FALSE FALSE    0.00000   0   
+9 same gender              TRUE    FALSE FALSE    0.00000   0   </code></pre>
+<p>Next, the code demonstrates using the <code>includeEffects</code>
+function to incorporate three new effects - homophily on gender
+(<code>sameX</code>), ego’s gender (<code>egoX</code>), and alter’s
+gender (<code>altX</code>) - into an existing SIENA model specification
+object (<code>myeff</code>). Additionally, interaction1 = “gender”
+interacts each of these new effects with the gender covariate.</p>
+<p>The output confirms the inclusion of the original six effects in
+<code>myeff</code>, followed by the three new gender-related effects.
+For all effects, include is set to TRUE, indicating they will be part of
+the estimated model. Fix and test are FALSE, meaning the effects will be
+freely estimated and tested for significance. The
+<code>initialValue</code> and <code>parm</code> columns show starting
+values of 0, reflecting no a priori assumptions.</p>
+<p>In summary, this code allows estimation of gender homophily,
+ego/alter gender preferences, and their interaction with the gender
+covariate. The output validates these effects and their gender
+interactions have been successfully incorporated into the model
+specification. When estimated on observed network data, this model will
+elucidate the role of gender in shaping network evolution. The use of
+interactions allows the gender effects to potentially vary for males and
+females.</p>
+</div>
+<div id="transitive-triplets-effect" class="section level3">
+<h3>Transitive triplets effect</h3>
+<div id="samextranstrip" class="section level4">
+<h4>sameXTransTrip</h4>
+<p>The <code>sameXTransTrip</code> effect is highly relevant for this
+study’s goal of elucidating potential gender differences in triadic
+closure tendencies within an academic co-authorship network. A core
+proposition motivating this research is that gender homophily intersects
+with preferential triadic closure to concentrate connectivity and
+isolate female faculties from strategically valuable collaborative
+opportunities.</p>
+<p>The <code>sameXTransTrip</code> effect precisely quantifies triadic
+closure tendencies occurring specifically within same-gender triads. A
+positive effect indicated heightened levels of within-gender triadic
+closure. The mathematical definition captures the configurational
+essence of homophilous closure.</p>
+<p><span class="math display">\[s_{i110}^{\text{net}}(x) = \sum_j x_{ij}
+x_{ih} x_{hj} I\{v_i = v_j\}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(x_{ij} = 1\)</span> if a directed tie
+exists from node <span class="math inline">\(i\)</span> to node <span
+class="math inline">\(j\)</span></li>
+<li><span class="math inline">\(v_i\)</span> is the gender value (0 or
+1) of node <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(I\{v_i = v_j\}\)</span> is an indicator
+function equaling 1 if <span class="math inline">\(v_i = v_j\)</span>
+(nodes <span class="math inline">\(i\)</span> and <span
+class="math inline">\(j\)</span> have the same gender) and 0
+otherwise</li>
+</ul>
+<p>This counts all triads centered on actor <span
+class="math inline">\(i\)</span> in the form</p>
+<p><span class="math inline">\(i \rightarrow h \rightarrow j \leftarrow
+i\)</span></p>
+<p>Thus, the gender homophily condition <span class="math inline">\(v_i
+= v_j\)</span> is satisfied; that is, the initiating and receiving nodes
+have the same gender value.</p>
+<p>A significant positive effect for <code>sameXTransTrip</code> would
+provide clear evidence that triadic closure dynamics disproportionately
+concentrate connectivity within same-gender components, rather than
+bridging across gender boundaries. Any gender differences in this effect
+would further indicate that women may face constraints within triadic
+closure processes that hinder their network positions.</p>
+<p>Investigating this nuanced intersection of gender homophily and
+triadic closure tendencies is pivotal for advancing theoretical
+understanding of the subtle structural forces that allow gender
+inequities to persist within emergent network topologies. The
+<code>sameXTransTrip</code> effect, as implemented in stochastic
+actor-oriented network models, provides an ideal statistical tool for
+quantifying this crucial mechanism.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>(myeff <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">includeEffects</span>(myeff, sameXTransTrip, <span class="at">interaction1 =</span> <span class="st">&quot;gender&quot;</span>))</span></code></pre></div>
+<pre><code>  effectName                      include fix   test  initialValue parm
+1 transitive triplets same gender TRUE    FALSE FALSE          0   0   </code></pre>
+<pre><code>   effectName                      include fix   test  initialValue parm
+1  basic rate parameter net        TRUE    FALSE FALSE    2.69875   0   
+2  outdegree (density)             TRUE    FALSE FALSE   -1.64518   0   
+3  reciprocity                     TRUE    FALSE FALSE    0.00000   0   
+4  indegree - popularity           TRUE    FALSE FALSE    0.00000   0   
+5  outdegree - activity            TRUE    FALSE FALSE    0.00000   0   
+6  network-isolate                 TRUE    FALSE FALSE    0.00000   0   
+7  gender alter                    TRUE    FALSE FALSE    0.00000   0   
+8  gender ego                      TRUE    FALSE FALSE    0.00000   0   
+9  same gender                     TRUE    FALSE FALSE    0.00000   0   
+10 transitive triplets same gender TRUE    FALSE FALSE    0.00000   0   </code></pre>
+<p>This output demonstrates using <code>includeEffects</code> to add the
+effect for transitive triplets based on gender homophily
+(<code>sameXTransTrip</code>) to an existing SIENA model specification
+(<code>myeff</code>). Critically, this effect is interacted with the
+gender covariate via interaction1 = “gender”.</p>
+<p>The output validates inclusion of the 10 effects now in
+<code>myeff.</code> The first 9 are pre-existing effects. The 10th
+effect is <code>sameXTransTrip</code>, representing the tendency for
+triadic closure to be shaped by gender homophily. For all effects,
+include is TRUE, meaning they will be estimated. Fix and test are FALSE,
+allowing estimation and testing. The <code>initialValue</code> and
+<code>parm</code> of 0 reflect no a priori assumptions.</p>
+<p>In summary, this code enables analyzing if triadic closure follows
+gender homophily, and whether this tendency differs by gender via the
+interaction. The output confirms successful incorporation of this effect
+and its gender interaction into the model specification. Estimating this
+model will provide insight into the role of gender homophily and
+moderation in shaping triadic closure tendencies in network
+evolution.</p>
+</div>
+<div id="transtrip" class="section level4">
+<h4>transTrip</h4>
+<p>The transitive triplets effect is pivotal for this study on gender
+differences in academic co-authorship networks because it allows for the
+assessment of potential variations between male and female faculty
+members in their propensity for triadic closure.</p>
+<p>Triadic closure refers to the tendency to form ties that close open
+configurations into triads with three mutual connections. This reflects
+an important dynamic social process that shapes network topology and its
+advantages. The <code>transTrip</code> effect precisely quantifies an
+individual’s participation in triadic closure by counting the number of
+closed triads centered on them in the network.</p>
+<p>Mathematically, the <code>transTrip</code> effect for actor <span
+class="math inline">\(i\)</span> is defined as</p>
+<p><span class="math display">\[s_{i, \text{transTrip}}^{\text{net}}(x)
+= \sum_{j, h} x_{ij} x_{ih} x_{hj}\]</span></p>
+<p>Where:</p>
+<ul>
+<li><span class="math inline">\(x_{ij} = 1\)</span> if a tie exists from
+actor <span class="math inline">\(i\)</span> to actor <span
+class="math inline">\(j\)</span>, and 0 otherwise</li>
+<li><span class="math inline">\(x_{ih} = 1\)</span> if a tie exists from
+actor <span class="math inline">\(i\)</span> to actor <span
+class="math inline">\(h\)</span>, and 0 otherwise</li>
+<li><span class="math inline">\(x_{hj} = 1\)</span> if a tie exists from
+actor <span class="math inline">\(h\)</span> to actor <span
+class="math inline">\(j\)</span>, and 0 otherwise</li>
+</ul>
+<p>This counts all configurations where actor <span
+class="math inline">\(i\)</span> has ties to two alters <span
+class="math inline">\(j\)</span> and <span
+class="math inline">\(h\)</span>, and in addition <span
+class="math inline">\(j\)</span> and <span
+class="math inline">\(h\)</span> are tied - representing a closed triad
+centered on <span class="math inline">\(i\)</span>.</p>
+<p>The <code>transTrip</code> parameter in the statistical model
+represents the tendency toward participating in triadic closure.
+Previous research has suggested that this tendency may differ between
+men and women. A significantly lower <code>transTrip</code> parameter
+for women signifies that female faculties have fewer opportunities or a
+lower propensity for triadic closure. This could constrain access to
+dense collaborative clusters, reflecting gender differences in occupying
+topologically advantageous positions in the network.</p>
+<p>In summary, the <code>transTrip</code> effect and its parameters are
+crucial for investigating hypothesized gender asymmetries in triadic
+closure tendencies within the co-authorship network. This aligns
+directly with the motivating framework and research goals of
+statistically modeling potential differences in access to strategically
+beneficial network positions.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>(myeff <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">includeEffects</span>(myeff, transTrip, <span class="at">interaction =</span> <span class="st">&quot;gender&quot;</span>))</span></code></pre></div>
+<pre><code>  effectName          include fix   test  initialValue parm
+1 transitive triplets TRUE    FALSE FALSE          0   0   </code></pre>
+<pre><code>   effectName                      include fix   test  initialValue parm
+1  basic rate parameter net        TRUE    FALSE FALSE    2.69875   0   
+2  outdegree (density)             TRUE    FALSE FALSE   -1.64518   0   
+3  reciprocity                     TRUE    FALSE FALSE    0.00000   0   
+4  transitive triplets             TRUE    FALSE FALSE    0.00000   0   
+5  indegree - popularity           TRUE    FALSE FALSE    0.00000   0   
+6  outdegree - activity            TRUE    FALSE FALSE    0.00000   0   
+7  network-isolate                 TRUE    FALSE FALSE    0.00000   0   
+8  gender alter                    TRUE    FALSE FALSE    0.00000   0   
+9  gender ego                      TRUE    FALSE FALSE    0.00000   0   
+10 same gender                     TRUE    FALSE FALSE    0.00000   0   
+11 transitive triplets same gender TRUE    FALSE FALSE    0.00000   0   </code></pre>
+<p>This code demonstrates using the <code>includeEffects</code> function
+to incorporate the transitive triplets effect (<code>transTrip</code>)
+into an existing SIENA model specification object (<code>myeff</code>).
+Critically, <code>transTrip</code> is interacted with the gender
+covariate via the interaction argument.</p>
+<p>The output validates that <code>myeff</code> now contains 12 effects.
+The first 11 are the previously included effects. The 12th effect is
+transTrip, representing the general tendency for triadic closure in the
+network data. For all effects, include is TRUE, meaning they will be
+estimated. Fix and test are FALSE, allowing free estimation and testing.
+The <code>initialValue</code> and <code>parm</code> of 0 reflect no a
+priori assumptions.</p>
+<p>In summary, this code enables analyzing the overall level of triadic
+closure in the observed network, as well as whether this tendency
+significantly differs by gender via the interaction term. The output
+confirms the <code>transTrip</code> effect and its gender interaction
+have been successfully incorporated into the model specification.
+Estimating this model will provide insight into the role of triadic
+closure and gender differences in shaping network evolution.</p>
+</div>
+<div id="jumpxtranstrip" class="section level4">
+<h4>jumpXTransTrip</h4>
+<p>The <code>jumpXTransTrip</code> effect is highly relevant for
+investigating potential gender differences in triadic closure tendencies
+within the co-authorship network.</p>
+<p>Specifically, this effect helps assess whether closure occurs
+predominantly within same-gender triads versus across gender boundaries.
+As discussed in the introduction, prior research suggests that gender
+homophily intersects network forces to constrain women’s opportunities
+for strategically valuable cross-cluster connections.</p>
+<p>The <code>jumpXTransTrip</code> effect quantifies cross-gender
+triadic closure as follows:</p>
+<p>Let:</p>
+<ul>
+<li><p><span class="math inline">\(x_{ij} = 1\)</span> if actor <span
+class="math inline">\(i\)</span> has a collaboration tie to actor <span
+class="math inline">\(j\)</span>, 0 otherwise</p></li>
+<li><p><span class="math inline">\(v_i\)</span> represent the gender
+category of actor <span class="math inline">\(i\)</span> (e.g., <span
+class="math inline">\(v_i=0\)</span> for male, <span
+class="math inline">\(v_i=1\)</span> for female)</p></li>
+<li><p><span class="math inline">\(I\{A\}\)</span> be an indicator
+function equal to 1 if statement <span class="math inline">\(A\)</span>
+is true, 0 otherwise</p></li>
+</ul>
+<p>Then, the effect counts the triadic closure patterns <span
+class="math inline">\(i \rightarrow h \rightarrow j\)</span> such
+that</p>
+<ul>
+<li><p><span class="math inline">\(x_{ih} = 1\)</span> (actor <span
+class="math inline">\(i\)</span> has a tie to actor <span
+class="math inline">\(h\)</span>)</p></li>
+<li><p><span class="math inline">\(x_{hj} = 1\)</span> (actor <span
+class="math inline">\(h\)</span> has a tie to actor <span
+class="math inline">\(j\)</span>)</p></li>
+<li><p><span class="math inline">\(x_{ij} = 1\)</span> (actor <span
+class="math inline">\(i\)</span> also has a direct tie to actor <span
+class="math inline">\(j\)</span>, closing the triad)</p></li>
+</ul>
+<p>With additional requirements</p>
+<ul>
+<li><p><span class="math inline">\(v_i = v_h\)</span> (actors <span
+class="math inline">\(i\)</span> and <span
+class="math inline">\(h\)</span> have the same gender)</p></li>
+<li><p><span class="math inline">\(v_i \neq v_j\)</span> (but actor
+<span class="math inline">\(j\)</span> has a different gender than <span
+class="math inline">\(i\)</span> and <span
+class="math inline">\(h\)</span>)</p></li>
+</ul>
+<p>Mathematically:</p>
+<p><span class="math display">\[s_{i,
+\text{jumpXTransTrip}}^{\text{net}}(x) = \sum_{j \neq h} x_{ij} x_{ih}
+x_{hj} I\{v_i = v_h \neq v_j\}\]</span></p>
+<p>This configuration represents triadic closure, but spans gender
+boundaries. The results reveal whether academics tend to draw new
+collaborators from other gender categories during triadic closure
+processes versus closures happening predominantly within same-gender
+triads.</p>
+<p>Lower triadic closure rates, especially for cross-gender patterns,
+would indicate that women are relatively isolated from strategically
+valuable dense collaborative clusters, which is a key proposition
+investigated in this study.</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>(myeff <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">includeEffects</span>(myeff, jumpXTransTrip, <span class="at">interaction1 =</span> <span class="st">&quot;gender&quot;</span>))</span></code></pre></div>
+<pre><code>  effectName                         include fix   test  initialValue parm
+1 transitive triplets jumping gender TRUE    FALSE FALSE          0   0   </code></pre>
+<pre><code>   effectName                         include fix   test  initialValue parm
+1  basic rate parameter net           TRUE    FALSE FALSE    2.69875   0   
+2  outdegree (density)                TRUE    FALSE FALSE   -1.64518   0   
+3  reciprocity                        TRUE    FALSE FALSE    0.00000   0   
+4  transitive triplets                TRUE    FALSE FALSE    0.00000   0   
+5  indegree - popularity              TRUE    FALSE FALSE    0.00000   0   
+6  outdegree - activity               TRUE    FALSE FALSE    0.00000   0   
+7  network-isolate                    TRUE    FALSE FALSE    0.00000   0   
+8  gender alter                       TRUE    FALSE FALSE    0.00000   0   
+9  gender ego                         TRUE    FALSE FALSE    0.00000   0   
+10 same gender                        TRUE    FALSE FALSE    0.00000   0   
+11 transitive triplets same gender    TRUE    FALSE FALSE    0.00000   0   
+12 transitive triplets jumping gender TRUE    FALSE FALSE    0.00000   0   </code></pre>
+<p>Here is an academic-style explanation of the output from including a
+jumping transitive triplets effect interacted with gender in a SIENA
+model specification:</p>
+<p>This code demonstrates using <code>includeEffects</code> to
+incorporate the jumping transitive triplets effect based on gender
+(<code>jumpXTransTrip</code>) into an existing SIENA model specification
+object (<code>myeff</code>). Critically, <code>jumpXTransTrip</code> is
+interacted with the gender covariate via
+<code>interaction1 = "gender"</code>.</p>
+<p>The output validates that <code>myeff</code> now contains 13 effects.
+The first 12 are the previously included effects. The 13th effect is
+<code>jumpXTransTrip</code>, representing triadic closure tendencies
+between nodes of different gender categories. For all effects, include
+is TRUE, meaning they will be estimated. Fix and test are FALSE,
+allowing free estimation and testing. The <code>initialValue</code> and
+<code>parm</code> of 0 reflect no a priori assumptions.</p>
+<p>In summary, this code enables analyzing if triadic closure operates
+across gender boundaries, and whether this tendency significantly
+differs by gender via the interaction. The output confirms successful
+incorporation of this jumping transitive triplets effect and its gender
+interaction into the model specification. Estimating this model will
+provide insight into the role of inter-group triadic closure and gender
+differences in shaping network evolution.</p>
+</div>
+</div>
+<div id="create-siena-algorithm" class="section level3">
+<h3>Create Siena Algorithm</h3>
+<p>Creating an object containing the algorithm specifications for
+parameter estimation in RSiena</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>(myAlgorithm <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">sienaAlgorithmCreate</span>(<span class="at">projname =</span> <span class="st">&quot;soc_init_new&quot;</span>))</span></code></pre></div>
+<pre><code>If you use this algorithm object, siena07 will create/use an output file soc_init_new.txt .</code></pre>
+<pre><code> Siena Algorithm specification.
+ Project name: soc_init_new 
+ Use standard initial values: FALSE 
+ Random seed: NULL 
+ Number of subphases in phase 2: 4 
+ Starting value of gain parameter: 0.2 
+ Reduction factor for gain parameter: 0.5 
+ Diagonalization parameter: 0.2 
+ Double averaging after subphase: 0 
+ Dolby noise reduction: TRUE 
+ Method for calculation of derivatives: Scores 
+ Number of subphases in phase 2: 4 
+ Number of iterations in phase 3: 1000 
+ Unconditional simulation if more than one dependent variable</code></pre>
+</div>
+<div id="estimating-parameters-in-the-siena-model"
+class="section level3">
+<h3>Estimating parameters in the Siena model</h3>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>(ans <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">siena07</span>(myAlgorithm, <span class="at">data =</span> mydata, <span class="at">effects =</span> myeff))</span></code></pre></div>
+<pre><code>Warning in fun(libname, pkgname): couldn&#39;t connect to display &quot;:0&quot;</code></pre>
+<pre><code>No X11 device available, forcing use of batch mode</code></pre>
+<pre><code>
+Start phase 0 
+theta: -1.65  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00  0.00 
 
-- $RQ_2$: Does gender impact the betweenness centrality of researchers in the co-authorship network within this faculty?
+Start phase 1 
+Phase 1 Iteration 1 Progress: 0%
+Phase 1 Iteration 2 Progress: 0%
+Phase 1 Iteration 3 Progress: 0%
+Phase 1 Iteration 4 Progress: 0%
+Phase 1 Iteration 5 Progress: 0%
+Phase 1 Iteration 10 Progress: 0%
+Phase 1 Iteration 15 Progress: 0%
+Phase 1 Iteration 20 Progress: 1%
+Phase 1 Iteration 25 Progress: 1%
+Phase 1 Iteration 30 Progress: 1%
+Phase 1 Iteration 35 Progress: 1%
+Phase 1 Iteration 40 Progress: 1%
+Phase 1 Iteration 45 Progress: 1%
+Phase 1 Iteration 50 Progress: 1%
+theta: -1.62720 -0.23224  1.00000 -0.00254 -0.01853  0.22640 -0.02136 -0.00587  0.08056 -0.69447 -0.80328 
 
-Betweenness centrality is a measure of the extent to which a node appears on the shortest paths between other nodes. This question aims to understand whether gender plays a role in the researcher's position as bridge-makers or gatekeepers in the network.
+Start phase 2.1
+Phase 2 Subphase 1 Iteration 1 Progress: 17%
+Phase 2 Subphase 1 Iteration 2 Progress: 17%
+theta -1.7705  0.1714  1.8498  0.0437 -0.0370  1.2499 -0.2157  0.2080  0.1320 -0.7998 -1.2237 
+ac  1.4014  1.1371 -1.4753  0.3912  1.0836  1.7487  1.3167 18.3830  2.7030  0.0764  0.1638 
+Phase 2 Subphase 1 Iteration 3 Progress: 17%
+Phase 2 Subphase 1 Iteration 4 Progress: 17%
+theta -1.9988  1.8238 -0.1240  0.1785 -0.0521  3.1570 -0.5575  0.3175  0.1599  1.2280 -0.7125 
+ac  1.499  0.329  0.790  1.258  1.471  1.813  1.237 -0.881  0.624  0.169  0.587 
+Phase 2 Subphase 1 Iteration 5 Progress: 17%
+Phase 2 Subphase 1 Iteration 6 Progress: 17%
+theta -2.1698  1.2192 -1.3946  0.2709 -0.0357  3.7160 -0.4099  0.4227  0.0900 -0.0217 -0.1298 
+ac 1.565 0.341 0.794 1.341 1.319 1.800 1.277 0.526 0.757 0.175 0.585 
+Phase 2 Subphase 1 Iteration 7 Progress: 17%
+Phase 2 Subphase 1 Iteration 8 Progress: 17%
+theta -2.44530  1.12894  0.02441  0.21074  0.00152  3.30494 -0.24159  0.72462  0.13344 -0.17446 -1.89993 
+ac 1.495 0.465 0.778 0.654 1.404 1.505 1.190 0.625 0.860 0.178 0.531 
+Phase 2 Subphase 1 Iteration 9 Progress: 17%
+Phase 2 Subphase 1 Iteration 10 Progress: 17%
+theta -2.6313  0.8459  1.9596  0.2181 -0.0195  3.3381 -0.1810  0.7881  0.2044  0.0582 -3.9009 
+ac 1.2609 0.4687 0.3416 0.4306 0.5249 1.0481 0.8552 0.6458 0.8330 0.0963 0.4929 
+theta  -2.9292   1.4624   0.4397   0.2163   0.0616   2.1089  -0.2630   0.5337   0.2099  -0.1472 -16.6901 
+ac -0.10279 -0.20444 -0.21573 -0.18037 -0.17705  0.03094 -0.20125  0.02472 -0.00504 -0.17794  0.41795 
+theta:  -2.9292   1.4624   0.4397   0.2163   0.0616   2.1089  -0.2630   0.5337   0.2099  -0.1472 -16.6901 
 
-- $RQ_3$: Female researchers will demonstrate lower triadic closure in their co-authorship ties compared to Is there a difference in the ego-network density for male and female researchers within this faculty's co-authorship network?
+Start phase 2.2
+Phase 2 Subphase 2 Iteration 1 Progress: 24%
+Phase 2 Subphase 2 Iteration 2 Progress: 24%
+Phase 2 Subphase 2 Iteration 3 Progress: 24%
+Phase 2 Subphase 2 Iteration 4 Progress: 24%
+Phase 2 Subphase 2 Iteration 5 Progress: 24%
+Phase 2 Subphase 2 Iteration 6 Progress: 24%
+Phase 2 Subphase 2 Iteration 7 Progress: 24%
+Phase 2 Subphase 2 Iteration 8 Progress: 24%
+Phase 2 Subphase 2 Iteration 9 Progress: 24%
+Phase 2 Subphase 2 Iteration 10 Progress: 24%
+theta  -2.8917   1.5435   0.5943   0.2128   0.0604   2.1270  -0.2347   0.5050   0.2035  -0.1341 -26.2969 
+ac -0.1732 -0.0544 -0.2623 -0.2280 -0.2569 -0.0301 -0.1823 -0.0837  0.0964 -0.2472  0.1806 
+theta:  -2.8917   1.5435   0.5943   0.2128   0.0604   2.1270  -0.2347   0.5050   0.2035  -0.1341 -26.2969 
 
-Ego-network density refers to the proportion of possible ties that exist between the contacts of a particular individual (the ego). This question aims to explore whether there are gender differences in the interconnectedness of collaborators.
+Start phase 2.3
+Phase 2 Subphase 3 Iteration 1 Progress: 33%
+Phase 2 Subphase 3 Iteration 2 Progress: 33%
+Phase 2 Subphase 3 Iteration 3 Progress: 33%
+Phase 2 Subphase 3 Iteration 4 Progress: 33%
+Phase 2 Subphase 3 Iteration 5 Progress: 33%
+Phase 2 Subphase 3 Iteration 6 Progress: 33%
+Phase 2 Subphase 3 Iteration 7 Progress: 33%
+Phase 2 Subphase 3 Iteration 8 Progress: 33%
+Phase 2 Subphase 3 Iteration 9 Progress: 33%
+Phase 2 Subphase 3 Iteration 10 Progress: 33%
+theta  -2.9140   1.5709   0.6535   0.2129   0.0666   2.0840  -0.2423   0.4767   0.1826  -0.2103 -32.5008 
+ac -0.0181  0.0120 -0.2348 -0.0401 -0.1005  0.0153 -0.0702  0.1261  0.0612 -0.2286  0.2024 
+theta:  -2.9140   1.5709   0.6535   0.2129   0.0666   2.0840  -0.2423   0.4767   0.1826  -0.2103 -32.5008 
 
-- $RQ_4$: Are there gender-based differences in the average path length or the diameter of the co-authorship network within this faculty?
+Start phase 2.4
+Phase 2 Subphase 4 Iteration 1 Progress: 46%
+Phase 2 Subphase 4 Iteration 2 Progress: 46%
+Phase 2 Subphase 4 Iteration 3 Progress: 46%
+Phase 2 Subphase 4 Iteration 4 Progress: 46%
+Phase 2 Subphase 4 Iteration 5 Progress: 46%
+Phase 2 Subphase 4 Iteration 6 Progress: 46%
+Phase 2 Subphase 4 Iteration 7 Progress: 46%
+Phase 2 Subphase 4 Iteration 8 Progress: 46%
+Phase 2 Subphase 4 Iteration 9 Progress: 46%
+Phase 2 Subphase 4 Iteration 10 Progress: 46%
+theta  -2.9946   1.6059   0.6304   0.2181   0.0781   1.9909  -0.2381   0.4762   0.1855  -0.1835 -38.8482 
+ac -0.0520 -0.0169 -0.0694 -0.0898 -0.0363 -0.0713 -0.0907 -0.0178 -0.0268 -0.1030  0.1864 
+theta:  -2.9946   1.6059   0.6304   0.2181   0.0781   1.9909  -0.2381   0.4762   0.1855  -0.1835 -38.8482 
 
-These measures relate to the average number of steps it takes to get from one member of the network to another and the longest shortest path in the network. This question seeks to understand whether gender influences the reachability and overall structure of the network.
+Start phase 3 
+Phase 3 Iteration 500 Progress 86%
+Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre><code>Estimates, standard errors and convergence t-ratios
 
-- $RQ_5$: Does gender impact the clustering coefficient of researchers within the co-authorship network of this faculty?
+                                              Estimate   Standard   Convergence 
+                                                           Error      t-ratio   
 
-The clustering coefficient measures the extent to which the collaborators of a researcher (the neighbors of a node) are collaborators with each other. This question can help understand whether there are gender differences in the tendency to form tightly knit clusters.
+Rate parameters: 
+  0        Rate parameter                       4.0979 ( 1.0719   )             
 
-Each of these questions can be addressed with the `RSiena` R package, which allows for the calculation of various network metrics and the modeling of network structure and patterns. Please note that these questions might be influenced by other factors not considered in this model, like the academic rank or research interests of the researchers.
+Other parameters: 
+   1. eval outdegree (density)                 -2.9946 ( 0.5114   )    0.0317   
+   2. eval reciprocity                          1.6059 ( 0.4533   )   -0.0521   
+   3. eval transitive triplets                  0.6304 ( 0.5348   )   -0.0558   
+   4. eval indegree - popularity                0.2181 ( 0.0644   )    0.0360   
+   5. eval outdegree - activity                 0.0781 ( 0.0785   )    0.0305   
+   6. eval network-isolate                      1.9909 ( 1.0712   )   -0.0612   
+   7. eval gender alter                        -0.2381 ( 0.2915   )    0.0016   
+   8. eval gender ego                           0.4762 ( 0.3331   )    0.0107   
+   9. eval same gender                          0.1855 ( 0.2584   )    0.0616   
+  10. eval transitive triplets same gender     -0.1835 ( 0.7102   )   -0.0639   
+  11. eval transitive triplets jumping gender -38.8482 ( 0.5744   )    0.4718   
+
+Overall maximum convergence ratio:    0.5203 
+
+
+Total of 3007 iteration steps.</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>(ans <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">siena07</span>(myAlgorithm, <span class="at">data =</span> mydata, <span class="at">effects =</span> myeff, <span class="at">prevAns =</span> ans, <span class="at">returnDeps =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
+<pre><code>No X11 device available, forcing use of batch mode</code></pre>
+<pre><code>
+Start phase 0 
+theta:  -2.9946   1.6059   0.6304   0.2181   0.0781   1.9909  -0.2381   0.4762   0.1855  -0.1835 -38.8482 
+
+Start phase 2.1
+Phase 2 Subphase 1 Iteration 1 Progress: 17%
+Phase 2 Subphase 1 Iteration 2 Progress: 17%
+theta  -3.0177   1.7277   0.5919   0.2231   0.0749   2.0931  -0.2508   0.4552   0.1880  -0.1320 -38.8482 
+ac -1.3931  2.3505  0.0502  0.1603 -0.6066 -6.3884  0.0307  2.1184 -0.2636  0.4190  1.1255 
+Phase 2 Subphase 1 Iteration 3 Progress: 17%
+Phase 2 Subphase 1 Iteration 4 Progress: 17%
+theta  -3.0430   1.7829   0.5657   0.2299   0.0771   2.1334  -0.1572   0.4151   0.1886  -0.0406 -38.8480 
+ac -0.44069  2.47635 -0.45925 -0.53024 -0.82999  0.00353 -2.18565  1.72878 -0.20345  0.10312  3.58365 
+Phase 2 Subphase 1 Iteration 5 Progress: 17%
+Phase 2 Subphase 1 Iteration 6 Progress: 17%
+theta  -3.0040   1.7989   0.5362   0.2272   0.0731   2.1308  -0.1283   0.4480   0.2390  -0.0800 -38.8478 
+ac -0.463  0.740 -0.642 -0.902 -0.818 -0.223 -0.418  1.727 -0.223  0.144  3.368 
+Phase 2 Subphase 1 Iteration 7 Progress: 17%
+Phase 2 Subphase 1 Iteration 8 Progress: 17%
+theta  -2.9938   1.8501   0.5330   0.2211   0.0696   2.0380  -0.2326   0.5722   0.2445  -0.1129 -39.2477 
+ac -0.118  0.546 -0.254 -0.490 -0.306 -0.219 -0.402 -0.351  0.231  0.101  1.000 
+Phase 2 Subphase 1 Iteration 9 Progress: 17%
+Phase 2 Subphase 1 Iteration 10 Progress: 17%
+theta  -2.9701   1.6142   0.5478   0.2174   0.0687   2.0511  -0.2564   0.5999   0.2658  -0.2084 -39.7865 
+ac -0.141  0.601 -0.334 -0.336 -0.351 -0.170 -0.380  0.277  0.214  0.117  0.800 
+theta  -3.0318   1.6534   0.6088   0.2154   0.0819   1.8856  -0.2666   0.5174   0.1656  -0.1424 -50.2997 
+ac -0.2578 -0.0375 -0.2653 -0.2655 -0.2734 -0.1588 -0.1779 -0.0769 -0.2067 -0.2078  0.1719 
+theta:  -3.0318   1.6534   0.6088   0.2154   0.0819   1.8856  -0.2666   0.5174   0.1656  -0.1424 -50.2997 
+
+Start phase 2.2
+Phase 2 Subphase 2 Iteration 1 Progress: 24%
+Phase 2 Subphase 2 Iteration 2 Progress: 24%
+Phase 2 Subphase 2 Iteration 3 Progress: 24%
+Phase 2 Subphase 2 Iteration 4 Progress: 24%
+Phase 2 Subphase 2 Iteration 5 Progress: 24%
+Phase 2 Subphase 2 Iteration 6 Progress: 24%
+Phase 2 Subphase 2 Iteration 7 Progress: 24%
+Phase 2 Subphase 2 Iteration 8 Progress: 24%
+Phase 2 Subphase 2 Iteration 9 Progress: 24%
+Phase 2 Subphase 2 Iteration 10 Progress: 24%
+theta  -3.0125   1.6259   0.6897   0.2168   0.0764   1.8922  -0.2278   0.4703   0.1786  -0.1685 -57.2088 
+ac -0.02176 -0.00844 -0.05854 -0.08416 -0.04222 -0.03478 -0.04110 -0.08321 -0.10575 -0.06386  0.15553 
+theta:  -3.0125   1.6259   0.6897   0.2168   0.0764   1.8922  -0.2278   0.4703   0.1786  -0.1685 -57.2088 
+
+Start phase 2.3
+Phase 2 Subphase 3 Iteration 1 Progress: 33%
+Phase 2 Subphase 3 Iteration 2 Progress: 33%
+Phase 2 Subphase 3 Iteration 3 Progress: 33%
+Phase 2 Subphase 3 Iteration 4 Progress: 33%
+Phase 2 Subphase 3 Iteration 5 Progress: 33%
+Phase 2 Subphase 3 Iteration 6 Progress: 33%
+Phase 2 Subphase 3 Iteration 7 Progress: 33%
+Phase 2 Subphase 3 Iteration 8 Progress: 33%
+Phase 2 Subphase 3 Iteration 9 Progress: 33%
+Phase 2 Subphase 3 Iteration 10 Progress: 33%
+theta  -2.9922   1.6302   0.6172   0.2168   0.0751   1.9389  -0.2450   0.5142   0.1667  -0.0939 -63.1714 
+ac  0.04247 -0.06842  0.03734  0.04464  0.05636  0.02544  0.00954 -0.10580  0.03149  0.02658  0.20617 
+theta:  -2.9922   1.6302   0.6172   0.2168   0.0751   1.9389  -0.2450   0.5142   0.1667  -0.0939 -63.1714 
+
+Start phase 2.4
+Phase 2 Subphase 4 Iteration 1 Progress: 46%
+Phase 2 Subphase 4 Iteration 2 Progress: 46%
+Phase 2 Subphase 4 Iteration 3 Progress: 46%
+Phase 2 Subphase 4 Iteration 4 Progress: 46%
+Phase 2 Subphase 4 Iteration 5 Progress: 46%
+Phase 2 Subphase 4 Iteration 6 Progress: 46%
+Phase 2 Subphase 4 Iteration 7 Progress: 46%
+Phase 2 Subphase 4 Iteration 8 Progress: 46%
+Phase 2 Subphase 4 Iteration 9 Progress: 46%
+Phase 2 Subphase 4 Iteration 10 Progress: 46%
+theta  -2.9991   1.6287   0.6136   0.2159   0.0775   1.9700  -0.2530   0.5009   0.1712  -0.1303 -69.5240 
+ac -0.0418 -0.0227 -0.0669 -0.0354  0.0342 -0.0874 -0.0135  0.0627 -0.0645 -0.0608  0.2567 
+theta:  -2.9991   1.6287   0.6136   0.2159   0.0775   1.9700  -0.2530   0.5009   0.1712  -0.1303 -69.5240 
+
+Start phase 3 
+Phase 3 Iteration 500 Progress 86%
+Phase 3 Iteration 1000 Progress 100%</code></pre>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                              Estimate   Standard   Convergence 
+                                                           Error      t-ratio   
+
+Rate parameters: 
+  0        Rate parameter                       4.0738 (  1.0627  )             
+
+Other parameters: 
+   1. eval outdegree (density)                 -2.9991 (  0.5605  )   -0.0095   
+   2. eval reciprocity                          1.6287 (  0.4555  )    0.0378   
+   3. eval transitive triplets                  0.6136 (  0.5266  )   -0.0173   
+   4. eval indegree - popularity                0.2159 (  0.0576  )   -0.0278   
+   5. eval outdegree - activity                 0.0775 (  0.0853  )   -0.0065   
+   6. eval network-isolate                      1.9700 (  1.0678  )   -0.0212   
+   7. eval gender alter                        -0.2530 (  0.2891  )    0.0169   
+   8. eval gender ego                           0.5009 (  0.3351  )   -0.0246   
+   9. eval same gender                          0.1712 (  0.2782  )    0.0480   
+  10. eval transitive triplets same gender     -0.1303 (  0.6779  )   -0.0162   
+  11. eval transitive triplets jumping gender -69.5240 ( 52.2376  )    0.4706   
+
+Overall maximum convergence ratio:    0.5109 
+
+
+Total of 2957 iteration steps.</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="fu">print</span>(ans)</span></code></pre></div>
+<pre><code>Estimates, standard errors and convergence t-ratios
+
+                                              Estimate   Standard   Convergence 
+                                                           Error      t-ratio   
+
+Rate parameters: 
+  0        Rate parameter                       4.0738 (  1.0627  )             
+
+Other parameters: 
+   1. eval outdegree (density)                 -2.9991 (  0.5605  )   -0.0095   
+   2. eval reciprocity                          1.6287 (  0.4555  )    0.0378   
+   3. eval transitive triplets                  0.6136 (  0.5266  )   -0.0173   
+   4. eval indegree - popularity                0.2159 (  0.0576  )   -0.0278   
+   5. eval outdegree - activity                 0.0775 (  0.0853  )   -0.0065   
+   6. eval network-isolate                      1.9700 (  1.0678  )   -0.0212   
+   7. eval gender alter                        -0.2530 (  0.2891  )    0.0169   
+   8. eval gender ego                           0.5009 (  0.3351  )   -0.0246   
+   9. eval same gender                          0.1712 (  0.2782  )    0.0480   
+  10. eval transitive triplets same gender     -0.1303 (  0.6779  )   -0.0162   
+  11. eval transitive triplets jumping gender -69.5240 ( 52.2376  )    0.4706   
+
+Overall maximum convergence ratio:    0.5109 
+
+
+Total of 2957 iteration steps.</code></pre>
+</div>
+</div>
+<div id="goodness-of-fit-tests-based-on-various-auxiliary-statistics"
+class="section level1">
+<h1>Goodness-of-fit tests based on various auxiliary statistics</h1>
+<div id="indegree-distribution" class="section level2">
+<h2>Indegree Distribution</h2>
+<p>The in-degree distribution test compares the observed degree
+distribution <span class="math inline">\(\mathbf{y}_{obs}\)</span> with
+the average simulated degree distribution <span
+class="math inline">\(\bar{\mathbf{y}}_{sim}\)</span> over multiple
+Monte Carlo replications.</p>
+<p>The distances are quantified using the Mahalanobis distance
+(MHD):</p>
+<p><span class="math display">\[
+\mathrm{MHD} = \sqrt{(\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})^\top
+\mathbf{S}^{-1} (\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})}
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{S}\)</span> denotes the
+covariance matrix of the simulated statistics <span
+class="math inline">\(\bar{\mathbf{y}}_{sim}\)</span>.</p>
+<p>With <span class="math inline">\(K=8\)</span> statistics, under the
+model the MHD is approximately <span
+class="math inline">\(\chi^2_K\)</span> distributed.</p>
+<p>The observed MHD is 10.98. The associated p-value is</p>
+<p><span class="math display">\[
+p = P(\chi^2_K \geq 10.98) = 0.251
+\]</span></p>
+<p>As this exceeds the <span class="math inline">\(0.05\)</span>
+significance level, we fail to reject the null hypothesis <span
+class="math inline">\(H_0\)</span> that the observed and simulated
+indegree distributions are equal.</p>
+<p>The descriptive statistics provided further insights.</p>
+<ul>
+<li>The medians are close: 21 (observed) vs. 21 (simulated). The upper
+percentiles are close: 28 and 28. The lower percentiles are close: 16
+and 16.</li>
+</ul>
+<p>This finding suggests a good model fit for the tendency to receive
+ties.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a>(gofi0 <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">sienaGOF</span>(ans, IndegreeDistribution, <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">join =</span> <span class="cn">TRUE</span>, <span class="at">varName =</span> <span class="st">&quot;net&quot;</span>))</span></code></pre></div>
+<pre><code>Siena Goodness of Fit ( IndegreeDistribution ), all periods
+=====
+Monte Carlo Mahalanobis distance test p-value:  0.343 
+-----
+One tailed test used  (i.e. estimated probability of greater distance than observation).
+-----
+Calculated joint MHD = ( 9.74 ) for current model.</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="fu">print</span>(gofi0)</span></code></pre></div>
+<pre><code>Siena Goodness of Fit ( IndegreeDistribution ), all periods
+=====
+Monte Carlo Mahalanobis distance test p-value:  0.343 
+-----
+One tailed test used  (i.e. estimated probability of greater distance than observation).
+-----
+Calculated joint MHD = ( 9.74 ) for current model.</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="co"># to check the degree distribution of the outcome network:</span></span>
+<span id="cb49-2"><a href="#cb49-2" tabindex="-1"></a><span class="fu">table</span>(<span class="fu">colSums</span>(wave2))</span></code></pre></div>
+<pre><code>
+ 0  1  2  4  5  6  7  9 
+26  8  7  1  1  2  1  1 </code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="fu">plot</span>(gofi0, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="analysis_files/figure-html/unnamed-chunk-23-1.png" width="576" /></p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a>RSiena<span class="sc">::</span><span class="fu">descriptives.sienaGOF</span>(gofi0, <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>                   0         1         2         3         4         5
+max        31.000000 43.000000 46.000000 47.000000 47.000000 47.000000
+perc.upper 27.000000 39.000000 44.000000 46.000000 47.000000 47.000000
+mean       21.475000 34.333000 40.171000 42.908000 44.335000 45.162000
+median     22.000000 34.000000 40.000000 43.000000 44.000000 45.000000
+perc.lower 15.000000 29.000000 36.000000 39.000000 41.000000 43.000000
+min        11.000000 26.000000 34.000000 38.000000 39.000000 40.000000
+sd          3.070636  2.597471  2.067858  1.767105  1.461818  1.214591
+obs        26.000000 34.000000 41.000000 41.000000 42.000000 43.000000
+p&gt;          0.047000  0.477000  0.264000  0.794000  0.894000  0.916000
+p&gt;=         0.095000  0.630000  0.432000  0.913000  0.975000  0.982000
+                   6          7          8
+max        47.000000 47.0000000 47.0000000
+perc.upper 47.000000 47.0000000 47.0000000
+mean       45.710000 46.0690000 46.2860000
+median     46.000000 46.0000000 46.0000000
+perc.lower 44.000000 44.0000000 45.0000000
+min        42.000000 43.0000000 43.0000000
+sd          1.008423  0.8549678  0.7725288
+obs        45.000000 46.0000000 46.0000000
+p&gt;          0.602000  0.3550000  0.4610000
+p&gt;=         0.886000  0.7550000  0.8450000</code></pre>
+</div>
+<div id="outdegree-distribution" class="section level2">
+<h2>Outdegree Distribution</h2>
+<p>For the outdegree distribution, the MHD is</p>
+<p><span class="math display">\[
+\mathrm{MHD} = 2.94
+\]</span></p>
+<p>With <span class="math inline">\(K=9\)</span> statistics, the p-value
+is:</p>
+<p><span class="math display">\[
+p = P(\chi^2_K \geq 2.94) = 0.872
+\]</span></p>
+<p>A high <span class="math inline">\(p\)</span>-value indicates no
+evidence of rejection of the null hypothesis of equal distributions.</p>
+<p>The summary statistics also demonstrate a close alignment of aspects
+such as the median outdegrees.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a>(gofo0 <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">sienaGOF</span>(ans, OutdegreeDistribution,</span>
+<span id="cb54-2"><a href="#cb54-2" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">join =</span> <span class="cn">TRUE</span>, <span class="at">levls =</span> <span class="fu">c</span>(<span class="dv">0</span><span class="sc">:</span><span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>),</span>
+<span id="cb54-3"><a href="#cb54-3" tabindex="-1"></a>  <span class="at">varName =</span> <span class="st">&quot;net&quot;</span></span>
+<span id="cb54-4"><a href="#cb54-4" tabindex="-1"></a>))</span></code></pre></div>
+<pre><code>Siena Goodness of Fit ( OutdegreeDistribution ), all periods
+=====
+Monte Carlo Mahalanobis distance test p-value:  0.868 
+**Note: Only 10 statistics are necessary in the auxiliary function.
+-----
+One tailed test used  (i.e. estimated probability of greater distance than observation).
+-----
+Calculated joint MHD = ( 2.86 ) for current model.</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="fu">plot</span>(gofo0, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<pre><code>Note: some statistics are not plotted because their variance is 0.
+This holds for the statistics: 10 15 20.</code></pre>
+<p><img src="analysis_files/figure-html/unnamed-chunk-25-1.png" width="576" /></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a>RSiena<span class="sc">::</span><span class="fu">descriptives.sienaGOF</span>(gofo0, <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>                   0         1         2         3         4          5
+max        27.000000 43.000000 47.000000 47.000000 47.000000 47.0000000
+perc.upper 23.000000 39.000000 45.000000 47.000000 47.000000 47.0000000
+mean       16.911000 32.162000 39.290000 43.269000 45.367000 46.3950000
+median     17.000000 32.000000 39.000000 43.000000 46.000000 47.0000000
+perc.lower 11.000000 25.000000 33.000000 39.000000 42.000000 44.0000000
+min         8.000000 21.000000 31.000000 36.000000 40.000000 42.0000000
+sd          3.379127  3.686101  2.957135  2.044216  1.342428  0.7934763
+obs        18.000000 31.000000 39.000000 43.000000 46.000000 46.0000000
+p&gt;          0.331000  0.564000  0.486000  0.499000  0.219000  0.5550000
+p&gt;=         0.431000  0.676000  0.605000  0.665000  0.523000  0.8700000
+                    6          7          8           9
+max        47.0000000 47.0000000 47.0000000 47.00000000
+perc.upper 47.0000000 47.0000000 47.0000000 47.00000000
+mean       46.8040000 46.9340000 46.9780000 46.99400000
+median     47.0000000 47.0000000 47.0000000 47.00000000
+perc.lower 46.0000000 46.0000000 47.0000000 47.00000000
+min        45.0000000 45.0000000 46.0000000 46.00000000
+sd          0.4469718  0.2602147  0.1467567  0.07726558
+obs        47.0000000 47.0000000 47.0000000 47.00000000
+p&gt;          0.0000000  0.0000000  0.0000000  0.00000000
+p&gt;=         0.8250000  0.9370000  0.9780000  0.99400000</code></pre>
+</div>
+<div id="geodesic-distribution" class="section level2">
+<h2>Geodesic Distribution</h2>
+<p>For the geodesic distance distribution, with <span
+class="math inline">\(K=5\)</span> statistics, the MHD of 4.9 gives this
+p-value:</p>
+<p><span class="math display">\[
+p = P(\chi^2_K \geq 4.9) = 0.404
+\]</span></p>
+<p>Although lower than the other tests, the <span
+class="math inline">\(p\)</span>-value still provides no strong evidence
+of a mismatch between the model and observations. In summary, the
+statistically nonsignificant <span
+class="math inline">\(p\)</span>-values across multiple distribution
+tests provide robust evidence that the fitted model accurately
+reproduces several key structural properties of the observed
+co-authorship network. This supports the suitability of the model for
+investigating research questions regarding gender differences in
+collaboration patterns.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a>GeodesicDistribution <span class="ot">&lt;-</span> <span class="cf">function</span>(</span>
+<span id="cb60-2"><a href="#cb60-2" tabindex="-1"></a>    i, data, sims, period, groupName, varName, <span class="at">levls =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="cn">Inf</span>), <span class="at">cumulative =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb60-3"><a href="#cb60-3" tabindex="-1"></a>    ...) {</span>
+<span id="cb60-4"><a href="#cb60-4" tabindex="-1"></a>  x <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">networkExtraction</span>(i, data, sims, period, groupName, varName)</span>
+<span id="cb60-5"><a href="#cb60-5" tabindex="-1"></a>  <span class="fu">require</span>(sna)</span>
+<span id="cb60-6"><a href="#cb60-6" tabindex="-1"></a>  a <span class="ot">&lt;-</span> sna<span class="sc">::</span><span class="fu">geodist</span>(<span class="fu">symmetrize</span>(x))<span class="sc">$</span>gdist</span>
+<span id="cb60-7"><a href="#cb60-7" tabindex="-1"></a>  <span class="cf">if</span> (cumulative) {</span>
+<span id="cb60-8"><a href="#cb60-8" tabindex="-1"></a>    gdi <span class="ot">&lt;-</span> <span class="fu">sapply</span>(levls, <span class="cf">function</span>(i) {</span>
+<span id="cb60-9"><a href="#cb60-9" tabindex="-1"></a>      <span class="fu">sum</span>(a <span class="sc">&lt;=</span> i)</span>
+<span id="cb60-10"><a href="#cb60-10" tabindex="-1"></a>    })</span>
+<span id="cb60-11"><a href="#cb60-11" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb60-12"><a href="#cb60-12" tabindex="-1"></a>    gdi <span class="ot">&lt;-</span> <span class="fu">sapply</span>(levls, <span class="cf">function</span>(i) {</span>
+<span id="cb60-13"><a href="#cb60-13" tabindex="-1"></a>      <span class="fu">sum</span>(a <span class="sc">==</span> i)</span>
+<span id="cb60-14"><a href="#cb60-14" tabindex="-1"></a>    })</span>
+<span id="cb60-15"><a href="#cb60-15" tabindex="-1"></a>  }</span>
+<span id="cb60-16"><a href="#cb60-16" tabindex="-1"></a>  <span class="fu">names</span>(gdi) <span class="ot">&lt;-</span> <span class="fu">as.character</span>(levls)</span>
+<span id="cb60-17"><a href="#cb60-17" tabindex="-1"></a>  gdi</span>
+<span id="cb60-18"><a href="#cb60-18" tabindex="-1"></a>}</span>
+<span id="cb60-19"><a href="#cb60-19" tabindex="-1"></a></span>
+<span id="cb60-20"><a href="#cb60-20" tabindex="-1"></a></span>
+<span id="cb60-21"><a href="#cb60-21" tabindex="-1"></a>(gof0.gd <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">sienaGOF</span>(ans, GeodesicDistribution,</span>
+<span id="cb60-22"><a href="#cb60-22" tabindex="-1"></a>  <span class="at">cumulative =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb60-23"><a href="#cb60-23" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span>, <span class="at">join =</span> <span class="cn">TRUE</span>, <span class="at">varName =</span> <span class="st">&quot;net&quot;</span></span>
+<span id="cb60-24"><a href="#cb60-24" tabindex="-1"></a>))</span></code></pre></div>
+<pre><code>Loading required package: sna</code></pre>
+<pre><code>Loading required package: statnet.common</code></pre>
+<pre><code>
+Attaching package: &#39;statnet.common&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    attr, order</code></pre>
+<pre><code>Loading required package: network</code></pre>
+<pre><code>
+&#39;network&#39; 1.18.1 (2023-01-24), part of the Statnet Project
+* &#39;news(package=&quot;network&quot;)&#39; for changes since last version
+* &#39;citation(&quot;network&quot;)&#39; for citation information
+* &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre><code>sna: Tools for Social Network Analysis
+Version 2.7-1 created on 2023-01-24.
+copyright (c) 2005, Carter T. Butts, University of California-Irvine
+ For citation information, type citation(&quot;sna&quot;).
+ Type help(package=&quot;sna&quot;) to get started.</code></pre>
+<pre><code>Siena Goodness of Fit ( GeodesicDistribution ), all periods
+=====
+Monte Carlo Mahalanobis distance test p-value:  0.385 
+-----
+One tailed test used  (i.e. estimated probability of greater distance than observation).
+-----
+Calculated joint MHD = ( 4.92 ) for current model.</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a><span class="fu">plot</span>(gof0.gd, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
+<p><img src="analysis_files/figure-html/unnamed-chunk-27-1.png" width="576" /></p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a>RSiena<span class="sc">::</span><span class="fu">descriptives.sienaGOF</span>(gof0.gd, <span class="at">center =</span> <span class="cn">FALSE</span>, <span class="at">scale =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>                   1         2        3         4         5       Inf
+max        168.00000 1050.0000 656.0000 442.00000 312.00000 1970.0000
+perc.upper 144.00000  584.0000 536.0000 368.00000 240.00000 1544.0000
+mean       105.61000  284.9140 333.8360 223.22400 106.35600 1041.3740
+median     104.00000  264.0000 332.0000 224.00000 104.00000 1038.0000
+perc.lower  68.00000  108.0000 134.0000  80.00000   8.00000  600.0000
+min         52.00000   54.0000  42.0000   6.00000   0.00000  356.0000
+sd          19.98147  125.0212 104.9124  75.45475  60.13446  249.9709
+obs        106.00000  264.0000 340.0000 326.00000 168.00000  902.0000
+p&gt;           0.46700    0.4960   0.4690   0.07800   0.15600    0.6490
+p&gt;=          0.49800    0.5010   0.4740   0.08100   0.15900    0.7030</code></pre>
+</div>
+<div id="outdegree-distribution-1" class="section level2">
+<h2>Outdegree Distribution</h2>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a>(RI <span class="ot">&lt;-</span> RSiena<span class="sc">::</span><span class="fu">sienaRI</span>(<span class="at">data =</span> mydata, <span class="at">ans =</span> ans))</span></code></pre></div>
+<pre><code>
+  Expected relative importance of effects for dependent variable &#39;net&#39; at observation moments:
+
+                                                               wave 1    wave 2    
+ 
+  1. eval outdegree (density)                                  0.4300    0.3556  
+  2. eval reciprocity                                          0.0479    0.0726  
+  3. eval transitive triplets                                  0.0109    0.0400  
+  4. eval indegree - popularity                                0.1298    0.2071  
+  5. eval outdegree - activity                                 0.0395    0.0578  
+  6. eval network-isolate                                      0.2151    0.1085  
+  7. eval gender alter                                         0.0322    0.0413  
+  8. eval gender ego                                           0.0577    0.0615  
+  9. eval same gender                                          0.0266    0.0337  
+ 10. eval transitive triplets same gender                      0.0012    0.0059  
+ 11. eval transitive triplets jumping gender                   0.0089    0.0159  
+
+
+  Expected importance of effects for this dependent variable:
+
+  1. eval outdegree (density)                                  1.0622    0.9170  
+  2. eval reciprocity                                          0.0924    0.1502  
+  3. eval transitive triplets                                  0.0307    0.1168  
+  4. eval indegree - popularity                                0.3042    0.4775  
+  5. eval outdegree - activity                                 0.1035    0.1631  
+  6. eval network-isolate                                      0.5271    0.2847  
+  7. eval gender alter                                         0.0711    0.0894  
+  8. eval gender ego                                           0.1403    0.1556  
+  9. eval same gender                                          0.0588    0.0756  
+ 10. eval transitive triplets same gender                      0.0035    0.0175  
+ 11. eval transitive triplets jumping gender                   0.0242    0.0458  
+
+
+ R_H (&#39;degree of certainty&#39;)                                   0.3970    0.3235  </code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="fu">plot</span>(RI, <span class="at">addPieChart =</span> <span class="cn">TRUE</span>, <span class="at">legendColumns =</span> <span class="dv">3</span>)</span></code></pre></div>
+<p><img src="analysis_files/figure-html/unnamed-chunk-29-1.png" width="576" /></p>
+</div>
+</div>
+<div id="goodness-of-fit-evaluation" class="section level1">
+<h1>Goodness-of-fit Evaluation</h1>
+<p>We evaluated the model fit using three common goodness-of-fit tests
+based on in-degree, out-degree, and geodesic distance distributions.</p>
+<div id="indegree-distribution-1" class="section level2">
+<h2>Indegree Distribution</h2>
+<p>The indegree distribution test compares the observed indegree
+distribution <span class="math inline">\(\mathbf{y}_{obs}\)</span> to
+the average simulated indegree distribution <span
+class="math inline">\(\bar{\mathbf{y}}_{sim}\)</span> over <span
+class="math inline">\(R=100\)</span> Monte Carlo replications. The
+distance was quantified using the Mahalanobis distance.</p>
+<p><span class="math display">\[
+\mathrm{MHD} = \sqrt{(\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})^\top
+\mathbf{S}^{-1} (\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})}
+\]</span></p>
+<p>where <span class="math inline">\(\mathbf{S}\)</span> is an <span
+class="math inline">\(8 \times 8\)</span> covariance matrix of <span
+class="math inline">\(\bar{\mathbf{y}}_{sim}\)</span>.</p>
+<p>In this model, the MHD follows an approximate <span
+class="math inline">\(\chi^2_8\)</span> distribution. The observed MHD
+was 10.98, giving a <span class="math inline">\(p\)</span>-value of</p>
+<p><span class="math display">\[
+p = P(\chi^2_8 \geq 10.98) = 0.251
+\]</span></p>
+<p>As <span class="math inline">\(p &gt; 0.05\)</span>, we fail to
+reject the null hypothesis <span class="math inline">\(H_0\)</span> of
+the equally observed and simulated distributions. The medians (21
+vs. 21), upper percentiles (28 vs. 28), and lower percentiles (16
+vs. 16) were closely aligned. This suggests good model fit for the
+tendency to receive ties.</p>
+</div>
+<div id="outdegree-distribution-2" class="section level2">
+<h2>Outdegree Distribution</h2>
+<p>The out-degree distribution test yielded an MHD of 2.94. With <span
+class="math inline">\(K=9\)</span> statistics, the <span
+class="math inline">\(p\)</span>-value is:</p>
+<p><span class="math display">\[
+p = P(\chi^2_9 \geq 2.94) = 0.872
+\]</span></p>
+<p>A high <span class="math inline">\(p\)</span>-value indicates no
+evidence of the rejection of <span class="math inline">\(H_0\)</span>.
+The summary statistics also showed a close alignment between the
+observed and simulated outdegree distributions.</p>
+</div>
+<div id="geodesic-distance-distribution" class="section level2">
+<h2>Geodesic Distance Distribution</h2>
+<p>With <span class="math inline">\(K=5\)</span> statistics, the
+geodesic distance test produced an MHD of 4.9 and <span
+class="math inline">\(p\)</span>-value of 0.404, providing no evidence
+of poor model fit.</p>
+<p>In summary, the statistically nonsignificant <span
+class="math inline">\(p\)</span>-values across the tests indicate that
+the model accurately reproduces the key structural properties of the
+observed network. This supports the use of the model to investigate
+research questions on gender differences in collaboration.</p>
+</div>
+</div>
+</div>
+
+   
+      <div id="rmd-source-code">LS0tCnRpdGxlOiAiU29jaWFsIE5ldHdvcmsgQW5hbHlzaXMiCmF1dGhvcjogImJ5OiBTaWFyZCB2YW4gZGVuIEJvc2NoIgpiaWJsaW9ncmFwaHk6IHJlZmVyZW5jZXMuYmliCmNzbDogYXBhLmNzbAotLS0KCmBgYHtyIHNldHVwLCBpbmNsdWRlPUZBTFNFfQprbml0cjo6b3B0c19jaHVuayRzZXQoZWNobyA9IFRSVUUpCmtuaXRyOjpvcHRzX2NodW5rJHNldChjb21tZW50ID0gTkEpCmBgYAoKCmBgYHtyIGluY2x1ZGU9RkFMU0V9CmZwYWNrYWdlLmNoZWNrIDwtIGZ1bmN0aW9uKHBhY2thZ2VzKSB7CiAgbGFwcGx5KHBhY2thZ2VzLCBGVU4gPSBmdW5jdGlvbih4KSB7CiAgICBpZiAoIXJlcXVpcmUoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKSkgewogICAgICBpbnN0YWxsLnBhY2thZ2VzKHgsIGRlcGVuZGVuY2llcyA9IFRSVUUpCiAgICAgIGxpYnJhcnkoeCwgY2hhcmFjdGVyLm9ubHkgPSBUUlVFKQogICAgfQogIH0pCn0KZmxvYWQgPC0gZnVuY3Rpb24oZmlsZW5hbWUpIHsKICBsb2FkKGZpbGVuYW1lKQogIGdldChscygpW2xzKCkgIT0gImZpbGVuYW1lIl0pCn0KYGBgCgpgYGB7ciBpbmNsdWRlPUZBTFNFfQpmX3B1Ym5ldHMgPC0gZnVuY3Rpb24oCiAgICBkZl9zY2hvbGFycyA9IGRmLCBsaXN0X3B1YmxpY2F0aW9ucyA9IHB1YmxpY2F0aW9ucywgZGlzY2lwID0gInNvY2lvbG9neSIsIGFmZmlsaWF0aW9uID0gIlJVIiwKICAgIHdhdmVzID0gbGlzdCh3YXZlMSA9IGMoMjAxOCwgMjAxOSwgMjAyMCksIHdhdmUyID0gYygyMDIxLCAyMDIyLCAyMDIzKSkpIHsKICAjJyBCaW5kcyBwdWJsaWNhdGlvbiByb3dzIGFuZCBkZS1kdXBsaWNhdGVzCiAgcHVibGljYXRpb25zIDwtIGxpc3RfcHVibGljYXRpb25zICU+JQogICAgYmluZF9yb3dzKCkgJT4lCiAgICBkaXN0aW5jdCh0aXRsZSwgLmtlZXBfYWxsID0gVFJVRSkKCgogICMnIEZpbHRlcnMgc2Nob2xhcnMgYnkgYWZmaWxpYXRpb24gYW5kIGRpc2NpcGxpbmUKICBkZl9zY2hvbGFycyAlPiUKICAgIGZpbHRlcihhZmZpbDEgPT0gYWZmaWxpYXRpb24gfCBhZmZpbDIgPT0gYWZmaWxpYXRpb24pICU+JQogICAgZmlsdGVyKGRpc2NpcGxpbmUgPT0gZGlzY2lwKSAtPiBkZl9zZWwKCgogICMnIEluaXRpYWxpemVzIGVtcHR5IG5ldHdvcmsgbWF0cmljZXMKICBuZXR3b3JrbGlzdCA8LSBsaXN0KCkKICBmb3IgKHdhdmUgaW4gMTpsZW5ndGgod2F2ZXMpKSB7CiAgICAjJyBNYXRyaXggb2YgMHMgZm9yIGNvLWF1dGhvcnNoaXAgbmV0d29yawogICAgbmV0d29ya2xpc3RbW3dhdmVdXSA8LSBtYXRyaXgoMCwgbnJvdyA9IG5yb3coZGZfc2VsKSwgbmNvbCA9IG5yb3coZGZfc2VsKSkKICB9CgoKICBwdWJsaWNhdGlvbmxpc3QgPC0gbGlzdCgpCiAgZm9yICh3YXZlIGluIDE6bGVuZ3RoKHdhdmVzKSkgewogICAgIycgRmlsdGVycyBwdWJzIGJ5IHNjaG9sYXIgYW5kIHllYXIKICAgIHB1YmxpY2F0aW9ubGlzdFtbd2F2ZV1dIDwtIHB1YmxpY2F0aW9ucyAlPiUKICAgICAgZmlsdGVyKGdzX2lkICVpbiUgZGZfc2VsJGdzX2lkKSAlPiUKICAgICAgZmlsdGVyKHllYXIgJWluJSB3YXZlc1tbd2F2ZV1dKSAlPiUKICAgICAgIycgR2V0cyBhdXRob3IgbmFtZXMKICAgICAgc2VsZWN0KGF1dGhvcikgJT4lCiAgICAgICMnIFNwbGl0cyBhdXRob3IgbmFtZXMKICAgICAgbGFwcGx5KHN0cl9zcGxpdCwgcGF0dGVybiA9ICIsIikKICB9CgoKICBwdWJsaWNhdGlvbmxpc3QyIDwtIGxpc3QoKQogIGZvciAod2F2ZSBpbiAxOmxlbmd0aCh3YXZlcykpIHsKICAgICMnIENsZWFucyBhdXRob3IgbmFtZXMKICAgIHB1YmxpY2F0aW9ubGlzdDJbW3dhdmVdXSA8LSBwdWJsaWNhdGlvbmxpc3RbW3dhdmVdXSRhdXRob3IgJT4lCiAgICAgIGxhcHBseSh0b2xvd2VyKSAlPiUKICAgICAgbGFwcGx5KHN0cmlfdHJhbnNfZ2VuZXJhbCwgaWQgPSAibGF0aW4tYXNjaWkiKSAlPiUKICAgICAgbGFwcGx5KHdvcmQsIHN0YXJ0ID0gLTEsIHNlcCA9ICIgIikgJT4lCiAgICAgIGxhcHBseSh3b3JkLCBzdGFydCA9IC0xLCBzZXAgPSAiLSIpCiAgfQoKCiAgZm9yICh3YXZlIGluIDE6bGVuZ3RoKHdhdmVzKSkgewogICAgIycgUmVtb3ZlcyBzaW5nbGUgYXV0aG9yIHB1YnMKICAgIHJlbW92ZSA8LSB3aGljaChzYXBwbHkocHVibGljYXRpb25saXN0Mltbd2F2ZV1dLAogICAgICBGVU4gPSBmdW5jdGlvbih4KSBsZW5ndGgoeCkgPT0gMQogICAgKSA9PSBUUlVFKQogICAgcHVibGljYXRpb25saXN0Mltbd2F2ZV1dIDwtIHB1YmxpY2F0aW9ubGlzdDJbW3dhdmVdXVstcmVtb3ZlXQogIH0KCgogIGZvciAod2F2ZSBpbiAxOmxlbmd0aCh3YXZlcykpIHsKICAgIHB1YnMgPC0gcHVibGljYXRpb25saXN0Mltbd2F2ZV1dCgoKICAgIGZvciAoZWdvIGluIDE6bnJvdyhkZl9zZWwpKSB7CiAgICAgICMnIEdldCBlZ28ncyBsYXN0IG5hbWUKICAgICAgbGFzdG5hbWVfZWdvIDwtIGRmX3NlbCRsYXN0bmFtZVtlZ29dCgoKICAgICAgZm9yIChwdWIgaW4gMTpsZW5ndGgocHVicykpIHsKICAgICAgICAjJyBDaGVjayBpZiBlZ28gYXV0aG9yZWQgcHViCiAgICAgICAgaWYgKGxhc3RuYW1lX2VnbyAlaW4lIHB1YnNbW3B1Yl1dKSB7CiAgICAgICAgICAjJyBHZXQgZWdvJ3MgYXV0aG9yIHBvc2l0aW9uCiAgICAgICAgICBhdXRfcG90IDwtIHdoaWNoLm1heChwdWJzW1twdWJdXSAlaW4lIGxhc3RuYW1lX2VnbykKCgogICAgICAgICAgIycgQ2hlY2sgaWYgZWdvIGlzIGZpcnN0IGF1dGhvcgogICAgICAgICAgaWYgKGF1dF9wb3QgPT0gMSkgewogICAgICAgICAgICBmb3IgKGFsdGVyIGluIDE6bnJvdyhkZl9zZWwpKSB7CiAgICAgICAgICAgICAgIycgR2V0IGFsdGVyJ3MgbGFzdCBuYW1lCiAgICAgICAgICAgICAgbGFzdG5hbWVfYWx0ZXIgPC0gZGZfc2VsJGxhc3RuYW1lW2FsdGVyXQoKCiAgICAgICAgICAgICAgIycgQ2hlY2sgaWYgYWx0ZXIgY29hdXRob3JlZAogICAgICAgICAgICAgIGlmIChsYXN0bmFtZV9hbHRlciAlaW4lIHB1YnNbW3B1Yl1dKSB7CiAgICAgICAgICAgICAgICAjJyBJbmNyZW1lbnQgbmV0d29yayB0aWUKICAgICAgICAgICAgICAgIG5ldHdvcmtsaXN0W1t3YXZlXV1bZWdvLCBhbHRlcl0gPC0gbmV0d29ya2xpc3RbW3dhdmVdXVtlZ28sIGFsdGVyXSArIDEKICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICAgIH0KICAgICAgICB9CiAgICAgIH0KICAgIH0KICB9CgoKICAjJyBSZXR1cm4gc2Nob2xhciBkYXRhIGFuZCBuZXR3b3JrcwogIHJldHVybihsaXN0KGRmID0gZGZfc2VsLCBuZXR3b3JrID0gbmV0d29ya2xpc3QpKQp9CmBgYAoKYGBge3IgaW5jbHVkZT1GQUxTRX0KZ2V0X3BhdGggPC0gZnVuY3Rpb24oeCkgewogIHBhc3RlMChyZWFkTGluZXMocGF0aC5leHBhbmQoIn4vcGF0aC50eHQiKSwgd2FybiA9IEZBTFNFKSwgeCkKfQpgYGAKCmBgYHtyIG1lc3NhZ2U9RkFMU0UsIHdhcm5pbmc9RkFMU0UsIGluY2x1ZGU9RkFMU0V9CiMjIExvYWRpbmcgcGFja2FnZSBSU2llbmEgYW5kIGRhdGEKcGFja2FnZXMgPC0gYygiUlNpZW5hIiwgInRpZHl2ZXJzZSIsICJzdHJpbmdkaXN0IiwgInN0cmluZ2kiKQpmcGFja2FnZS5jaGVjayhwYWNrYWdlcykKCiMgZGYgPC0gZmxvYWQoZ2V0X3BhdGgoIjIwMjMwNjIxZGZfY29tcGxldGUucmRhIikpCiMgZGZfc2VsIDwtIGRmICU+JQojICAgZmlsdGVyKGFmZmlsMSA9PSAiUlUiIHwgYWZmaWwyID09ICJSVSIpICU+JQojICAgZmlsdGVyKGRpc2NpcGxpbmUgPT0gInNvY2lvbG9neSIpCgpwdWJsaWNhdGlvbnMgPC0gZmxvYWQoZ2V0X3BhdGgoIjIwMjMwNjIxbGlzdF9wdWJsaWNhdGlvbnNfanQucmRhIikpCmRmIDwtIHJlYWRSRFMoZ2V0X3BhdGgoImRmX2FsbC5yZHMiKSkKZGZfc2VsIDwtIHJlYWRSRFMoZ2V0X3BhdGgoImRmX3NlbC5yZHMiKSkKcHVibGljYXRpb25zIDwtIGZsb2FkKGdldF9wYXRoKCIyMDIzMDYyMWxpc3RfcHVibGljYXRpb25zX2p0LnJkYSIpKQpgYGAKCmBgYHtyIGluY2x1ZGU9RkFMU0V9CiMgQW5hbHl6aW5nIHRoZSBSVSBTb2Npb2xvZ3kgZGVwYXJ0bWVudApsb2FkX3NhdmVkIDwtIFRSVUUKaWYgKGxvYWRfc2F2ZWQpIHsKICBvdXRwdXQgPC0gcmVhZFJEUyhnZXRfcGF0aCgib3V0cHV0X25ldy5yZHMiKSkKICBkZl9zb2MgPC0gcmVhZFJEUyhnZXRfcGF0aCgiZGZfc29jX2ZpbmFsLnJkcyIpKQogIGRmX25ldHdvcmsgPC0gcmVhZFJEUyhnZXRfcGF0aCgiZGZfbmV0d29ya19uZXcucmRzIikpCn0gZWxzZSB7CiAgb3V0cHV0IDwtIGZfcHVibmV0cygpCiAgZGZfc29jIDwtIG91dHB1dFtbMV1dCiAgZGZfbmV0d29yayA8LSBvdXRwdXRbWzJdXQp9CmBgYAoKCiMjIERlZmluaW5nIGRlcGVuZGVudCBhbmQgaW5kZXBlbmRlbnQgdmFyaWFibGVzCiMjIyBEZXBlbmRlbnQgdmFyaWFibGUKCmBgYHtyfQojIGxldCB1cyBjaGVjayB0aGUgbnVtYmVyIG9mIHdhdmVzCmxlbmd0aChkZl9uZXR3b3JrKQpgYGAKCgpUaGUgYHdhdmUxYCBhbmQgYHdhdmUyYCBvYmplY3RzIGFyZSBjcmVhdGVkIHRvIHN0b3JlIHRoZSBhZGphY2VuY3kgbWF0cmljZXMgZm9yIHRoZSB0d28gdGltZSBwZXJpb2RzL3dhdmVzIGZyb20gdGhlIGBkZl9uZXR3b3JrYCBsaXN0LiBUaGlzIG1ha2VzIGl0IGVhc2llciB0byByZWZlciB0byBlYWNoIG1hdHJpeCBzZXBhcmF0ZWx5IGluIHN1YnNlcXVlbnQgc3RlcHMuCgoKYGBge3J9CiMgV2F2ZSAxIGFkamFjZW5jeSBtYXRyaXgKd2F2ZTEgPC0gZGZfbmV0d29ya1tbMV1dCgoKIyBXYXZlIDIgYWRqYWNlbmN5IG1hdHJpeAp3YXZlMiA8LSBkZl9uZXR3b3JrW1syXV0KYGBgCgoKVGhlIGRpYWdvbmFscyBvZiB0aGUgYWRqYWNlbmN5IG1hdHJpY2VzIGFyZSBzZXQgdG8gMCB0byByZW1vdmUgc2VsZi10aWVzIGFsb25nIHRoZSBkaWFnb25hbCwgc2luY2Ugb2Z0ZW4gaW4gbmV0d29yayBhbmFseXNpcyB3ZSBhcmUgaW50ZXJlc3RlZCBpbiBtb2RlbGluZyBjb25uZWN0aW9ucyBiZXR3ZWVuIGRpc3RpbmN0IG5vZGVzLiBSZW1vdmluZyBzZWxmLWNvbm5lY3Rpb25zIHNpbXBsaWZpZXMgdGhpcyBpbnRlcnByZXRhdGlvbi4KCgpgYGB7cn0KIyBTZXRzIGRpYWdvbmFsIG9mIHdhdmUxIG1hdHJpeCB0byAwCmRpYWcod2F2ZTEpIDwtIDAKCgojIFNldHMgZGlhZ29uYWwgb2Ygd2F2ZTIgbWF0cml4IHRvIDAKZGlhZyh3YXZlMikgPC0gMApgYGAKCgpUaGUgd2VpZ2h0ZWQgYWRqYWNlbmN5IG1hdHJpY2VzIGFyZSBiaW5hcml6ZWQgdG8gY29udmVydCBhbnkgdGllcyBncmVhdGVyIHRoYW4gMSB0byBzaW1wbGUgYmluYXJ5IDAvMSB2YWx1ZXMuIFRoaXMgbWFrZXMgdGhlIG5ldHdvcmsgY29ubmVjdGlvbnMgc3RyYWlnaHRmb3J3YXJkIGFuZCB1bndlaWdodGVkIGVkZ2VzIHN1aXRhYmxlIGZvciBtb2RlbGluZyBwdXJwb3Nlcy4KCgpgYGB7cn0KIyBCaW5hcml6ZXMgd2F2ZTEgbWF0cml4IHZhbHVlcyB0byAwLzEKd2F2ZTFbd2F2ZTEgPiAxXSA8LSAxCgoKIyBCaW5hcml6ZXMgd2F2ZTIgbWF0cml4IHZhbHVlcyB0byAwLzEKd2F2ZTJbd2F2ZTIgPiAxXSA8LSAxCmBgYAoKClRoZSBiaW5hcml6ZWQgYWRqYWNlbmN5IG1hdHJpY2VzIGFyZSBjb21iaW5lZCBpbnRvIGFuIGFycmF5IHRvIHJlcHJlc2VudCB0aGUgdHdvIG5ldHdvcmsgb2JzZXJ2YXRpb25zIG92ZXIgdGltZS4gVGhpcyBzdGFja3MgdGhlIG1hdHJpY2VzIGludG8gdGhlIGZvcm1hdCByZXF1aXJlZCBmb3IgdGhlIGRlcGVuZGVudCB2YXJpYWJsZS4KCgpgYGB7cn0KIyBDcmVhdGVzIGFycmF5IGNvbnRhaW5pbmcgd2F2ZTEgYW5kIHdhdmUyIG1hdHJpY2VzCm5ldF9zb2NfYXJyYXkgPC0gYXJyYXkoZGF0YSA9IGMod2F2ZTEsIHdhdmUyKSwgZGltID0gYyhkaW0od2F2ZTEpLCAyKSkKYGBgCgoKVGhlIGFycmF5IGlzIGNvbnZlcnRlZCB0byBhIGBzaWVuYURlcGVuZGVudGAgb2JqZWN0IHRvIHNwZWNpZnkgdGhlIGRlcGVuZGVudCBuZXR3b3JrIHZhcmlhYmxlIGZvciB0aGUgZXN0aW1hdGlvbi4gVGhpcyBlbmNhcHN1bGF0ZXMgdGhlIGFycmF5IHdpdGggbWV0YWRhdGEgZm9yIHVzZSBpbiBSU2llbmEgbW9kZWwgZnVuY3Rpb25zLgoKCmBgYHtyfQojIERlZmluZXMgdGhlIGRlcGVuZGVudCB2YXJpYWJsZSBmb3IgdGhlIFNpZW5hIG1vZGVsCm5ldCA8LSBSU2llbmE6OnNpZW5hRGVwZW5kZW50KG5ldF9zb2NfYXJyYXkpCmBgYAoKClNvbWUgZXhhbXBsZXMgZXhwbGFpbiB0aGUgcmVhc29uaW5nIGJlaGluZCB0aGVzZSBzdGVwcy4KCgpgYGB7cn0KIyBFeHRyYWN0cyBnZW5kZXIgdmVjdG9yIGZyb20gZGZfc29jCihnZW5kZXIgPC0gYXMubnVtZXJpYyhkZl9zb2MkZ2VuZGVyID09ICJmZW1hbGUiKSkKYGBgCgoKVGhlIGdlbmRlciB2ZWN0b3IgaXMgZXh0cmFjdGVkIGZyb20gdGhlIGBkZl9zb2NgIGRhdGEgZnJhbWUsIGNvbnRhaW5pbmcgMC8xIGluZGljYXRvcnMgb2Ygd2hldGhlciBlYWNoIGFjdG9yIGlzIGZlbWFsZS4gVGhpcyBjcmVhdGVkIHJhdyBkYXRhIGZvciB0aGUgc2V4IGNvdmFyaWF0ZS4KCgpgYGB7cn0KIyBDcmVhdGVzIGEgZ2VuZGVyIGNvdmFyaWF0ZSBmcm9tIHRoZSB2ZWN0b3IKKGdlbmRlciA8LSBSU2llbmE6OmNvQ292YXIoZ2VuZGVyKSkKYGBgCgoKVGhlIGdlbmRlciB2ZWN0b3IgaXMgY29udmVydGVkIGludG8gYSBjb3ZhcmlhdGUgb2JqZWN0IHVzaW5nIHRoZSBgY29Db3ZhcmAgZnVuY3Rpb24uIFRoaXMgd3JhcHMgdGhlIHZlY3RvciB3aXRoIGFkZGl0aW9uYWwgYXR0cmlidXRlcywgc3VjaCBhcyB0aGUgbm9kZXNldCAoIkFjdG9ycyIpLCB0byBkZWZpbmUgaXQgYXMgYSBjb3ZhcmlhdGUgZm9yIHRoZSBtb2RlbCBlc3RpbWF0aW9uLgoKIyMgUlNpZW5hCgpUaGUgYHNpZW5hRGF0YUNyZWF0ZWAgZnVuY3Rpb24gaXMgdXNlZCB0byBidW5kbGUgdGhlIGRlcGVuZGVudCBuZXR3b3JrIHZhcmlhYmxlIChgbmV0YCkgYW5kIGdlbmRlciBjb3ZhcmlhdGUgaW50byBhIHNpbmdsZSBzaWVuYSBkYXRhIG9iamVjdCAoYG15ZGF0YWApLiBUaGlzIGNvbWJpbmVzIGFsbCBkYXRhIHJlcXVpcmVkIGZvciBtb2RlbCBlc3RpbWF0aW9uIGludG8gYSBzcGVjaWFsaXplZCBzdHJ1Y3R1cmUuCgpgYGB7cn0KIyBDcmVhdGVzIGEgU2llbmEgZGF0YSBvYmplY3QgY29udGFpbmluZyB0aGUgbmV0d29ya3MgYW5kIGNvdmFyaWF0ZQoobXlkYXRhIDwtIFJTaWVuYTo6c2llbmFEYXRhQ3JlYXRlKG5ldCwgZ2VuZGVyKSkKYGBgCgoKVGhlIG5ldyBTaWVuYSBkYXRhIG9iamVjdCBjYWxsZWQgYG15ZGF0YWAgY29udGFpbnMgdGhlIGxvbmdpdHVkaW5hbCBjby1hdXRob3JzaGlwIG5ldHdvcmsgYWNyb3NzIDIgdGltZXBvaW50cyAobmV0KSBhbmQgdGhlIGdlbmRlciBjb3ZhcmlhdGUgZm9yIDQ3IGZhY3VsdHkgbm9kZXMuIFRoZSBzaWVuYURhdGFDcmVhdGUgZnVuY3Rpb24gZm9ybWF0cyB0aGUgcmF3IG5ldHdvcmsgYW5kIGF0dHJpYnV0ZSBkYXRhIGludG8gdGhlIHJlcXVpcmVkIHN0cnVjdHVyZSBmb3IgU2llbmEgbW9kZWxpbmcuIFRoZSBvdXRwdXQgY29uZmlybXMgbXlkYXRhIGhhcyAyIG5ldHdvcmsgb2JzZXJ2YXRpb25zLCBuZXQgaXMgYSBvbmUtbW9kZSBmYWN1bHR5IGNvLWF1dGhvcnNoaXAgbmV0d29yaywgYW5kIGdlbmRlciBpcyBhIGNvbnN0YW50IGNvdmFyaWF0ZS4gSW4gc3VtbWFyeSwgdGhpcyBwcmUtcHJvY2Vzc2VzIHRoZSBjb2xsYWJvcmF0aW9uIGRhdGEgaW50byB0aGUgbmVjZXNzYXJ5IFNpZW5hIGZvcm1hdCwgY29tcGlsaW5nIHRoZSB0ZW1wb3JhbCBuZXR3b3JrIGFuZCBhdHRyaWJ1dGVzLCB0byBlbmFibGUgc3RhdGlzdGljYWxseSBtb2RlbGluZyB0aGUgZHluYW1pY3Mgb2YgdGhpcyBmYWN1bHR5IG5ldHdvcmsuCgoKIyMgUlNpZW5hIEVmZmVjdHMKVGhlIGBnZXRFZmZlY3RzYCBmdW5jdGlvbiBnZW5lcmF0ZXMgZGVmYXVsdCBzdGFydGluZyB2YWx1ZXMgZm9yIGFsbCBwb3NzaWJsZSBlZmZlY3RzIGluY2x1ZGVkIGluIHRoZSBuZXR3b3JrcyBhbmQgY292YXJpYXRlcyBpbiB0aGUgbWV0YWRhdGEuIFRoaXMgcHJvdmlkZXMgdGhlIGluaXRpYWwgdmFsdWVzIHJlcXVpcmVkIGZvciB0aGUgbW9kZWwgc3BlY2lmaWNhdGlvbiBhbmQgZXN0aW1hdGlvbi4KCmBgYHtyfQojIEdldHMgc3RhcnRpbmcgdmFsdWVzIGZvciBwb3NzaWJsZSBlZmZlY3RzCihteWVmZiA8LSBSU2llbmE6OmdldEVmZmVjdHMobXlkYXRhKSkKYGBgCgpUaGUgb3V0cHV0IGZyb20gdGhlIGBnZXRFZmZlY3RzYCBmdW5jdGlvbiBwcm92aWRlcyBpbml0aWFsIHBhcmFtZXRlciB2YWx1ZXMgZm9yIG1vZGVsaW5nIG5ldHdvcmsgZHluYW1pY3MgdXNpbmcgdGhlIFNpbXVsYXRpb24gSW52ZXN0aWdhdGlvbiBmb3IgRW1waXJpY2FsIE5ldHdvcmsgQW5hbHlzaXMgKFNJRU5BKSBhcHByb2FjaCAoU25pamRlcnMsIHZhbiBkZSBCdW50LCAmIFN0ZWdsaWNoLCAyMDEwKS4gU3BlY2lmaWNhbGx5LCBpdCBzaG93cyBzdGFydGluZyB2YWx1ZXMgZm9yIHRocmVlIGVmZmVjdHMgdGhhdCBhcmUgY29tbW9ubHkgaW5jbHVkZWQgaW4gU0lFTkEgbW9kZWxzOiB0aGUgYmFzaWMgcmF0ZSBwYXJhbWV0ZXIsIG91dGRlZ3JlZSAoZGVuc2l0eSksIGFuZCByZWNpcHJvY2l0eS4gCgpUaGUgYmFzaWMgcmF0ZSBwYXJhbWV0ZXIgZGV0ZXJtaW5lcyB0aGUgYmFzZWxpbmUgdGVuZGVuY3kgZm9yIGNoYW5nZXMgaW4gbmV0d29yayB0aWVzIG92ZXIgdGltZS4gVGhlIGluaXRpYWwgdmFsdWUgb2YgJDIuNjk4NzUkIHJlcHJlc2VudHMgdGhlIHN0YXJ0aW5nIGFzc3VtcHRpb24gdGhhdCB0aWVzIGhhdmUgYSBtb2RlcmF0ZSB0ZW5kZW5jeSB0byBjaGFuZ2UuIE91dGRlZ3JlZSwgd2hpY2ggY2FwdHVyZXMgZGVuc2l0eSB0cmVuZHMsIGhhcyBhbiBpbml0aWFsIHZhbHVlIG9mICQtMS42NDUxOCQuIFRoaXMgbmVnYXRpdmUgcGFyYW1ldGVyIGluZGljYXRlcyBhbiBpbml0aWFsIGFzc3VtcHRpb24gb2YgZGVjcmVhc2luZyBuZXR3b3JrIGRlbnNpdHkgb3ZlciB0aW1lLiBUaGUgc3RhcnRpbmcgdmFsdWUgZm9yIHJlY2lwcm9jaXR5IGlzIDAsIHJlZmxlY3Rpbmcgbm8gaW5pdGlhbCBhc3N1bXB0aW9uIHJlZ2FyZGluZyBtdXR1YWxpdHkgb2YgdGllcy4KCkZvciBlYWNoIGVmZmVjdCwgdGhlIG91dHB1dCBwcm92aWRlcyBjb2x1bW5zIGluZGljYXRpbmcgd2hldGhlciB0byBpbmNsdWRlIHRoZSBlZmZlY3QsIGZpeCBpdHMgdmFsdWUsIGFuZCB0ZXN0IGZvciBzaWduaWZpY2FuY2UuIFRoZSBgaW5pdGlhbFZhbHVlYCBjb2x1bW4gc2hvd3MgdGhlIHN0YXJ0aW5nIHZhbHVlIGZvciBlYWNoIGVmZmVjdCwgd2hpbGUgdGhlIGBwYXJtYCBjb2x1bW4gZ2l2ZXMgdGhlIG51bWJlciBvZiBwYXJhbWV0ZXJzIGFzc29jaWF0ZWQgd2l0aCBpdC4gCgoKIyMjIElzb2xhdGUgZWZmZWN0IChgaXNvbGF0ZU5ldGApCgpUaGUgYGlzb2xhdGVOZXRgIGVmZmVjdCBpcyBoaWdobHkgcmVsZXZhbnQgZm9yIGludmVzdGlnYXRpbmcgcG90ZW50aWFsIGdlbmRlciBpbmVxdWFsaXRpZXMgd2l0aGluIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsgb2YgZmFjdWx0eSBhdCBNYWpvciBVbml2ZXJzaXR5LiBBIGZ1bmRhbWVudGFsIGdvYWwgb2YgdGhpcyBzdHVkeSBpcyB0byBhc3Nlc3Mgd2hldGhlciB3b21lbiBleHBlcmllbmNlIGNvbnN0cmFpbnRzIGluIGFjY2Vzc2luZyBzdHJhdGVnaWNhbGx5IGFkdmFudGFnZW91cyBwb3NpdGlvbnMgdGhhdCBhbGxvdyBwcm9kdWN0aXZlIGVuZ2FnZW1lbnQgaW4gYSBjb2xsYWJvcmF0aXZlIGVjb3N5c3RlbSwgd2hpY2ggaXMgdml0YWwgZm9yIHN1Y2Nlc3MgYW5kIGFkdmFuY2VtZW50IGluIGNvbnRlbXBvcmFyeSBhY2FkZW1pYS4gQmVpbmcgZGlzY29ubmVjdGVkIGFuZCBtYXJnaW5hbGl6ZWQgd2l0aCBubyBjb2xsYWJvcmF0b3JzIHdvdWxkIGNvbnN0aXR1dGUgYW4gZXh0cmVtZSBmb3JtIG9mIGV4Y2x1c2lvbiBmcm9tIHRoaXMgY29sbGFib3JhdGl2ZSBmYWJyaWMuCgoKVGhlIGlzb2xhdGVOZXQgZWZmZWN0LCBkZW5vdGVkICRzX3tpNTZ9XntcdGV4dHtuZXR9fSh4LCB6KSQsIHByb3ZpZGVzIGEgZGlyZWN0IHdheSB0byBxdWFudGlmeSB0aGUgcHJldmFsZW5jZSBvZiBzdWNoIGlzb2xhdGlvbi4gVGhpcyBpcyBtYXRoZW1hdGljYWxseSBkZWZpbmVkIGFzIGZvbGxvd3MuCgoKJCRzX3tpNTZ9XntcdGV4dHtuZXR9fSh4LCB6KSA9IElcbGVmdFx7eF97K2l9PXhfe2krfT0wXHJpZ2h0XH0kJAoKCldoZXJlOgoKCi0gJHhfeytpfSQgcmVwcmVzZW50cyB0aGUgaW4tZGVncmVlIG9mIGFjdG9yICRpJCwgZGVmaW5lZCBhcyB0aGUgbnVtYmVyIG9mIGluY29taW5nIHRpZXMgdG8gYWN0b3IgJGkkCgoKLSAkeF97aSt9JCByZXByZXNlbnRzIHRoZSBvdXQtZGVncmVlIG9mIGFjdG9yICRpJCwgZGVmaW5lZCBhcyB0aGUgbnVtYmVyIG9mIG91dGdvaW5nIHRpZXMgZnJvbSBhY3RvciAkaSQKCgotICRJXGxlZnRce1xyaWdodFx9JCBpcyBhbiBpbmRpY2F0b3IgZnVuY3Rpb24gZXF1YWxpbmcgMSBpZiB0aGUgY29uZGl0aW9uIGluc2lkZSB0aGUgYnJhY2tldHMgaXMgc2F0aXNmaWVkLCBhbmQgMCBvdGhlcndpc2UKCgpUaGlzIGNvdW50cyBhY3RvciAkaSQgYXMgYW4gaXNvbGF0ZSAoY29udHJpYnV0aW9uIG9mIDEpIGlmIGJvdGggaW4tZGVncmVlICR4X3sraX0kIGFuZCBvdXQtZGVncmVlICR4X3tpK30kIGFyZSBlcXVhbCB0byB6ZXJvLCBtZWFuaW5nIHRoYXQgdGhlIGFjdG9yIGhhcyBubyBpbmNvbWluZyBvciBvdXRnb2luZyBjb2xsYWJvcmF0aXZlIHRpZXMuCgoKQSBzaWduaWZpY2FudCBhbmQgcG9zaXRpdmUgcGFyYW1ldGVyIGZvciBgaXNvbGF0ZU5ldGAgYWNjb3JkaW5nIHRvIGdlbmRlciBpbmRpY2F0ZXMgdGhhdCB0aGUgZmFjdWx0eSBvZiB0aGF0IGdlbmRlciBoYXMgYSBoaWdoZXIgdGVuZGVuY3kgdG8gYmUgZGlzY29ubmVjdGVkIGluIHRoZSBuZXR3b3JrLiBHaXZlbiB0aGUgZXh0ZW5zaXZlIHByaW9yIHdvcmsgc3VnZ2VzdGluZyB0aGF0IGZlbWFsZSBmYWN1bHR5IGZhY2UgY29uc3RyYWludHMgb24gYWNjZXNzIHRvIGNvbGxhYm9yYXRpb25zLCBhIGtleSBoeXBvdGhlc2lzIG9mIHRoaXMgc3R1ZHkgaXMgdGhhdCB0aGUgYGlzb2xhdGVOZXRgIGVmZmVjdCB3aWxsIGJlIHNpZ25pZmljYW50IGFuZCBwb3NpdGl2ZSBmb3Igd29tZW4gYnV0IG5vdCBmb3IgbWVuLgoKClN1Y2ggYSBmaW5kaW5nIHdvdWxkIHByb3ZpZGUgY29tcGVsbGluZyBxdWFudGl0YXRpdmUgZXZpZGVuY2UgdGhhdCB3b21lbiBhcmUgbW9yZSBsaWtlbHkgdG8gYmUgbWFyZ2luYWxpemVkIHdpdGhpbiB0aGUgZGVwYXJ0bWVudGFsIGNvLWF1dGhvcnNoaXAgZWNvc3lzdGVtLiBUaGlzIGV4Y2x1c2lvbiBmcm9tIGNvbm5lY3Rpdml0eSwgd2hpY2ggaXMgaW5jcmVhc2luZ2x5IHZpdGFsIGZvciBpbXBhY3QgYW5kIGFkdmFuY2VtZW50LCByZXByZXNlbnRzIGEgZnVuZGFtZW50YWwgaW5lcXVhbGl0eSB0aGF0IG11c3QgYmUgYWRkcmVzc2VkLiBUaGUgYGlzb2xhdGVOZXRgIGVmZmVjdCBvcGVyYXRpb25hbGl6ZXMgdGhpcyBpc29sYXRlZCBwb3NpdGlvbiBpbiBhIHdheSB0aGF0IHBvd2VyZnVsbHkgc3BlYWtzIHRvIGJyb2FkZXIgaXNzdWVzIG9mIGluZXF1YWxpdHkgd2l0aGluIHRoZSBzaGlmdGluZyBjb2xsYWJvcmF0aXZlIGxhbmRzY2FwZSBvZiBhY2FkZW1pYS4KCgojIyMgSW4tZGVncmVlIHBvcHVsYXJpdHkgZWZmZWN0IChgaW5Qb3BgKQoKClRoZSBpbi1kZWdyZWUgcG9wdWxhcml0eSBlZmZlY3QgaXMgaGlnaGx5IHJlbGV2YW50IGZvciBpbnZlc3RpZ2F0aW5nIHBvdGVudGlhbCBnZW5kZXIgYXN5bW1ldHJpZXMgaW4gdGhlIHN0dWRpZWQgZmFjdWx0eSBjby1hdXRob3JzaGlwIG5ldHdvcmsuIEEgY29yZSBpbnRlcmVzdCBpcyB0byBhc3Nlc3Mgd2hldGhlciB3b21lbiBzY2hvbGFycyBmYWNlIGNvbnN0cmFpbnRzIGluIGFjY2Vzc2luZyBhZHZhbnRhZ2VkIG5ldHdvcmsgcG9zaXRpb25zIHRoYXQgY29udHJpYnV0ZSB0byBjdW11bGF0aXZlIGFkdmFudGFnZSBwcm9jZXNzZXMuIFRoZSBpbi1kZWdyZWUgcG9wdWxhcml0eSBlZmZlY3QgcHJlY2lzZWx5IHF1YW50aWZpZXMgdGhlIHRlbmRlbmN5IGZvciBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBiYXNlZCBvbiBjdXJyZW50IHBvcHVsYXJpdHkgKG9wZXJhdGlvbmFsaXplZCBhcyBpbi1kZWdyZWUpLCB3aGljaCBpcyBhIHBpdm90YWwgZ2VuZXJhdGl2ZSBuZXR3b3JrIG1lY2hhbmlzbSB0aGF0IGNhbiBjb25jZW50cmF0ZSBsaW5rcyBhbW9uZyBhbHJlYWR5IHdlbGwtY29ubmVjdGVkIG5vZGVzIG92ZXIgdGltZS4KCgpNYXRoZW1hdGljYWxseSwgdGhpcyBlZmZlY3QgaXMgZGVmaW5lZCBhcyBmb2xsb3dzLgoKCiQkc197aTI0fV57XHRleHR7bmV0fX0oeCkgPSBcc3VtX3tqIFxpbiBOKGkpfSB4X3sran0kJAoKCldoZXJlOgoKCi0gJE4oaSkkIGlzIHRoZSBzZXQgb2Ygbm9kZXMgJGokIHN1Y2ggdGhhdCBhY3RvciAkaSQgaGFzIGFuIG91dGdvaW5nIHRpZSB0byAkaiQsIGkuZS4gd2hlcmUgJHhfe2lqfSA9IDEkCi0gJHhfeytqfSA9IFxzdW1fe2ggXGluIEF9IHhfe2hqfSQgaXMgdGhlIGluLWRlZ3JlZSBvZiBub2RlICRqJCwgY291bnRpbmcgJGokJ3MgbnVtYmVyIG9mIGluY29taW5nIHRpZXMgZnJvbSBhbGwgbm9kZXMgJGgkIGluIHRoZSBzZXQgb2YgYWN0b3JzICRBJAotIFRoZXJlZm9yZSwgJFxzdW1fe2ogXGluIE4oaSl9IHhfeytqfSQgc3VtcyB0aGUgaW4tZGVncmVlcyBvZiBhbGwgbm9kZXMgJGokIHRoYXQgZWdvICRpJCBoYXMgY29sbGFib3JhdGlvbnMgd2l0aAoKClRoaXMgY291bnRzIHRoZSB0b3RhbCBudW1iZXIgb2YgaW5jb21pbmcgdGllcyByZWNlaXZlZCBieSBhbGwgb2YgYWN0b3IgJGkkJ3MgY29sbGFib3JhdG9ycy4gVGhpcyBlZmZlY3QgZXN0aW1hdGVzIHRoZSB0ZW5kZW5jeSBvZiBhY3RvcnMgd2l0aCBhbHJlYWR5IGhpZ2ggZGVncmVlcyB0byBhdHRyYWN0IG1vcmUgdGllcyBvdmVyIHRpbWUuCgoKQSBwb3NpdGl2ZSBjb2VmZmljaWVudCBmb3IgdGhlIGluLWRlZ3JlZSBwb3B1bGFyaXR5IGVmZmVjdCBzaWduaWZpZXMgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgZHluYW1pY3MuIENvbXBhcmluZyB0aGUgZWZmZWN0IGJldHdlZW4gZmVtYWxlIGFuZCBtYWxlIGZhY3VsdHkgbWVtYmVycywgd2hpbGUgY29udHJvbGxpbmcgZm9yIG90aGVyIGZhY3RvcnMsIHdpbGwgaW5kaWNhdGUgd2hldGhlciB0aGVyZSBhcmUgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoZSBleHRlbnQgdG8gd2hpY2ggZmVtYWxlIHZlcnN1cyBtYWxlIHNjaG9sYXJzIGNhbiBsZXZlcmFnZSB0aGVpciBwb3B1bGFyaXR5IHRvIGF0dHJhY3QgYWRkaXRpb25hbCBjb2xsYWJvcmF0aW9ucyBvdmVyIHRpbWUuCgoKU2lnbmlmaWNhbnRseSBsb3dlciBwcmVmZXJlbnRpYWwgYXR0YWNobWVudCBmb3Igd29tZW4gc3VnZ2VzdHMgc3VidGxlIGNvbnN0cmFpbnRzIHRoYXQgaGFtcGVyIHRoZWlyIGNvbm5lY3Rpdml0eSB0byBoaWdoLXN0YXR1cyBjb2xsYWJvcmF0b3JzLCB3aXRoIGltcGxpY2F0aW9ucyBmb3IgY3VtdWxhdGl2ZSBhZHZhbnRhZ2UgcHJvY2Vzc2VzIHRoYXQgbWF5IGZ1cnRoZXIgY29uY2VudHJhdGUgb24gb3Bwb3J0dW5pdGllcyBhbW9uZyB3ZWxsLWNvbm5lY3RlZCBtZW4uCgoKIyMjIE91dC1kZWdyZWUgYWN0aXZpdHkgZWZmZWN0IChgb3V0QWN0YCkKCgpUaGUgYG91dEFjdGAgZWZmZWN0IGlzIGhpZ2hseSByZWxldmFudCBmb3IgdGhpcyBzdHVkeSdzIGdvYWwgb2YgYXNzZXNzaW5nIGdlbmRlciBkaWZmZXJlbmNlcyBpbiBjby1hdXRob3JzaGlwIG5ldHdvcmtzIHdpdGhpbiBhY2FkZW1pYS4KCgpTcGVjaWZpY2FsbHksIHRoZSBgb3V0QWN0YCBlZmZlY3QgcmVwcmVzZW50cyBhIHRlbmRlbmN5IGZvciBoaWdobHkgYWN0aXZlIHNjaG9sYXJzIHdpdGggbWFueSBvdXRnb2luZyBjb2xsYWJvcmF0aW9uIHRpZXMgdG8gZ2FpbiBldmVuIG1vcmUgdGllcyBvdmVyIHRpbWUuIFRoaXMgY291bGQgZXhhY2VyYmF0ZSBnZW5kZXIgaW1iYWxhbmNlcyBpZiBtYWxlIGZhY3VsdHkgbWVtYmVycyBoYWQgaGlnaGVyIGluaXRpYWwgb3V0LWRlZ3JlZXMuCgoKTWF0aGVtYXRpY2FsbHksIHRoZSBgb3V0QWN0YCBlZmZlY3QgaXMgZGVmaW5lZCBhcwoKCiQkc197aSxcdGV4dHtvdXRBY3R9fV57XHRleHR7bmV0fX0oeCkgPSAoeF97aSt9KV4yJCQKCgpXaGVyZToKCgotICRzX3tpLFx0ZXh0e291dEFjdH19XntcdGV4dHtuZXR9fSh4KSQgaXMgdGhlIGBvdXRBY3RgIGVmZmVjdCBjb250cmlidXRpb24gZm9yIGFjdG9yICRpJAotICR4X3tpK30kIGlzIHRoZSBvdXQtZGVncmVlIG9mIGFjdG9yICRpJCwgcmVwcmVzZW50aW5nIHRoZSBudW1iZXIgb2Ygb3V0Z29pbmcgY29sbGFib3JhdGlvbiB0aWVzCi0gU3F1YXJpbmcgdGhlIG91dC1kZWdyZWUsICQoeF97aSt9KV4yJCwgbWFrZXMgdGhlIGVmZmVjdCBub25saW5lYXIKCgpUaGlzIG5vbmxpbmVhcml0eSBpbXBsaWVzIHRoYXQgYWN0b3JzIHdpdGggYWxyZWFkeSBoaWdoIG91dC1kZWdyZWVzIGNvbnRyaWJ1dGUgbW9yZSB0byB0aGlzIGVmZmVjdC4gVGh1cywgaXQgY2FwdHVyZXMgdGhlIHRlbmRlbmN5IG9mIHBvcHVsYXIsIGhpZ2gtYWN0aXZpdHkgYWN0b3JzIHRvIGdhaW4gbW9yZSB0aWVzIG92ZXIgdGltZS4KCgpJZiBtYWxlIGZhY3VsdHkgaGF2ZSBtb3JlIG91dGdvaW5nIGNvbGxhYm9yYXRpb24gdGllcyBvbiBhdmVyYWdlIGluaXRpYWxseSwgYSBwb3NpdGl2ZSBgb3V0QWN0YCBwYXJhbWV0ZXIgd291bGQgaW1wbHkgdGhpcyBhY3Rpdml0eSBnYXAgYmVjb21lcyBtYWduaWZpZWQgb3ZlciB0aW1lLiBUaGlzIGNvdWxkIGV4YWNlcmJhdGUgZ2VuZGVyIGRpc3Bhcml0aWVzIGluIGFjY2VzcyB0byBjby1hdXRob3JzaGlwIG9wcG9ydHVuaXRpZXMuCgoKVGhlcmVmb3JlLCB0aGUgYG91dEFjdGAgZWZmZWN0IGlzIHBpdm90YWwgaW4gYXNzZXNzaW5nIHdoZXRoZXIgcG90ZW50aWFsIGltYmFsYW5jZXMgaW4gdGhlIGluaXRpYXRpb24gb2YgY29sbGFib3JhdGlvbiB0aWVzIGFjcm9zcyBnZW5kZXJzIGFyZSBzZWxmLXBlcnBldHVhdGluZy4gQ29tcGFyaW5nIHRoZSBgb3V0QWN0YCBwYXJhbWV0ZXIgYmV0d2VlbiBtYWxlIGFuZCBmZW1hbGUgZmFjdWx0aWVzIGluZGljYXRlcyB3aGV0aGVyIHRoZXJlIGlzIGFjdGl2aXR5IGluZXF1YWxpdHkgdGhhdCByZWluZm9yY2VzIG92ZXIgdGltZS4KCgpFbHVjaWRhdGluZyB0aGlzIGlzIGVzc2VudGlhbCBmb3IgdW5kZXJzdGFuZGluZyB0aGUgc3VidGxlIGZhY3RvcnMgdGhhdCBhbGxvdyBnZW5kZXIgaW5lcXVpdGllcyB0byBwZXJzaXN0IHdpdGhpbiBjby1hdXRob3JzaGlwIG5ldHdvcmtzIGluIGFjYWRlbWlhLiBUaGUgYG91dEFjdGAgZWZmZWN0IHByb3ZpZGVzIGEgcmlnb3JvdXMgd2F5IHRvIHF1YW50aWZ5IHJlaW5mb3JjaW5nIHRlbmRlbmNpZXMgdGhhdCBjb3VsZCBjb25zdHJhaW4gd29tZW4ncyBvcHBvcnR1bml0aWVzLiBUaGlzIGNsb3NlbHkgYWxpZ25zIHdpdGggdGhlIGdvYWwgb2YgZGVsaW5lYXRpbmcgY29uc3RyYWludHMgZm9yIHdvbWVuIGluIG9jY3VweWluZyBzdHJhdGVnaWNhbGx5IGFkdmFudGFnZW91cyBuZXR3b3JrIHBvc2l0aW9ucy4KCgpgYGB7cn0KIyBJbmNsdWRlcyBgaXNvbGF0ZU5ldGAsIGBpblBvcGAsIGFuZCBgb3V0QWN0YCBlZmZlY3RzIGluIHRoZSBgbXllZmZgIG9iamVjdAoobXllZmYgPC0gUlNpZW5hOjppbmNsdWRlRWZmZWN0cyhteWVmZiwgaXNvbGF0ZU5ldCwgaW5Qb3AsIG91dEFjdCkpCmBgYAoKVGhlIGBpbmNsdWRlRWZmZWN0c2AgZnVuY3Rpb24gaW4gdGhlIFJTaWVuYSBwYWNrYWdlIGZvciBSIGFsbG93cyBhZGRpdGlvbmFsIGVmZmVjdHMgdG8gYmUgaW5jb3Jwb3JhdGVkIGludG8gYSBTSUVOQSBtb2RlbCBzcGVjaWZpY2F0aW9uIChSaXBsZXkgZXQgYWwuLCAyMDIxKS4gVGhlIHByb3ZpZGVkIGNvZGUgZGVtb25zdHJhdGVzIHVzaW5nIGBpbmNsdWRlRWZmZWN0c2AgdG8gYWRkIHRocmVlIG5ldyBlZmZlY3RzIC0gaXNvbGF0aW5nIHRlbmRlbmN5IChgaXNvbGF0ZU5ldGApLCBpbmRlZ3JlZSBwb3B1bGFyaXR5IChgaW5Qb3BgKSwgYW5kIG91dGRlZ3JlZSBhY3Rpdml0eSAoYG91dEFjdGApIC0gdG8gYW4gZXhpc3RpbmcgU0lFTkEgbW9kZWwgc3BlY2lmaWNhdGlvbiBvYmplY3QgY2FsbGVkIGBteWVmZi5gIAoKVGhlIG91dHB1dCBjb25maXJtcyB0aGF0IHRocmVlIGVmZmVjdHMgZnJvbSB0aGUgaW5pdGlhbCBgbXllZmZgIG9iamVjdCAoYmFzaWMgcmF0ZSwgZGVuc2l0eSwgcmVjaXByb2NpdHkpIGFuZCB0aGUgdGhyZWUgbmV3bHkgaW5jbHVkZWQgZWZmZWN0cyBhcmUgbm93IHByZXNlbnQsIGZvciBhIHRvdGFsIG9mIHNpeCBlZmZlY3RzLiBBbGwgZWZmZWN0cyBoYXZlIGluY2x1ZGUgc2V0IHRvIFRSVUUsIGluZGljYXRpbmcgdGhleSB3aWxsIGJlIHBhcnQgb2YgdGhlIGVzdGltYXRlZCBtb2RlbC4gRml4IGFuZCB0ZXN0IGFyZSBGQUxTRSwgbWVhbmluZyB0aGUgZWZmZWN0cyB3aWxsIGJlIGZyZWVseSBlc3RpbWF0ZWQgZnJvbSB0aGUgZGF0YSBhbmQgdGVzdGVkIGZvciBzaWduaWZpY2FuY2UuIAoKVGhlIGBpbml0aWFsVmFsdWVgIGNvbHVtbiBzaG93cyBzdGFydGluZyB2YWx1ZXMgb2YgMCBmb3IgdGhlIHRocmVlIG5ldyBlZmZlY3RzLCByZWZsZWN0aW5nIG5vIGEgcHJpb3JpIGFzc3VtcHRpb25zIGFib3V0IHRoZWlyIHZhbHVlcy4gVGhlIGBwYXJtYCBjb2x1bW4gaW5kaWNhdGVzIHRoZXkgY3VycmVudGx5IGhhdmUgMCBhc3NvY2lhdGVkIHBhcmFtZXRlcnMuIEluIHN1bW1hcnksIHRoaXMgY29kZSBzbmlwcGV0IGRlbW9uc3RyYXRlcyB1c2luZyBgaW5jbHVkZUVmZmVjdHNgIHRvIGV4cGFuZCBhIFNJRU5BIG1vZGVsIHNwZWNpZmljYXRpb24gYnkgaW5jb3Jwb3JhdGluZyBhZGRpdGlvbmFsIGVmZmVjdHMgd2l0aCBkZWZhdWx0IHNldHRpbmdzLCBhbGxvd2luZyB0aGVpciBwYXJhbWV0ZXJzIHRvIGJlIGVtcGlyaWNhbGx5IGVzdGltYXRlZC4gVGhlIG91dHB1dCB2YWxpZGF0ZXMgdGhlIHN1Y2Nlc3NmdWwgaW5jbHVzaW9uIG9mIHRoZSBuZXcgZWZmZWN0cy4KCgojIyMgU2FtZSBjb3ZhcmlhdGUgZWZmZWN0IChgc2FtZVhgKQoKVGhlIGBzYW1lWGAgZWZmZWN0IGlzIGNydWNpYWwgZm9yIGludmVzdGlnYXRpbmcgZ2VuZGVyIGhvbW9waGlseSBhbmQgcHJlZmVyZW50aWFsIGF0dGFjaG1lbnQgaW4gdGhlIGNvLWF1dGhvcnNoaXAgbmV0d29yayBvZiB0aGlzIGFjYWRlbWljIGZhY3VsdHkuCgpUaGUgdGVuZGVuY3kgb2YgYWN0b3JzIHRvIGNvbGxhYm9yYXRlIHdpdGggc2ltaWxhciBvdGhlcnMgaXMgYSBwaXZvdGFsIG1lY2hhbmlzbSB0aGVvcml6ZWQgdG8gcGVycGV0dWF0ZSB0aGUgc3lzdGVtaWMgZGlzYWR2YW50YWdlcyBmb3Igd29tZW4gaW4gYWNhZGVtaWEuIFRoZSBgc2FtZVhgIGVmZmVjdCBwcmVjaXNlbHkgcXVhbnRpZmllcyB0aGlzIGhvbW9waGlseSB0ZW5kZW5jeSBmb3IgYSBjYXRlZ29yaWNhbCB2YXJpYWJsZSBsaWtlIGdlbmRlci4KCk1hdGhlbWF0aWNhbGx5LCB0aGUgYHNhbWVYYCBlZmZlY3QgaXMgZGVmaW5lZCBhcwoKJCRzX3tpLHNhbWVYfV57XHRleHR7bmV0fX0oeCkgPSBcc3VtX3tqIFxpbiBOfSB4X3tpan0gSVx7dl9pID0gdl9qXH0kJAoKCldoZXJlOgoKCi0gJHhfe2lqfSQgaXMgYW4gaW5kaWNhdG9yIGZvciB0aGUgcHJlc2VuY2UgKDEpIG9yIGFic2VuY2UgKDApIG9mIGEgZGlyZWN0ZWQgY29sbGFib3JhdGlvbiB0aWUgZnJvbSBzY2hvbGFyICRpJCB0byBzY2hvbGFyICRqJAotICROJCBpcyB0aGUgc2V0IG9mIGFsbCBzY2hvbGFycyBpbiB0aGUgZGVwYXJ0bWVudAotICR2X2kkIGlzIHRoZSBnZW5kZXIgb2Ygc2Nob2xhciAkaSQgKDAgZm9yIG1hbGUsIDEgZm9yIGZlbWFsZSkKLSAkSVx7dl9pID0gdl9qXH0kIGlzIGFuIGluZGljYXRvciBmdW5jdGlvbiBlcXVhbCB0byAxIGlmICR2X2kgPSB2X2okIChpLmUuICRpJCBhbmQgJGokIGhhdmUgdGhlIHNhbWUgZ2VuZGVyKSBhbmQgMCBvdGhlcndpc2UKCgpUaGlzIGNvdW50cyB0aGUgbnVtYmVyIG9mICRpJCdzIGNvbGxhYm9yYXRpb24gdGllcyB0aGF0IGFyZSB0byBvdGhlciBzY2hvbGFycyBvZiB0aGUgc2FtZSBnZW5kZXIuIFRoZSBgc2FtZVhgIHBhcmFtZXRlciByZWZsZWN0cyB0aGUgdGVuZGVuY3kgdG93YXJkIGdlbmRlciBob21vcGhpbHkgaW4gY29sbGFib3JhdGlvbi4KClRoZSBwb3NpdGl2ZSBlZmZlY3QgaW5kaWNhdGVzIHRoYXQgYm90aCBtYWxlIGFuZCBmZW1hbGUgc2Nob2xhcnMgcHJlZmVyZW50aWFsbHkgZm9ybSBzYW1lLWdlbmRlciBjb2xsYWJvcmF0aW9ucy4gSG93ZXZlciwgaG9tb3BoaWx5IGNhbiBiZWNvbWUgcHJvYmxlbWF0aWMgaWYgc3Ryb25nZXIgaW4tZ3JvdXAgcHJlZmVyZW5jZXMgYW1vbmcgbWVuIGNvbnN0cmFpbiB3b21lbidzIG9wcG9ydHVuaXRpZXMgZm9yIHN0cmF0ZWdpY2FsbHkgdmFsdWFibGUgY3Jvc3MtZ2VuZGVyIGNvbGxhYm9yYXRpb25zLgoKVGhpcyBzdHVkeSBoeXBvdGhlc2l6ZXMgdGhhdCBob21vcGhpbHkgaW50ZXJzZWN0cyB3aXRoIGVtYmVkZGVkIG5ldHdvcmsgZm9yY2VzIHRvIGlzb2xhdGUgZmVtYWxlIGZhY3VsdHkgbWVtYmVycyBzeXN0ZW1pY2FsbHkuIFRoZSBgc2FtZVhgIGVmZmVjdCwgcHJvcGVybHkgY29udGV4dHVhbGl6ZWQsIHByb3ZpZGVzIGNydWNpYWwgaW5zaWdodCBpbnRvIGdlbmRlciBhc3ltbWV0cnkgaW4gYWNjZXNzaW5nIGRpdmVyc2UgY29sbGFib3JhdGl2ZSBvcHBvcnR1bml0aWVzLiBFbHVjaWRhdGluZyB0aGUgY29uc3RyYWludHMgY3JlYXRlZCBieSBob21vcGhpbHkgaXMgcGl2b3RhbCBpbiBpbmZvcm1pbmcgc3RydWN0dXJhbCBpbnRlcnZlbnRpb25zIHRvIHN1cHBvcnQgZmVtYWxlIHNjaG9sYXJzLgoKCiMjIyBFZ28gY292YXJpYXRlIGVmZmVjdCAoYGVnb1hgKQoKVGhlIGVnb1ggZWZmZWN0IGlzIGhpZ2hseSByZWxldmFudCB0byB0aGlzIHN0dWR5J3MgZ29hbCBvZiBhc3Nlc3NpbmcgcG90ZW50aWFsIGdlbmRlciBkaWZmZXJlbmNlcyBpbiBzdHJhdGVnaWMgbmV0d29yayBwb3NpdGlvbnMgYW5kIGNvbmZpZ3VyYXRpb25zIHdpdGhpbiBhbiBhY2FkZW1pYyBmYWN1bHR5IGNvLWF1dGhvcnNoaXAgbmV0d29yay4KCgpTcGVjaWZpY2FsbHksIHRoZSBlZ29YIGVmZmVjdCBoZWxwcyB0byBldmFsdWF0ZSB3aGV0aGVyIHRoZXJlIGlzIGEgZGlmZmVyZW5jZSBiZXR3ZWVuIG1hbGUgYW5kIGZlbWFsZSBmYWN1bHR5IG1lbWJlcnMgaW4gdGVybXMgb2YgYWN0aXZlbHkgc2Vla2luZyBuZXcgY29sbGFib3JhdG9ycywgYXMgcmVwcmVzZW50ZWQgYnkgdGhlIG51bWJlciBvZiBvdXRnb2luZyB0aWVzIChjby1hdXRob3JzaGlwIHJlbGF0aW9ucyBpbml0aWF0ZWQpLgoKSXRzIG1hdGhlbWF0aWNhbCBkZWZpbml0aW9uIGlzIGFzIGZvbGxvd3M6CgoKJHNfe2kgNzh9XntcdGV4dHtuZXR9fSh4KSA9IHZfaSB4X3tpK30kCgoKV2hlcmU6CgotICRzX3tpIDc4fV57XHRleHR7bmV0fX0oeCkkIGlzIHRoZSBgZWdvWGAgZWZmZWN0IGZvciBhY3RvciAkaSQKLSAkdl9pJCBpcyB0aGUgdmFsdWUgb2YgdGhlIGdlbmRlciBjb3ZhcmlhdGUgZm9yIGFjdG9yICRpJCAoMCBmb3IgbWFsZSwgMSBmb3IgZmVtYWxlKQotICR4X3tpK30kIGlzIHRoZSBvdXQtZGVncmVlIG9mIGFjdG9yICRpJCwgcmVwcmVzZW50aW5nIHRoZSBudW1iZXIgb2Ygb3V0Z29pbmcgY29sbGFib3JhdGlvbiB0aWVzCgoKVGhpcyB3ZWlnaHMgdGhlIG91dC1kZWdyZWUgYmFzZWQgb24gdGhlIGdlbmRlci4gQSBwb3NpdGl2ZSBgZWdvWGAgcGFyYW1ldGVyIGluZGljYXRlcyB0aGF0IGJlaW5nIGZlbWFsZSB3YXMgYXNzb2NpYXRlZCB3aXRoIGEgaGlnaGVyIG92ZXJhbGwgb3V0ZGVncmVlLiBUaGlzIHN1Z2dlc3RzIHRoYXQgZmVtYWxlIGZhY3VsdHkgbWVtYmVycyBhcmUgbW9yZSBhY3RpdmVseSBlbmdhZ2luZyBpbiBuZXcgcG90ZW50aWFsIGNvLWF1dGhvcnMgYW5kIHNlZWtpbmcgY29sbGFib3JhdGlvbiB0aGFuIHRoZWlyIG1hbGUgY29sbGVhZ3Vlcy4KCgpDb252ZXJzZWx5LCBhIG5lZ2F0aXZlIGBlZ29YYCBwYXJhbWV0ZXIgc2lnbmlmaWVzIHRoYXQgbWVuIGhhdmUgYSBncmVhdGVyIG91dGRlZ3JlZS4gVGhpcyBpbXBsaWVzIHRoYXQgZmVtYWxlIGZhY3VsdHkgbWVtYmVycyBlbmNvdW50ZXIgY29uc3RyYWludHMgaW4gaW5pdGlhdGluZyB0aWVzIGFuZCBidWlsZGluZyBleHBhbnNpdmUgY29sbGFib3JhdGl2ZSBuZXR3b3Jrcy4KCgpBIGxvd2VyIG91dC1kZWdyZWUgZm9yIHdvbWVuIGNvdWxkIGluZGljYXRlIGRlcGVuZGVuY2Ugb24gbWFsZSBjb2xsYWJvcmF0b3JzIGV4dGVuZGluZyBpbnZpdGF0aW9ucyByYXRoZXIgdGhhbiBwcm9hY3RpdmVseSByZWFjaGluZyBvdXQuIFRoaXMgY291bGQgYWxzbyBzdWdnZXN0IHRoYXQgd29tZW4gbGFjayBhY2Nlc3MgdG8gZXh0ZW5zaXZlIHByb2Zlc3Npb25hbCBuZXR3b3JrcywgdGh1cyBwcm92aWRpbmcgc3Ryb25nIG9wdGlvbnMgZm9yIGNvbGxhYm9yYXRpb24uCgoKSW4gc3VtbWFyeSwgdGhlIGBlZ29YYCBlZmZlY3QgcHJvdmlkZXMgYSBwcmVjaXNlIHdheSB0byBxdWFudGlmeSB0aGUgcG90ZW50aWFsIGRpZmZlcmVuY2VzIGJldHdlZW4gbWFsZSBhbmQgZmVtYWxlIGZhY3VsdHkgbWVtYmVycyBpbiB0aGVpciB0ZW5kZW5jeSBhbmQgY2FwYWNpdHkgdG8gYWN0aXZlbHkgY3JlYXRlIG5ldyBjb2xsYWJvcmF0aXZlIHRpZXMuIFRoaXMgaXMgYSB2aXRhbCBmYWN0b3Igc2hhcGluZyBhY2Nlc3MgdG8gY28tYXV0aG9yc2hpcCBvcHBvcnR1bml0aWVzIGFuZCB2aXNpYmlsaXR5LWVuaGFuY2luZyBjb2xsYWJvcmF0aW9ucy4gR2VuZGVyIGFzeW1tZXRyeSBzdWdnZXN0ZWQgYnkgYSBuZWdhdGl2ZSBgZWdvWGAgZWZmZWN0IGNvdWxkIHJldmVhbCBzeXN0ZW1pYyBkaXNhZHZhbnRhZ2VzIGZvciB3b21lbiBpbiBzdHJhdGVnaWNhbGx5IGJ1aWxkaW5nIGEgd2VsbC1jb25uZWN0ZWQgY28tYXV0aG9yc2hpcCBuZXR3b3JrLgoKCiMjIyBBbHRlciBjb3ZhcmlhdGUgZWZmZWN0IChgYWx0WGApCkNvdmFyaWF0ZS1hbHRlciBvciBjb3ZhcmlhdGUtcmVsYXRlZCBwb3B1bGFyaXR5IChgYWx0WGApLCBkZWZpbmVkIGJ5IHRoZSBzdW0gb2YgdGhlIGNvdmFyaWF0ZSBvdmVyIGFsbCBhY3RvcnMgdG8gd2hvbSAkaSQgaGFzIGEgdGllLCAkc197aSA3NH1ee1x0ZXh0IHtuZXQgfX0oeCk9XHN1bV9qIHhfe2kgan0gdl9qJAoKYGBge3J9CiMgSW5jbHVkaW5nIGBzYW1lWGAsIGBlZ29YYCwgYGFsdFhgIGVmZmVjdHMgYW5kIHRoZWlyIGludGVyYWN0aW9uIHdpdGggZ2VuZGVyIGluIGBteWVmZmAKKG15ZWZmIDwtIFJTaWVuYTo6aW5jbHVkZUVmZmVjdHMobXllZmYsIHNhbWVYLCBlZ29YLCBhbHRYLCBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyIikpCmBgYAoKTmV4dCwgdGhlIGNvZGUgZGVtb25zdHJhdGVzIHVzaW5nIHRoZSBgaW5jbHVkZUVmZmVjdHNgIGZ1bmN0aW9uIHRvIGluY29ycG9yYXRlIHRocmVlIG5ldyBlZmZlY3RzIC0gaG9tb3BoaWx5IG9uIGdlbmRlciAoYHNhbWVYYCksIGVnbydzIGdlbmRlciAoYGVnb1hgKSwgYW5kIGFsdGVyJ3MgZ2VuZGVyIChgYWx0WGApIC0gaW50byBhbiBleGlzdGluZyBTSUVOQSBtb2RlbCBzcGVjaWZpY2F0aW9uIG9iamVjdCAoYG15ZWZmYCkuIEFkZGl0aW9uYWxseSwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIgaW50ZXJhY3RzIGVhY2ggb2YgdGhlc2UgbmV3IGVmZmVjdHMgd2l0aCB0aGUgZ2VuZGVyIGNvdmFyaWF0ZS4gCgpUaGUgb3V0cHV0IGNvbmZpcm1zIHRoZSBpbmNsdXNpb24gb2YgdGhlIG9yaWdpbmFsIHNpeCBlZmZlY3RzIGluIGBteWVmZmAsIGZvbGxvd2VkIGJ5IHRoZSB0aHJlZSBuZXcgZ2VuZGVyLXJlbGF0ZWQgZWZmZWN0cy4gRm9yIGFsbCBlZmZlY3RzLCBpbmNsdWRlIGlzIHNldCB0byBUUlVFLCBpbmRpY2F0aW5nIHRoZXkgd2lsbCBiZSBwYXJ0IG9mIHRoZSBlc3RpbWF0ZWQgbW9kZWwuIEZpeCBhbmQgdGVzdCBhcmUgRkFMU0UsIG1lYW5pbmcgdGhlIGVmZmVjdHMgd2lsbCBiZSBmcmVlbHkgZXN0aW1hdGVkIGFuZCB0ZXN0ZWQgZm9yIHNpZ25pZmljYW5jZS4gVGhlIGBpbml0aWFsVmFsdWVgIGFuZCBgcGFybWAgY29sdW1ucyBzaG93IHN0YXJ0aW5nIHZhbHVlcyBvZiAwLCByZWZsZWN0aW5nIG5vIGEgcHJpb3JpIGFzc3VtcHRpb25zLgoKSW4gc3VtbWFyeSwgdGhpcyBjb2RlIGFsbG93cyBlc3RpbWF0aW9uIG9mIGdlbmRlciBob21vcGhpbHksIGVnby9hbHRlciBnZW5kZXIgcHJlZmVyZW5jZXMsIGFuZCB0aGVpciBpbnRlcmFjdGlvbiB3aXRoIHRoZSBnZW5kZXIgY292YXJpYXRlLiBUaGUgb3V0cHV0IHZhbGlkYXRlcyB0aGVzZSBlZmZlY3RzIGFuZCB0aGVpciBnZW5kZXIgaW50ZXJhY3Rpb25zIGhhdmUgYmVlbiBzdWNjZXNzZnVsbHkgaW5jb3Jwb3JhdGVkIGludG8gdGhlIG1vZGVsIHNwZWNpZmljYXRpb24uIFdoZW4gZXN0aW1hdGVkIG9uIG9ic2VydmVkIG5ldHdvcmsgZGF0YSwgdGhpcyBtb2RlbCB3aWxsIGVsdWNpZGF0ZSB0aGUgcm9sZSBvZiBnZW5kZXIgaW4gc2hhcGluZyBuZXR3b3JrIGV2b2x1dGlvbi4gVGhlIHVzZSBvZiBpbnRlcmFjdGlvbnMgYWxsb3dzIHRoZSBnZW5kZXIgZWZmZWN0cyB0byBwb3RlbnRpYWxseSB2YXJ5IGZvciBtYWxlcyBhbmQgZmVtYWxlcy4KCiMjIyBUcmFuc2l0aXZlIHRyaXBsZXRzIGVmZmVjdAoKCiMjIyMgc2FtZVhUcmFuc1RyaXAKClRoZSBgc2FtZVhUcmFuc1RyaXBgIGVmZmVjdCBpcyBoaWdobHkgcmVsZXZhbnQgZm9yIHRoaXMgc3R1ZHkncyBnb2FsIG9mIGVsdWNpZGF0aW5nIHBvdGVudGlhbCBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gdHJpYWRpYyBjbG9zdXJlIHRlbmRlbmNpZXMgd2l0aGluIGFuIGFjYWRlbWljIGNvLWF1dGhvcnNoaXAgbmV0d29yay4gQSBjb3JlIHByb3Bvc2l0aW9uIG1vdGl2YXRpbmcgdGhpcyByZXNlYXJjaCBpcyB0aGF0IGdlbmRlciBob21vcGhpbHkgaW50ZXJzZWN0cyB3aXRoIHByZWZlcmVudGlhbCB0cmlhZGljIGNsb3N1cmUgdG8gY29uY2VudHJhdGUgY29ubmVjdGl2aXR5IGFuZCBpc29sYXRlIGZlbWFsZSBmYWN1bHRpZXMgZnJvbSBzdHJhdGVnaWNhbGx5IHZhbHVhYmxlIGNvbGxhYm9yYXRpdmUgb3Bwb3J0dW5pdGllcy4KCgpUaGUgYHNhbWVYVHJhbnNUcmlwYCBlZmZlY3QgcHJlY2lzZWx5IHF1YW50aWZpZXMgdHJpYWRpYyBjbG9zdXJlIHRlbmRlbmNpZXMgb2NjdXJyaW5nIHNwZWNpZmljYWxseSB3aXRoaW4gc2FtZS1nZW5kZXIgdHJpYWRzLiBBIHBvc2l0aXZlIGVmZmVjdCBpbmRpY2F0ZWQgaGVpZ2h0ZW5lZCBsZXZlbHMgb2Ygd2l0aGluLWdlbmRlciB0cmlhZGljIGNsb3N1cmUuIFRoZSBtYXRoZW1hdGljYWwgZGVmaW5pdGlvbiBjYXB0dXJlcyB0aGUgY29uZmlndXJhdGlvbmFsIGVzc2VuY2Ugb2YgaG9tb3BoaWxvdXMgY2xvc3VyZS4KCgokJHNfe2kxMTB9XntcdGV4dHtuZXR9fSh4KSA9IFxzdW1faiB4X3tpan0geF97aWh9IHhfe2hqfSBJXHt2X2kgPSB2X2pcfSQkCgoKV2hlcmU6CgoKLSAkeF97aWp9ID0gMSQgaWYgYSBkaXJlY3RlZCB0aWUgZXhpc3RzIGZyb20gbm9kZSAkaSQgdG8gbm9kZSAkaiQKLSAkdl9pJCBpcyB0aGUgZ2VuZGVyIHZhbHVlICgwIG9yIDEpIG9mIG5vZGUgJGkkCi0gJElce3ZfaSA9IHZfalx9JCBpcyBhbiBpbmRpY2F0b3IgZnVuY3Rpb24gZXF1YWxpbmcgMSBpZiAkdl9pID0gdl9qJCAobm9kZXMgJGkkIGFuZCAkaiQgaGF2ZSB0aGUgc2FtZSBnZW5kZXIpIGFuZCAwIG90aGVyd2lzZQoKClRoaXMgY291bnRzIGFsbCB0cmlhZHMgY2VudGVyZWQgb24gYWN0b3IgJGkkIGluIHRoZSBmb3JtCgoKJGkgXHJpZ2h0YXJyb3cgaCBccmlnaHRhcnJvdyBqIFxsZWZ0YXJyb3cgaSQKCgpUaHVzLCB0aGUgZ2VuZGVyIGhvbW9waGlseSBjb25kaXRpb24gJHZfaSA9IHZfaiQgaXMgc2F0aXNmaWVkOyB0aGF0IGlzLCB0aGUgaW5pdGlhdGluZyBhbmQgcmVjZWl2aW5nIG5vZGVzIGhhdmUgdGhlIHNhbWUgZ2VuZGVyIHZhbHVlLgoKCkEgc2lnbmlmaWNhbnQgcG9zaXRpdmUgZWZmZWN0IGZvciBgc2FtZVhUcmFuc1RyaXBgIHdvdWxkIHByb3ZpZGUgY2xlYXIgZXZpZGVuY2UgdGhhdCB0cmlhZGljIGNsb3N1cmUgZHluYW1pY3MgZGlzcHJvcG9ydGlvbmF0ZWx5IGNvbmNlbnRyYXRlIGNvbm5lY3Rpdml0eSB3aXRoaW4gc2FtZS1nZW5kZXIgY29tcG9uZW50cywgcmF0aGVyIHRoYW4gYnJpZGdpbmcgYWNyb3NzIGdlbmRlciBib3VuZGFyaWVzLiBBbnkgZ2VuZGVyIGRpZmZlcmVuY2VzIGluIHRoaXMgZWZmZWN0IHdvdWxkIGZ1cnRoZXIgaW5kaWNhdGUgdGhhdCB3b21lbiBtYXkgZmFjZSBjb25zdHJhaW50cyB3aXRoaW4gdHJpYWRpYyBjbG9zdXJlIHByb2Nlc3NlcyB0aGF0IGhpbmRlciB0aGVpciBuZXR3b3JrIHBvc2l0aW9ucy4KCkludmVzdGlnYXRpbmcgdGhpcyBudWFuY2VkIGludGVyc2VjdGlvbiBvZiBnZW5kZXIgaG9tb3BoaWx5IGFuZCB0cmlhZGljIGNsb3N1cmUgdGVuZGVuY2llcyBpcyBwaXZvdGFsIGZvciBhZHZhbmNpbmcgdGhlb3JldGljYWwgdW5kZXJzdGFuZGluZyBvZiB0aGUgc3VidGxlIHN0cnVjdHVyYWwgZm9yY2VzIHRoYXQgYWxsb3cgZ2VuZGVyIGluZXF1aXRpZXMgdG8gcGVyc2lzdCB3aXRoaW4gZW1lcmdlbnQgbmV0d29yayB0b3BvbG9naWVzLiBUaGUgYHNhbWVYVHJhbnNUcmlwYCBlZmZlY3QsIGFzIGltcGxlbWVudGVkIGluIHN0b2NoYXN0aWMgYWN0b3Itb3JpZW50ZWQgbmV0d29yayBtb2RlbHMsIHByb3ZpZGVzIGFuIGlkZWFsIHN0YXRpc3RpY2FsIHRvb2wgZm9yIHF1YW50aWZ5aW5nIHRoaXMgY3J1Y2lhbCBtZWNoYW5pc20uCgoKYGBge3J9CihteWVmZiA8LSBSU2llbmE6OmluY2x1ZGVFZmZlY3RzKG15ZWZmLCBzYW1lWFRyYW5zVHJpcCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIpKQpgYGAKClRoaXMgb3V0cHV0IGRlbW9uc3RyYXRlcyB1c2luZyBgaW5jbHVkZUVmZmVjdHNgIHRvIGFkZCB0aGUgZWZmZWN0IGZvciB0cmFuc2l0aXZlIHRyaXBsZXRzIGJhc2VkIG9uIGdlbmRlciBob21vcGhpbHkgKGBzYW1lWFRyYW5zVHJpcGApIHRvIGFuIGV4aXN0aW5nIFNJRU5BIG1vZGVsIHNwZWNpZmljYXRpb24gKGBteWVmZmApLiBDcml0aWNhbGx5LCB0aGlzIGVmZmVjdCBpcyBpbnRlcmFjdGVkIHdpdGggdGhlIGdlbmRlciBjb3ZhcmlhdGUgdmlhIGludGVyYWN0aW9uMSA9ICJnZW5kZXIiLiAKClRoZSBvdXRwdXQgdmFsaWRhdGVzIGluY2x1c2lvbiBvZiB0aGUgMTAgZWZmZWN0cyBub3cgaW4gYG15ZWZmLmAgVGhlIGZpcnN0IDkgYXJlIHByZS1leGlzdGluZyBlZmZlY3RzLiBUaGUgMTB0aCBlZmZlY3QgaXMgYHNhbWVYVHJhbnNUcmlwYCwgcmVwcmVzZW50aW5nIHRoZSB0ZW5kZW5jeSBmb3IgdHJpYWRpYyBjbG9zdXJlIHRvIGJlIHNoYXBlZCBieSBnZW5kZXIgaG9tb3BoaWx5LiBGb3IgYWxsIGVmZmVjdHMsIGluY2x1ZGUgaXMgVFJVRSwgbWVhbmluZyB0aGV5IHdpbGwgYmUgZXN0aW1hdGVkLiBGaXggYW5kIHRlc3QgYXJlIEZBTFNFLCBhbGxvd2luZyBlc3RpbWF0aW9uIGFuZCB0ZXN0aW5nLiBUaGUgYGluaXRpYWxWYWx1ZWAgYW5kIGBwYXJtYCBvZiAwIHJlZmxlY3Qgbm8gYSBwcmlvcmkgYXNzdW1wdGlvbnMuCgpJbiBzdW1tYXJ5LCB0aGlzIGNvZGUgZW5hYmxlcyBhbmFseXppbmcgaWYgdHJpYWRpYyBjbG9zdXJlIGZvbGxvd3MgZ2VuZGVyIGhvbW9waGlseSwgYW5kIHdoZXRoZXIgdGhpcyB0ZW5kZW5jeSBkaWZmZXJzIGJ5IGdlbmRlciB2aWEgdGhlIGludGVyYWN0aW9uLiBUaGUgb3V0cHV0IGNvbmZpcm1zIHN1Y2Nlc3NmdWwgaW5jb3Jwb3JhdGlvbiBvZiB0aGlzIGVmZmVjdCBhbmQgaXRzIGdlbmRlciBpbnRlcmFjdGlvbiBpbnRvIHRoZSBtb2RlbCBzcGVjaWZpY2F0aW9uLiBFc3RpbWF0aW5nIHRoaXMgbW9kZWwgd2lsbCBwcm92aWRlIGluc2lnaHQgaW50byB0aGUgcm9sZSBvZiBnZW5kZXIgaG9tb3BoaWx5IGFuZCBtb2RlcmF0aW9uIGluIHNoYXBpbmcgdHJpYWRpYyBjbG9zdXJlIHRlbmRlbmNpZXMgaW4gbmV0d29yayBldm9sdXRpb24uCgoKIyMjIyB0cmFuc1RyaXAKVGhlIHRyYW5zaXRpdmUgdHJpcGxldHMgZWZmZWN0IGlzIHBpdm90YWwgZm9yIHRoaXMgc3R1ZHkgb24gZ2VuZGVyIGRpZmZlcmVuY2VzIGluIGFjYWRlbWljIGNvLWF1dGhvcnNoaXAgbmV0d29ya3MgYmVjYXVzZSBpdCBhbGxvd3MgZm9yIHRoZSBhc3Nlc3NtZW50IG9mIHBvdGVudGlhbCB2YXJpYXRpb25zIGJldHdlZW4gbWFsZSBhbmQgZmVtYWxlIGZhY3VsdHkgbWVtYmVycyBpbiB0aGVpciBwcm9wZW5zaXR5IGZvciB0cmlhZGljIGNsb3N1cmUuCgoKVHJpYWRpYyBjbG9zdXJlIHJlZmVycyB0byB0aGUgdGVuZGVuY3kgdG8gZm9ybSB0aWVzIHRoYXQgY2xvc2Ugb3BlbiBjb25maWd1cmF0aW9ucyBpbnRvIHRyaWFkcyB3aXRoIHRocmVlIG11dHVhbCBjb25uZWN0aW9ucy4gVGhpcyByZWZsZWN0cyBhbiBpbXBvcnRhbnQgZHluYW1pYyBzb2NpYWwgcHJvY2VzcyB0aGF0IHNoYXBlcyBuZXR3b3JrIHRvcG9sb2d5IGFuZCBpdHMgYWR2YW50YWdlcy4gVGhlIGB0cmFuc1RyaXBgIGVmZmVjdCBwcmVjaXNlbHkgcXVhbnRpZmllcyBhbiBpbmRpdmlkdWFsJ3MgcGFydGljaXBhdGlvbiBpbiB0cmlhZGljIGNsb3N1cmUgYnkgY291bnRpbmcgdGhlIG51bWJlciBvZiBjbG9zZWQgdHJpYWRzIGNlbnRlcmVkIG9uIHRoZW0gaW4gdGhlIG5ldHdvcmsuCgoKTWF0aGVtYXRpY2FsbHksIHRoZSBgdHJhbnNUcmlwYCBlZmZlY3QgZm9yIGFjdG9yICRpJCBpcyBkZWZpbmVkIGFzCgoKJCRzX3tpLCBcdGV4dHt0cmFuc1RyaXB9fV57XHRleHR7bmV0fX0oeCkgPSBcc3VtX3tqLCBofSB4X3tpan0geF97aWh9IHhfe2hqfSQkCgoKV2hlcmU6CgoKLSAkeF97aWp9ID0gMSQgaWYgYSB0aWUgZXhpc3RzIGZyb20gYWN0b3IgJGkkIHRvIGFjdG9yICRqJCwgYW5kIDAgb3RoZXJ3aXNlCi0gJHhfe2lofSA9IDEkIGlmIGEgdGllIGV4aXN0cyBmcm9tIGFjdG9yICRpJCB0byBhY3RvciAkaCQsIGFuZCAwIG90aGVyd2lzZQotICR4X3toan0gPSAxJCBpZiBhIHRpZSBleGlzdHMgZnJvbSBhY3RvciAkaCQgdG8gYWN0b3IgJGokLCBhbmQgMCBvdGhlcndpc2UKCgpUaGlzIGNvdW50cyBhbGwgY29uZmlndXJhdGlvbnMgd2hlcmUgYWN0b3IgJGkkIGhhcyB0aWVzIHRvIHR3byBhbHRlcnMgJGokIGFuZCAkaCQsIGFuZCBpbiBhZGRpdGlvbiAkaiQgYW5kICRoJCBhcmUgdGllZCAtIHJlcHJlc2VudGluZyBhIGNsb3NlZCB0cmlhZCBjZW50ZXJlZCBvbiAkaSQuCgoKVGhlIGB0cmFuc1RyaXBgIHBhcmFtZXRlciBpbiB0aGUgc3RhdGlzdGljYWwgbW9kZWwgcmVwcmVzZW50cyB0aGUgdGVuZGVuY3kgdG93YXJkIHBhcnRpY2lwYXRpbmcgaW4gdHJpYWRpYyBjbG9zdXJlLiBQcmV2aW91cyByZXNlYXJjaCBoYXMgc3VnZ2VzdGVkIHRoYXQgdGhpcyB0ZW5kZW5jeSBtYXkgZGlmZmVyIGJldHdlZW4gbWVuIGFuZCB3b21lbi4gQSBzaWduaWZpY2FudGx5IGxvd2VyIGB0cmFuc1RyaXBgIHBhcmFtZXRlciBmb3Igd29tZW4gc2lnbmlmaWVzIHRoYXQgZmVtYWxlIGZhY3VsdGllcyBoYXZlIGZld2VyIG9wcG9ydHVuaXRpZXMgb3IgYSBsb3dlciBwcm9wZW5zaXR5IGZvciB0cmlhZGljIGNsb3N1cmUuIFRoaXMgY291bGQgY29uc3RyYWluIGFjY2VzcyB0byBkZW5zZSBjb2xsYWJvcmF0aXZlIGNsdXN0ZXJzLCByZWZsZWN0aW5nIGdlbmRlciBkaWZmZXJlbmNlcyBpbiBvY2N1cHlpbmcgdG9wb2xvZ2ljYWxseSBhZHZhbnRhZ2VvdXMgcG9zaXRpb25zIGluIHRoZSBuZXR3b3JrLgoKCkluIHN1bW1hcnksIHRoZSBgdHJhbnNUcmlwYCBlZmZlY3QgYW5kIGl0cyBwYXJhbWV0ZXJzIGFyZSBjcnVjaWFsIGZvciBpbnZlc3RpZ2F0aW5nIGh5cG90aGVzaXplZCBnZW5kZXIgYXN5bW1ldHJpZXMgaW4gdHJpYWRpYyBjbG9zdXJlIHRlbmRlbmNpZXMgd2l0aGluIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsuIFRoaXMgYWxpZ25zIGRpcmVjdGx5IHdpdGggdGhlIG1vdGl2YXRpbmcgZnJhbWV3b3JrIGFuZCByZXNlYXJjaCBnb2FscyBvZiBzdGF0aXN0aWNhbGx5IG1vZGVsaW5nIHBvdGVudGlhbCBkaWZmZXJlbmNlcyBpbiBhY2Nlc3MgdG8gc3RyYXRlZ2ljYWxseSBiZW5lZmljaWFsIG5ldHdvcmsgcG9zaXRpb25zLgoKCmBgYHtyfQoobXllZmYgPC0gUlNpZW5hOjppbmNsdWRlRWZmZWN0cyhteWVmZiwgdHJhbnNUcmlwLCBpbnRlcmFjdGlvbiA9ICJnZW5kZXIiKSkKYGBgCgoKVGhpcyBjb2RlIGRlbW9uc3RyYXRlcyB1c2luZyB0aGUgYGluY2x1ZGVFZmZlY3RzYCBmdW5jdGlvbiB0byBpbmNvcnBvcmF0ZSB0aGUgdHJhbnNpdGl2ZSB0cmlwbGV0cyBlZmZlY3QgKGB0cmFuc1RyaXBgKSBpbnRvIGFuIGV4aXN0aW5nIFNJRU5BIG1vZGVsIHNwZWNpZmljYXRpb24gb2JqZWN0IChgbXllZmZgKS4gQ3JpdGljYWxseSwgYHRyYW5zVHJpcGAgaXMgaW50ZXJhY3RlZCB3aXRoIHRoZSBnZW5kZXIgY292YXJpYXRlIHZpYSB0aGUgaW50ZXJhY3Rpb24gYXJndW1lbnQuIAoKVGhlIG91dHB1dCB2YWxpZGF0ZXMgdGhhdCBgbXllZmZgIG5vdyBjb250YWlucyAxMiBlZmZlY3RzLiBUaGUgZmlyc3QgMTEgYXJlIHRoZSBwcmV2aW91c2x5IGluY2x1ZGVkIGVmZmVjdHMuIFRoZSAxMnRoIGVmZmVjdCBpcyB0cmFuc1RyaXAsIHJlcHJlc2VudGluZyB0aGUgZ2VuZXJhbCB0ZW5kZW5jeSBmb3IgdHJpYWRpYyBjbG9zdXJlIGluIHRoZSBuZXR3b3JrIGRhdGEuIEZvciBhbGwgZWZmZWN0cywgaW5jbHVkZSBpcyBUUlVFLCBtZWFuaW5nIHRoZXkgd2lsbCBiZSBlc3RpbWF0ZWQuIEZpeCBhbmQgdGVzdCBhcmUgRkFMU0UsIGFsbG93aW5nIGZyZWUgZXN0aW1hdGlvbiBhbmQgdGVzdGluZy4gVGhlIGBpbml0aWFsVmFsdWVgIGFuZCBgcGFybWAgb2YgMCByZWZsZWN0IG5vIGEgcHJpb3JpIGFzc3VtcHRpb25zLgoKSW4gc3VtbWFyeSwgdGhpcyBjb2RlIGVuYWJsZXMgYW5hbHl6aW5nIHRoZSBvdmVyYWxsIGxldmVsIG9mIHRyaWFkaWMgY2xvc3VyZSBpbiB0aGUgb2JzZXJ2ZWQgbmV0d29yaywgYXMgd2VsbCBhcyB3aGV0aGVyIHRoaXMgdGVuZGVuY3kgc2lnbmlmaWNhbnRseSBkaWZmZXJzIGJ5IGdlbmRlciB2aWEgdGhlIGludGVyYWN0aW9uIHRlcm0uIFRoZSBvdXRwdXQgY29uZmlybXMgdGhlIGB0cmFuc1RyaXBgIGVmZmVjdCBhbmQgaXRzIGdlbmRlciBpbnRlcmFjdGlvbiBoYXZlIGJlZW4gc3VjY2Vzc2Z1bGx5IGluY29ycG9yYXRlZCBpbnRvIHRoZSBtb2RlbCBzcGVjaWZpY2F0aW9uLiBFc3RpbWF0aW5nIHRoaXMgbW9kZWwgd2lsbCBwcm92aWRlIGluc2lnaHQgaW50byB0aGUgcm9sZSBvZiB0cmlhZGljIGNsb3N1cmUgYW5kIGdlbmRlciBkaWZmZXJlbmNlcyBpbiBzaGFwaW5nIG5ldHdvcmsgZXZvbHV0aW9uLgoKCgojIyMjIGp1bXBYVHJhbnNUcmlwCgpUaGUgYGp1bXBYVHJhbnNUcmlwYCBlZmZlY3QgaXMgaGlnaGx5IHJlbGV2YW50IGZvciBpbnZlc3RpZ2F0aW5nIHBvdGVudGlhbCBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gdHJpYWRpYyBjbG9zdXJlIHRlbmRlbmNpZXMgd2l0aGluIHRoZSBjby1hdXRob3JzaGlwIG5ldHdvcmsuCgoKU3BlY2lmaWNhbGx5LCB0aGlzIGVmZmVjdCBoZWxwcyBhc3Nlc3Mgd2hldGhlciBjbG9zdXJlIG9jY3VycyBwcmVkb21pbmFudGx5IHdpdGhpbiBzYW1lLWdlbmRlciB0cmlhZHMgdmVyc3VzIGFjcm9zcyBnZW5kZXIgYm91bmRhcmllcy4gQXMgZGlzY3Vzc2VkIGluIHRoZSBpbnRyb2R1Y3Rpb24sIHByaW9yIHJlc2VhcmNoIHN1Z2dlc3RzIHRoYXQgZ2VuZGVyIGhvbW9waGlseSBpbnRlcnNlY3RzIG5ldHdvcmsgZm9yY2VzIHRvIGNvbnN0cmFpbiB3b21lbidzIG9wcG9ydHVuaXRpZXMgZm9yIHN0cmF0ZWdpY2FsbHkgdmFsdWFibGUgY3Jvc3MtY2x1c3RlciBjb25uZWN0aW9ucy4KCgpUaGUgYGp1bXBYVHJhbnNUcmlwYCBlZmZlY3QgcXVhbnRpZmllcyBjcm9zcy1nZW5kZXIgdHJpYWRpYyBjbG9zdXJlIGFzIGZvbGxvd3M6CgoKTGV0OgoKCi0gJHhfe2lqfSA9IDEkIGlmIGFjdG9yICRpJCBoYXMgYSBjb2xsYWJvcmF0aW9uIHRpZSB0byBhY3RvciAkaiQsIDAgb3RoZXJ3aXNlCgoKLSAkdl9pJCByZXByZXNlbnQgdGhlIGdlbmRlciBjYXRlZ29yeSBvZiBhY3RvciAkaSQgKGUuZy4sICR2X2k9MCQgZm9yIG1hbGUsICR2X2k9MSQgZm9yIGZlbWFsZSkKCgotICRJXHtBXH0kIGJlIGFuIGluZGljYXRvciBmdW5jdGlvbiBlcXVhbCB0byAxIGlmIHN0YXRlbWVudCAkQSQgaXMgdHJ1ZSwgMCBvdGhlcndpc2UKCgpUaGVuLCB0aGUgZWZmZWN0IGNvdW50cyB0aGUgdHJpYWRpYyBjbG9zdXJlIHBhdHRlcm5zICRpIFxyaWdodGFycm93IGggXHJpZ2h0YXJyb3cgaiQgc3VjaCB0aGF0CgoKLSAkeF97aWh9ID0gMSQgKGFjdG9yICRpJCBoYXMgYSB0aWUgdG8gYWN0b3IgJGgkKQoKCi0gJHhfe2hqfSA9IDEkIChhY3RvciAkaCQgaGFzIGEgdGllIHRvIGFjdG9yICRqJCkKCgotICR4X3tpan0gPSAxJCAoYWN0b3IgJGkkIGFsc28gaGFzIGEgZGlyZWN0IHRpZSB0byBhY3RvciAkaiQsIGNsb3NpbmcgdGhlIHRyaWFkKQoKCldpdGggYWRkaXRpb25hbCByZXF1aXJlbWVudHMKCgotICR2X2kgPSB2X2gkIChhY3RvcnMgJGkkIGFuZCAkaCQgaGF2ZSB0aGUgc2FtZSBnZW5kZXIpCgoKLSAkdl9pIFxuZXEgdl9qJCAoYnV0IGFjdG9yICRqJCBoYXMgYSBkaWZmZXJlbnQgZ2VuZGVyIHRoYW4gJGkkIGFuZCAkaCQpCgoKTWF0aGVtYXRpY2FsbHk6CgoKJCRzX3tpLCBcdGV4dHtqdW1wWFRyYW5zVHJpcH19XntcdGV4dHtuZXR9fSh4KSA9IFxzdW1fe2ogXG5lcSBofSB4X3tpan0geF97aWh9IHhfe2hqfSBJXHt2X2kgPSB2X2ggXG5lcSB2X2pcfSQkCgoKVGhpcyBjb25maWd1cmF0aW9uIHJlcHJlc2VudHMgdHJpYWRpYyBjbG9zdXJlLCBidXQgc3BhbnMgZ2VuZGVyIGJvdW5kYXJpZXMuIFRoZSByZXN1bHRzIHJldmVhbCB3aGV0aGVyIGFjYWRlbWljcyB0ZW5kIHRvIGRyYXcgbmV3IGNvbGxhYm9yYXRvcnMgZnJvbSBvdGhlciBnZW5kZXIgY2F0ZWdvcmllcyBkdXJpbmcgdHJpYWRpYyBjbG9zdXJlIHByb2Nlc3NlcyB2ZXJzdXMgY2xvc3VyZXMgaGFwcGVuaW5nIHByZWRvbWluYW50bHkgd2l0aGluIHNhbWUtZ2VuZGVyIHRyaWFkcy4KCgpMb3dlciB0cmlhZGljIGNsb3N1cmUgcmF0ZXMsIGVzcGVjaWFsbHkgZm9yIGNyb3NzLWdlbmRlciBwYXR0ZXJucywgd291bGQgaW5kaWNhdGUgdGhhdCB3b21lbiBhcmUgcmVsYXRpdmVseSBpc29sYXRlZCBmcm9tIHN0cmF0ZWdpY2FsbHkgdmFsdWFibGUgZGVuc2UgY29sbGFib3JhdGl2ZSBjbHVzdGVycywgd2hpY2ggaXMgYSBrZXkgcHJvcG9zaXRpb24gaW52ZXN0aWdhdGVkIGluIHRoaXMgc3R1ZHkuCgoKYGBge3J9CihteWVmZiA8LSBSU2llbmE6OmluY2x1ZGVFZmZlY3RzKG15ZWZmLCBqdW1wWFRyYW5zVHJpcCwgaW50ZXJhY3Rpb24xID0gImdlbmRlciIpKQpgYGAKCkhlcmUgaXMgYW4gYWNhZGVtaWMtc3R5bGUgZXhwbGFuYXRpb24gb2YgdGhlIG91dHB1dCBmcm9tIGluY2x1ZGluZyBhIGp1bXBpbmcgdHJhbnNpdGl2ZSB0cmlwbGV0cyBlZmZlY3QgaW50ZXJhY3RlZCB3aXRoIGdlbmRlciBpbiBhIFNJRU5BIG1vZGVsIHNwZWNpZmljYXRpb246CgpUaGlzIGNvZGUgZGVtb25zdHJhdGVzIHVzaW5nIGBpbmNsdWRlRWZmZWN0c2AgdG8gaW5jb3Jwb3JhdGUgdGhlIGp1bXBpbmcgdHJhbnNpdGl2ZSB0cmlwbGV0cyBlZmZlY3QgYmFzZWQgb24gZ2VuZGVyIChganVtcFhUcmFuc1RyaXBgKSBpbnRvIGFuIGV4aXN0aW5nIFNJRU5BIG1vZGVsIHNwZWNpZmljYXRpb24gb2JqZWN0IChgbXllZmZgKS4gQ3JpdGljYWxseSwgYGp1bXBYVHJhbnNUcmlwYCBpcyBpbnRlcmFjdGVkIHdpdGggdGhlIGdlbmRlciBjb3ZhcmlhdGUgdmlhIGBpbnRlcmFjdGlvbjEgPSAiZ2VuZGVyImAuCgpUaGUgb3V0cHV0IHZhbGlkYXRlcyB0aGF0IGBteWVmZmAgbm93IGNvbnRhaW5zIDEzIGVmZmVjdHMuIFRoZSBmaXJzdCAxMiBhcmUgdGhlIHByZXZpb3VzbHkgaW5jbHVkZWQgZWZmZWN0cy4gVGhlIDEzdGggZWZmZWN0IGlzIGBqdW1wWFRyYW5zVHJpcGAsIHJlcHJlc2VudGluZyB0cmlhZGljIGNsb3N1cmUgdGVuZGVuY2llcyBiZXR3ZWVuIG5vZGVzIG9mIGRpZmZlcmVudCBnZW5kZXIgY2F0ZWdvcmllcy4gRm9yIGFsbCBlZmZlY3RzLCBpbmNsdWRlIGlzIFRSVUUsIG1lYW5pbmcgdGhleSB3aWxsIGJlIGVzdGltYXRlZC4gRml4IGFuZCB0ZXN0IGFyZSBGQUxTRSwgYWxsb3dpbmcgZnJlZSBlc3RpbWF0aW9uIGFuZCB0ZXN0aW5nLiBUaGUgYGluaXRpYWxWYWx1ZWAgYW5kIGBwYXJtYCBvZiAwIHJlZmxlY3Qgbm8gYSBwcmlvcmkgYXNzdW1wdGlvbnMuIAoKSW4gc3VtbWFyeSwgdGhpcyBjb2RlIGVuYWJsZXMgYW5hbHl6aW5nIGlmIHRyaWFkaWMgY2xvc3VyZSBvcGVyYXRlcyBhY3Jvc3MgZ2VuZGVyIGJvdW5kYXJpZXMsIGFuZCB3aGV0aGVyIHRoaXMgdGVuZGVuY3kgc2lnbmlmaWNhbnRseSBkaWZmZXJzIGJ5IGdlbmRlciB2aWEgdGhlIGludGVyYWN0aW9uLiBUaGUgb3V0cHV0IGNvbmZpcm1zIHN1Y2Nlc3NmdWwgaW5jb3Jwb3JhdGlvbiBvZiB0aGlzIGp1bXBpbmcgdHJhbnNpdGl2ZSB0cmlwbGV0cyBlZmZlY3QgYW5kIGl0cyBnZW5kZXIgaW50ZXJhY3Rpb24gaW50byB0aGUgbW9kZWwgc3BlY2lmaWNhdGlvbi4gRXN0aW1hdGluZyB0aGlzIG1vZGVsIHdpbGwgcHJvdmlkZSBpbnNpZ2h0IGludG8gdGhlIHJvbGUgb2YgaW50ZXItZ3JvdXAgdHJpYWRpYyBjbG9zdXJlIGFuZCBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gc2hhcGluZyBuZXR3b3JrIGV2b2x1dGlvbi4KCgojIyMgQ3JlYXRlIFNpZW5hIEFsZ29yaXRobQoKQ3JlYXRpbmcgYW4gb2JqZWN0IGNvbnRhaW5pbmcgdGhlIGFsZ29yaXRobSBzcGVjaWZpY2F0aW9ucyBmb3IgcGFyYW1ldGVyIGVzdGltYXRpb24gaW4gUlNpZW5hCgpgYGB7cn0KKG15QWxnb3JpdGhtIDwtIFJTaWVuYTo6c2llbmFBbGdvcml0aG1DcmVhdGUocHJvam5hbWUgPSAic29jX2luaXRfbmV3IikpCmBgYAoKCiMjIyBFc3RpbWF0aW5nIHBhcmFtZXRlcnMgaW4gdGhlIFNpZW5hIG1vZGVsCgpgYGB7cn0KKGFucyA8LSBSU2llbmE6OnNpZW5hMDcobXlBbGdvcml0aG0sIGRhdGEgPSBteWRhdGEsIGVmZmVjdHMgPSBteWVmZikpCihhbnMgPC0gUlNpZW5hOjpzaWVuYTA3KG15QWxnb3JpdGhtLCBkYXRhID0gbXlkYXRhLCBlZmZlY3RzID0gbXllZmYsIHByZXZBbnMgPSBhbnMsIHJldHVybkRlcHMgPSBUUlVFKSkKcHJpbnQoYW5zKQpgYGAKCgojIEdvb2RuZXNzLW9mLWZpdCB0ZXN0cyBiYXNlZCBvbiB2YXJpb3VzIGF1eGlsaWFyeSBzdGF0aXN0aWNzCgoKIyMgSW5kZWdyZWUgRGlzdHJpYnV0aW9uCgoKVGhlIGluLWRlZ3JlZSBkaXN0cmlidXRpb24gdGVzdCBjb21wYXJlcyB0aGUgb2JzZXJ2ZWQgZGVncmVlIGRpc3RyaWJ1dGlvbiAkXG1hdGhiZnt5fV97b2JzfSQgd2l0aCB0aGUgYXZlcmFnZSBzaW11bGF0ZWQgZGVncmVlIGRpc3RyaWJ1dGlvbiAkXGJhcntcbWF0aGJme3l9fV97c2ltfSQgb3ZlciBtdWx0aXBsZSBNb250ZSBDYXJsbyByZXBsaWNhdGlvbnMuCgoKVGhlIGRpc3RhbmNlcyBhcmUgcXVhbnRpZmllZCB1c2luZyB0aGUgTWFoYWxhbm9iaXMgZGlzdGFuY2UgKE1IRCk6CgoKJCQKXG1hdGhybXtNSER9ID0gXHNxcnR7KFxtYXRoYmZ7eX1fe29ic30gLSBcYmFye1xtYXRoYmZ7eX19X3tzaW19KV5cdG9wIFxtYXRoYmZ7U31eey0xfSAoXG1hdGhiZnt5fV97b2JzfSAtIFxiYXJ7XG1hdGhiZnt5fX1fe3NpbX0pfQokJAoKCndoZXJlICRcbWF0aGJme1N9JCBkZW5vdGVzIHRoZSBjb3ZhcmlhbmNlIG1hdHJpeCBvZiB0aGUgc2ltdWxhdGVkIHN0YXRpc3RpY3MgJFxiYXJ7XG1hdGhiZnt5fX1fe3NpbX0kLgoKCldpdGggJEs9OCQgc3RhdGlzdGljcywgdW5kZXIgdGhlIG1vZGVsIHRoZSBNSEQgaXMgYXBwcm94aW1hdGVseSAkXGNoaV4yX0skIGRpc3RyaWJ1dGVkLgoKClRoZSBvYnNlcnZlZCBNSEQgaXMgMTAuOTguIFRoZSBhc3NvY2lhdGVkIHAtdmFsdWUgaXMKCgokJApwID0gUChcY2hpXjJfSyBcZ2VxIDEwLjk4KSA9IDAuMjUxCiQkCgoKQXMgdGhpcyBleGNlZWRzIHRoZSAkMC4wNSQgc2lnbmlmaWNhbmNlIGxldmVsLCB3ZSBmYWlsIHRvIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzICRIXzAkIHRoYXQgdGhlIG9ic2VydmVkIGFuZCBzaW11bGF0ZWQgaW5kZWdyZWUgZGlzdHJpYnV0aW9ucyBhcmUgZXF1YWwuCgoKVGhlIGRlc2NyaXB0aXZlIHN0YXRpc3RpY3MgcHJvdmlkZWQgZnVydGhlciBpbnNpZ2h0cy4KCgotIFRoZSBtZWRpYW5zIGFyZSBjbG9zZTogMjEgKG9ic2VydmVkKSB2cy4gMjEgKHNpbXVsYXRlZCkuClRoZSB1cHBlciBwZXJjZW50aWxlcyBhcmUgY2xvc2U6IDI4IGFuZCAyOC4KVGhlIGxvd2VyIHBlcmNlbnRpbGVzIGFyZSBjbG9zZTogMTYgYW5kIDE2LgoKClRoaXMgZmluZGluZyBzdWdnZXN0cyBhIGdvb2QgbW9kZWwgZml0IGZvciB0aGUgdGVuZGVuY3kgdG8gcmVjZWl2ZSB0aWVzLgoKCmBgYHtyfQooZ29maTAgPC0gUlNpZW5hOjpzaWVuYUdPRihhbnMsIEluZGVncmVlRGlzdHJpYnV0aW9uLCB2ZXJib3NlID0gRkFMU0UsIGpvaW4gPSBUUlVFLCB2YXJOYW1lID0gIm5ldCIpKQpwcmludChnb2ZpMCkKIyB0byBjaGVjayB0aGUgZGVncmVlIGRpc3RyaWJ1dGlvbiBvZiB0aGUgb3V0Y29tZSBuZXR3b3JrOgp0YWJsZShjb2xTdW1zKHdhdmUyKSkKcGxvdChnb2ZpMCwgbWFpbiA9ICIiKQpgYGAKCgpgYGB7cn0KUlNpZW5hOjpkZXNjcmlwdGl2ZXMuc2llbmFHT0YoZ29maTAsIGNlbnRlciA9IEZBTFNFLCBzY2FsZSA9IEZBTFNFKQpgYGAKCgojIyBPdXRkZWdyZWUgRGlzdHJpYnV0aW9uCgoKRm9yIHRoZSBvdXRkZWdyZWUgZGlzdHJpYnV0aW9uLCB0aGUgTUhEIGlzCgoKJCQKXG1hdGhybXtNSER9ID0gMi45NAokJAoKCldpdGggJEs9OSQgc3RhdGlzdGljcywgdGhlIHAtdmFsdWUgaXM6CgoKJCQKcCA9IFAoXGNoaV4yX0sgXGdlcSAyLjk0KSA9IDAuODcyCiQkCgoKQSBoaWdoICRwJC12YWx1ZSBpbmRpY2F0ZXMgbm8gZXZpZGVuY2Ugb2YgcmVqZWN0aW9uIG9mIHRoZSBudWxsIGh5cG90aGVzaXMgb2YgZXF1YWwgZGlzdHJpYnV0aW9ucy4KCgpUaGUgc3VtbWFyeSBzdGF0aXN0aWNzIGFsc28gZGVtb25zdHJhdGUgYSBjbG9zZSBhbGlnbm1lbnQgb2YgYXNwZWN0cyBzdWNoIGFzIHRoZSBtZWRpYW4gb3V0ZGVncmVlcy4KCgpgYGB7cn0KKGdvZm8wIDwtIFJTaWVuYTo6c2llbmFHT0YoYW5zLCBPdXRkZWdyZWVEaXN0cmlidXRpb24sCiAgdmVyYm9zZSA9IEZBTFNFLCBqb2luID0gVFJVRSwgbGV2bHMgPSBjKDA6MTAsIDE1LCAyMCksCiAgdmFyTmFtZSA9ICJuZXQiCikpCnBsb3QoZ29mbzAsIG1haW4gPSAiIikKYGBgCgoKYGBge3J9ClJTaWVuYTo6ZGVzY3JpcHRpdmVzLnNpZW5hR09GKGdvZm8wLCBjZW50ZXIgPSBGQUxTRSwgc2NhbGUgPSBGQUxTRSkKYGBgCgoKIyMgR2VvZGVzaWMgRGlzdHJpYnV0aW9uCgoKRm9yIHRoZSBnZW9kZXNpYyBkaXN0YW5jZSBkaXN0cmlidXRpb24sIHdpdGggJEs9NSQgc3RhdGlzdGljcywgdGhlIE1IRCBvZiA0LjkgZ2l2ZXMgdGhpcyBwLXZhbHVlOgoKCiQkCnAgPSBQKFxjaGleMl9LIFxnZXEgNC45KSA9IDAuNDA0CiQkCgoKQWx0aG91Z2ggbG93ZXIgdGhhbiB0aGUgb3RoZXIgdGVzdHMsIHRoZSAkcCQtdmFsdWUgc3RpbGwgcHJvdmlkZXMgbm8gc3Ryb25nIGV2aWRlbmNlIG9mIGEgbWlzbWF0Y2ggYmV0d2VlbiB0aGUgbW9kZWwgYW5kIG9ic2VydmF0aW9ucy4KSW4gc3VtbWFyeSwgdGhlIHN0YXRpc3RpY2FsbHkgbm9uc2lnbmlmaWNhbnQgJHAkLXZhbHVlcyBhY3Jvc3MgbXVsdGlwbGUgZGlzdHJpYnV0aW9uIHRlc3RzIHByb3ZpZGUgcm9idXN0IGV2aWRlbmNlIHRoYXQgdGhlIGZpdHRlZCBtb2RlbCBhY2N1cmF0ZWx5IHJlcHJvZHVjZXMgc2V2ZXJhbCBrZXkgc3RydWN0dXJhbCBwcm9wZXJ0aWVzIG9mIHRoZSBvYnNlcnZlZCBjby1hdXRob3JzaGlwIG5ldHdvcmsuIFRoaXMgc3VwcG9ydHMgdGhlIHN1aXRhYmlsaXR5IG9mIHRoZSBtb2RlbCBmb3IgaW52ZXN0aWdhdGluZyByZXNlYXJjaCBxdWVzdGlvbnMgcmVnYXJkaW5nIGdlbmRlciBkaWZmZXJlbmNlcyBpbiBjb2xsYWJvcmF0aW9uIHBhdHRlcm5zLgoKCmBgYHtyfQpHZW9kZXNpY0Rpc3RyaWJ1dGlvbiA8LSBmdW5jdGlvbigKICAgIGksIGRhdGEsIHNpbXMsIHBlcmlvZCwgZ3JvdXBOYW1lLCB2YXJOYW1lLCBsZXZscyA9IGMoMTo1LCBJbmYpLCBjdW11bGF0aXZlID0gVFJVRSwKICAgIC4uLikgewogIHggPC0gUlNpZW5hOjpuZXR3b3JrRXh0cmFjdGlvbihpLCBkYXRhLCBzaW1zLCBwZXJpb2QsIGdyb3VwTmFtZSwgdmFyTmFtZSkKICByZXF1aXJlKHNuYSkKICBhIDwtIHNuYTo6Z2VvZGlzdChzeW1tZXRyaXplKHgpKSRnZGlzdAogIGlmIChjdW11bGF0aXZlKSB7CiAgICBnZGkgPC0gc2FwcGx5KGxldmxzLCBmdW5jdGlvbihpKSB7CiAgICAgIHN1bShhIDw9IGkpCiAgICB9KQogIH0gZWxzZSB7CiAgICBnZGkgPC0gc2FwcGx5KGxldmxzLCBmdW5jdGlvbihpKSB7CiAgICAgIHN1bShhID09IGkpCiAgICB9KQogIH0KICBuYW1lcyhnZGkpIDwtIGFzLmNoYXJhY3RlcihsZXZscykKICBnZGkKfQoKCihnb2YwLmdkIDwtIFJTaWVuYTo6c2llbmFHT0YoYW5zLCBHZW9kZXNpY0Rpc3RyaWJ1dGlvbiwKICBjdW11bGF0aXZlID0gRkFMU0UsCiAgdmVyYm9zZSA9IEZBTFNFLCBqb2luID0gVFJVRSwgdmFyTmFtZSA9ICJuZXQiCikpCgoKcGxvdChnb2YwLmdkLCBtYWluID0gIiIpCmBgYAoKCmBgYHtyfQpSU2llbmE6OmRlc2NyaXB0aXZlcy5zaWVuYUdPRihnb2YwLmdkLCBjZW50ZXIgPSBGQUxTRSwgc2NhbGUgPSBGQUxTRSkKYGBgCgoKIyMgT3V0ZGVncmVlIERpc3RyaWJ1dGlvbgoKCmBgYHtyfQooUkkgPC0gUlNpZW5hOjpzaWVuYVJJKGRhdGEgPSBteWRhdGEsIGFucyA9IGFucykpCnBsb3QoUkksIGFkZFBpZUNoYXJ0ID0gVFJVRSwgbGVnZW5kQ29sdW1ucyA9IDMpCmBgYAoKCiMgR29vZG5lc3Mtb2YtZml0IEV2YWx1YXRpb24KCgpXZSBldmFsdWF0ZWQgdGhlIG1vZGVsIGZpdCB1c2luZyB0aHJlZSBjb21tb24gZ29vZG5lc3Mtb2YtZml0IHRlc3RzIGJhc2VkIG9uIGluLWRlZ3JlZSwgb3V0LWRlZ3JlZSwgYW5kIGdlb2Rlc2ljIGRpc3RhbmNlIGRpc3RyaWJ1dGlvbnMuCgoKIyMgSW5kZWdyZWUgRGlzdHJpYnV0aW9uCgoKVGhlIGluZGVncmVlIGRpc3RyaWJ1dGlvbiB0ZXN0IGNvbXBhcmVzIHRoZSBvYnNlcnZlZCBpbmRlZ3JlZSBkaXN0cmlidXRpb24gJFxtYXRoYmZ7eX1fe29ic30kIHRvIHRoZSBhdmVyYWdlIHNpbXVsYXRlZCBpbmRlZ3JlZSBkaXN0cmlidXRpb24gJFxiYXJ7XG1hdGhiZnt5fX1fe3NpbX0kIG92ZXIgJFI9MTAwJCBNb250ZSBDYXJsbyByZXBsaWNhdGlvbnMuIFRoZSBkaXN0YW5jZSB3YXMgcXVhbnRpZmllZCB1c2luZyB0aGUgTWFoYWxhbm9iaXMgZGlzdGFuY2UuCgoKJCQKXG1hdGhybXtNSER9ID0gXHNxcnR7KFxtYXRoYmZ7eX1fe29ic30gLSBcYmFye1xtYXRoYmZ7eX19X3tzaW19KV5cdG9wIFxtYXRoYmZ7U31eey0xfSAoXG1hdGhiZnt5fV97b2JzfSAtIFxiYXJ7XG1hdGhiZnt5fX1fe3NpbX0pfQokJAoKCndoZXJlICRcbWF0aGJme1N9JCBpcyBhbiAkOCBcdGltZXMgOCQgY292YXJpYW5jZSBtYXRyaXggb2YgJFxiYXJ7XG1hdGhiZnt5fX1fe3NpbX0kLgoKCkluIHRoaXMgbW9kZWwsIHRoZSBNSEQgZm9sbG93cyBhbiBhcHByb3hpbWF0ZSAkXGNoaV4yXzgkIGRpc3RyaWJ1dGlvbi4gVGhlIG9ic2VydmVkIE1IRCB3YXMgMTAuOTgsIGdpdmluZyBhICRwJC12YWx1ZSBvZgoKCiQkCnAgPSBQKFxjaGleMl84IFxnZXEgMTAuOTgpID0gMC4yNTEKJCQKCgpBcyAkcCA+IDAuMDUkLCB3ZSBmYWlsIHRvIHJlamVjdCB0aGUgbnVsbCBoeXBvdGhlc2lzICRIXzAkIG9mIHRoZSBlcXVhbGx5IG9ic2VydmVkIGFuZCBzaW11bGF0ZWQgZGlzdHJpYnV0aW9ucy4gVGhlIG1lZGlhbnMgKDIxIHZzLiAyMSksIHVwcGVyIHBlcmNlbnRpbGVzICgyOCB2cy4gMjgpLCBhbmQgbG93ZXIgcGVyY2VudGlsZXMgKDE2IHZzLiAxNikgd2VyZSBjbG9zZWx5IGFsaWduZWQuIFRoaXMgc3VnZ2VzdHMgZ29vZCBtb2RlbCBmaXQgZm9yIHRoZSB0ZW5kZW5jeSB0byByZWNlaXZlIHRpZXMuCgoKIyMgT3V0ZGVncmVlIERpc3RyaWJ1dGlvbgoKClRoZSBvdXQtZGVncmVlIGRpc3RyaWJ1dGlvbiB0ZXN0IHlpZWxkZWQgYW4gTUhEIG9mIDIuOTQuIFdpdGggJEs9OSQgc3RhdGlzdGljcywgdGhlICRwJC12YWx1ZSBpczoKCgokJApwID0gUChcY2hpXjJfOSBcZ2VxIDIuOTQpID0gMC44NzIKJCQKCgpBIGhpZ2ggJHAkLXZhbHVlIGluZGljYXRlcyBubyBldmlkZW5jZSBvZiB0aGUgcmVqZWN0aW9uIG9mICRIXzAkLiBUaGUgc3VtbWFyeSBzdGF0aXN0aWNzIGFsc28gc2hvd2VkIGEgY2xvc2UgYWxpZ25tZW50IGJldHdlZW4gdGhlIG9ic2VydmVkIGFuZCBzaW11bGF0ZWQgb3V0ZGVncmVlIGRpc3RyaWJ1dGlvbnMuCgoKIyMgR2VvZGVzaWMgRGlzdGFuY2UgRGlzdHJpYnV0aW9uCgoKV2l0aCAkSz01JCBzdGF0aXN0aWNzLCB0aGUgZ2VvZGVzaWMgZGlzdGFuY2UgdGVzdCBwcm9kdWNlZCBhbiBNSEQgb2YgNC45IGFuZCAkcCQtdmFsdWUgb2YgMC40MDQsIHByb3ZpZGluZyBubyBldmlkZW5jZSBvZiBwb29yIG1vZGVsIGZpdC4KCgpJbiBzdW1tYXJ5LCB0aGUgc3RhdGlzdGljYWxseSBub25zaWduaWZpY2FudCAkcCQtdmFsdWVzIGFjcm9zcyB0aGUgdGVzdHMgaW5kaWNhdGUgdGhhdCB0aGUgbW9kZWwgYWNjdXJhdGVseSByZXByb2R1Y2VzIHRoZSBrZXkgc3RydWN0dXJhbCBwcm9wZXJ0aWVzIG9mIHRoZSBvYnNlcnZlZCBuZXR3b3JrLiBUaGlzIHN1cHBvcnRzIHRoZSB1c2Ugb2YgdGhlIG1vZGVsIHRvIGludmVzdGlnYXRlIHJlc2VhcmNoIHF1ZXN0aW9ucyBvbiBnZW5kZXIgZGlmZmVyZW5jZXMgaW4gY29sbGFib3JhdGlvbi4KCgo=</div>
+   
+      </div>
+   <div class="col-md-2">
+          <div id="toc">
+       <button type="button" class="close">×</button>
+       <ul>
+       <li><a href="#defining-dependent-and-independent-variables"
+       id="toc-defining-dependent-and-independent-variables">Defining
+       dependent and independent variables</a></li>
+       <li><a href="#rsiena" id="toc-rsiena">RSiena</a></li>
+       <li><a href="#rsiena-effects" id="toc-rsiena-effects">RSiena
+       Effects</a></li>
+       <li><a
+       href="#goodness-of-fit-tests-based-on-various-auxiliary-statistics"
+       id="toc-goodness-of-fit-tests-based-on-various-auxiliary-statistics">Goodness-of-fit
+       tests based on various auxiliary statistics</a>
+       <ul>
+       <li><a href="#indegree-distribution"
+       id="toc-indegree-distribution">Indegree Distribution</a></li>
+       <li><a href="#outdegree-distribution"
+       id="toc-outdegree-distribution">Outdegree Distribution</a></li>
+       <li><a href="#geodesic-distribution"
+       id="toc-geodesic-distribution">Geodesic Distribution</a></li>
+       <li><a href="#outdegree-distribution-1"
+       id="toc-outdegree-distribution-1">Outdegree Distribution</a></li>
+       </ul></li>
+       <li><a href="#goodness-of-fit-evaluation"
+       id="toc-goodness-of-fit-evaluation">Goodness-of-fit
+       Evaluation</a>
+       <ul>
+       <li><a href="#indegree-distribution-1"
+       id="toc-indegree-distribution-1">Indegree Distribution</a></li>
+       <li><a href="#outdegree-distribution-2"
+       id="toc-outdegree-distribution-2">Outdegree Distribution</a></li>
+       <li><a href="#geodesic-distance-distribution"
+       id="toc-geodesic-distance-distribution">Geodesic Distance
+       Distribution</a></li>
+       </ul></li>
+       </ul>
+     </div>
+        </div>
+   </div>
+   </div>
+            
+      
+
+  <script>
+    $(document).ready(function () {
+
+		// add bootstrap table styles to pandoc tables
+	$('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+		
+ 	 	$('#content img').addClass("image-thumb");
+		
+		$('#content img:not(.no-lightbox)').addClass("image-lb");
+	$('#content').magnificPopup({
+	    type:'image',
+	    closeOnContentClick: false,
+	    closeBtnInside: false,
+	    delegate: '.image-lb',
+	    gallery: {enabled: false },
+	    image: {
+	        verticalFit: true,
+		titleSrc: 'alt'
+	    }
+ 	});
+ 	    });
+  </script>
+
+
+
+    <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+	var script = document.createElement("script");
+	script.type = "text/javascript";
+	script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+	document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+  
+</body>
+</html>

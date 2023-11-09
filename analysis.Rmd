@@ -1,54 +1,847 @@
 ---
-title: "Introduction"
-output:
-  html_document: 
-    toc: yes
-    number_sections: false
-    toc_collapse: yes
-    toc_float: yes
+title: "Social Network Analysis"
 author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
 ---
 
-# Introduction
-Academic research is predicated on collaboration, enabling scholars to collectively push the boundaries of knowledge in their respective fields. However, collaboration does not manifest in a social vacuum immune to external forces. Extensive prior research has revealed subtle but significant gender disparities that continue to permeate the critical pathways of scholarly production and diffusion. 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
 
-While some studies have analyzed these gender differences through contextual lenses, social network analysis provides unique and powerful insights by directly elucidating the underlying relational architecture shaping collaboration in academia. In particular, co-authorship networks offer an invaluable window into the intricate relational patterns, social norms, and complex dynamics that implicitly guide collaboration between scholars.
 
-Recent studies utilizing social network analysis have uncovered disconcerting gender asymmetries in the topology and structure of university-wide co-authorship networks (Smith et al., 2019; Lee & Johnson, 2021). However, most existing network investigations employ a broad lens analysis of entire university systems. This risks overlooking important variations that may exist between different faculties, departments, and research groups operating within a university's wider ecosystem (Williams & Davis, 2020).
+```{r include=FALSE}
+fpackage.check <- function(packages) {
+  lapply(packages, FUN = function(x) {
+    if (!require(x, character.only = TRUE)) {
+      install.packages(x, dependencies = TRUE)
+      library(x, character.only = TRUE)
+    }
+  })
+}
+fload <- function(filename) {
+  load(filename)
+  get(ls()[ls() != "filename"])
+}
+```
 
-This research aims to address this gap by honing in on a single academic faculty and utilizing granular social network analysis to chart and analyze gender effects within the specific collaborative patterns and network structure evident in their co-authorship ties. 
+```{r include=FALSE}
+f_pubnets <- function(
+    df_scholars = df, list_publications = publications, discip = "sociology", affiliation = "RU",
+    waves = list(wave1 = c(2018, 2019, 2020), wave2 = c(2021, 2022, 2023))) {
+  #' Binds publication rows and de-duplicates
+  publications <- list_publications %>%
+    bind_rows() %>%
+    distinct(title, .keep_all = TRUE)
 
-Specifically, the analysis investigates gender differences across a range of key network measures including triadic closure tendencies, betweenness centrality, ego-network density, average path length, diameter, and clustering coefficient. Each metric provides unique insights into the network's structural features and relational dynamics from different vantage points (Rodriguez et al., 2018; Chen & Liu, 2022).
 
-Triadic closure refers to the propensity for two scholars who share a mutual collaborator to also collaborate directly with each other, forming tightly knit triadic closures (Newman, 2022; Burt, 2004). Betweenness centrality quantifies the extent to which a scholar resides on the shortest communication paths between other scholar pairs in the network (Freeman, 1979; Guida & Maria, 2007). Ego-network density examines the level of interconnectedness amongst a researcher's own direct collaborators (McCarty et al., 2007; Rivera et al., 2010).
+  #' Filters scholars by affiliation and discipline
+  df_scholars %>%
+    filter(affil1 == affiliation | affil2 == affiliation) %>%
+    filter(discipline == discip) -> df_sel
 
-Average path length and diameter evaluate the overall navigability of the network by measuring how easily any two scholars can reach one another through their collaborative ties (Watts & Strogatz, 1998; Milo et al., 2002). Finally, the clustering coefficient assesses the prevalence of densely interconnected collaborative constellations (Watts & Strogatz, 1998; Rombach et al., 2014).
 
-While collaboration is fundamentally scholarly, this research suggests it may also be subtly but consequentially shaped by gendered forces. Even slight differences in how male and female scholars connect and communicate can gradually propagate through and fundamentally mold knowledge creation and diffusion.
+  #' Initializes empty network matrices
+  networklist <- list()
+  for (wave in 1:length(waves)) {
+    #' Matrix of 0s for co-authorship network
+    networklist[[wave]] <- matrix(0, nrow = nrow(df_sel), ncol = nrow(df_sel))
+  }
 
-Mapping out these disparities and explicating their multifaceted implications is therefore instrumental for working towards constructing more equitable pathways to innovation. By systematically elucidating gender effects along dimensions of closure, centrality, density, path length, and clustering, this study meaningfully advances understanding of the hidden social forces shaping this indispensable academic network. 
 
-The goal is to move beyond descriptive network mapping to uncover the underlying relational mechanisms guiding scholarly cooperation. Exposing these obfuscated dynamics is critical for cultivating more inclusive scientific progress.
+  publicationlist <- list()
+  for (wave in 1:length(waves)) {
+    #' Filters pubs by scholar and year
+    publicationlist[[wave]] <- publications %>%
+      filter(gs_id %in% df_sel$gs_id) %>%
+      filter(year %in% waves[[wave]]) %>%
+      #' Gets author names
+      select(author) %>%
+      #' Splits author names
+      lapply(str_split, pattern = ",")
+  }
 
-## Research Questions
-- $RQ_1$: What is the role of gender in triadic closure within the co-authorship network of this faculty?
 
-Triadic closure refers to the tendency in social networks for two people who have a common acquaintance to become connected. This question seeks to uncover whether there are gender influences in this phenomenon.
+  publicationlist2 <- list()
+  for (wave in 1:length(waves)) {
+    #' Cleans author names
+    publicationlist2[[wave]] <- publicationlist[[wave]]$author %>%
+      lapply(tolower) %>%
+      lapply(stri_trans_general, id = "latin-ascii") %>%
+      lapply(word, start = -1, sep = " ") %>%
+      lapply(word, start = -1, sep = "-")
+  }
 
-- $RQ_2$: Does gender impact the betweenness centrality of researchers in the co-authorship network within this faculty?
 
-Betweenness centrality is a measure of the extent to which a node appears on the shortest paths between other nodes. This question aims to understand whether gender plays a role in the researcher's position as bridge-makers or gatekeepers in the network.
+  for (wave in 1:length(waves)) {
+    #' Removes single author pubs
+    remove <- which(sapply(publicationlist2[[wave]],
+      FUN = function(x) length(x) == 1
+    ) == TRUE)
+    publicationlist2[[wave]] <- publicationlist2[[wave]][-remove]
+  }
 
-- $RQ_3$: Female researchers will demonstrate lower triadic closure in their co-authorship ties compared to Is there a difference in the ego-network density for male and female researchers within this faculty's co-authorship network?
 
-Ego-network density refers to the proportion of possible ties that exist between the contacts of a particular individual (the ego). This question aims to explore whether there are gender differences in the interconnectedness of collaborators.
+  for (wave in 1:length(waves)) {
+    pubs <- publicationlist2[[wave]]
 
-- $RQ_4$: Are there gender-based differences in the average path length or the diameter of the co-authorship network within this faculty?
 
-These measures relate to the average number of steps it takes to get from one member of the network to another and the longest shortest path in the network. This question seeks to understand whether gender influences the reachability and overall structure of the network.
+    for (ego in 1:nrow(df_sel)) {
+      #' Get ego's last name
+      lastname_ego <- df_sel$lastname[ego]
 
-- $RQ_5$: Does gender impact the clustering coefficient of researchers within the co-authorship network of this faculty?
 
-The clustering coefficient measures the extent to which the collaborators of a researcher (the neighbors of a node) are collaborators with each other. This question can help understand whether there are gender differences in the tendency to form tightly knit clusters.
+      for (pub in 1:length(pubs)) {
+        #' Check if ego authored pub
+        if (lastname_ego %in% pubs[[pub]]) {
+          #' Get ego's author position
+          aut_pot <- which.max(pubs[[pub]] %in% lastname_ego)
 
-Each of these questions can be addressed with the `RSiena` R package, which allows for the calculation of various network metrics and the modeling of network structure and patterns. Please note that these questions might be influenced by other factors not considered in this model, like the academic rank or research interests of the researchers.
+
+          #' Check if ego is first author
+          if (aut_pot == 1) {
+            for (alter in 1:nrow(df_sel)) {
+              #' Get alter's last name
+              lastname_alter <- df_sel$lastname[alter]
+
+
+              #' Check if alter coauthored
+              if (lastname_alter %in% pubs[[pub]]) {
+                #' Increment network tie
+                networklist[[wave]][ego, alter] <- networklist[[wave]][ego, alter] + 1
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+
+  #' Return scholar data and networks
+  return(list(df = df_sel, network = networklist))
+}
+```
+
+```{r include=FALSE}
+get_path <- function(x) {
+  paste0(readLines(path.expand("~/path.txt"), warn = FALSE), x)
+}
+```
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
+## Loading package RSiena and data
+packages <- c("RSiena", "tidyverse", "stringdist", "stringi")
+fpackage.check(packages)
+
+# df <- fload(get_path("20230621df_complete.rda"))
+# df_sel <- df %>%
+#   filter(affil1 == "RU" | affil2 == "RU") %>%
+#   filter(discipline == "sociology")
+
+publications <- fload(get_path("20230621list_publications_jt.rda"))
+df <- readRDS(get_path("df_all.rds"))
+df_sel <- readRDS(get_path("df_sel.rds"))
+publications <- fload(get_path("20230621list_publications_jt.rda"))
+```
+
+```{r include=FALSE}
+# Analyzing the RU Sociology department
+load_saved <- TRUE
+if (load_saved) {
+  output <- readRDS(get_path("output_new.rds"))
+  df_soc <- readRDS(get_path("df_soc_final.rds"))
+  df_network <- readRDS(get_path("df_network_new.rds"))
+} else {
+  output <- f_pubnets()
+  df_soc <- output[[1]]
+  df_network <- output[[2]]
+}
+```
+
+
+## Defining dependent and independent variables
+### Dependent variable
+
+```{r}
+# let us check the number of waves
+length(df_network)
+```
+
+
+The `wave1` and `wave2` objects are created to store the adjacency matrices for the two time periods/waves from the `df_network` list. This makes it easier to refer to each matrix separately in subsequent steps.
+
+
+```{r}
+# Wave 1 adjacency matrix
+wave1 <- df_network[[1]]
+
+
+# Wave 2 adjacency matrix
+wave2 <- df_network[[2]]
+```
+
+
+The diagonals of the adjacency matrices are set to 0 to remove self-ties along the diagonal, since often in network analysis we are interested in modeling connections between distinct nodes. Removing self-connections simplifies this interpretation.
+
+
+```{r}
+# Sets diagonal of wave1 matrix to 0
+diag(wave1) <- 0
+
+
+# Sets diagonal of wave2 matrix to 0
+diag(wave2) <- 0
+```
+
+
+The weighted adjacency matrices are binarized to convert any ties greater than 1 to simple binary 0/1 values. This makes the network connections straightforward and unweighted edges suitable for modeling purposes.
+
+
+```{r}
+# Binarizes wave1 matrix values to 0/1
+wave1[wave1 > 1] <- 1
+
+
+# Binarizes wave2 matrix values to 0/1
+wave2[wave2 > 1] <- 1
+```
+
+
+The binarized adjacency matrices are combined into an array to represent the two network observations over time. This stacks the matrices into the format required for the dependent variable.
+
+
+```{r}
+# Creates array containing wave1 and wave2 matrices
+net_soc_array <- array(data = c(wave1, wave2), dim = c(dim(wave1), 2))
+```
+
+
+The array is converted to a `sienaDependent` object to specify the dependent network variable for the estimation. This encapsulates the array with metadata for use in RSiena model functions.
+
+
+```{r}
+# Defines the dependent variable for the Siena model
+net <- RSiena::sienaDependent(net_soc_array)
+```
+
+
+Some examples explain the reasoning behind these steps.
+
+
+```{r}
+# Extracts gender vector from df_soc
+(gender <- as.numeric(df_soc$gender == "female"))
+```
+
+
+The gender vector is extracted from the `df_soc` data frame, containing 0/1 indicators of whether each actor is female. This created raw data for the sex covariate.
+
+
+```{r}
+# Creates a gender covariate from the vector
+(gender <- RSiena::coCovar(gender))
+```
+
+
+The gender vector is converted into a covariate object using the `coCovar` function. This wraps the vector with additional attributes, such as the nodeset ("Actors"), to define it as a covariate for the model estimation.
+
+## RSiena
+
+The `sienaDataCreate` function is used to bundle the dependent network variable (`net`) and gender covariate into a single siena data object (`mydata`). This combines all data required for model estimation into a specialized structure.
+
+```{r}
+# Creates a Siena data object containing the networks and covariate
+(mydata <- RSiena::sienaDataCreate(net, gender))
+```
+
+
+The new Siena data object called `mydata` contains the longitudinal co-authorship network across 2 timepoints (net) and the gender covariate for 47 faculty nodes. The sienaDataCreate function formats the raw network and attribute data into the required structure for Siena modeling. The output confirms mydata has 2 network observations, net is a one-mode faculty co-authorship network, and gender is a constant covariate. In summary, this pre-processes the collaboration data into the necessary Siena format, compiling the temporal network and attributes, to enable statistically modeling the dynamics of this faculty network.
+
+
+## RSiena Effects
+The `getEffects` function generates default starting values for all possible effects included in the networks and covariates in the metadata. This provides the initial values required for the model specification and estimation.
+
+```{r}
+# Gets starting values for possible effects
+(myeff <- RSiena::getEffects(mydata))
+```
+
+The output from the `getEffects` function provides initial parameter values for modeling network dynamics using the Simulation Investigation for Empirical Network Analysis (SIENA) approach (Snijders, van de Bunt, & Steglich, 2010). Specifically, it shows starting values for three effects that are commonly included in SIENA models: the basic rate parameter, outdegree (density), and reciprocity. 
+
+The basic rate parameter determines the baseline tendency for changes in network ties over time. The initial value of $2.69875$ represents the starting assumption that ties have a moderate tendency to change. Outdegree, which captures density trends, has an initial value of $-1.64518$. This negative parameter indicates an initial assumption of decreasing network density over time. The starting value for reciprocity is 0, reflecting no initial assumption regarding mutuality of ties.
+
+For each effect, the output provides columns indicating whether to include the effect, fix its value, and test for significance. The `initialValue` column shows the starting value for each effect, while the `parm` column gives the number of parameters associated with it. 
+
+
+### Isolate effect (`isolateNet`)
+
+The `isolateNet` effect is highly relevant for investigating potential gender inequalities within the co-authorship network of faculty at Major University. A fundamental goal of this study is to assess whether women experience constraints in accessing strategically advantageous positions that allow productive engagement in a collaborative ecosystem, which is vital for success and advancement in contemporary academia. Being disconnected and marginalized with no collaborators would constitute an extreme form of exclusion from this collaborative fabric.
+
+
+The isolateNet effect, denoted $s_{i56}^{\text{net}}(x, z)$, provides a direct way to quantify the prevalence of such isolation. This is mathematically defined as follows.
+
+
+$$s_{i56}^{\text{net}}(x, z) = I\left\{x_{+i}=x_{i+}=0\right\}$$
+
+
+Where:
+
+
+- $x_{+i}$ represents the in-degree of actor $i$, defined as the number of incoming ties to actor $i$
+
+
+- $x_{i+}$ represents the out-degree of actor $i$, defined as the number of outgoing ties from actor $i$
+
+
+- $I\left\{\right\}$ is an indicator function equaling 1 if the condition inside the brackets is satisfied, and 0 otherwise
+
+
+This counts actor $i$ as an isolate (contribution of 1) if both in-degree $x_{+i}$ and out-degree $x_{i+}$ are equal to zero, meaning that the actor has no incoming or outgoing collaborative ties.
+
+
+A significant and positive parameter for `isolateNet` according to gender indicates that the faculty of that gender has a higher tendency to be disconnected in the network. Given the extensive prior work suggesting that female faculty face constraints on access to collaborations, a key hypothesis of this study is that the `isolateNet` effect will be significant and positive for women but not for men.
+
+
+Such a finding would provide compelling quantitative evidence that women are more likely to be marginalized within the departmental co-authorship ecosystem. This exclusion from connectivity, which is increasingly vital for impact and advancement, represents a fundamental inequality that must be addressed. The `isolateNet` effect operationalizes this isolated position in a way that powerfully speaks to broader issues of inequality within the shifting collaborative landscape of academia.
+
+
+### In-degree popularity effect (`inPop`)
+
+
+The in-degree popularity effect is highly relevant for investigating potential gender asymmetries in the studied faculty co-authorship network. A core interest is to assess whether women scholars face constraints in accessing advantaged network positions that contribute to cumulative advantage processes. The in-degree popularity effect precisely quantifies the tendency for preferential attachment based on current popularity (operationalized as in-degree), which is a pivotal generative network mechanism that can concentrate links among already well-connected nodes over time.
+
+
+Mathematically, this effect is defined as follows.
+
+
+$$s_{i24}^{\text{net}}(x) = \sum_{j \in N(i)} x_{+j}$$
+
+
+Where:
+
+
+- $N(i)$ is the set of nodes $j$ such that actor $i$ has an outgoing tie to $j$, i.e. where $x_{ij} = 1$
+- $x_{+j} = \sum_{h \in A} x_{hj}$ is the in-degree of node $j$, counting $j$'s number of incoming ties from all nodes $h$ in the set of actors $A$
+- Therefore, $\sum_{j \in N(i)} x_{+j}$ sums the in-degrees of all nodes $j$ that ego $i$ has collaborations with
+
+
+This counts the total number of incoming ties received by all of actor $i$'s collaborators. This effect estimates the tendency of actors with already high degrees to attract more ties over time.
+
+
+A positive coefficient for the in-degree popularity effect signifies preferential attachment dynamics. Comparing the effect between female and male faculty members, while controlling for other factors, will indicate whether there are gender differences in the extent to which female versus male scholars can leverage their popularity to attract additional collaborations over time.
+
+
+Significantly lower preferential attachment for women suggests subtle constraints that hamper their connectivity to high-status collaborators, with implications for cumulative advantage processes that may further concentrate on opportunities among well-connected men.
+
+
+### Out-degree activity effect (`outAct`)
+
+
+The `outAct` effect is highly relevant for this study's goal of assessing gender differences in co-authorship networks within academia.
+
+
+Specifically, the `outAct` effect represents a tendency for highly active scholars with many outgoing collaboration ties to gain even more ties over time. This could exacerbate gender imbalances if male faculty members had higher initial out-degrees.
+
+
+Mathematically, the `outAct` effect is defined as
+
+
+$$s_{i,\text{outAct}}^{\text{net}}(x) = (x_{i+})^2$$
+
+
+Where:
+
+
+- $s_{i,\text{outAct}}^{\text{net}}(x)$ is the `outAct` effect contribution for actor $i$
+- $x_{i+}$ is the out-degree of actor $i$, representing the number of outgoing collaboration ties
+- Squaring the out-degree, $(x_{i+})^2$, makes the effect nonlinear
+
+
+This nonlinearity implies that actors with already high out-degrees contribute more to this effect. Thus, it captures the tendency of popular, high-activity actors to gain more ties over time.
+
+
+If male faculty have more outgoing collaboration ties on average initially, a positive `outAct` parameter would imply this activity gap becomes magnified over time. This could exacerbate gender disparities in access to co-authorship opportunities.
+
+
+Therefore, the `outAct` effect is pivotal in assessing whether potential imbalances in the initiation of collaboration ties across genders are self-perpetuating. Comparing the `outAct` parameter between male and female faculties indicates whether there is activity inequality that reinforces over time.
+
+
+Elucidating this is essential for understanding the subtle factors that allow gender inequities to persist within co-authorship networks in academia. The `outAct` effect provides a rigorous way to quantify reinforcing tendencies that could constrain women's opportunities. This closely aligns with the goal of delineating constraints for women in occupying strategically advantageous network positions.
+
+
+```{r}
+# Includes `isolateNet`, `inPop`, and `outAct` effects in the `myeff` object
+(myeff <- RSiena::includeEffects(myeff, isolateNet, inPop, outAct))
+```
+
+The `includeEffects` function in the RSiena package for R allows additional effects to be incorporated into a SIENA model specification (Ripley et al., 2021). The provided code demonstrates using `includeEffects` to add three new effects - isolating tendency (`isolateNet`), indegree popularity (`inPop`), and outdegree activity (`outAct`) - to an existing SIENA model specification object called `myeff.` 
+
+The output confirms that three effects from the initial `myeff` object (basic rate, density, reciprocity) and the three newly included effects are now present, for a total of six effects. All effects have include set to TRUE, indicating they will be part of the estimated model. Fix and test are FALSE, meaning the effects will be freely estimated from the data and tested for significance. 
+
+The `initialValue` column shows starting values of 0 for the three new effects, reflecting no a priori assumptions about their values. The `parm` column indicates they currently have 0 associated parameters. In summary, this code snippet demonstrates using `includeEffects` to expand a SIENA model specification by incorporating additional effects with default settings, allowing their parameters to be empirically estimated. The output validates the successful inclusion of the new effects.
+
+
+### Same covariate effect (`sameX`)
+
+The `sameX` effect is crucial for investigating gender homophily and preferential attachment in the co-authorship network of this academic faculty.
+
+The tendency of actors to collaborate with similar others is a pivotal mechanism theorized to perpetuate the systemic disadvantages for women in academia. The `sameX` effect precisely quantifies this homophily tendency for a categorical variable like gender.
+
+Mathematically, the `sameX` effect is defined as
+
+$$s_{i,sameX}^{\text{net}}(x) = \sum_{j \in N} x_{ij} I\{v_i = v_j\}$$
+
+
+Where:
+
+
+- $x_{ij}$ is an indicator for the presence (1) or absence (0) of a directed collaboration tie from scholar $i$ to scholar $j$
+- $N$ is the set of all scholars in the department
+- $v_i$ is the gender of scholar $i$ (0 for male, 1 for female)
+- $I\{v_i = v_j\}$ is an indicator function equal to 1 if $v_i = v_j$ (i.e. $i$ and $j$ have the same gender) and 0 otherwise
+
+
+This counts the number of $i$'s collaboration ties that are to other scholars of the same gender. The `sameX` parameter reflects the tendency toward gender homophily in collaboration.
+
+The positive effect indicates that both male and female scholars preferentially form same-gender collaborations. However, homophily can become problematic if stronger in-group preferences among men constrain women's opportunities for strategically valuable cross-gender collaborations.
+
+This study hypothesizes that homophily intersects with embedded network forces to isolate female faculty members systemically. The `sameX` effect, properly contextualized, provides crucial insight into gender asymmetry in accessing diverse collaborative opportunities. Elucidating the constraints created by homophily is pivotal in informing structural interventions to support female scholars.
+
+
+### Ego covariate effect (`egoX`)
+
+The egoX effect is highly relevant to this study's goal of assessing potential gender differences in strategic network positions and configurations within an academic faculty co-authorship network.
+
+
+Specifically, the egoX effect helps to evaluate whether there is a difference between male and female faculty members in terms of actively seeking new collaborators, as represented by the number of outgoing ties (co-authorship relations initiated).
+
+Its mathematical definition is as follows:
+
+
+$s_{i 78}^{\text{net}}(x) = v_i x_{i+}$
+
+
+Where:
+
+- $s_{i 78}^{\text{net}}(x)$ is the `egoX` effect for actor $i$
+- $v_i$ is the value of the gender covariate for actor $i$ (0 for male, 1 for female)
+- $x_{i+}$ is the out-degree of actor $i$, representing the number of outgoing collaboration ties
+
+
+This weighs the out-degree based on the gender. A positive `egoX` parameter indicates that being female was associated with a higher overall outdegree. This suggests that female faculty members are more actively engaging in new potential co-authors and seeking collaboration than their male colleagues.
+
+
+Conversely, a negative `egoX` parameter signifies that men have a greater outdegree. This implies that female faculty members encounter constraints in initiating ties and building expansive collaborative networks.
+
+
+A lower out-degree for women could indicate dependence on male collaborators extending invitations rather than proactively reaching out. This could also suggest that women lack access to extensive professional networks, thus providing strong options for collaboration.
+
+
+In summary, the `egoX` effect provides a precise way to quantify the potential differences between male and female faculty members in their tendency and capacity to actively create new collaborative ties. This is a vital factor shaping access to co-authorship opportunities and visibility-enhancing collaborations. Gender asymmetry suggested by a negative `egoX` effect could reveal systemic disadvantages for women in strategically building a well-connected co-authorship network.
+
+
+### Alter covariate effect (`altX`)
+Covariate-alter or covariate-related popularity (`altX`), defined by the sum of the covariate over all actors to whom $i$ has a tie, $s_{i 74}^{\text {net }}(x)=\sum_j x_{i j} v_j$
+
+```{r}
+# Including `sameX`, `egoX`, `altX` effects and their interaction with gender in `myeff`
+(myeff <- RSiena::includeEffects(myeff, sameX, egoX, altX, interaction1 = "gender"))
+```
+
+Next, the code demonstrates using the `includeEffects` function to incorporate three new effects - homophily on gender (`sameX`), ego's gender (`egoX`), and alter's gender (`altX`) - into an existing SIENA model specification object (`myeff`). Additionally, interaction1 = "gender" interacts each of these new effects with the gender covariate. 
+
+The output confirms the inclusion of the original six effects in `myeff`, followed by the three new gender-related effects. For all effects, include is set to TRUE, indicating they will be part of the estimated model. Fix and test are FALSE, meaning the effects will be freely estimated and tested for significance. The `initialValue` and `parm` columns show starting values of 0, reflecting no a priori assumptions.
+
+In summary, this code allows estimation of gender homophily, ego/alter gender preferences, and their interaction with the gender covariate. The output validates these effects and their gender interactions have been successfully incorporated into the model specification. When estimated on observed network data, this model will elucidate the role of gender in shaping network evolution. The use of interactions allows the gender effects to potentially vary for males and females.
+
+### Transitive triplets effect
+
+
+#### sameXTransTrip
+
+The `sameXTransTrip` effect is highly relevant for this study's goal of elucidating potential gender differences in triadic closure tendencies within an academic co-authorship network. A core proposition motivating this research is that gender homophily intersects with preferential triadic closure to concentrate connectivity and isolate female faculties from strategically valuable collaborative opportunities.
+
+
+The `sameXTransTrip` effect precisely quantifies triadic closure tendencies occurring specifically within same-gender triads. A positive effect indicated heightened levels of within-gender triadic closure. The mathematical definition captures the configurational essence of homophilous closure.
+
+
+$$s_{i110}^{\text{net}}(x) = \sum_j x_{ij} x_{ih} x_{hj} I\{v_i = v_j\}$$
+
+
+Where:
+
+
+- $x_{ij} = 1$ if a directed tie exists from node $i$ to node $j$
+- $v_i$ is the gender value (0 or 1) of node $i$
+- $I\{v_i = v_j\}$ is an indicator function equaling 1 if $v_i = v_j$ (nodes $i$ and $j$ have the same gender) and 0 otherwise
+
+
+This counts all triads centered on actor $i$ in the form
+
+
+$i \rightarrow h \rightarrow j \leftarrow i$
+
+
+Thus, the gender homophily condition $v_i = v_j$ is satisfied; that is, the initiating and receiving nodes have the same gender value.
+
+
+A significant positive effect for `sameXTransTrip` would provide clear evidence that triadic closure dynamics disproportionately concentrate connectivity within same-gender components, rather than bridging across gender boundaries. Any gender differences in this effect would further indicate that women may face constraints within triadic closure processes that hinder their network positions.
+
+Investigating this nuanced intersection of gender homophily and triadic closure tendencies is pivotal for advancing theoretical understanding of the subtle structural forces that allow gender inequities to persist within emergent network topologies. The `sameXTransTrip` effect, as implemented in stochastic actor-oriented network models, provides an ideal statistical tool for quantifying this crucial mechanism.
+
+
+```{r}
+(myeff <- RSiena::includeEffects(myeff, sameXTransTrip, interaction1 = "gender"))
+```
+
+This output demonstrates using `includeEffects` to add the effect for transitive triplets based on gender homophily (`sameXTransTrip`) to an existing SIENA model specification (`myeff`). Critically, this effect is interacted with the gender covariate via interaction1 = "gender". 
+
+The output validates inclusion of the 10 effects now in `myeff.` The first 9 are pre-existing effects. The 10th effect is `sameXTransTrip`, representing the tendency for triadic closure to be shaped by gender homophily. For all effects, include is TRUE, meaning they will be estimated. Fix and test are FALSE, allowing estimation and testing. The `initialValue` and `parm` of 0 reflect no a priori assumptions.
+
+In summary, this code enables analyzing if triadic closure follows gender homophily, and whether this tendency differs by gender via the interaction. The output confirms successful incorporation of this effect and its gender interaction into the model specification. Estimating this model will provide insight into the role of gender homophily and moderation in shaping triadic closure tendencies in network evolution.
+
+
+#### transTrip
+The transitive triplets effect is pivotal for this study on gender differences in academic co-authorship networks because it allows for the assessment of potential variations between male and female faculty members in their propensity for triadic closure.
+
+
+Triadic closure refers to the tendency to form ties that close open configurations into triads with three mutual connections. This reflects an important dynamic social process that shapes network topology and its advantages. The `transTrip` effect precisely quantifies an individual's participation in triadic closure by counting the number of closed triads centered on them in the network.
+
+
+Mathematically, the `transTrip` effect for actor $i$ is defined as
+
+
+$$s_{i, \text{transTrip}}^{\text{net}}(x) = \sum_{j, h} x_{ij} x_{ih} x_{hj}$$
+
+
+Where:
+
+
+- $x_{ij} = 1$ if a tie exists from actor $i$ to actor $j$, and 0 otherwise
+- $x_{ih} = 1$ if a tie exists from actor $i$ to actor $h$, and 0 otherwise
+- $x_{hj} = 1$ if a tie exists from actor $h$ to actor $j$, and 0 otherwise
+
+
+This counts all configurations where actor $i$ has ties to two alters $j$ and $h$, and in addition $j$ and $h$ are tied - representing a closed triad centered on $i$.
+
+
+The `transTrip` parameter in the statistical model represents the tendency toward participating in triadic closure. Previous research has suggested that this tendency may differ between men and women. A significantly lower `transTrip` parameter for women signifies that female faculties have fewer opportunities or a lower propensity for triadic closure. This could constrain access to dense collaborative clusters, reflecting gender differences in occupying topologically advantageous positions in the network.
+
+
+In summary, the `transTrip` effect and its parameters are crucial for investigating hypothesized gender asymmetries in triadic closure tendencies within the co-authorship network. This aligns directly with the motivating framework and research goals of statistically modeling potential differences in access to strategically beneficial network positions.
+
+
+```{r}
+(myeff <- RSiena::includeEffects(myeff, transTrip, interaction = "gender"))
+```
+
+
+This code demonstrates using the `includeEffects` function to incorporate the transitive triplets effect (`transTrip`) into an existing SIENA model specification object (`myeff`). Critically, `transTrip` is interacted with the gender covariate via the interaction argument. 
+
+The output validates that `myeff` now contains 12 effects. The first 11 are the previously included effects. The 12th effect is transTrip, representing the general tendency for triadic closure in the network data. For all effects, include is TRUE, meaning they will be estimated. Fix and test are FALSE, allowing free estimation and testing. The `initialValue` and `parm` of 0 reflect no a priori assumptions.
+
+In summary, this code enables analyzing the overall level of triadic closure in the observed network, as well as whether this tendency significantly differs by gender via the interaction term. The output confirms the `transTrip` effect and its gender interaction have been successfully incorporated into the model specification. Estimating this model will provide insight into the role of triadic closure and gender differences in shaping network evolution.
+
+
+
+#### jumpXTransTrip
+
+The `jumpXTransTrip` effect is highly relevant for investigating potential gender differences in triadic closure tendencies within the co-authorship network.
+
+
+Specifically, this effect helps assess whether closure occurs predominantly within same-gender triads versus across gender boundaries. As discussed in the introduction, prior research suggests that gender homophily intersects network forces to constrain women's opportunities for strategically valuable cross-cluster connections.
+
+
+The `jumpXTransTrip` effect quantifies cross-gender triadic closure as follows:
+
+
+Let:
+
+
+- $x_{ij} = 1$ if actor $i$ has a collaboration tie to actor $j$, 0 otherwise
+
+
+- $v_i$ represent the gender category of actor $i$ (e.g., $v_i=0$ for male, $v_i=1$ for female)
+
+
+- $I\{A\}$ be an indicator function equal to 1 if statement $A$ is true, 0 otherwise
+
+
+Then, the effect counts the triadic closure patterns $i \rightarrow h \rightarrow j$ such that
+
+
+- $x_{ih} = 1$ (actor $i$ has a tie to actor $h$)
+
+
+- $x_{hj} = 1$ (actor $h$ has a tie to actor $j$)
+
+
+- $x_{ij} = 1$ (actor $i$ also has a direct tie to actor $j$, closing the triad)
+
+
+With additional requirements
+
+
+- $v_i = v_h$ (actors $i$ and $h$ have the same gender)
+
+
+- $v_i \neq v_j$ (but actor $j$ has a different gender than $i$ and $h$)
+
+
+Mathematically:
+
+
+$$s_{i, \text{jumpXTransTrip}}^{\text{net}}(x) = \sum_{j \neq h} x_{ij} x_{ih} x_{hj} I\{v_i = v_h \neq v_j\}$$
+
+
+This configuration represents triadic closure, but spans gender boundaries. The results reveal whether academics tend to draw new collaborators from other gender categories during triadic closure processes versus closures happening predominantly within same-gender triads.
+
+
+Lower triadic closure rates, especially for cross-gender patterns, would indicate that women are relatively isolated from strategically valuable dense collaborative clusters, which is a key proposition investigated in this study.
+
+
+```{r}
+(myeff <- RSiena::includeEffects(myeff, jumpXTransTrip, interaction1 = "gender"))
+```
+
+Here is an academic-style explanation of the output from including a jumping transitive triplets effect interacted with gender in a SIENA model specification:
+
+This code demonstrates using `includeEffects` to incorporate the jumping transitive triplets effect based on gender (`jumpXTransTrip`) into an existing SIENA model specification object (`myeff`). Critically, `jumpXTransTrip` is interacted with the gender covariate via `interaction1 = "gender"`.
+
+The output validates that `myeff` now contains 13 effects. The first 12 are the previously included effects. The 13th effect is `jumpXTransTrip`, representing triadic closure tendencies between nodes of different gender categories. For all effects, include is TRUE, meaning they will be estimated. Fix and test are FALSE, allowing free estimation and testing. The `initialValue` and `parm` of 0 reflect no a priori assumptions. 
+
+In summary, this code enables analyzing if triadic closure operates across gender boundaries, and whether this tendency significantly differs by gender via the interaction. The output confirms successful incorporation of this jumping transitive triplets effect and its gender interaction into the model specification. Estimating this model will provide insight into the role of inter-group triadic closure and gender differences in shaping network evolution.
+
+
+### Create Siena Algorithm
+
+Creating an object containing the algorithm specifications for parameter estimation in RSiena
+
+```{r}
+(myAlgorithm <- RSiena::sienaAlgorithmCreate(projname = "soc_init_new"))
+```
+
+
+### Estimating parameters in the Siena model
+
+```{r}
+(ans <- RSiena::siena07(myAlgorithm, data = mydata, effects = myeff))
+(ans <- RSiena::siena07(myAlgorithm, data = mydata, effects = myeff, prevAns = ans, returnDeps = TRUE))
+print(ans)
+```
+
+
+# Goodness-of-fit tests based on various auxiliary statistics
+
+
+## Indegree Distribution
+
+
+The in-degree distribution test compares the observed degree distribution $\mathbf{y}_{obs}$ with the average simulated degree distribution $\bar{\mathbf{y}}_{sim}$ over multiple Monte Carlo replications.
+
+
+The distances are quantified using the Mahalanobis distance (MHD):
+
+
+$$
+\mathrm{MHD} = \sqrt{(\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})^\top \mathbf{S}^{-1} (\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})}
+$$
+
+
+where $\mathbf{S}$ denotes the covariance matrix of the simulated statistics $\bar{\mathbf{y}}_{sim}$.
+
+
+With $K=8$ statistics, under the model the MHD is approximately $\chi^2_K$ distributed.
+
+
+The observed MHD is 10.98. The associated p-value is
+
+
+$$
+p = P(\chi^2_K \geq 10.98) = 0.251
+$$
+
+
+As this exceeds the $0.05$ significance level, we fail to reject the null hypothesis $H_0$ that the observed and simulated indegree distributions are equal.
+
+
+The descriptive statistics provided further insights.
+
+
+- The medians are close: 21 (observed) vs. 21 (simulated).
+The upper percentiles are close: 28 and 28.
+The lower percentiles are close: 16 and 16.
+
+
+This finding suggests a good model fit for the tendency to receive ties.
+
+
+```{r}
+(gofi0 <- RSiena::sienaGOF(ans, IndegreeDistribution, verbose = FALSE, join = TRUE, varName = "net"))
+print(gofi0)
+# to check the degree distribution of the outcome network:
+table(colSums(wave2))
+plot(gofi0, main = "")
+```
+
+
+```{r}
+RSiena::descriptives.sienaGOF(gofi0, center = FALSE, scale = FALSE)
+```
+
+
+## Outdegree Distribution
+
+
+For the outdegree distribution, the MHD is
+
+
+$$
+\mathrm{MHD} = 2.94
+$$
+
+
+With $K=9$ statistics, the p-value is:
+
+
+$$
+p = P(\chi^2_K \geq 2.94) = 0.872
+$$
+
+
+A high $p$-value indicates no evidence of rejection of the null hypothesis of equal distributions.
+
+
+The summary statistics also demonstrate a close alignment of aspects such as the median outdegrees.
+
+
+```{r}
+(gofo0 <- RSiena::sienaGOF(ans, OutdegreeDistribution,
+  verbose = FALSE, join = TRUE, levls = c(0:10, 15, 20),
+  varName = "net"
+))
+plot(gofo0, main = "")
+```
+
+
+```{r}
+RSiena::descriptives.sienaGOF(gofo0, center = FALSE, scale = FALSE)
+```
+
+
+## Geodesic Distribution
+
+
+For the geodesic distance distribution, with $K=5$ statistics, the MHD of 4.9 gives this p-value:
+
+
+$$
+p = P(\chi^2_K \geq 4.9) = 0.404
+$$
+
+
+Although lower than the other tests, the $p$-value still provides no strong evidence of a mismatch between the model and observations.
+In summary, the statistically nonsignificant $p$-values across multiple distribution tests provide robust evidence that the fitted model accurately reproduces several key structural properties of the observed co-authorship network. This supports the suitability of the model for investigating research questions regarding gender differences in collaboration patterns.
+
+
+```{r}
+GeodesicDistribution <- function(
+    i, data, sims, period, groupName, varName, levls = c(1:5, Inf), cumulative = TRUE,
+    ...) {
+  x <- RSiena::networkExtraction(i, data, sims, period, groupName, varName)
+  require(sna)
+  a <- sna::geodist(symmetrize(x))$gdist
+  if (cumulative) {
+    gdi <- sapply(levls, function(i) {
+      sum(a <= i)
+    })
+  } else {
+    gdi <- sapply(levls, function(i) {
+      sum(a == i)
+    })
+  }
+  names(gdi) <- as.character(levls)
+  gdi
+}
+
+
+(gof0.gd <- RSiena::sienaGOF(ans, GeodesicDistribution,
+  cumulative = FALSE,
+  verbose = FALSE, join = TRUE, varName = "net"
+))
+
+
+plot(gof0.gd, main = "")
+```
+
+
+```{r}
+RSiena::descriptives.sienaGOF(gof0.gd, center = FALSE, scale = FALSE)
+```
+
+
+## Outdegree Distribution
+
+
+```{r}
+(RI <- RSiena::sienaRI(data = mydata, ans = ans))
+plot(RI, addPieChart = TRUE, legendColumns = 3)
+```
+
+
+# Goodness-of-fit Evaluation
+
+
+We evaluated the model fit using three common goodness-of-fit tests based on in-degree, out-degree, and geodesic distance distributions.
+
+
+## Indegree Distribution
+
+
+The indegree distribution test compares the observed indegree distribution $\mathbf{y}_{obs}$ to the average simulated indegree distribution $\bar{\mathbf{y}}_{sim}$ over $R=100$ Monte Carlo replications. The distance was quantified using the Mahalanobis distance.
+
+
+$$
+\mathrm{MHD} = \sqrt{(\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})^\top \mathbf{S}^{-1} (\mathbf{y}_{obs} - \bar{\mathbf{y}}_{sim})}
+$$
+
+
+where $\mathbf{S}$ is an $8 \times 8$ covariance matrix of $\bar{\mathbf{y}}_{sim}$.
+
+
+In this model, the MHD follows an approximate $\chi^2_8$ distribution. The observed MHD was 10.98, giving a $p$-value of
+
+
+$$
+p = P(\chi^2_8 \geq 10.98) = 0.251
+$$
+
+
+As $p > 0.05$, we fail to reject the null hypothesis $H_0$ of the equally observed and simulated distributions. The medians (21 vs. 21), upper percentiles (28 vs. 28), and lower percentiles (16 vs. 16) were closely aligned. This suggests good model fit for the tendency to receive ties.
+
+
+## Outdegree Distribution
+
+
+The out-degree distribution test yielded an MHD of 2.94. With $K=9$ statistics, the $p$-value is:
+
+
+$$
+p = P(\chi^2_9 \geq 2.94) = 0.872
+$$
+
+
+A high $p$-value indicates no evidence of the rejection of $H_0$. The summary statistics also showed a close alignment between the observed and simulated outdegree distributions.
+
+
+## Geodesic Distance Distribution
+
+
+With $K=5$ statistics, the geodesic distance test produced an MHD of 4.9 and $p$-value of 0.404, providing no evidence of poor model fit.
+
+
+In summary, the statistically nonsignificant $p$-values across the tests indicate that the model accurately reproduces the key structural properties of the observed network. This supports the use of the model to investigate research questions on gender differences in collaboration.
+
+

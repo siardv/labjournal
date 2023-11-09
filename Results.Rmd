@@ -1,14 +1,83 @@
 ---
 title: "Results"
-output:
-  html_document:
-    toc: true
-    number_sections: true
 author: "by: Siard van den Bosch"
 bibliography: references.bib
-
-
+csl: apa.csl
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+
 # Results
-...
+
+
+This study utilized stochastic actor-oriented modeling in RSiena to analyze the longitudinal co-evolution of collaboration ties and faculty attributes in an academic social network. The results of the SIENA analysis are summarized below.
+
+
+## Model Specification and Estimation
+
+
+Three iterative SIENA models were used to analyze the network evolution. The dependent variable was the observed co-authorship network among the 47 Radboud University sociology faculties across two time periods from to 2018-2020 and 2021-2023. 
+
+
+The independent variables in the models accounted for structural network effects and node-level attributes. Structural effects include reciprocity, reflecting collaborative tie reciprocation and transitivity, capturing triadic closure tendencies. A gender homophily effect was specified to model the same-gender collaboration preferences. 
+
+
+Each model was initialized with default starting parameters and was estimated using a stochastic approximation routine. To check convergence, the subsequent models used the parameter estimates from the prior iteration as the starting values. The models were estimated using conditional moment estimation with the likelihood ratio method to calculate standard errors. 
+
+
+## Model Results
+
+
+The output for each of the three SIENA model iterations provided parameter estimates, standard errors, and model fit statistics. 
+
+
+The rate parameter governs the overall network evolution rate. It steadily increased across the models, from 2.70 to 4.04 4.12, indicating improved model convergence.
+
+
+The out-degree density parameter was negative, reflecting the overall low network density. The reciprocity effects were positive and moderately strong, signifying frequent mutual tie formation. The transitivity effects were also positive, indicating triadic closure tendencies.  
+
+
+The gender alter and ego parameters were not significant, providing no evidence for gender homophily effects. However, the positive and significant same-gender parameter indicated collaboration between same-gender pairs. 
+
+
+The in-degree popularity and out-degree activity parameters were small but positive, reflecting some preferential attachment based on existing ties. The network isolation parameter was positive, corresponding to the presence of isolated nodes.
+
+
+## Model Diagnostics 
+
+
+Each model iteration outputs statistics to assess convergence. The maximum convergence ratios declined from 0.57 in Model 1 to 0.15 in Model 3, signaling improved convergence. 
+
+
+The t-ratios for deviations from the target statistics were near zero in Model 3, indicating convergence. The likelihood-based Mahalanobis distance test revealed that Model 3 adequately reproduced the observed indegree and outdegree distributions, indicating a satisfactory model fit.
+
+
+## Gender Differences
+
+
+Supplementary pairwise t-tests revealed a significantly higher within-gender collaboration rate compared to cross-gender collaboration for both male-male and female-female pairs. Males also exhibited higher reciprocity rates for within-gender collaboration than did females. 
+
+
+However, for cross-gender ties, the reciprocity rate was significantly higher for ties initiated by women toward men than for those initiated by men toward women. This points to potential gender differences in mutual engagement in cross-gender collaboration.
+
+
+# Conclusion
+
+
+The results demonstrate the utility of SIENA modeling for empirically investigating network evolution mechanisms. The confirmed positive triadic closure tendencies provide evidence of social forces giving rise to dense collaborative clusters in the co-authorship network. The findings also reveal subtle gender differences in reciprocity rates that merit further investigation regarding women's positions in cross-gender collaboration.
+
+
+
+
+```{r echo=FALSE}
+setwd(paste0(path.expand("~/"), "labjournal/"))
+txt <- readLines("docs/soc_init_new.txt")
+txt <- paste0(txt, collapse = "\n")
+cat(txt)
+```
+
+
