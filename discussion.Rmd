@@ -18,8 +18,6 @@ The results provide robust evidence for two pivotal generative forces - triadic 
 
 ## Triadic Closure
 
-One way to enhance the argument regarding triadic closure with relevant academic citations is as follows.
-
 The positive and significant parameters for transitivity effects in the fitted models substantiate the theorized tendency for triadic closure in collaborative networks (Moody 2001; Snijders et al. 2010). The propensity to develop ties with closed open triadic configurations is a major mechanism that induces clustering on social networks.
 
 The confirmation of triadic closure has implications for information diffusion, trust building, and other processes within the co-authorship network ecosystem. However, contrary to expectations, the results revealed no significant variation in the triadic closure rates between male and female faculty members. This contrasts with the propositions of lower triadic closure for women, due to constraints on access to dense collaborative clusters (Smith-Doerr et al. 2017).
