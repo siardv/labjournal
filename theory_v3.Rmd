@@ -1,0 +1,53 @@
+---
+title: "Theory"
+output:
+  html_document: 
+    toc: yes
+    number_sections: false
+    toc_collapse: yes
+    toc_float: yes
+author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
+---
+
+
+```{r, echo=FALSE}
+h <- 1
+```
+# `r (h<-h+1)` Theory
+
+This study employs two seminal sociological theories of social capital and social network structure: Granovetter's theory of the strength of weak ties (1973) and Burt's structural holes theory (1992).
+Granovetter demonstrated that weak bridging ties often link disconnected clusters in a network, enabling novel, nonredundant information to flow between groups.
+This is because weak ties connect actors embedded in different social circles, providing access to novel information from diverse network neighborhoods.
+Expanding on this, Burt showed that, by strategically building brokerage ties across structural holes between disconnected groups, actors accrue competitive social capital advantages through access to diverse, non-redundant knowledge spanning structural holes between clusters.
+
+These foundational network theories elucidate how specific network topology and connectivity patterns shape information diffusion dynamics and inequality of access to social capital resources embedded in the network structure.
+Highly interconnected small-world networks with high triadic closure propagate information rapidly through dense redundant ties but may impede the penetration of novel non-redundant information from outside clusters.
+Conversely, fragmented networks with many brokerage opportunities across structural holes between disconnected actors tend to constrain widespread collaborative innovation because of lack of connectivity.
+This provides the impetus for a detailed social network analysis to map the topology and connectivity patterns of faculty coauthorship networks.
+
+This research is also grounded in extensive sociological work on persistent gender disparities in academia.
+Past studies have shown that female scholars face lower research productivity, weaker international visibility, and lower citation impact than males, even after accounting for academic rank, discipline, and other factors (Dion et al., 2013; Dion et al., 2018).
+This occurs because of the accumulation of subtle gender biases permeating critical academic processes, including peer review, hiring, promotion, salaries, and service burden.
+However, few studies have focused directly on elucidating the gender asymmetry in collaborative social capital resources transmitted through scholarly co-authorship networks.
+
+Elucidating gender asymmetry in the relational architecture that shapes knowledge creation is pivotal.
+Collaboration provides access to information, resources, visibility, and career opportunities.
+If women lack access to equitable collaborative networks, it may exacerbate other structural disadvantages.
+
+Integrating these perspectives, we hypothesized that the structure of faculty co-authorship networks may exhibit gender asymmetry with significant implications.
+Specifically:
+
+$H_1$: Female researchers will have fewer network closures than male researchers, limiting access to novel non-redundant information from diverse network neighborhoods.
+$H_2$: Female scholars will have lower betweenness centrality than male scholars, reducing brokerage power to transmit knowledge across disconnected scholarly communities.
+$H_3$: Ego-network density will be lower for women than for men, potentially constraining collaborative opportunities and visibility.
+$H_4$: The average shortest path length and network diameter are greater in the networks of female researchers, indicating lower global network navigability.
+$H_5$: Female scholars have a lower clustering coefficient than male scholars, suggesting that knowledge diffusion may be less efficient through their local networks.
+$H_6$: These gender asymmetries will persist after controlling for academic rank, signifying that they are not solely attributable to rank disparities, but rather embedded in the relational architecture.
+
+Support for these hypothesized gender asymmetries would imply that female scholars face more fragmented and less navigable collaboration networks, hindering innovation and advancement.
+The null results would indicate that the co-authorship network structure does not vary by gender.
+By empirically testing for gender effects, this research elucidates the obscured relational dynamics that shape academia.
+Uncovering hidden collaborative barriers is essential for constructing equitable pathways for scientific progress.
+Integrating social capital and gender theories provides a robust framework for investigating gender asymmetry in collaborative scholarship architectures.

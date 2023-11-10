@@ -7,6 +7,8 @@ output:
     toc_collapse: yes
     toc_float: yes
 author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
 ---
 
 # Introduction

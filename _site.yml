@@ -115,15 +115,20 @@ navbar:
     - text: "Final Paper"
       menu:
         - text: "Introduction"
-          href:
+          href: introduction.html
         - text: "Theory"
-          href:
-        - text: "Methods"
-          href:
+          href: theory.html
+        - text: "Data and Methods"
+          menu: data_methods.html
+        - text: "Descriptives"
+          menu: descriptives.html
+        - text: "Analysis"
+          menu: analysis.html
         - text: "Results"
-          href:
+          menu: results.html
         - text: "Discussion"
-          href:
+          menu: discussion.html
+        - text: "Conclusion"
 
   right:
     - icon: fab fa-github
