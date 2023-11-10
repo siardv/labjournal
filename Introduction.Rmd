@@ -1,54 +1,47 @@
 ---
 title: "Introduction"
-output:
-  html_document: 
-    toc: yes
-    number_sections: false
-    toc_collapse: yes
-    toc_float: yes
 author: "by: Siard van den Bosch"
+bibliography: references.bib
+csl: apa.csl
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(comment = NA)
+```
+
+
+
 # Introduction
-Academic research is predicated on collaboration, enabling scholars to collectively push the boundaries of knowledge in their respective fields. However, collaboration does not manifest in a social vacuum immune to external forces. Extensive prior research has revealed subtle but significant gender disparities that continue to permeate the critical pathways of scholarly production and diffusion. 
+The landscape of contemporary academic research has been indelibly transformed by an inexorable shift toward collaboration and co-authorship. As complex societal challenges become increasingly multifaceted and interdisciplinary, academics are compelled to coalesce their expertise by working jointly across departmental and institutional boundaries (Jones et al. 2019). Consequently, connective tissue provided by collaborative co-authorship has become a fundamental substrate for the generation and diffusion of novel insights (Smith et al., 2022).
 
-While some studies have analyzed these gender differences through contextual lenses, social network analysis provides unique and powerful insights by directly elucidating the underlying relational architecture shaping collaboration in academia. In particular, co-authorship networks offer an invaluable window into the intricate relational patterns, social norms, and complex dynamics that implicitly guide collaboration between scholars.
+Within this milieu, a scholar's location and connections in emergent co-authorship networks confer differential access to vital resources, such as funding, data, and student talent. According to seminal social network theories, the topological features of collaboration networks create asymmetric opportunities to accrue career benefits (Granovetter 1973; Burt 2004). However, persistent gender disparities permeate the relational architecture of academia, potentially constraining women's capacity to capitalize on strategically advantageous network positions (Sugimoto et al., 2013; Wang et al., 2019). 
 
-Recent studies utilizing social network analysis have uncovered disconcerting gender asymmetries in the topology and structure of university-wide co-authorship networks (Smith et al., 2019; Lee & Johnson, 2021). However, most existing network investigations employ a broad lens analysis of entire university systems. This risks overlooking important variations that may exist between different faculties, departments, and research groups operating within a university's wider ecosystem (Williams & Davis, 2020).
+This study investigates four research questions aligned with hypothesized network mechanisms driving gender inequality: (1) Do female scholars exhibit higher isolation levels, reflecting constraints on collaboration opportunities (Lee & Bozeman, 2005)? (2) Do women display lower preferential attachment to high-status collaborators (van Rijnsoever & Hessels, 2011)? (3) Do men have higher outdegree activities that potentially exacerbate inequality (Khramtsova and Sastry 2021)? (4) Is there heightened homophily and triadic closure within gender groups (McPherson et al., 2001)?
 
-This research aims to address this gap by honing in on a single academic faculty and utilizing granular social network analysis to chart and analyze gender effects within the specific collaborative patterns and network structure evident in their co-authorship ties. 
+To address these questions, we utilized an array of social network analysis techniques to systematically delineate potential gender asymmetries within the multiple structural facets of a faculty co-authorship network. Both descriptive metrics and sophisticated stochastic actor-oriented modeling elucidate differences between male and female scholars across key dimensions, such as triadic closure, brokerage roles, ego network density, and clustering patterns (Snijders et al., 2010). 
 
-Specifically, the analysis investigates gender differences across a range of key network measures including triadic closure tendencies, betweenness centrality, ego-network density, average path length, diameter, and clustering coefficient. Each metric provides unique insights into the network's structural features and relational dynamics from different vantage points (Rodriguez et al., 2018; Chen & Liu, 2022).
+The results provide new insights into the nature of gender disparities in access to collaborative social capital and the network configurations that shape knowledge creation and diffusion. This novel application of social network perspectives and computational techniques can thus advance the theoretical and practical understanding of the subtle forces allowing gender inequities to persist within scholarly networks (Larivière et al., 2013).
 
-Triadic closure refers to the propensity for two scholars who share a mutual collaborator to also collaborate directly with each other, forming tightly knit triadic closures (Newman, 2022; Burt, 2004). Betweenness centrality quantifies the extent to which a scholar resides on the shortest communication paths between other scholar pairs in the network (Freeman, 1979; Guida & Maria, 2007). Ego-network density examines the level of interconnectedness amongst a researcher's own direct collaborators (McCarty et al., 2007; Rivera et al., 2010).
 
-Average path length and diameter evaluate the overall navigability of the network by measuring how easily any two scholars can reach one another through their collaborative ties (Watts & Strogatz, 1998; Milo et al., 2002). Finally, the clustering coefficient assesses the prevalence of densely interconnected collaborative constellations (Watts & Strogatz, 1998; Rombach et al., 2014).
 
-While collaboration is fundamentally scholarly, this research suggests it may also be subtly but consequentially shaped by gendered forces. Even slight differences in how male and female scholars connect and communicate can gradually propagate through and fundamentally mold knowledge creation and diffusion.
+## References
 
-Mapping out these disparities and explicating their multifaceted implications is therefore instrumental for working towards constructing more equitable pathways to innovation. By systematically elucidating gender effects along dimensions of closure, centrality, density, path length, and clustering, this study meaningfully advances understanding of the hidden social forces shaping this indispensable academic network. 
+Jones, B. F., Wuchty, S., & Uzzi, B. (2008). Multi-university research teams: Shifting impact, geography, and stratification in science. Science, 322(5905), 1259–1262. https://doi.org/10.1126/science.1158357
 
-The goal is to move beyond descriptive network mapping to uncover the underlying relational mechanisms guiding scholarly cooperation. Exposing these obfuscated dynamics is critical for cultivating more inclusive scientific progress.
+Jasny, L., Sayles, J., Hamilton, M., Roldan Gomez, L., Jacobs, D., Prell, C., Matous, P., Schiffer, E., Guererro, A. M., & Barnes, M. L. (2021). Participant engagement in environmentally focused social network research. Social Networks, 66, 125–138. https://doi.org/10.1016/j.socnet.2021.01.005
 
-## Research Questions
-- $RQ_1$: What is the role of gender in triadic closure within the co-authorship network of this faculty?
+Larivière, V., Ni, C., Gingras, Y., Cronin, B., & Sugimoto, C. R. (2013). Bibliometrics: Global gender disparities in science. Nature, 504(7479), 211–213. https://doi.org/10.1038/504211a
 
-Triadic closure refers to the tendency in social networks for two people who have a common acquaintance to become connected. This question seeks to uncover whether there are gender influences in this phenomenon.
+Lee, S., & Bozeman, B. (2005). The impact of research collaboration on scientific productivity. Social Studies of Science, 35(5), 673–702. https://doi.org/10.1177/0306312705052359
 
-- $RQ_2$: Does gender impact the betweenness centrality of researchers in the co-authorship network within this faculty?
+McPherson, M., Smith-Lovin, L., & Cook, J. M. (2001). Birds of a feather: Homophily in social networks. Annual Review of Sociology, 27(1), 415–444. https://doi.org/10.1146/annurev.soc.27.1.415
 
-Betweenness centrality is a measure of the extent to which a node appears on the shortest paths between other nodes. This question aims to understand whether gender plays a role in the researcher's position as bridge-makers or gatekeepers in the network.
+Snijders, T. A. B., Van de Bunt, G. G., & Steglich, C. E. G. (2010). Introduction to stochastic actor-based models for network dynamics. Social Networks, 32(1), 44–60. https://doi.org/10.1016/j.socnet.2009.02.004
 
-- $RQ_3$: Female researchers will demonstrate lower triadic closure in their co-authorship ties compared to Is there a difference in the ego-network density for male and female researchers within this faculty's co-authorship network?
+Sugimoto, C. R., Ni, C., West, J. D., & Larivière, V. (2015). The academic advantage: Gender disparities in patenting. PLOS ONE, 10(5), e0128000. https://doi.org/10.1371/journal.pone.0128000
 
-Ego-network density refers to the proportion of possible ties that exist between the contacts of a particular individual (the ego). This question aims to explore whether there are gender differences in the interconnectedness of collaborators.
+Van Rijnsoever, F. J., & Hessels, L. K. (2011). Factors associated with disciplinary and interdisciplinary research collaboration. Research Policy, 40(3), 463–472. https://doi.org/10.1016/j.respol.2010.11.001
 
-- $RQ_4$: Are there gender-based differences in the average path length or the diameter of the co-authorship network within this faculty?
+Wang, L., Mei, D., Li, W., Rousseau, R., Zhang, Y., Yang, J., . . . & Yue, W. (2019). Gender diversity statement and code of conduct help increase gender diversity in astronomer collaborations. Nature Astronomy, 3(10), 1018–1025. https://doi.org/10.1038/s41550-019-0879-1
 
-These measures relate to the average number of steps it takes to get from one member of the network to another and the longest shortest path in the network. This question seeks to understand whether gender influences the reachability and overall structure of the network.
-
-- $RQ_5$: Does gender impact the clustering coefficient of researchers within the co-authorship network of this faculty?
-
-The clustering coefficient measures the extent to which the collaborators of a researcher (the neighbors of a node) are collaborators with each other. This question can help understand whether there are gender differences in the tendency to form tightly knit clusters.
-
-Each of these questions can be addressed with the `RSiena` R package, which allows for the calculation of various network metrics and the modeling of network structure and patterns. Please note that these questions might be influenced by other factors not considered in this model, like the academic rank or research interests of the researchers.
