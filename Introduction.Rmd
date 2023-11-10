@@ -1,8 +1,6 @@
 ---
 title: "Introduction"
 author: "by: Siard van den Bosch"
-bibliography: references.bib
-csl: apa.csl
 ---
 
 ```{r setup, include=FALSE}
